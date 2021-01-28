@@ -17,6 +17,7 @@
     "url": "git@github.com:eea/volto-freshwater.git"
   },
   "dependencies": {
+    "react-lazy-load-image-component": "^1.4.0"
   },
   "scripts": {
     "release": "release-it",
