@@ -1,10 +1,26 @@
 /*-------------------
         Footer
 --------------------*/
-.footer-top-wrapper {
-  padding: 1.5em 0;
-  border-bottom: 1px solid #f0f0f0;
-  margin-bottom: 2.5em;
+.footer-top-wave {
+  position: relative;
+  height: 70px;
+  background-image: linear-gradient(transparent, #ecf1f7);
+}
+
+.footer-top-wave:before {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 25px;
+  background-image: radial-gradient(
+    circle at 20px -2px,
+    transparent 23px,
+    white 24px
+  );
+  background-repeat: repeat;
+  background-size: 40px 30px;
+  content: '';
 }
 
 .footer-nav {
@@ -17,11 +33,7 @@
 }
 
 .footer-nav .item {
-  font-weight: 600;
-}
-
-.footerLogos {
-  margin-top: 3em;
+  font-weight: 500;
 }
 
 .site-info-logos,
@@ -32,14 +44,18 @@
   }
 }
 
+.site-info-logos a:first-child,
+.footerLogos a:first-child {
+  padding-left: 0;
+}
+
 .site-info-logos {
   margin-top: 1.2rem;
 }
 
 .footerLogo {
   width: auto;
-  height: 50px;
-  // margin: 0.5rem 1rem;
+  height: 38px;
 }
 
 .footer-login a,
@@ -54,15 +70,18 @@
 }
 
 .site-info {
+  position: relative;
   font-size: 13px;
 }
 
-.site-info a {
-  font-weight: 700;
+.footer-backdrop {
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  bottom: 0.5em;
 }
 
-.bise-footer {
-  width: 150px;
-  height: 50px;
-  margin-top: 0.8rem;
+.footer-backdrop img {
+  width: 139px;
+  height: 105px;
 }

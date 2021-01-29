@@ -7,7 +7,6 @@ import React from 'react';
 import { Container, Segment, Grid } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import LogoImage from '@plone/volto/components/theme/Logo/Logo.svg';
 
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
@@ -17,6 +16,7 @@ import fiseLogo from '@eeacms/volto-freshwater/static/forest.svg';
 import ccaLogo from '@eeacms/volto-freshwater/static/climate_adapt.png';
 import biseLogo from '@eeacms/volto-freshwater/static/bise-logo.png';
 import wiseLogo from '@eeacms/volto-freshwater/static/wise-logo.png';
+import fishLogo from '@eeacms/volto-freshwater/static/footer-fishes.svg';
 
 /**
  * Component to display the footer.
@@ -26,11 +26,12 @@ import wiseLogo from '@eeacms/volto-freshwater/static/wise-logo.png';
  */
 const Footer = ({ intl }) => (
   <Segment role="contentinfo" vertical padded className="footerWrapper">
+    <div className="footer-top-wave">&nbsp;</div>
     <Container>
       <div className="footer-top-wrapper">
         <Grid stackable>
           <Grid.Row>
-            <Grid.Column mobile={16} tablet={10} computer={10}>
+            <Grid.Column mobile={16} tablet={16} computer={16}>
               <ul className="footer-nav" id="footer_links">
                 <li>
                   <Link className="item" to="/">
@@ -57,15 +58,6 @@ const Footer = ({ intl }) => (
                 </li>
               </ul>
             </Grid.Column>
-            <Grid.Column mobile={16} tablet={2} computer={2}>
-              <img
-                className="bise-footer"
-                src={LogoImage}
-                alt="BISE"
-                height={50}
-                width={150}
-              />
-            </Grid.Column>
           </Grid.Row>
         </Grid>
       </div>
@@ -73,21 +65,8 @@ const Footer = ({ intl }) => (
       <div className="site-info">
         <Grid stackable>
           <Grid.Row>
-            <Grid.Column
-              mobile={16}
-              tablet={16}
-              computer={5}
-              style={{ marginBottom: '1.5em' }}
-            >
+            <Grid.Column mobile={16} tablet={16} computer={6}>
               <div className="site-info-logos">
-                <a href="https://ec.europa.eu/">
-                  <LazyLoadImage
-                    className="footerLogo"
-                    src={ecLogo}
-                    title="European Commission"
-                    alt="European Commission"
-                  />
-                </a>
                 <a href="https://www.eea.europa.eu/">
                   <LazyLoadImage
                     className="footerLogo"
@@ -96,15 +75,18 @@ const Footer = ({ intl }) => (
                     alt="European Environment Agency"
                   />
                 </a>
+                <a href="https://ec.europa.eu/">
+                  <LazyLoadImage
+                    className="footerLogo"
+                    src={ecLogo}
+                    title="European Commission"
+                    alt="European Commission"
+                  />
+                </a>
               </div>
             </Grid.Column>
 
-            <Grid.Column
-              mobile={16}
-              tablet={16}
-              computer={7}
-              style={{ marginBottom: '0.8rem' }}
-            >
+            <Grid.Column mobile={16} tablet={16} computer={6}>
               <div>
                 <p>Other European Information Systems:</p>
               </div>
@@ -115,6 +97,14 @@ const Footer = ({ intl }) => (
                     src={biseLogo}
                     title="Biodiversity Information System for Europe"
                     alt="Biodiversity Information System for Europe"
+                  />
+                </a>
+                <a href="https://climate-adapt.eea.europa.eu/">
+                  <LazyLoadImage
+                    className="footerLogo"
+                    src={ccaLogo}
+                    title="Climate-Adapt"
+                    alt="Climate-Adapt"
                   />
                 </a>
                 <a href="https://water.europa.eu/">
@@ -131,21 +121,19 @@ const Footer = ({ intl }) => (
                     src={fiseLogo}
                     title="Forest Information System for Europe"
                     alt="Forest Information System for Europe"
-                    style={{ height: '38px' }}
-                  />
-                </a>
-                <a href="https://climate-adapt.eea.europa.eu/">
-                  <LazyLoadImage
-                    className="footerLogo"
-                    src={ccaLogo}
-                    title="Climate-Adapt"
-                    alt="Climate-Adapt"
                   />
                 </a>
               </div>
             </Grid.Column>
           </Grid.Row>
         </Grid>
+        <div className="footer-backdrop">
+          <LazyLoadImage
+            src={fishLogo}
+            title="Footer Fish Logo"
+            alt="Footer Fish Logo"
+          />
+        </div>
       </div>
     </Container>
   </Segment>

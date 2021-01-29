@@ -1,0 +1,38 @@
+/*-------------------
+   Freshwater Reset
+--------------------*/
+
+/*-------------------
+       Fonts
+--------------------*/
+@font-face {
+  font-display: swap;
+  font-family: @fontName;
+  font-style: normal;
+  font-weight: @normal;
+  .setFontSrc(@fontName);
+}
+
+@font-face {
+  font-display: swap;
+  font-family: @fontName;
+  font-style: normal;
+  font-weight: 500;
+  .setFontSrc(@fontName, @fontWeight: 'Medium');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: @headerFontName;
+  font-style: normal;
+  font-weight: @normal;
+  .setFontSrc(@headerFontName);
+}
+
+@font-face {
+  font-display: swap;
+  font-family: @headerFontName;
+  font-style: normal;
+  font-weight: 500;
+  .setFontSrc(@headerFontName, @fontWeight: 'SemiBold');
+}
