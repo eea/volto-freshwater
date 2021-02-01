@@ -133,9 +133,11 @@
 @sidebarToggleButtonAnimationsDuration: 0.5s;
 @sidebarToggleButtonIterations: 4;
 
-/*-------------------
-     Breakpoints
---------------------*/
+@mobileBreakpoint            : 320px;
+@tabletBreakpoint            : 768px;
+@computerBreakpoint          : 1200px;
+@largeMonitorBreakpoint      : 1500px;
+@widescreenMonitorBreakpoint : 1920px;
 
 
 /*-------------------

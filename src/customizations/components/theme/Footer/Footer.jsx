@@ -26,7 +26,7 @@ import fishLogo from '@eeacms/volto-freshwater/static/footer-fishes.svg';
  */
 const Footer = ({ intl }) => (
   <Segment role="contentinfo" vertical padded className="footerWrapper">
-    <div className="footer-top-wave">&nbsp;</div>
+    <Grid className="footer-top-wave"> </Grid>
     <Container>
       <div className="footer-top-wrapper">
         <Grid stackable>
