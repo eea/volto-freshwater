@@ -45,3 +45,8 @@
     display: none !important;
   }
 }
+@media only screen and (min-width: 1520px) {
+  .ui.container {
+    max-width: 1520px !important;
+  }
+}
