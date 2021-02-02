@@ -24,84 +24,23 @@
 /* All Sizes */
 .ui.container {
   display: block;
-  width: @maxWidth;
-  padding: 0 2rem;
+  padding: 0 1rem;
   margin-left: auto;
   margin-right: auto;
 }
 
-/* Mobile */
-@media only screen and (max-width: @largestMobileScreen) {
-  .ui.container {
-    max-width: @mobileWidth !important;
-    padding-left: @mobileGutter !important;
-    padding-right: @mobileGutter !important;
-  }
-  .ui.grid.container {
-    max-width: @mobileGridWidth !important;
-  }
-  .ui.relaxed.grid.container {
-    max-width: @mobileRelaxedGridWidth !important;
-  }
-  .ui.very.relaxed.grid.container {
-    max-width: @mobileVeryRelaxedGridWidth !important;
-  }
+@media (min-width: 768px) {
+    .container {
+      width:100%;
+      padding: 0 2rem;
+    }
 }
 
-/* Tablet */
-@media only screen and (min-width: @tabletBreakpoint) and (max-width: @largestTabletScreen) {
-  .ui.container {
-    max-width: @tabletWidth;
-    padding-left: @tabletGutter !important;
-    padding-right: @tabletGutter !important;
-  }
-  .ui.grid.container {
-    max-width: @tabletGridWidth !important;
-  }
-  .ui.relaxed.grid.container {
-    max-width: @tabletRelaxedGridWidth !important;
-  }
-  .ui.very.relaxed.grid.container {
-    max-width: @tabletVeryRelaxedGridWidth !important;
-  }
+@media (min-width: 1200px) {
+    .container {
+        max-width:1520px
+    }
 }
-
-/* Small Monitor */
-@media only screen and (min-width: @computerBreakpoint) and (max-width: @largestSmallMonitor) {
-  .ui.container {
-    max-width: @computerWidth;
-    padding-left: @computerGutter !important;
-    padding-right: @computerGutter !important;
-  }
-  .ui.grid.container {
-    max-width: @computerGridWidth !important;
-  }
-  .ui.relaxed.grid.container {
-    max-width: @computerRelaxedGridWidth !important;
-  }
-  .ui.very.relaxed.grid.container {
-    max-width: @computerVeryRelaxedGridWidth !important;
-  }
-}
-
-/* Large Monitor */
-@media only screen and (min-width: @largeMonitorBreakpoint) {
-  .ui.container {
-    max-width: @largeMonitorWidth;
-    padding-left: @largeMonitorGutter !important;
-    padding-right: @largeMonitorGutter !important;
-  }
-  .ui.grid.container {
-    max-width: @largeMonitorGridWidth !important;
-  }
-  .ui.relaxed.grid.container {
-    max-width: @largeMonitorRelaxedGridWidth !important;
-  }
-  .ui.very.relaxed.grid.container {
-    max-width: @largeMonitorVeryRelaxedGridWidth !important;
-  }
-}
-
 /*******************************
              Types
 *******************************/
