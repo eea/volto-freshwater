@@ -24,15 +24,18 @@
 /* All Sizes */
 .ui.container {
   display: block;
-  max-width: @maxWidth !important;
+  width: @maxWidth;
+  padding: 0 2rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Mobile */
 @media only screen and (max-width: @largestMobileScreen) {
   .ui.container {
     max-width: @mobileWidth !important;
-    margin-left: @mobileGutter !important;
-    margin-right: @mobileGutter !important;
+    padding-left: @mobileGutter !important;
+    padding-right: @mobileGutter !important;
   }
   .ui.grid.container {
     max-width: @mobileGridWidth !important;
@@ -49,8 +52,8 @@
 @media only screen and (min-width: @tabletBreakpoint) and (max-width: @largestTabletScreen) {
   .ui.container {
     max-width: @tabletWidth;
-    margin-left: @tabletGutter !important;
-    margin-right: @tabletGutter !important;
+    padding-left: @tabletGutter !important;
+    padding-right: @tabletGutter !important;
   }
   .ui.grid.container {
     max-width: @tabletGridWidth !important;
@@ -67,8 +70,8 @@
 @media only screen and (min-width: @computerBreakpoint) and (max-width: @largestSmallMonitor) {
   .ui.container {
     max-width: @computerWidth;
-    margin-left: @computerGutter !important;
-    margin-right: @computerGutter !important;
+    padding-left: @computerGutter !important;
+    padding-right: @computerGutter !important;
   }
   .ui.grid.container {
     max-width: @computerGridWidth !important;
@@ -85,8 +88,8 @@
 @media only screen and (min-width: @largeMonitorBreakpoint) {
   .ui.container {
     max-width: @largeMonitorWidth;
-    margin-left: @largeMonitorGutter !important;
-    margin-right: @largeMonitorGutter !important;
+    padding-left: @largeMonitorGutter !important;
+    padding-right: @largeMonitorGutter !important;
   }
   .ui.grid.container {
     max-width: @largeMonitorGridWidth !important;
