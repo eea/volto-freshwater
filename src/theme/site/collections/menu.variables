@@ -1,0 +1,6 @@
+@itemPadding: .85rem .8rem;
+@dropdownMenuBorderRadius: 0;
+@dropdownItemPadding: 0.5rem;
+@dropdownHoveredItemBackground: transparent;
+@secondaryPointingBorderWidth: 0;
+@secondaryDropdownMenuDistance: 0;

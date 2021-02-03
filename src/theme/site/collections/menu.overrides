@@ -1,0 +1,19 @@
+.ui.secondary.pointing.menu .dropdown.item:hover {
+  background-color: #cdd6dd;
+  color: #002d54;
+}
+
+.ui.secondary.pointing.menu a {
+  font-family: 'Poppins', serif;
+  font-weight: 500;
+}
+
+.navigation .ui.secondary.pointing.menu .item {
+  padding: @itemPadding;
+  margin: 0;
+  text-transform: none;
+}
+
+.navigation .dropdown .menu > .item[role='option'] {
+  border-bottom: 1px solid @lightGreyBorderColor;
+}
