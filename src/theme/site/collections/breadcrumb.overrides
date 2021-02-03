@@ -1,0 +1,28 @@
+.ui.vertical.segment.breadcrumbs {
+  border-bottom: 0;
+  background: none;
+}
+@media only screen and (max-width: 480px) {
+  .ui.breadcrumbs {
+    right: 0;
+    left: 0;
+  }
+}
+
+.ui.breadcrumb {
+  display: inline-block;
+  padding: 5px 10px;
+  background: #000;
+}
+
+@media only screen and (min-width: 480px) {
+  .ui.breadcrumb {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+}
+
+.ui.breadcrumb a:hover,
+.ui.breadcrumb .section {
+  color: #fff;
+}
