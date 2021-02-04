@@ -1,0 +1,71 @@
+/*******************************
+         Theme Overrides
+*******************************/
+
+.ui.basic.segment.header-wrapper {
+  padding: 1.25rem 0 0;
+  margin-bottom: 0;
+}
+
+.ui.basic.segment .header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .logo-nav-wrapper {
+    position: relative;
+    top: -6px;
+    align-items: center;
+
+    .logo {
+      flex: 0 0 auto;
+    }
+
+    .navigation {
+      &::-webkit-scrollbar {
+        height: 0; /* remove scrollbar space */
+        background: transparent; /* optional: just make scrollbar invisible */
+      }
+
+      /* optional: show position indicator in red */
+      &::-webkit-scrollbar-thumb {
+        background: #f00;
+      }
+
+      @media only screen and (max-width: @largestTabletScreen) {
+        overflow-x: initial;
+      }
+    }
+  }
+
+  @media only screen and (max-width: @largestTabletScreen) {
+    flex-direction: column;
+    align-items: initial;
+
+    .logo-nav-wrapper {
+      align-items: initial;
+      justify-content: space-between;
+    }
+  }
+
+  .tools-search-wrapper {
+    & > * {
+      display: flex;
+    }
+
+    .tools {
+    }
+
+    .search {
+      form {
+        @media only screen and (min-width: @largestTabletScreen) {
+          padding: 0.7em 0 1em 0;
+        }
+      }
+    }
+  }
+}
+
+.tools {
+  display: none !important;
+}
