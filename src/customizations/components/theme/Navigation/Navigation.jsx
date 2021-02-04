@@ -101,7 +101,6 @@ class Navigation extends Component {
       nextProps.pathname !== this.props.pathname ||
       nextProps.userToken !== this.props.userToken
     ) {
-      console.log('navdepth', settings.navDepth);
       this.props.getNavigation(
         getBaseUrl(nextProps.pathname),
         settings.navDepth,
@@ -206,7 +205,6 @@ class Navigation extends Component {
           onClick={this.closeMobileMenu}
           onBlur={() => this.closeMobileMenu}
         >
-          {console.log(this.props)}
           {this.props.items.map((item) => {
             const flatUrl = flattenToAppURL(item.url);
             const itemID = item.title.split(' ').join('-').toLowerCase();
