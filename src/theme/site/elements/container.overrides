@@ -46,7 +46,8 @@
   }
 }
 @media only screen and (min-width: 1520px) {
-  .ui.container {
-    max-width: 1520px !important;
+  .has-sidebar .ui.container {
+    max-width: 1450px;
+    padding: 0 3rem;
   }
 }
