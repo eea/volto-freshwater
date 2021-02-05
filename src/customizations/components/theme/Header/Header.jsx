@@ -37,7 +37,7 @@ class Header extends Component {
   static propTypes = {
     token: PropTypes.string,
     pathname: PropTypes.string.isRequired,
-    defaultHeaderImage: PropTypes.any,
+    headerImage: PropTypes.object,
   };
 
   /**
@@ -49,7 +49,7 @@ class Header extends Component {
     token: null,
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.pathname !== this.props.pathname) {
       this.setState({
         isHomepage: !nextProps.pathname,
@@ -70,8 +70,7 @@ class Header extends Component {
    * @returns {string} Markup for the component.
    */
   render() {
-    const defaultHeaderImage = this.props.content?.image?.download;
-    let headerImageUrl = defaultHeaderImage?.image || defaultHeaderImage;
+    let headerImageUrl = this.props.headerImage?.download;
     return (
       <div className="portal-top">
         <Segment basic className="header-wrapper" role="banner">
@@ -116,7 +115,7 @@ class Header extends Component {
 export default connect(
   (state) => ({
     token: state.userSession.token,
-    content: state.content.data,
+    headerImage: state.content.data.image,
   }),
   {},
 )(Header);
