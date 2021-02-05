@@ -26,7 +26,7 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isHomepage: this.props.actualPathName === '/',
+      isHomepage: !this.props.pathname,
     };
   }
   /**
@@ -37,7 +37,6 @@ class Header extends Component {
   static propTypes = {
     token: PropTypes.string,
     pathname: PropTypes.string.isRequired,
-    actualPathName: PropTypes.string.isRequired,
     defaultHeaderImage: PropTypes.any,
   };
 
@@ -51,16 +50,16 @@ class Header extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.actualPathName !== this.props.actualPathName) {
+    if (nextProps.pathname !== this.props.pathname) {
       this.setState({
-        isHomepage: nextProps.actualPathName === '/',
+        isHomepage: !nextProps.pathname,
       });
     }
   }
   componentDidUpdate(prevProps) {
-    if (prevProps.actualPathName !== this.props.actualPathName) {
+    if (prevProps.pathname !== this.props.pathname) {
       this.setState({
-        isHomepage: this.props.actualPathName === '/',
+        isHomepage: !this.props.pathname,
       });
     }
   }
@@ -114,7 +113,10 @@ class Header extends Component {
   }
 }
 
-export default connect((state) => ({
-  token: state.userSession.token,
-  content: state.content.data,
-}))(Header);
+export default connect(
+  (state) => ({
+    token: state.userSession.token,
+    content: state.content.data,
+  }),
+  {},
+)(Header);
