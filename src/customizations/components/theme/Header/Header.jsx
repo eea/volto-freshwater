@@ -15,7 +15,7 @@ import {
   Breadcrumbs,
 } from '@plone/volto/components';
 
-import HeaderImage from './HeaderImage';
+import HeaderImage from '@eeacms/volto-freshwater/components/theme/Header/HeaderImage';
 
 /**
  * Header component class.
