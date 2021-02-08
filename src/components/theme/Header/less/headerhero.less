@@ -1,0 +1,68 @@
+@type: 'extra';
+@element: 'custom';
+
+@addon: 'volto-freshwater';
+@addontype: 'header';
+@addonelement: 'headerhero';
+
+@import (multiple) '../../theme.config';
+
+/* Enables customization of addons */
+.loadAddonOverrides() {
+  @import (optional) '@{siteFolder}/@{type}s/@{element}.overrides';
+  @import (optional)
+    '@{siteFolder}/../addons/@{addon}/@{addontype}/@{addonelement}.overrides';
+}
+
+/* Helper to load variables */
+.loadAddonVariables() {
+  @import (optional) '@{addonelement}.variables';
+  @import (optional)
+    '@{siteFolder}/../addons/@{addon}/@{addontype}/@{addonelement}.variables';
+}
+
+.loadAddonVariables();
+
+/*******************************
+            Custom Style
+*******************************/
+
+
+.leadimage {
+  height: 100%;
+  min-height: 360px;
+  background-color: rgba(0, 0, 0, 0.8);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.leadimage-content {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 0.25rem;
+  color: #fff;
+}
+
+.leadimage-title {
+  margin-bottom: 2rem;
+  font-size: 40px;
+  font-weight: bold;
+  text-shadow: 0 1px 1px black;
+}
+
+.header-bg .breadcrumbs {
+  padding: 0 !important;
+}
+
+.header-bg .breadcrumb {
+  position: absolute !important;
+}
+
+.portal-top + .breadcrumbs {
+  display: none !important;
+}
+
+.loadAddonOverrides();

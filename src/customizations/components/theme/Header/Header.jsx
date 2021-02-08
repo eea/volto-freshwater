@@ -15,7 +15,7 @@ import {
   Breadcrumbs,
 } from '@plone/volto/components';
 
-import HeaderImage from '@eeacms/volto-freshwater/components/theme/Header/HeaderImage';
+import { HeaderHero } from '../../../../components';
 
 /**
  * Header component class.
@@ -37,7 +37,8 @@ class Header extends Component {
   static propTypes = {
     token: PropTypes.string,
     pathname: PropTypes.string.isRequired,
-    headerImage: PropTypes.object,
+    leadImage: PropTypes.object,
+    content: PropTypes.object,
   };
 
   /**
@@ -70,7 +71,10 @@ class Header extends Component {
    * @returns {string} Markup for the component.
    */
   render() {
-    let headerImageUrl = this.props.headerImage?.download;
+    let leadImageUrl = this.props.leadImage?.download;
+    let imageCaption = this.props.content?.image_caption;
+    let contentTitle = this.props.content?.title;
+    let contentDescription = this.props.content?.description;
     return (
       <div className="portal-top">
         <Segment basic className="header-wrapper" role="banner">
@@ -93,20 +97,28 @@ class Header extends Component {
             </div>
           </Container>
         </Segment>
-        <div>
+        <React.Fragment>
           <div
             className={`header-bg ${
               this.state.isHomepage ? 'homepage' : 'contentpage'
             }`}
           >
             {!this.state.isHomepage && (
-              <div style={{ position: 'relative' }}>
+              <div
+                className={'header-title-container'}
+                style={{ position: 'relative' }}
+              >
                 <Breadcrumbs pathname={this.props.pathname} />
-                <HeaderImage url={headerImageUrl} />
+                <HeaderHero
+                  image_url={leadImageUrl}
+                  image_caption={imageCaption}
+                  content_title={contentTitle}
+                  content_description={contentDescription}
+                />
               </div>
             )}
           </div>
-        </div>
+        </React.Fragment>
       </div>
     );
   }
@@ -115,7 +127,8 @@ class Header extends Component {
 export default connect(
   (state) => ({
     token: state.userSession.token,
-    headerImage: state.content.data.image,
+    leadImage: state?.content?.data?.image,
+    content: state.content.data,
   }),
   {},
 )(Header);
