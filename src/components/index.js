@@ -1,1 +1,1 @@
-export HeaderHero from './theme/Header/HeaderHero';
+export HeroSection from './theme/Header/HeroSection';

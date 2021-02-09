@@ -1,0 +1,18 @@
+@type: 'extra';
+@element: 'custom';
+
+@import (multiple, reference, optional) '../../theme.config';
+
+/* Enables customization of addons */
+.loadAddonOverrides() {
+  @import (optional) '@{siteFolder}/@{type}s/@{element}.overrides';
+  @import (optional)
+    '@{siteFolder}/../addons/@{addon}/@{addontype}/@{addonelement}.overrides';
+}
+
+/* Helper to load variables */
+.loadAddonVariables() {
+  @import (optional) '@{addonelement}.variables';
+  @import (optional)
+    '@{siteFolder}/../addons/@{addon}/@{addontype}/@{addonelement}.variables';
+}

@@ -15,7 +15,7 @@ import {
   Breadcrumbs,
 } from '@plone/volto/components';
 
-import { HeaderHero } from '../../../../components';
+import { HeroSection } from '../../../../components';
 
 /**
  * Header component class.
@@ -105,11 +105,10 @@ class Header extends Component {
           >
             {!this.state.isHomepage && (
               <div
-                className={'header-title-container'}
+                className={'header-container'}
                 style={{ position: 'relative' }}
               >
-                <Breadcrumbs pathname={this.props.pathname} />
-                <HeaderHero
+                <HeroSection
                   image_url={leadImageUrl}
                   image_caption={imageCaption}
                   content_title={contentTitle}

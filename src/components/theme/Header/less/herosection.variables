@@ -1,0 +1,10 @@
+@heroSectionContentColor: #FFF;
+@heroSectionContentMargin: 0 0 0.25rem 0;
+
+@heroSectionContentImageMinHeight: 360px;
+@heroSectionContentImageOverlayBackground: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5) 100%);
+
+@heroSectionContentTitleMargin: 0 0 2rem 0 !important;
+@heroSectionContentTitleSize: 40px;
+@heroSectionContentTitleWeight: bold;
+@heroSectionContentTitleShadow: 0 1px 1px black;
