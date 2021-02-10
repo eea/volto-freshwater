@@ -12,7 +12,6 @@ import {
   Logo,
   Navigation,
   SearchWidget,
-  Breadcrumbs,
 } from '@plone/volto/components';
 
 import { HeroSection } from '../../../../components';
