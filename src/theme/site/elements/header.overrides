@@ -62,13 +62,3 @@
     }
   }
 }
-
-.breadcrumbs {
-  padding: 0 !important;
-}
-
-.breadcrumb {
-  position: absolute;
-  top: 84px;
-  max-width: 91%;
-}

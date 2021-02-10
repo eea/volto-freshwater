@@ -29,7 +29,9 @@ function HeroSection(props) {
                 </p>
               )}
               {image_caption && (
-                <p className="herosection-image-caption">{image_caption}</p>
+                <p className="herosection-content-image-caption">
+                  {image_caption}
+                </p>
               )}
             </div>
           </div>

@@ -8,3 +8,11 @@
 @heroSectionContentTitleSize: 40px;
 @heroSectionContentTitleWeight: bold;
 @heroSectionContentTitleShadow: 0 1px 1px black;
+
+@heroSectionContentDescriptionMargin: -2rem 0 2rem 0 !important;
+@heroSectionContentDescriptionShadow: @heroSectionContentTitleShadow;
+
+@heroSectionContentImageCaptionFontSize: 11px;
+@heroSectionContentImageCaptionFontStyle: italic;
+@heroSectionContentImageCaptionOpacity: 0.8;
+@heroSectionContentImageCaptionShadow: @heroSectionContentTitleShadow;
