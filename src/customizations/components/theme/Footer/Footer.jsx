@@ -49,12 +49,15 @@ const Footer = ({ intl }) => (
                   </Link>
                 </li>
                 <li>
-                  <Link className="item" to="/legal-and-privacy-notice">
+                  <a
+                    className="item"
+                    href="https://water.europa.eu/legal-notice"
+                  >
                     <FormattedMessage
                       id="legal_notice"
                       defaultMessage="Privacy and legal notice"
                     />
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </Grid.Column>

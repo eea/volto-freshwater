@@ -57,6 +57,7 @@ class Header extends Component {
       });
     }
   }
+
   componentDidUpdate(prevProps) {
     if (prevProps.pathname !== this.props.pathname) {
       this.setState({
