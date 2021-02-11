@@ -1,19 +1,60 @@
 .ui.secondary.pointing.menu .dropdown.item:hover {
   background-color: #cdd6dd;
-  color: #002d54;
+  color: @secondaryPointingHoverTextColor;
 }
 
 .ui.secondary.pointing.menu a {
+  color: @secondaryPointingHoverTextColor;
   font-family: 'Poppins', serif;
   font-weight: 500;
+  line-height: 1.2;
+}
+
+.secondLevel:hover {
+  color: @secondaryPointingTextColor !important;
 }
 
 .navigation .ui.secondary.pointing.menu .item {
   padding: @itemPadding;
   margin: 0;
+  line-height: 1.2;
   text-transform: none;
 }
 
 .navigation .dropdown .menu > .item[role='option'] {
   border-bottom: 1px solid @lightGreyBorderColor;
+}
+
+#main .firstLevel:before {
+  position: absolute;
+  top: 6px;
+  left: -0.5px;
+  display: block !important;
+  width: 1px;
+  height: 25px;
+  background: #002d54;
+  content: ' ';
+}
+
+#main .dropdown:hover:after {
+  position: absolute;
+  top: -1px;
+  right: 0;
+  left: 100%;
+  display: block;
+  width: 1px;
+  height: 100%;
+  border-left: 1px solid #cdd6dd;
+  content: ' ';
+  transform: none;
+  visibility: visible;
+}
+
+#main .dropdown:hover:before,
+#main .dropdown:first-child:before {
+  display: none !important;
+}
+
+#main .firstLevel:hover {
+  z-index: 10;
 }
