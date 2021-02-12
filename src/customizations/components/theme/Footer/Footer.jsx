@@ -8,6 +8,8 @@ import { Container, Segment, Grid } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
+import { Anontools } from '@plone/volto/components';
+
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import ecLogo from '@eeacms/volto-freshwater/static/ec_logo.png';
@@ -59,6 +61,7 @@ const Footer = ({ intl }) => (
                     />
                   </a>
                 </li>
+                <Anontools />
               </ul>
             </Grid.Column>
           </Grid.Row>
