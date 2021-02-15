@@ -58,3 +58,15 @@
 #main .firstLevel:hover {
   z-index: 10;
 }
+
+.has-carousel {
+  #main .firstLevel:before {
+    top: 9px;
+    background-color: #fff;
+  }
+
+  .firstLevel,
+  .firstLevel > a {
+    color: #fff !important;
+  }
+}

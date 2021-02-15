@@ -31,6 +31,10 @@
   padding: 0 !important;
 }
 
+.has-carousel .breadcrumbs {
+  display: none !important;
+}
+
 .breadcrumb {
   position: absolute;
   top: 84px;

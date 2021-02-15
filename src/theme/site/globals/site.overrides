@@ -1,3 +1,22 @@
 /*-------------------
  Freshwater Site overrides
 --------------------*/
+
+.has-carousel {
+  .ui.content-area {
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+  .portal-top {
+    position: absolute;
+    z-index: 5;
+    top: 20px;
+    width: 98%;
+  }
+
+  .header-wrapper > .container {
+    padding: 0;
+    border-bottom: 1px solid #fff;
+  }
+}
