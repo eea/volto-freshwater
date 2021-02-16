@@ -65,8 +65,14 @@
     background-color: #fff;
   }
 
-  .firstLevel,
-  .firstLevel > a {
-    color: #fff !important;
+  #main {
+    .firstLevel,
+    .firstLevel > a {
+      color: #fff;
+    }
+
+    .firstLevel:hover > a {
+      color: #002d54;
+    }
   }
 }

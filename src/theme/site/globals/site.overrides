@@ -10,13 +10,16 @@
 
   .portal-top {
     position: absolute;
-    z-index: 5;
+    z-index: 2;
     top: 20px;
     width: 98%;
   }
 
-  .header-wrapper > .container {
-    padding: 0;
+  .header {
     border-bottom: 1px solid #fff;
+  }
+
+  .documentFirstHeading {
+    display: none;
   }
 }
