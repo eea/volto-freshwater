@@ -6,5 +6,5 @@
 
 @secondaryPointingTextColor: #59727F;
 @secondaryPointingHoverTextColor: #002d54;
-@secondaryPointingBorderWidth: 0;
+//@secondaryPointingBorderWidth: 0;
 @secondaryDropdownMenuDistance: 0;

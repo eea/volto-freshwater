@@ -1,6 +1,15 @@
+@width: 1520px;
+
+.ui.container {
+  max-width: @width !important;
+}
 .contentWidthMedia(@width, @gutter, @offset) {
-  .ui.container {
-    max-width: @width !important;
+  .drag.handle.wrapper {
+    margin-left: @offset !important;
+  }
+
+  .block .delete-button {
+    margin-right: @offset !important;
   }
 }
 
@@ -8,6 +17,8 @@
   padding: 0 3rem;
 }
 @media only screen and (max-width: @largestMobileScreen) {
+  .contentWidthMedia(@mobileWidth, @mobileGutter, -12px);
+
   [class*='mobile hidden'],
   [class*='tablet only']:not(.mobile),
   [class*='computer only']:not(.mobile),
@@ -18,6 +29,8 @@
   }
 }
 @media only screen and (min-width: @tabletBreakpoint) and (max-width: @largestTabletScreen) {
+  .contentWidthMedia(@tabletWidth, @tabletGutter, -30px);
+
   [class*='mobile only']:not(.tablet),
   [class*='tablet hidden'],
   [class*='computer only']:not(.tablet),
@@ -29,6 +42,8 @@
 }
 
 @media only screen and (min-width: @computerBreakpoint) and (max-width: @largestSmallMonitor) {
+  .contentWidthMedia(@computerWidth, @computerGutter, -30px);
+
   [class*='mobile only']:not(.computer),
   [class*='tablet only']:not(.computer),
   [class*='computer hidden'],
@@ -39,6 +54,8 @@
   }
 }
 @media only screen and (min-width: @largeMonitorBreakpoint) {
+  .contentWidthMedia(@largeMonitorWidth, @largeMonitorGutter, -30px);
+
   [class*='mobile only']:not([class*='large screen']),
   [class*='tablet only']:not([class*='large screen']),
   [class*='computer only']:not([class*='large screen']),

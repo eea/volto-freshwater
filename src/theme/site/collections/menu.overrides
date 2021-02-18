@@ -1,17 +1,19 @@
-.ui.secondary.pointing.menu .dropdown.item:hover {
-  background-color: #cdd6dd;
-  color: @secondaryPointingHoverTextColor;
-}
+.navigation {
+  .ui.secondary.pointing.menu .dropdown.item:hover {
+    background-color: #cdd6dd;
+    color: @secondaryPointingHoverTextColor;
+  }
 
-.ui.secondary.pointing.menu a {
-  color: @secondaryPointingHoverTextColor;
-  font-family: 'Poppins', serif;
-  font-weight: 500;
-  line-height: 1.2;
-}
+  .ui.secondary.pointing.menu a {
+    color: @secondaryPointingHoverTextColor;
+    font-family: 'Poppins', serif;
+    font-weight: 500;
+    line-height: 1.2;
+  }
 
-.secondLevel:hover {
-  color: @secondaryPointingTextColor !important;
+  .secondLevel:hover {
+    color: @secondaryPointingTextColor !important;
+  }
 }
 
 .navigation .ui.secondary.pointing.menu .item {

@@ -1,0 +1,14 @@
+/* avoid visibility of block types when output is production */
+.blocks-chooser .ui.accordion .content {
+  padding: 0 !important;
+}
+
+.blocks-chooser .ui.accordion .accordion .title ~ .content,
+.blocks-chooser .ui.accordion .title ~ .content {
+  display: block;
+}
+
+/* fix image cards block pickers stretching over the content area */
+#field-cards {
+  max-width: 83%;
+}
