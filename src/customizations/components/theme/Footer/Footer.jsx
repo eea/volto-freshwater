@@ -18,7 +18,7 @@ import fiseLogo from '@eeacms/volto-freshwater/static/forest.svg';
 import ccaLogo from '@eeacms/volto-freshwater/static/climate_adapt.png';
 import biseLogo from '@eeacms/volto-freshwater/static/bise-logo.png';
 import wiseLogo from '@eeacms/volto-freshwater/static/wise-logo.png';
-import fishLogo from '@eeacms/volto-freshwater/static/footer-fishes.svg';
+// import fishLogo from '@eeacms/volto-freshwater/static/footer-fishes.svg';
 
 /**
  * Component to display the footer.
@@ -133,13 +133,13 @@ const Footer = ({ intl }) => (
             </Grid.Column>
           </Grid.Row>
         </Grid>
-        <div className="footer-backdrop">
-          <LazyLoadImage
-            src={fishLogo}
-            title="Footer Fish Logo"
-            alt="Footer Fish Logo"
-          />
-        </div>
+        {/*<div className="footer-backdrop">*/}
+        {/*  <LazyLoadImage*/}
+        {/*    src={fishLogo}*/}
+        {/*    title="Footer Fish Logo"*/}
+        {/*    alt="Footer Fish Logo"*/}
+        {/*  />*/}
+        {/*</div>*/}
       </div>
     </Container>
   </Segment>
