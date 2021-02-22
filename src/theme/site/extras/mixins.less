@@ -2,3 +2,23 @@
   src: url('@{themeFontPath}/@{fontName}/@{fontName}-@{fontWeight}.@{fontType}')
     format('@{fontFormat}');
 }
+
+
+.centeredArrow(@color: red, @position: left, @position-amount: 45%) {
+  border: 10px solid transparent;
+  border-@{position}-color: @color;
+  top: 40%;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  @{position}: @position-amount;
+}
+.centeredLeftArrow(@color: red, @position: left) {
+  .centeredArrow();
+}
+
+.centeredRightArrow(@color: red, @position: right, @position-amount:5%) {
+  .centeredArrow(@position:@position, @position-amount: @position-amount);
+}

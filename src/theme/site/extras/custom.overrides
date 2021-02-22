@@ -5,4 +5,5 @@
 & {
   @import 'footer';
   @import 'blocks.overrides';
+  @import 'toolbar.overrides';
 }
