@@ -1,12 +1,13 @@
 #toolbar .toolbar .toolbar-handler button {
-  opacity: 0.7;
   position: relative;
+  opacity: 0.7;
 }
 
-#toolbar .expanded .toolbar-handler  {
+#toolbar .expanded .toolbar-handler {
   button {
     opacity: 0.45;
   }
+
   button:before {
     left: 16px;
   }
@@ -15,6 +16,7 @@
 .toolbar:not(.expanded) .toolbar-handler button:after {
   .centeredArrow();
 }
+
 .expanded .toolbar-handler button:after {
   .centeredArrow(@position: right, @position-amount: 5%);
 }
@@ -23,16 +25,19 @@
 .sidebar-container.full-size.no-toolbar {
   width: 100%;
 }
+
 .sidebar-container:not(.collapsed) {
   .trigger,
   .trigger:focus,
   .trigger:hover {
     opacity: 0.45;
   }
+
   .trigger::before {
     left: 0;
   }
 }
+
 .sidebar-container.collapsed {
   .trigger,
   .trigger:focus,
@@ -46,11 +51,10 @@
   opacity: 0.9;
 }
 
-
 .sidebar-container.collapsed .trigger::after {
   .centeredArrow(@position: right);
 }
+
 .sidebar-container:not(.collapsed) .trigger::after {
   .centeredArrow(@position-amount: 5%);
 }
-

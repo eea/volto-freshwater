@@ -1,8 +1,16 @@
 /*-------------------
  Freshwater Site overrides
 --------------------*/
+.block-editor-slate p {
+  font-size: 18px;
+  font-weight: 300;
+}
 
 .has-carousel {
+  .block-editor-title {
+    display: none;
+  }
+
   .ui.content-area {
     padding-top: 0;
     margin-top: 0;

@@ -11,6 +11,14 @@ const applyConfig = (config) => {
     document_view: HeroSectionView,
     herosection_view: HeroSectionView,
   };
+  config.settings.slate = config.settings.slate || {};
+
+  config.settings.slate.styleMenu = config.settings.slate.styleMenu || {};
+  config.settings.slate.styleMenu.inlineStyles = [
+    ...(config.settings.slate.styleMenu?.inlineStyles || []),
+    { cssClass: 'blue-text', label: 'Blue text' },
+    { cssClass: 'grey-text', label: 'Grey text' },
+  ];
 
   return config;
 };

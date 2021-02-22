@@ -17,6 +17,14 @@
   font-display: swap;
   font-family: @fontName;
   font-style: normal;
+  font-weight: 300;
+  .setFontSrc(@fontName, @fontWeight: 'Light');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: @fontName;
+  font-style: normal;
   font-weight: 500;
   .setFontSrc(@fontName, @fontWeight: 'Medium');
 }

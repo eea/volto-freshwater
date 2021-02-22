@@ -149,7 +149,7 @@
 @yellow           : #F6A808; // Palette: goldenRod
 @green            : #51AA55; // Palette: darkPastelGreen
 @teal             : #517776; // Palette: slate
-@blue             : #007EB1; // Palette: Plone (tealBlue/cerulean)
+@blue             : #0077bc; // Palette: Plone (tealBlue/cerulean)
 @pink             : #E40166; // Palette: darkHotPink
 @red              : @pink;
 @brown            : #826A6A; // Palette: reddishGrey
@@ -177,6 +177,7 @@
 
 /*--- Colored Text ---*/
 @tealTextColor   : @teal;
+@darkBlueTextColor: #003159;
 
 /*--- Colored Border ---*/
 // Pastanaga custom borders colors

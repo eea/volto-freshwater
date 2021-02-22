@@ -3,18 +3,18 @@
     format('@{fontFormat}');
 }
 
-
 .centeredArrow(@color: red, @position: left, @position-amount: 45%) {
-  border: 10px solid transparent;
-  border-@{position}-color: @color;
-  top: 40%;
-  content: " ";
-  height: 0;
-  width: 0;
   position: absolute;
+  top: 40%;
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  content: ' ';
   pointer-events: none;
+  border-@{position}-color: @color;
   @{position}: @position-amount;
 }
+
 .centeredLeftArrow(@color: red, @position: left) {
   .centeredArrow();
 }

@@ -12,3 +12,9 @@
 #field-cards {
   max-width: 83%;
 }
+
+.block.slate::after {
+  display: block;
+  clear: both;
+  content: '';
+}
