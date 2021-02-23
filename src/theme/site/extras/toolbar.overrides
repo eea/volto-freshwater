@@ -25,6 +25,23 @@
 .sidebar-container.full-size.no-toolbar {
   width: 100%;
 }
+#sidebar .sidebar-container {
+  .trigger,
+  .trigger:focus,
+  .trigger:hover {
+    box-shadow: none;
+    padding: 0;
+    margin-top: 0;
+  }
+}
+
+#sidebar {
+  .button,
+  .button:focus,
+  .button:hover {
+    background-color: transparent;
+  }
+}
 
 .sidebar-container:not(.collapsed) {
   .trigger,

@@ -2,9 +2,9 @@
 // Place here all the extra non-SemanticUI components/modules CSS
 // and make behave it like the SemanticUI ones
 
-& {
-  @import 'footer';
-  @import 'blocks.overrides';
-  @import 'toolbar.overrides';
-  @import 'editor';
-}
+//& {
+@import 'footer';
+@import 'blocks.overrides';
+@import 'toolbar.overrides';
+@import 'editor';
+//}
