@@ -25,13 +25,14 @@
 .sidebar-container.full-size.no-toolbar {
   width: 100%;
 }
+
 #sidebar .sidebar-container {
   .trigger,
   .trigger:focus,
   .trigger:hover {
-    box-shadow: none;
     padding: 0;
-    margin-top: 0;
+    margin-top: -40px;
+    box-shadow: none;
   }
 }
 
@@ -40,6 +41,10 @@
   .button:focus,
   .button:hover {
     background-color: transparent;
+  }
+
+  .tab-wrapper {
+    padding: 0;
   }
 }
 
