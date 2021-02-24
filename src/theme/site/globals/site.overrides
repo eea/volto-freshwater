@@ -1,7 +1,7 @@
 /*-------------------
  Freshwater Site overrides
 --------------------*/
-.block-editor-slate p {
+.content-area p {
   font-size: 18px;
   font-weight: 300;
 }
