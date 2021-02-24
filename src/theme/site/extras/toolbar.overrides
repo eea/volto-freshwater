@@ -1,6 +1,11 @@
 #toolbar .toolbar .toolbar-handler button {
   position: relative;
   opacity: 0.7;
+
+  &::before {
+    width: 6px;
+    border-radius: 0 4px 4px 0;
+  }
 }
 
 #toolbar .expanded .toolbar-handler {
@@ -9,8 +14,15 @@
   }
 
   button:before {
-    left: 16px;
+    left: 14px;
+    width: 6px;
+    border-radius: 4px 0 0 4px;
   }
+}
+
+#toolbar .toolbar .toolbar-handler .private::before,
+#toolbar .toolbar .toolbar-handler .published::before {
+  background-color: red;
 }
 
 .toolbar:not(.expanded) .toolbar-handler button:after {
@@ -68,9 +80,32 @@
   }
 }
 
+// disable animation from sidebar-container so that it behaves like the toolbar
+// trigger
+.sidebar-container .trigger {
+  animation: none;
+}
+
+.sidebar-container .trigger:hover,
+.sidebar-container .trigger:focus {
+  animation: none;
+  transition: none;
+}
+
 .sidebar-container .trigger::before {
+  width: 6px;
+  animation: none;
   background-color: red;
   opacity: 0.9;
+}
+
+// add rounded borders to sidebar button
+.sidebar-container.collapsed .trigger::before {
+  border-radius: 4px 0 0 4px;
+}
+
+.sidebar-container:not(.collapsed) .trigger::before {
+  border-radius: 0 4px 4px 0;
 }
 
 .sidebar-container.collapsed .trigger::after {

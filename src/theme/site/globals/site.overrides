@@ -6,6 +6,10 @@
   font-weight: 300;
 }
 
+.ui.inverted a {
+  color: @inverteditemlinkcolor;
+}
+
 .has-carousel {
   .block-editor-title {
     display: none;
