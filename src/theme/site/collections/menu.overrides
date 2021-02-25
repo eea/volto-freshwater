@@ -25,7 +25,7 @@
 }
 
 .navigation .dropdown .menu > .item[role='option'] {
-  border-bottom: 1px solid @lightGreyBorderColor;
+  border-bottom: 1px solid @lightGreyBorderColor !important;
 }
 
 #main .firstLevel:before {
