@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { Logo, Navigation, SearchWidget } from '@plone/volto/components';
 
 import { HeroSection } from '../../../../components';
+import { fixUrl, getPath } from '@eeacms/volto-freshwater/utils';
 
 /**
  * Header component class.
@@ -67,7 +68,9 @@ class Header extends Component {
    * @returns {string} Markup for the component.
    */
   render() {
-    let leadImageUrl = this.props.leadImage?.download;
+    let leadImageUrl = this.props?.leadImage?.download
+      ? fixUrl(getPath(this.props.pathname))
+      : null;
     let imageCaption = this.props.content?.image_caption;
     let contentTitle = this.props.content?.title;
     let contentDescription = this.props.content?.description;

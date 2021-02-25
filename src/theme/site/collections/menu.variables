@@ -4,7 +4,7 @@
 @dropdownHoveredItemBackground: transparent;
 
 
-@secondaryPointingTextColor: #59727F;
-@secondaryPointingHoverTextColor: #002d54;
+@secondaryPointingTextColor: #002d54;
+@secondaryPointingHoverTextColor: #59727F;
 //@secondaryPointingBorderWidth: 0;
 @secondaryDropdownMenuDistance: 0;
