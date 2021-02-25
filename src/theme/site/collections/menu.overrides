@@ -21,6 +21,7 @@
   margin: 0;
   line-height: 1.2;
   text-transform: none;
+  border: 0;
 }
 
 .navigation .dropdown .menu > .item[role='option'] {
@@ -59,8 +60,20 @@
 
 #main .firstLevel:hover {
   z-index: 10;
-  color: @darkBlueTextColor !important;
+  color: @secondaryPointingHoverTextColor;
 }
+
+#main .thirdLevel {
+    font-weight: normal;
+    margin-left: .5rem;
+    border-bottom: 0;
+    line-height: 1.1;
+    padding: .4rem 1rem;
+   &:hover {
+     color: @secondaryPointingHoverTextColor;
+   }
+}
+
 
 .has-carousel {
   #main .firstLevel:before {
@@ -73,7 +86,8 @@
     .firstLevel > a {
       color: #fff;
     }
-
+    
+    a.firstLevel:hover,
     .firstLevel:hover > a {
       color: @darkBlueTextColor;
     }

@@ -97,7 +97,8 @@
        Links
 --------------------*/
 
-@linkColor           : @blue;
+//#1978b5
+@linkColor           : #0077bc;
 
 
 /*-------------------
@@ -147,18 +148,27 @@
 /*---  Colors  ---*/
 @orange           : #FA5C2A; // Palette: reddishOrange
 @yellow           : #F6A808; // Palette: goldenRod
-@green            : #51AA55; // Palette: darkPastelGreen
+@green            : #18ad5f; // Palette: darkPastelGreen
 @teal             : #517776; // Palette: slate
 @blue             : #064c7f; // Palette: Plone (tealBlue/cerulean)
 @pink             : #E40166; // Palette: darkHotPink
-@red              : @pink;
+@red              : #c31f43;
 @brown            : #826A6A; // Palette: reddishGrey
-@grey             : #68778D; // Palette: blueishGrey
+@grey             : #5d5e5e; // Palette: blueishGrey
 @black            : #252525; // Palette: darkishGrey
+@violet           : #595a93;
 
 /*---  Light Colors  ---*/
-@lightOlive       : #C9EAB1; // Palette: lightSage
-@lightGrey        : #878F93;
+@lightTeal        : #34c0bf;
+@lightBlue        : #5db5e6;
+@lightGreen       : #72933d;
+@lightOrange      : #f58450;
+@lightOlive       : #d0cd41; // Palette: lightSage
+@lightGrey        : #ccc;
+
+/*---  Dark Tones  ---*/
+@darkGrey: #4d4d4d;
+@darkBlue: #064c7f;
 
 /*---   Neutrals  ---*/
 @fullBlack        : #000000;
@@ -168,11 +178,14 @@
 @white            : #FFFFFF;
 
 /*--- Colored Backgrounds ---*/
-@redBackground    : #F5C1C1; // Palette: alertError
-@tealBackground   : #EDF1F2; // Palette: Breadcrumbs
-@blueBackground   : #F2F6F8;
-@darkBlueBackground: #064c7f;
-@purpleBackground : #B8C6C8; // Dublin Core Summary
+@redBackground      : #F5C1C1; // Palette: alertError
+@tealBackground     : #EDF1F2; // Palette: Breadcrumbs
+@blueBackground     : #59d3ff;
+@darkBlueBackground : #064c7f;
+@purpleBackground   : #B8C6C8; // Dublin Core Summary
+@greyBackground     : #e2e2e2;
+
+@darkGreenBackground: #156650;
 
 /*--- Colored Headers ---*/
 
@@ -182,8 +195,8 @@
 
 /*--- Colored Border ---*/
 // Pastanaga custom borders colors
-@greyBorderColor      : #C7D5D8; // breadcrumbs border
-@lightGreyBorderColor : #EDF1F2; // breadcrumbs background
+@greyBorderColor      : #ccc; // breadcrumbs border
+@lightGreyBorderColor : #eee; // breadcrumbs background
 
 @sidebarToggleButtonHighlightColor: @grey;
 
@@ -266,7 +279,7 @@
 --------------------*/
 
 @borderColor               : @greyBorderColor;
-@borderRadius : 4px;
+@borderRadius              : 4px;
 
 
 /*-------------------

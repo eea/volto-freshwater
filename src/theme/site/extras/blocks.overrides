@@ -18,3 +18,12 @@
   clear: both;
   content: '';
 }
+
+.block p:last-child {
+  margin-bottom: 0;
+}
+
+.callout {
+  background-color: #eee;
+  border-left: 1em solid #ccc;
+}
