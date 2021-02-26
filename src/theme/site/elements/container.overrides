@@ -3,6 +3,11 @@
 .ui.container {
   max-width: @width !important;
 }
+
+.ui.twelve {
+  width: 100%;
+}
+
 .contentWidthMedia(@width, @gutter, @offset) {
   .drag.handle.wrapper {
     margin-left: @offset !important;
