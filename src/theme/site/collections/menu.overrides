@@ -39,27 +39,11 @@
   content: ' ';
 }
 
-#main .dropdown:hover:after {
-  position: absolute;
-  top: -1px;
-  right: 0;
-  left: 100%;
-  display: block;
-  width: 1px;
-  height: 100%;
-  border-left: 1px solid #cdd6dd;
-  content: ' ';
-  transform: none;
-  visibility: visible;
-}
-
-#main .dropdown:hover:before,
 #main .dropdown:first-child:before {
   display: none !important;
 }
 
 #main .firstLevel:hover {
-  z-index: 10;
   color: @secondaryPointingHoverTextColor;
 }
 
@@ -77,19 +61,24 @@
 
 .has-carousel {
   #main .firstLevel:before {
-    top: 9px;
+    top: 0;
+    height: 100%;
     background-color: #fff;
   }
 
   #main {
+    .tools-search-wrapper {
+      margin-bottom: -41px;
+    }
+
     .firstLevel,
     .firstLevel > a {
       color: #fff;
     }
 
-    a.firstLevel:hover,
-    .firstLevel:hover > a {
-      color: @darkBlueTextColor;
+    .firstLevel:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      color: #fff;
     }
   }
 }
