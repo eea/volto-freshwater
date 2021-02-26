@@ -1,7 +1,7 @@
 /*-------------------
  Freshwater Site overrides
 --------------------*/
-.content-area p {
+.content-area .container {
   font-size: 18px;
   font-weight: 300;
 }

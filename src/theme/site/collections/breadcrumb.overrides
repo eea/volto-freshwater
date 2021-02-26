@@ -35,7 +35,7 @@
   display: none !important;
 }
 
-.breadcrumb {
+.has-image .breadcrumb {
   position: absolute;
   top: 84px;
   max-width: 91%;

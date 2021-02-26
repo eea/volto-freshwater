@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { Logo, Navigation, SearchWidget } from '@plone/volto/components';
+import { BodyClass } from '@plone/volto/helpers';
 
 import { HeroSection } from '../../../../components';
 import { fixUrl, getPath } from '@eeacms/volto-freshwater/utils';
@@ -68,7 +69,7 @@ class Header extends Component {
    * @returns {string} Markup for the component.
    */
   render() {
-    let leadImageUrl = this.props?.leadImage?.download
+    let leadImageUrl = this.props?.leadImage
       ? fixUrl(getPath(this.props.pathname))
       : null;
     let imageCaption = this.props.content?.image_caption;
@@ -76,6 +77,7 @@ class Header extends Component {
     let contentDescription = this.props.content?.description;
     return (
       <div className="portal-top">
+        {leadImageUrl && <BodyClass className="has-image" />}
         <Segment basic className="header-wrapper" role="banner">
           <Container>
             <div className="header">
