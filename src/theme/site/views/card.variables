@@ -1,0 +1,7 @@
+/* cards content size */
+@contentFontSize: 1.5625rem;
+@background: #59d3ff;
+@borderRadius: 0;
+@extraDivider: 0;
+@boxShadow: none;
+
