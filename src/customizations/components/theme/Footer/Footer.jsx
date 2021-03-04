@@ -16,7 +16,7 @@ import ecLogo from '@eeacms/volto-freshwater/static/ec_logo.png';
 import eeaLogo from '@eeacms/volto-freshwater/static/eea_mini.png';
 import fiseLogo from '@eeacms/volto-freshwater/static/forest.svg';
 import ccaLogo from '@eeacms/volto-freshwater/static/climate_adapt.png';
-import biseLogo from '@eeacms/volto-freshwater/static/bise-logo.png';
+import biseLogo from '@eeacms/volto-freshwater/static/bise-logo.svg';
 import wiseLogo from '@eeacms/volto-freshwater/static/wise-logo.png';
 // import fishLogo from '@eeacms/volto-freshwater/static/footer-fishes.svg';
 
