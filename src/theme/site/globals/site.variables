@@ -30,6 +30,7 @@
 @fontSize : 16px;
 
 
+
 /*-------------------
     Border Radius
 --------------------*/
@@ -159,8 +160,9 @@
 @violet           : #595a93;
 
 /*---  Light Colors  ---*/
+
 @lightTeal        : #34c0bf;
-@lightBlue        : #5db5e6;
+@lightBlue        : #59d3ff;
 @lightGreen       : #72933d;
 @lightOrange      : #f58450;
 @lightOlive       : #d0cd41; // Palette: lightSage
@@ -244,6 +246,7 @@
 /*-------------------
         Paths
 --------------------*/
+@themeImagePath: '../assets/images';
 
 
 /*-------------------
