@@ -1,0 +1,35 @@
+@import 'globals.less';
+
+@addon: 'volto-addons';
+@addontype: 'imagecard';
+@addonelement: 'coloredcards';
+
+.loadAddonVariables();
+
+.cardsgrid {
+  margin-bottom: @coloredCardsMarginBottom;
+  text-align: @coloredCardsTextAlign;
+}
+
+.cardsgrid-cards {
+  min-height: 400px;
+}
+
+.cardsgrid-cards .header,
+.card-title {
+  color: inherit !important;
+}
+
+.center .card-title {
+  text-align: center;
+}
+
+.left .card-title {
+  text-align: left;
+}
+
+.right .card-title {
+  text-align: right;
+}
+
+.loadAddonOverrides();

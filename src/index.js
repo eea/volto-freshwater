@@ -1,4 +1,5 @@
 import HeroSectionView from './components/theme/Header/HeroSectionView';
+import ColoredCards from './components/blocks/CustomImageCards/ColoredCards/ColoredCards';
 
 const applyConfig = (config) => {
   config.settings.navDepth = 3;
@@ -10,6 +11,17 @@ const applyConfig = (config) => {
     ...config.views.layoutViews,
     document_view: HeroSectionView,
     herosection_view: HeroSectionView,
+  };
+
+  config.blocks.blocksConfig.imagecards =
+    config.blocks.blocksConfig.imagecards || {};
+  config.blocks.blocksConfig.imagecards.display_types =
+    config.blocks.blocksConfig.imagecards.display_types || {};
+
+  config.blocks.blocksConfig.imagecards.blockRenderers['colored_cards'] = {
+    title: 'Colored cards',
+    schema: null,
+    view: ColoredCards,
   };
 
   config.settings.available_colors = [
