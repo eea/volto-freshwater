@@ -1,5 +1,6 @@
 import HeroSectionView from './components/theme/Header/HeroSectionView';
 import ColoredCards from './components/blocks/CustomImageCards/ColoredCards/ColoredCards';
+import { ColoredCardsSchemaExtender } from './components/blocks/CustomImageCards/ColoredCards/schema';
 
 const applyConfig = (config) => {
   config.settings.navDepth = 3;
@@ -20,7 +21,7 @@ const applyConfig = (config) => {
 
   config.blocks.blocksConfig.imagecards.blockRenderers['colored_cards'] = {
     title: 'Colored cards',
-    schema: null,
+    schemaExtender: ColoredCardsSchemaExtender,
     view: ColoredCards,
   };
 
