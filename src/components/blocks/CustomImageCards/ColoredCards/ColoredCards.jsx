@@ -108,8 +108,9 @@ const ColoredCards = ({ data }) => {
         <div className={'cardsgrid'}>
           <h2 className={'cardsgrid-title'}>{title}</h2>
           <Grid className={'ui three stackable cards cardsgrid-cards'}>
-            {(cards || []).map((card, i) => (
+            {(cards || []).map((card, index) => (
               <Card
+                key={index}
                 {...card}
                 background_color={data.background_color}
                 text_color={data.text_color}

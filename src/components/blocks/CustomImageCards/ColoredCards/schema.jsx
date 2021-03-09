@@ -1,6 +1,8 @@
 import config from '@plone/volto/registry';
+import { cloneDeep } from 'lodash';
 
 export const ColoredCardsSchemaExtender = (schema, data) => {
+  schema = cloneDeep(schema);
   schema.fieldsets[0].fields.push('text_color');
   schema.fieldsets[0].fields.push('background_color');
 
