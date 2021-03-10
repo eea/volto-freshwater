@@ -1,5 +1,6 @@
-@coloredCardsMarginBottom: 1rem !important;
-@coloredCardsTextAlign: center;
+@coloredCardsTopMargin: 3rem;
+@coloredCardsBottomMargin: 3rem;
+@coloredCardsTextAlign: left;
 
 @coloredCardsTitleMarginTop: 2rem;
 @coloredCardsTitleMarginBottom: 1rem;

@@ -7,15 +7,10 @@ import { LazyLoadComponent } from 'react-lazy-load-image-component';
 import { UniversalLink } from '@plone/volto/components';
 import { BodyClass } from '@plone/volto/helpers';
 
-import { fixUrl, getPath } from '@eeacms/volto-freshwater/utils';
+import { getScaleUrl, getPath } from '@eeacms/volto-freshwater/utils';
 
 import './css/coloredcards.less';
 import { serializeNodes } from 'volto-slate/editor/render';
-
-export const thumbUrl = (url) =>
-  (url || '').includes(settings.apiPath)
-    ? `${flattenToAppURL(url.replace('/api', ''))}/@@images/image/preview`
-    : `${url.replace('/api', '')}/@@images/image/preview`;
 
 export const Card = (props) => {
   const {
@@ -29,7 +24,7 @@ export const Card = (props) => {
 
   return (
     <div
-      className="ui card"
+      className="ui card colored-card"
       style={
         background_color
           ? {
@@ -44,12 +39,13 @@ export const Card = (props) => {
           {attachedimage && (
             <LazyLoadComponent>
               <div
-                className="card-image"
+                className="colored-card-image"
                 style={
                   attachedimage
                     ? {
-                        backgroundImage: `url(${fixUrl(
+                        backgroundImage: `url(${getScaleUrl(
                           getPath(attachedimage),
+                          'preview',
                         )})`,
                       }
                     : {}
@@ -59,20 +55,22 @@ export const Card = (props) => {
           )}
 
           {title && (
-            <div className="content">
+            <div className="content colored-card-content">
               <div className="header">{title}</div>
             </div>
           )}
 
           {text && (
             <div className="content">
-              <div className="card-description">{serializeNodes(text)}</div>
+              <div className="colored-card-description">
+                {serializeNodes(text)}
+              </div>
             </div>
           )}
 
           <div className="extra content">
             <div className="right floated author">
-              <UniversalLink className={'card-link'} href={link}>
+              <UniversalLink className={'colored-card-link'} href={link}>
                 <Icon link name="arrow alternate circle right" size="large" />
               </UniversalLink>
             </div>
@@ -80,7 +78,7 @@ export const Card = (props) => {
         </>
       ) : (
         <>
-          <div className="card-title">{serializeNodes(text)}</div>
+          <div className="colored-card-title">{serializeNodes(text)}</div>
         </>
       )}
     </div>
@@ -92,22 +90,19 @@ const ColoredCards = ({ data }) => {
   return (
     <div
       className={cx(
-        'block align imagecards-block',
+        'block align colored-cards-block',
         {
           center: !Boolean(data.align),
+          'full-width': data.align === 'full',
         },
         data.align,
       )}
     >
       <BodyClass className="has-card-tiles" />
-      <div
-        className={cx({
-          'full-width': data.align === 'full',
-        })}
-      >
-        <div className={'cardsgrid'}>
-          <h2 className={'cardsgrid-title'}>{title}</h2>
-          <Grid className={'ui three stackable cards cardsgrid-cards'}>
+      <div className={'colored-cards-grid-wrapper ui container'}>
+        <div className={'colored-cards-grid'}>
+          <h2 className={'colored-cards-grid-title'}>{title}</h2>
+          <Grid className={'ui three stackable cards colored-cards'}>
             {(cards || []).map((card, index) => (
               <Card
                 key={index}
