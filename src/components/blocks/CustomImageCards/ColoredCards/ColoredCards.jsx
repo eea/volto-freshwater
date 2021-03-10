@@ -1,7 +1,5 @@
 import cx from 'classnames';
 import React from 'react';
-import { settings } from '~/config';
-import { flattenToAppURL } from '@plone/volto/helpers';
 import { Grid, Icon } from 'semantic-ui-react';
 import { LazyLoadComponent } from 'react-lazy-load-image-component';
 import { UniversalLink } from '@plone/volto/components';
@@ -61,7 +59,7 @@ export const Card = (props) => {
           )}
 
           {text && (
-            <div className="content">
+            <div className="content colored-card-content">
               <div className="colored-card-description">
                 {serializeNodes(text)}
               </div>

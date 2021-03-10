@@ -1,6 +1,6 @@
 /* cards content size */
 @contentFontSize: 1.5625rem;
-@background: #59d3ff;
+@background: inherit;
 @contentDivider: 0;
 @borderRadius: 0;
 @extraDivider: 0;
