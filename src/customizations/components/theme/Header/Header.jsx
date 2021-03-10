@@ -12,7 +12,7 @@ import { Logo, Navigation, SearchWidget } from '@plone/volto/components';
 import { BodyClass } from '@plone/volto/helpers';
 
 import { HeroSection } from '../../../../components';
-import { fixUrl, getPath } from '@eeacms/volto-freshwater/utils';
+import { getScaleUrl, getPath } from '@eeacms/volto-freshwater/utils';
 
 /**
  * Header component class.
@@ -70,7 +70,7 @@ class Header extends Component {
    */
   render() {
     let leadImageUrl = this.props?.leadImage
-      ? fixUrl(getPath(this.props.pathname))
+      ? getScaleUrl(getPath(this.props.pathname), 'panoramic')
       : null;
     let imageCaption = this.props.content?.image_caption;
     let contentTitle = this.props.content?.title;
