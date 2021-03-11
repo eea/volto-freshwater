@@ -55,8 +55,8 @@ export const Card = (props) => {
 
         {title && (
           <div className="content colored-card-content">
-            <div className="header">{title}</div>
-            <div className="sub-header">{sub_title}</div>
+            <div className="ui sub header">{title}</div>
+            <div className="colored-card-sub-header">{sub_title}</div>
           </div>
         )}
 
