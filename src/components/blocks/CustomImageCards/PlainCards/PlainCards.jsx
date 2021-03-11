@@ -77,7 +77,7 @@ const PlainCards = ({ data }) => {
       <div className={'plain-cards-grid-wrapper ui container'}>
         <div className={'plain-cards-grid'}>
           <h2 className={'plain-cards-grid-title'}>{title}</h2>
-          <Grid className={'ui three stackable cards plain-cards'}>
+          <Grid className={'ui four stackable cards plain-cards'}>
             {(cards || []).map((card, index) => (
               <Card key={index} {...card} />
             ))}

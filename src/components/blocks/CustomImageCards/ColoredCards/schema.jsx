@@ -5,6 +5,7 @@ export const ColoredCardsSchemaExtender = (schema, data) => {
   schema = cloneDeep(schema);
   schema.fieldsets[0].fields.push('text_color');
   schema.fieldsets[0].fields.push('background_color');
+  schema.fieldsets[0].fields.push('font_size');
 
   schema.properties.text_color = {
     widget: 'style_simple_color',
@@ -20,6 +21,15 @@ export const ColoredCardsSchemaExtender = (schema, data) => {
     field_props: {
       available_colors: config.settings.available_colors,
     },
+  };
+
+  schema.properties.font_size = {
+    title: 'Card Font size',
+    description: 'Relative to normal size of text in the block',
+    choices: [
+      ['p_size', 'Normal text'],
+      ['h_size', 'Headers text'],
+    ],
   };
 
   return schema;
