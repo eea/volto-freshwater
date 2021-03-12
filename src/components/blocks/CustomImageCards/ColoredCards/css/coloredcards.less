@@ -6,6 +6,15 @@
 
 .loadAddonVariables();
 
+.simple-color-picker-widget .button {
+  border: 1px solid #ececec !important;
+}
+
+.github-picker {
+  position: absolute;
+  z-index: 10;
+}
+
 .colored-cards-block {
   padding: 2rem 0;
   margin-top: @coloredCardsTopMargin;
@@ -50,6 +59,14 @@
 .colored-card-link {
   position: relative;
   z-index: 2;
+  padding: 0.2rem 40px;
+  background-color: @cardLinkBackgroundColor;
+  border-radius: 21px;
+  color: @cardLinkTextColor !important;
+}
+
+.colored-card-link:hover {
+  background-color: @cardLinkBackgroundColorHover;
 }
 
 .center .colored-card-title {

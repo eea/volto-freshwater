@@ -72,7 +72,7 @@ export const Card = (props) => {
           <div className="extra content">
             <div className="right floated author">
               <UniversalLink className={'colored-card-link'} href={link}>
-                <Icon link name="arrow alternate circle right" size="large" />
+                Read more
               </UniversalLink>
             </div>
           </div>

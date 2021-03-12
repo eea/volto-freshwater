@@ -21,3 +21,7 @@
 @cardTitleFontSize: 22px;
 @cardTitleFontWeight: normal;
 @cardTitleDecoration: underline;
+
+@cardLinkTextColor: #fff !important;
+@cardLinkBackgroundColor: #f58450;
+@cardLinkBackgroundColorHover: #0065a0;

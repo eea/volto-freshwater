@@ -38,7 +38,7 @@ export const Card = (props) => {
 
             {title && (
               <div className="content plain-card-content">
-                <div className="header">{title}</div>
+                <div className="plain-card-header">{title}</div>
               </div>
             )}
 
