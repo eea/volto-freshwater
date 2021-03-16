@@ -3,6 +3,9 @@ import ColoredCards from './components/blocks/CustomImageCards/ColoredCards/Colo
 import { ColoredCardsSchemaExtender } from './components/blocks/CustomImageCards/ColoredCards/schema';
 import PlainCards from './components/blocks/CustomImageCards/PlainCards/PlainCards';
 
+import { PresentationCardsSchemaExtender } from './components/blocks/CustomImageCards/PresentationCards/schema';
+import PresentationCards from './components/blocks/CustomImageCards/PresentationCards/PresentationCards';
+
 const applyConfig = (config) => {
   config.settings.navDepth = 3;
   config.views.contentTypesViews = {
@@ -30,6 +33,12 @@ const applyConfig = (config) => {
     title: 'Plain cards',
     schemaExtender: null,
     view: PlainCards,
+  };
+
+  config.blocks.blocksConfig.imagecards.blockRenderers['presentation_cards'] = {
+    title: 'Presentation cards',
+    schemaExtender: PresentationCardsSchemaExtender,
+    view: PresentationCards,
   };
 
   config.settings.available_colors = [
