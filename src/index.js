@@ -77,6 +77,12 @@ const applyConfig = (config) => {
     ...(config.settings.slate.styleMenu?.inlineStyles || []),
     { cssClass: 'blue-text', label: 'Blue text' },
     { cssClass: 'grey-text', label: 'Grey text' },
+    { cssClass: 'h1', label: 'H1 36px' },
+    { cssClass: 'h2', label: 'H2 30px' },
+    { cssClass: 'h3', label: 'H3 24px' },
+    { cssClass: 'h4', label: 'H4 18px' },
+    { cssClass: 'h5', label: 'H5 14px' },
+    { cssClass: 'p-text', label: 'Paragraph 16px' },
   ];
 
   return config;

@@ -29,6 +29,12 @@
 /* The size of page text  */
 @fontSize : 16px;
 
+@h1 : unit((36 / 16), rem);
+@h2 : unit((30 / 16), rem);
+@h3 : unit((24 / 16), rem);
+@h4 : unit((18 / 16), rem);
+@h5 : unit((14 / 16), rem);
+
 
 
 /*-------------------
