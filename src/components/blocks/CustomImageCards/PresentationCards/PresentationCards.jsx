@@ -11,50 +11,58 @@ import './css/presentationcards.less';
 import { serializeNodes } from 'volto-slate/editor/render';
 
 export const Card = (props) => {
-  const { title, text, link, attachedimage } = props;
+  const { title, text, item_type, link, border_color, attachedimage } = props;
 
   return (
-    <div className="ui card presentation-card">
+    <div
+      className="ui card presentation-card"
+      style={{ borderTopColor: `${border_color} !important` }}
+    >
       {link ? (
         <>
-          <UniversalLink className={'presentation-card-link'} href={link}>
-            {attachedimage && (
-              <LazyLoadComponent>
-                <div
-                  className="presentation-card-image"
-                  style={
-                    attachedimage
-                      ? {
-                          backgroundImage: `url(${getScaleUrl(
-                            getPath(attachedimage),
-                            'thumb',
-                          )})`,
-                        }
-                      : {}
-                  }
-                ></div>
-              </LazyLoadComponent>
-            )}
+          <div className="content presentation-card-content">
+            <UniversalLink className={'presentation-card-link'} href={link}>
+              {attachedimage && (
+                <LazyLoadComponent>
+                  <div
+                    className="presentation-card-image"
+                    style={
+                      attachedimage
+                        ? {
+                            backgroundImage: `url(${getScaleUrl(
+                              getPath(attachedimage),
+                              'mini',
+                            )})`,
+                          }
+                        : {}
+                    }
+                  ></div>
+                </LazyLoadComponent>
+              )}
 
-            {title && (
-              <div className="content presentation-card-content">
-                <div className="presentation-card-header">{title}</div>
-              </div>
-            )}
+              {title && <div className="presentation-card-header">{title}</div>}
 
-            {text && (
-              <div className="content presentation-card-content">
-                <div className="presentation-card-description">
-                  {serializeNodes(text)}
+              {text && (
+                <div className="content presentation-card-content">
+                  <div className="presentation-card-description">
+                    {serializeNodes(text)}
+                  </div>
                 </div>
-              </div>
-            )}
-          </UniversalLink>
+              )}
+            </UniversalLink>
+          </div>
+          {item_type && (
+            <div className="extra content">
+              <div className="left floated card_item_type">{item_type}</div>
+            </div>
+          )}
         </>
       ) : (
         <>
           {text && (
-            <div className="presentation-card-title">{serializeNodes(text)}</div>
+            <div className="presentation-card-title">
+              {serializeNodes(text)}
+            </div>
           )}
         </>
       )}
@@ -63,7 +71,7 @@ export const Card = (props) => {
 };
 
 const PresentationCards = ({ data }) => {
-  const { title, cards } = data;
+  const { title, cards, border_color } = data;
   return (
     <div
       className={cx(
@@ -81,7 +89,7 @@ const PresentationCards = ({ data }) => {
           <h2 className={'presentation-cards-grid-title'}>{title}</h2>
           <Grid className={'ui four stackable cards presentation-cards'}>
             {(cards || []).map((card, index) => (
-              <Card key={index} {...card} />
+              <Card key={index} {...card} border_color={border_color} />
             ))}
           </Grid>
         </div>

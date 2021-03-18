@@ -12,9 +12,9 @@ export const PresentationCardsSchemaExtender = (schema, data) => {
   };
   schema.properties.border_color = {
     widget: 'style_simple_color',
-    title: 'Card Border color',
+    title: 'Card top border color',
     type: 'color',
-    default: 'blue',
+    default: '#FFF',
     available_colors: config.settings.available_colors,
   };
 

@@ -1,5 +1,5 @@
 /* cards content size */
-@contentFontSize: 1.5625rem;
+//@contentFontSize: 1.5625rem;
 @background: inherit;
 @contentDivider: 0;
 @borderRadius: 0;
