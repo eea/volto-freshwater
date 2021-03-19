@@ -17,6 +17,7 @@ export const Card = (props) => {
     link,
     attachedimage,
     background_color,
+    border_color,
     text_color,
     font_size,
     sub_title,
@@ -30,6 +31,7 @@ export const Card = (props) => {
           ? {
               backgroundColor: `${background_color}`,
               color: `${text_color}`,
+              borderTopColor: `${border_color} !important`,
             }
           : {}
       }
@@ -105,6 +107,7 @@ const ColoredCards = ({ data }) => {
                 key={index}
                 {...card}
                 background_color={data.background_color}
+                border_color={data.border_color}
                 text_color={data.text_color}
                 font_size={data.font_size}
               />

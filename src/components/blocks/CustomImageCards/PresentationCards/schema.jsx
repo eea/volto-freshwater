@@ -4,7 +4,9 @@ import { cloneDeep } from 'lodash';
 export const PresentationCardsSchemaExtender = (schema, data) => {
   if (!data.display === 'presentation_cards') return schema;
   schema = cloneDeep(schema);
-  schema.fieldsets[0].fields.push('border_color');
+  schema.fieldsets[0].fields.splice(4, 0, 'border_color');
+  schema.fieldsets[0].fields.splice(4, 0, 'image_bg_size');
+  schema.fieldsets[0].fields.splice(4, 0, 'image_bg_min_size');
   schema.properties.cards.schema.fieldsets[0].fields.splice(1, 0, 'item_type');
   schema.properties.cards.schema.properties.item_type = {
     type: 'string',
@@ -16,6 +18,21 @@ export const PresentationCardsSchemaExtender = (schema, data) => {
     type: 'color',
     default: '#FFF',
     available_colors: config.settings.available_colors,
+  };
+
+  schema.properties.image_bg_size = {
+    title: 'Card Background image size',
+    choices: [
+      ['contain', 'Contains header area'],
+      ['cover', 'Covers header area'],
+    ],
+    default: 'contain',
+  };
+
+  schema.properties.image_bg_min_size = {
+    type: 'string',
+    title: 'Height of background image',
+    default: '90px',
   };
 
   return schema;

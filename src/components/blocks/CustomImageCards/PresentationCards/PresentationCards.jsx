@@ -11,7 +11,16 @@ import './css/presentationcards.less';
 import { serializeNodes } from 'volto-slate/editor/render';
 
 export const Card = (props) => {
-  const { title, text, item_type, link, border_color, attachedimage } = props;
+  const {
+    title,
+    text,
+    item_type,
+    link,
+    border_color,
+    attachedimage,
+    image_bg_size,
+    image_bg_min_size,
+  } = props;
 
   return (
     <div
@@ -33,6 +42,8 @@ export const Card = (props) => {
                               getPath(attachedimage),
                               'mini',
                             )})`,
+                            backgroundSize: `${image_bg_size}`,
+                            minHeight: `${image_bg_min_size}`,
                           }
                         : {}
                     }
@@ -71,7 +82,7 @@ export const Card = (props) => {
 };
 
 const PresentationCards = ({ data }) => {
-  const { title, cards, border_color } = data;
+  const { title, cards, border_color, image_bg_size, image_bg_min_size } = data;
   return (
     <div
       className={cx(
@@ -89,7 +100,13 @@ const PresentationCards = ({ data }) => {
           <h2 className={'presentation-cards-grid-title'}>{title}</h2>
           <Grid className={'ui four stackable cards presentation-cards'}>
             {(cards || []).map((card, index) => (
-              <Card key={index} {...card} border_color={border_color} />
+              <Card
+                key={index}
+                {...card}
+                border_color={border_color}
+                image_bg_size={image_bg_size}
+                image_bg_min_size={image_bg_min_size}
+              />
             ))}
           </Grid>
         </div>

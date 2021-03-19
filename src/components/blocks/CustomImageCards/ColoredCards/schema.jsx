@@ -4,9 +4,10 @@ import { cloneDeep } from 'lodash';
 export const ColoredCardsSchemaExtender = (schema, data) => {
   if (!data.display === 'colored_cards') return schema;
   schema = cloneDeep(schema);
-  schema.fieldsets[0].fields.push('text_color');
-  schema.fieldsets[0].fields.push('background_color');
-  schema.fieldsets[0].fields.push('font_size');
+  schema.fieldsets[0].fields.splice(4, 0, 'text_color');
+  schema.fieldsets[0].fields.splice(4, 0, 'background_color');
+  schema.fieldsets[0].fields.splice(4, 0, 'border_color');
+  schema.fieldsets[0].fields.splice(4, 0, 'font_size');
   schema.properties.cards.schema.fieldsets[0].fields.splice(1, 0, 'sub_title');
   schema.properties.cards.schema.properties.sub_title = {
     type: 'string',
@@ -26,6 +27,14 @@ export const ColoredCardsSchemaExtender = (schema, data) => {
     field_props: {
       available_colors: config.settings.available_colors,
     },
+  };
+
+  schema.properties.border_color = {
+    widget: 'style_simple_color',
+    title: 'Card top border color',
+    type: 'color',
+    default: '#FFF',
+    available_colors: config.settings.available_colors,
   };
 
   schema.properties.font_size = {
