@@ -18,6 +18,7 @@ export const Card = (props) => {
     attachedimage,
     background_color,
     border_color,
+    cards_per_line,
     text_color,
     font_size,
     sub_title,
@@ -85,7 +86,7 @@ export const Card = (props) => {
 };
 
 const ColoredCards = ({ data }) => {
-  const { title, cards } = data;
+  const { title, cards, cards_per_line } = data;
   return (
     <div
       className={cx(
@@ -101,7 +102,9 @@ const ColoredCards = ({ data }) => {
       <div className={'colored-cards-grid-wrapper ui container'}>
         <div className={'colored-cards-grid'}>
           <h2 className={'colored-cards-grid-title'}>{title}</h2>
-          <Grid className={'ui three stackable cards colored-cards'}>
+          <Grid
+            className={`ui ${cards_per_line} stackable cards colored-cards`}
+          >
             {(cards || []).map((card, index) => (
               <Card
                 key={index}
@@ -110,6 +113,7 @@ const ColoredCards = ({ data }) => {
                 border_color={data.border_color}
                 text_color={data.text_color}
                 font_size={data.font_size}
+                cards_per_line={data.cards_per_line}
               />
             ))}
           </Grid>

@@ -1,9 +1,11 @@
 import config from '@plone/volto/registry';
 import { cloneDeep } from 'lodash';
+import { CommonCardsSchemaExtender } from '../CommonAssets/schema';
 
 export const ColoredCardsSchemaExtender = (schema, data) => {
   if (!data.display === 'colored_cards') return schema;
   schema = cloneDeep(schema);
+  schema = CommonCardsSchemaExtender(schema, data);
   schema.fieldsets[0].fields.splice(4, 0, 'text_color');
   schema.fieldsets[0].fields.splice(4, 0, 'background_color');
   schema.fieldsets[0].fields.splice(4, 0, 'border_color');

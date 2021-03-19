@@ -20,6 +20,7 @@ export const Card = (props) => {
     attachedimage,
     image_bg_size,
     image_bg_min_size,
+    cards_per_line,
   } = props;
 
   return (
@@ -82,7 +83,14 @@ export const Card = (props) => {
 };
 
 const PresentationCards = ({ data }) => {
-  const { title, cards, border_color, image_bg_size, image_bg_min_size } = data;
+  const {
+    title,
+    cards,
+    border_color,
+    image_bg_size,
+    image_bg_min_size,
+    cards_per_line,
+  } = data;
   return (
     <div
       className={cx(
@@ -98,7 +106,9 @@ const PresentationCards = ({ data }) => {
       <div className={'presentation-cards-grid-wrapper ui container'}>
         <div className={'presentation-cards-grid'}>
           <h2 className={'presentation-cards-grid-title'}>{title}</h2>
-          <Grid className={'ui four stackable cards presentation-cards'}>
+          <Grid
+            className={`ui ${cards_per_line} stackable cards presentation-cards`}
+          >
             {(cards || []).map((card, index) => (
               <Card
                 key={index}
@@ -106,6 +116,7 @@ const PresentationCards = ({ data }) => {
                 border_color={border_color}
                 image_bg_size={image_bg_size}
                 image_bg_min_size={image_bg_min_size}
+                cards_per_line={cards_per_line}
               />
             ))}
           </Grid>
