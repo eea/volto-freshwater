@@ -17,6 +17,7 @@ export const Card = (props) => {
     item_type,
     link,
     border_color,
+    border_top_width,
     attachedimage,
     image_bg_size,
     image_bg_min_size,
@@ -26,7 +27,10 @@ export const Card = (props) => {
   return (
     <div
       className="ui card presentation-card"
-      style={{ borderTopColor: `${border_color} !important` }}
+      style={{
+        borderTopColor: `${border_color} !important`,
+        borderTopWidth: `${border_top_width} !important`,
+      }}
     >
       {link ? (
         <>
@@ -114,6 +118,7 @@ const PresentationCards = ({ data }) => {
                 key={index}
                 {...card}
                 border_color={border_color}
+                border_top_width={data.border_top_width}
                 image_bg_size={image_bg_size}
                 image_bg_min_size={image_bg_min_size}
                 cards_per_line={cards_per_line}

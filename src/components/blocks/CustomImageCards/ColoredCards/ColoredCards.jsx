@@ -18,7 +18,7 @@ export const Card = (props) => {
     attachedimage,
     background_color,
     border_color,
-    cards_per_line,
+    border_top_width,
     text_color,
     font_size,
     sub_title,
@@ -33,6 +33,7 @@ export const Card = (props) => {
               backgroundColor: `${background_color}`,
               color: `${text_color}`,
               borderTopColor: `${border_color} !important`,
+              borderTopWidth: `${border_top_width} !important`,
             }
           : {}
       }
@@ -111,9 +112,9 @@ const ColoredCards = ({ data }) => {
                 {...card}
                 background_color={data.background_color}
                 border_color={data.border_color}
+                border_top_width={data.border_top_width}
                 text_color={data.text_color}
                 font_size={data.font_size}
-                cards_per_line={data.cards_per_line}
               />
             ))}
           </Grid>
