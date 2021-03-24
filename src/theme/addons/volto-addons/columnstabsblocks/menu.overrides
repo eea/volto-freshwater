@@ -1,0 +1,10 @@
+.columns-tabs-container .item {
+  min-width: 40px;
+  justify-content: center;
+  margin: 0 1rem;
+  border-radius: 50% !important;
+}
+
+.columns-tabs-container .item:first-of-type {
+  margin-left: 0;
+}
