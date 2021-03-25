@@ -1,5 +1,10 @@
+.columns-tabs-container {
+  border: 3px solid #ededed;
+  box-shadow: 0 2px 15px #d3d3d3;
+  padding: 0.5rem;
+}
 .columns-tabs-container .item {
-  min-width: 40px;
+  min-width: 45px;
   justify-content: center;
   margin: 0 1rem;
   border-radius: 50% !important;
