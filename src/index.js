@@ -5,6 +5,7 @@ import PlainCards from './components/blocks/CustomImageCards/PlainCards/PlainCar
 
 import { PresentationCardsSchemaExtender } from './components/blocks/CustomImageCards/PresentationCards/schema';
 import PresentationCards from './components/blocks/CustomImageCards/PresentationCards/PresentationCards';
+import { ScrollToTop } from './components';
 
 const applyConfig = (config) => {
   config.settings.navDepth = 3;
@@ -83,6 +84,14 @@ const applyConfig = (config) => {
     { cssClass: 'h4', label: 'H4 18px' },
     { cssClass: 'h5', label: 'H5 14px' },
     { cssClass: 'p-text', label: 'Paragraph 16px' },
+  ];
+
+  config.settings.appExtras = [
+    ...config.settings.appExtras,
+    {
+      match: '',
+      component: ScrollToTop,
+    },
   ];
 
   return config;
