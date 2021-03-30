@@ -1,0 +1,16 @@
+.tabs-block .item {
+  min-width: 45px;
+  justify-content: center;
+  margin: 0 1rem;
+  border-radius: 50% !important;
+}
+
+.tabs-block .item:first-of-type {
+  margin-left: 0;
+}
+
+.tabs-block .tab {
+  padding: 0.5rem;
+  border: 3px solid #ededed;
+  box-shadow: 0 2px 15px #d3d3d3;
+}
