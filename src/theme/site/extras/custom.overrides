@@ -7,5 +7,6 @@
 @import 'blocks.overrides';
 @import 'segment.overrides';
 @import 'toolbar.overrides';
+@import 'contextnavigation';
 @import 'editor';
 //}
