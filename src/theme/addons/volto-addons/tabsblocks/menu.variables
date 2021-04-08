@@ -1,13 +1,16 @@
-@menuItemFontSize: 20px;
+@menuItemFontSize: 1rem;
 @menuFirstItemPadding: 0.5rem;
 
-@menuItemHoverBackground: #3ec8e6;
-@menuActiveItemBackground: #3ec8e6;
-@menuActiveItemHoverBackground: #3ec8e6;
-@menuActiveItemHoverColor: #FFF;
-@menuActiveItemColor: #FFF;
-@menuItemHoverColor: #FFF;
-@menuItemColor: #FFF;
-@menuItemBackground: #878F93;
+@menuItemHoverBackground: none;
+@menuActiveItemBackground: none;
+@menuActiveItemHoverBackground: none;
+@menuActiveItemHoverColor: @darkBlue;
+@menuActiveItemColor: @darkBlue;
+@menuItemHoverColor: @darkBlue;
+@menuItemColor: #878F93;
+@menuItemBackground: none;
+@menuItemCountDisplay: flex;
+@menuItemCountBackgroundActive: #3ec8e6;
 
-@menuItemPadding: 0;
+@menuItemPadding: 0 0 1rem 0;
+//#3ec8e6

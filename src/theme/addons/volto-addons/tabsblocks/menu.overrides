@@ -1,16 +1,31 @@
-.tabs-block .item {
-  min-width: 45px;
+.menu-item-count {
   justify-content: center;
-  margin: 0 1rem;
+  margin: 0 0.25rem 0 0;
   border-radius: 50% !important;
+  width: 25px;
+  height: 25px;
+  line-height: 1.6;
+  background-color: @menuItemColor;
+  color: #FFF;
+}
+.default .item {
+  margin-left: 1rem;
+}
+
+.active .menu-item-count {
+  background-color: @menuItemCountBackgroundActive;
+}
+
+.tabs-block .ui.menu .item:first-child {
+  padding: 0 0 1rem 0;
 }
 
 .tabs-block .item:first-of-type {
   margin-left: 0;
 }
 
-.tabs-block .tab {
-  padding: 0.5rem;
-  border: 3px solid #ededed;
-  box-shadow: 0 2px 15px #d3d3d3;
+.tabs-block {
+  padding: 1rem 0.5rem;
+  border: 3px solid @borderColor;
+  box-shadow: 5px 5px 5px @borderColor;
 }
