@@ -21,6 +21,24 @@
 .has-sidebar .ui.container {
   padding: 0 3rem;
 }
+
+.has-sidebar .full-width {
+  position: relative;
+  right: 50%;
+  left: 55%;
+  width: 71vw !important;
+  max-width: initial !important;
+  margin-right: -37vw !important;
+  margin-left: -39vw !important;
+}
+
+.has-sidebar-collapsed {
+  .full-width {
+    width: 80vw !important;
+    margin-right: -50vw !important;
+    margin-left: -40vw !important;
+  }
+}
 @media only screen and (max-width: @largestMobileScreen) {
   .contentWidthMedia(@mobileWidth, @mobileGutter, -12px);
 

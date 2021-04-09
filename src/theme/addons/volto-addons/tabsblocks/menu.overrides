@@ -1,15 +1,43 @@
 .menu-item-count {
+  width: 25px;
+  min-width: 25px;
+  height: 25px;
   justify-content: center;
   margin: 0 0.25rem 0 0;
-  border-radius: 50% !important;
-  width: 25px;
-  height: 25px;
-  line-height: 1.6;
   background-color: @menuItemColor;
-  color: #FFF;
+  border-radius: 50% !important;
+  color: #fff;
+  line-height: 1.6;
 }
+
 .default .item {
-  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.tabs-block .ui.menu .ui.fluid.input {
+  margin: 0 0 0 1.7rem;
+}
+
+.tabs-block .ui.fluid.input > input {
+  width: 100% !important;
+}
+
+.tabs-block .side.tabs {
+  padding: 0;
+}
+
+.full-width .ui.container {
+  max-width: 100% !important;
+}
+
+.full-width .tabs-block {
+  margin: 0 0.5rem;
+}
+
+@media screen and (max-width: 1023px) {
+  .side .menu {
+    flex-basis: 100% !important;
+  }
 }
 
 .active .menu-item-count {

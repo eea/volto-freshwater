@@ -21,7 +21,6 @@ export const Card = (props) => {
     attachedimage,
     image_bg_size,
     image_bg_min_size,
-    cards_per_line,
   } = props;
 
   return (
@@ -93,7 +92,7 @@ const PresentationCards = ({ data }) => {
     border_color,
     image_bg_size,
     image_bg_min_size,
-    cards_per_line,
+    cards_per_line = 'three',
   } = data;
   return (
     <div

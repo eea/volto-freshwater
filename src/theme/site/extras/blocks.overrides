@@ -27,3 +27,7 @@
   border-left: 1em solid #ccc;
   background-color: #eee;
 }
+
+.block.maps iframe {
+  min-height: 600px;
+}
