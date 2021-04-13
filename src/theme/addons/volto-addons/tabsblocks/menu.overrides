@@ -26,7 +26,7 @@
   padding: 0;
 }
 
-.full-width .ui.container {
+.full-width .tabs-block .container {
   max-width: 100% !important;
 }
 
