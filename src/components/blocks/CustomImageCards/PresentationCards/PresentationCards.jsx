@@ -27,8 +27,7 @@ export const Card = (props) => {
     <div
       className="ui card presentation-card"
       style={{
-        borderTopColor: `${border_color} !important`,
-        borderTopWidth: `${border_top_width} !important`,
+        borderTop: `${border_top_width} solid ${border_color}`,
       }}
     >
       {link ? (

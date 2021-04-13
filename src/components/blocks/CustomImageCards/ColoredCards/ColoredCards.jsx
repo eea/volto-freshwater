@@ -18,7 +18,7 @@ export const Card = (props) => {
     attachedimage,
     background_color,
     border_color,
-    border_top_width,
+    border_top_width = '15px',
     text_color,
     font_size,
     sub_title,
@@ -27,16 +27,11 @@ export const Card = (props) => {
   return (
     <div
       className="ui card colored-card"
-      style={
-        background_color
-          ? {
-              backgroundColor: `${background_color}`,
-              color: `${text_color}`,
-              borderTopColor: `${border_color} !important`,
-              borderTopWidth: `${border_top_width} !important`,
-            }
-          : {}
-      }
+      style={{
+        backgroundColor: `${background_color}`,
+        color: `${text_color}`,
+        borderTop: `${border_top_width} solid ${border_color}`,
+      }}
     >
       <>
         {attachedimage && (
