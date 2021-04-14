@@ -42,6 +42,11 @@ const applyConfig = (config) => {
     view: PresentationCards,
   };
 
+  // on home contextNavigation should return false
+  config.blocks.blocksConfig.contextNavigation.blockHasValue = (data) => {
+    return data.pathname !== '/';
+  };
+
   config.settings.available_colors = [
     '#156650',
     '#72933d',
