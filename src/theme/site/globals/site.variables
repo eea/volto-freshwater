@@ -182,7 +182,7 @@
 @fullBlack        : #000000;
 @offWhite         : #F9FAFB;
 @darkWhite        : #F3F4F5;
-@midWhite         : #DCDDDE;
+@midGrey         : #cdd6dd;
 @white            : #FFFFFF;
 
 /*--- Colored Backgrounds ---*/
