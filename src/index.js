@@ -43,6 +43,8 @@ const applyConfig = (config) => {
   };
 
   // on home contextNavigation should return false
+  config.blocks.blocksConfig.contextNavigation =
+    config.blocks.blocksConfig.contextNavigation || {};
   config.blocks.blocksConfig.contextNavigation.blockHasValue = (data) => {
     return data.pathname !== '/';
   };
