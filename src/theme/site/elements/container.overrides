@@ -3,6 +3,10 @@
 .ui.container {
   max-width: @width !important;
 }
+// #129211 ensure grid column is still centered
+.ui.container.grid {
+  margin: 0 auto;
+}
 
 .ui.twelve {
   width: 100%;
