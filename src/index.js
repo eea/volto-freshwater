@@ -80,6 +80,13 @@ const applyConfig = (config) => {
 
   config.settings.slate = config.settings.slate || {};
 
+  // workaround to invalidate render of empty slot blocksConfig with hidden value
+  // needed in order to delete the block to get add button to show up on slot edit
+  config.blocks.blocksConfig.slate.blockHasValue = (data) => {
+    const value = data.plaintext;
+    return !!value && value !== 'hidden';
+  };
+
   config.settings.slate.styleMenu = config.settings.slate.styleMenu || {};
   config.settings.slate.styleMenu.inlineStyles = [
     ...(config.settings.slate.styleMenu?.inlineStyles || []),
