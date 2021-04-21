@@ -1,3 +1,7 @@
+.slot-inherited {
+    position: relative;
+    margin: 3rem 0 !important;
+}
 .slot-inherited::before {
     content: "Inherited";
     position: absolute;
