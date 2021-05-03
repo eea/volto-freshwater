@@ -31,3 +31,11 @@
 .block.maps iframe {
   min-height: 600px;
 }
+
+// add visual queue for selection TODO: move into a package such as volto-slate
+.block.multiSelected .block::before {
+  z-index: 1;
+  background-color: rgba(120,192,215,.375);
+  border-width: 1px;
+  border-color: rgba(120,192,215,.75);
+}
