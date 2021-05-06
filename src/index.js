@@ -24,6 +24,8 @@ const applyConfig = (config) => {
   config.blocks.blocksConfig.imagecards.display_types =
     config.blocks.blocksConfig.imagecards.display_types || {};
 
+  config.blocks.blocksConfig.blockRenderers =
+    config.blocks.blocksConfig.blockRenderers || {};
   config.blocks.blocksConfig.imagecards.blockRenderers['colored_cards'] = {
     title: 'Colored cards',
     schemaExtender: ColoredCardsSchemaExtender,
