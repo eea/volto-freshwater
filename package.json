@@ -16,8 +16,14 @@
     "type": "git",
     "url": "git@github.com:eea/volto-freshwater.git"
   },
+  "addons": [
+    "volto-slate:asDefault",
+    "@eeacms/volto-block-style"
+  ],
   "dependencies": {
-    "react-lazy-load-image-component": "^1.4.0"
+    "react-lazy-load-image-component": "^1.4.0",
+    "volto-slate": "^2.0.0",
+    "@eeacms/volto-block-style": "eea/volto-block-style#master"
   },
   "scripts": {
     "release": "release-it",
