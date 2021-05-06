@@ -75,7 +75,7 @@ class Navigation extends Component {
   componentDidMount() {
     this.props.getNavigation(
       getBaseUrl(this.props.pathname),
-      settings.navDepth,
+      settings?.navDepth || 3,
     );
   }
 
