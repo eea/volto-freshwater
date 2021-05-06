@@ -42,7 +42,7 @@ const HeroSectionView = ({ content, intl, location }) => {
       {map(content[blocksLayoutFieldName].items, (block) => {
         const block_data = content[blocksFieldName]?.[block];
         const block_type = block_data?.['@type'];
-        const Block = blocks.blocksConfig[block_type]?.['view'] || null;
+        const Block = blocks?.blocksConfig[block_type]?.['view'] || null;
         return Block !== null ? (
           <React.Fragment key={block}>
             {(block_type !== 'title' || !hasContentImage) && (
