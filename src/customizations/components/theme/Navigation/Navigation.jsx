@@ -103,7 +103,7 @@ class Navigation extends Component {
     ) {
       this.props.getNavigation(
         getBaseUrl(nextProps.pathname),
-        settings.navDepth,
+        settings?.navDepth || 3,
       );
       this.closeMobileMenu();
     }
