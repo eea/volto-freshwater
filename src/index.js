@@ -83,6 +83,12 @@ const applyConfig = (config) => {
     },
   };
 
+  config.blocks.blocksConfig.imagesGrid.restricted = true;
+  config.blocks.blocksConfig.teaserGrid.restricted = true;
+  config.blocks.blocksConfig.teaser.restricted = false;
+  config.blocks.blocksConfig.teaser.mostUsed = false;
+  config.blocks.blocksConfig.__grid.title = 'Teasers row';
+  config.blocks.blocksConfig.__grid.mostUsed = false;
   config.settings.available_colors = available_colors;
 
   // workaround to invalidate render of empty slot blocksConfig with hidden value
