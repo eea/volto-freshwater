@@ -18,6 +18,7 @@
   },
   "addons": [
     "volto-slate:asDefault",
+    "@kitconcept/volto-blocks-grid",
     "@eeacms/volto-block-style"
   ],
   "dependencies": {
