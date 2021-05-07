@@ -5,7 +5,7 @@ const EmbedContentSchema = (props) => {
       {
         id: 'default',
         title: 'Default',
-        fields: ['href'],
+        fields: ['href', 'title_style'],
       },
     ],
     properties: {
@@ -15,6 +15,15 @@ const EmbedContentSchema = (props) => {
         mode: 'link',
         selectedItemAttrs: ['Title', 'Description', 'hasPreviewImage'],
         allowExternals: true,
+      },
+      title_style: {
+        title: 'Title style',
+        choices: [
+          ['hidden', 'Hidden'],
+          ['h1', 'Main page title'],
+          ['h2', 'Title'],
+          ['h3', 'Subtitle'],
+        ],
       },
     },
     required: [],

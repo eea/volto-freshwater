@@ -61,6 +61,11 @@ class View extends React.Component {
   }
 }
 
+const Title = (level) => ({ properties: { title } }) => {
+  const As = level;
+  return level === 'hidden' ? '' : <As>{title}</As>;
+};
+
 const ContentBlockView = (props) => {
   const { data = {}, block } = props;
   const { href = [] } = data;
@@ -88,9 +93,7 @@ const ContentBlockView = (props) => {
               ...config.blocks.blocksConfig,
               title: {
                 ...config.blocks.blocksConfig.title,
-                view: ({ properties: { title } }) => {
-                  return <h2>{title}</h2>;
-                },
+                view: Title(data.title_style || 'h2'),
               },
             }}
             location={{ pathname: props.pathname }}
