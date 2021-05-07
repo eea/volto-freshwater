@@ -6,6 +6,36 @@ import PlainCards from './components/blocks/CustomImageCards/PlainCards/PlainCar
 import { PresentationCardsSchemaExtender } from './components/blocks/CustomImageCards/PresentationCards/schema';
 import PresentationCards from './components/blocks/CustomImageCards/PresentationCards/PresentationCards';
 import { ScrollToTop } from './components';
+import installEmbedContentBlock from './components/blocks/Content';
+
+const available_colors = [
+  '#156650',
+  '#72933d',
+  '#88c24f',
+  '#d0cd41',
+  '#f58450',
+  '#f4cf01',
+  '#c31f43',
+  '#595a93',
+  '#064c7f',
+  '#003159',
+  '#59d3ff',
+  '#34c0bf',
+  '#826A6A',
+  '#000000',
+  '#252525',
+  '#8d8d8d',
+  '#5d5e5e',
+  '#4d4d4d',
+  '#ccc',
+  '#e2e2e2',
+  '#ffffff',
+  '#FAD0C3',
+  '#F3E2AB',
+  '#C1E1C5',
+  '#BEDADC',
+  '#BED3F3',
+];
 
 const applyConfig = (config) => {
   config.settings.navDepth = 3;
@@ -19,68 +49,41 @@ const applyConfig = (config) => {
     herosection_view: HeroSectionView,
   };
 
-  config.blocks.blocksConfig.imagecards =
-    config.blocks.blocksConfig.imagecards || {};
-  config.blocks.blocksConfig.imagecards.display_types =
-    config.blocks.blocksConfig.imagecards.display_types || {};
+  config.blocks.blocksConfig.imagecards = {
+    ...config.blocks.blocksConfig.imagecards,
+    display_types: {
+      ...config.blocks.blocksConfig.imagecards?.display_types,
+    },
+    blockRenderers: {
+      ...config.blocks.blocksConfig.imagecards?.blockRenderers,
+      colored_cards: {
+        title: 'Colored cards',
+        schemaExtender: ColoredCardsSchemaExtender,
+        view: ColoredCards,
+      },
+      plain_cards: {
+        title: 'Plain cards',
+        schemaExtender: null,
+        view: PlainCards,
+      },
 
-  config.blocks.blocksConfig.imagecards.blockRenderers =
-    config.blocks.blocksConfig.imagecards.blockRenderers || {};
-  config.blocks.blocksConfig.imagecards.blockRenderers['colored_cards'] = {
-    title: 'Colored cards',
-    schemaExtender: ColoredCardsSchemaExtender,
-    view: ColoredCards,
-  };
-
-  config.blocks.blocksConfig.imagecards.blockRenderers['plain_cards'] = {
-    title: 'Plain cards',
-    schemaExtender: null,
-    view: PlainCards,
-  };
-
-  config.blocks.blocksConfig.imagecards.blockRenderers['presentation_cards'] = {
-    title: 'Presentation cards',
-    schemaExtender: PresentationCardsSchemaExtender,
-    view: PresentationCards,
+      presentation_cards: {
+        title: 'Presentation cards',
+        schemaExtender: PresentationCardsSchemaExtender,
+        view: PresentationCards,
+      },
+    },
   };
 
   // on home contextNavigation should return false
-  config.blocks.blocksConfig.contextNavigation =
-    config.blocks.blocksConfig.contextNavigation || {};
-  config.blocks.blocksConfig.contextNavigation.blockHasValue = (data) => {
-    return data.pathname !== '/';
+  config.blocks.blocksConfig.contextNavigation = {
+    ...config.blocks.blocksConfig.contextNavigation,
+    blockHasValue: (data) => {
+      return data.pathname !== '/';
+    },
   };
 
-  config.settings.available_colors = [
-    '#156650',
-    '#72933d',
-    '#88c24f',
-    '#d0cd41',
-    '#f58450',
-    '#f4cf01',
-    '#c31f43',
-    '#595a93',
-    '#064c7f',
-    '#003159',
-    '#59d3ff',
-    '#34c0bf',
-    '#826A6A',
-    '#000000',
-    '#252525',
-    '#8d8d8d',
-    '#5d5e5e',
-    '#4d4d4d',
-    '#ccc',
-    '#e2e2e2',
-    '#ffffff',
-    '#FAD0C3',
-    '#F3E2AB',
-    '#C1E1C5',
-    '#BEDADC',
-    '#BED3F3',
-  ];
-
-  config.settings.slate = config.settings.slate || {};
+  config.settings.available_colors = available_colors;
 
   // workaround to invalidate render of empty slot blocksConfig with hidden value
   // needed in order to delete the block to get add button to show up on slot edit
@@ -110,7 +113,7 @@ const applyConfig = (config) => {
     },
   ];
 
-  return config;
+  return installEmbedContentBlock(config);
 };
 
 export default applyConfig;
