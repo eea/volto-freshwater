@@ -50,6 +50,7 @@ const applyConfig = (config) => {
   };
 
   config.blocks.blocksConfig.imagecards = {
+    sidebarTab: 1,
     ...config.blocks.blocksConfig.imagecards,
     display_types: {
       ...config.blocks.blocksConfig.imagecards?.display_types,

@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import React from 'react';
-import { Grid } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 import { LazyLoadComponent } from 'react-lazy-load-image-component';
 import { UniversalLink } from '@plone/volto/components';
 import { BodyClass } from '@plone/volto/helpers';
@@ -10,7 +10,7 @@ import { getScaleUrl, getPath } from '@eeacms/volto-freshwater/utils';
 import './css/coloredcards.less';
 import { serializeNodes } from 'volto-slate/editor/render';
 
-export const Card = (props) => {
+export const CardItem = (props) => {
   const {
     title,
     text,
@@ -22,6 +22,7 @@ export const Card = (props) => {
     text_color,
     font_size,
     sub_title,
+    image_scale,
   } = props;
 
   return (
@@ -43,7 +44,7 @@ export const Card = (props) => {
                   ? {
                       backgroundImage: `url(${getScaleUrl(
                         getPath(attachedimage),
-                        'preview',
+                        image_scale || 'preview',
                       )})`,
                     }
                   : {}
@@ -82,7 +83,7 @@ export const Card = (props) => {
 };
 
 const ColoredCards = ({ data }) => {
-  const { title, cards, cards_per_line = 'four' } = data;
+  const { title, cards, fluid_cards, image_scale } = data;
   return (
     <div
       className={cx(
@@ -98,11 +99,12 @@ const ColoredCards = ({ data }) => {
       <div className={'colored-cards-grid-wrapper ui container'}>
         <div className={'colored-cards-grid'}>
           <h2 className={'colored-cards-grid-title'}>{title}</h2>
-          <Grid
-            className={`ui ${cards_per_line} stackable cards colored-cards`}
+          <Card.Group
+            className="colored-card-group"
+            itemsPerRow={fluid_cards ? data?.cards.length : null}
           >
             {(cards || []).map((card, index) => (
-              <Card
+              <CardItem
                 key={index}
                 {...card}
                 background_color={data.background_color}
@@ -110,9 +112,10 @@ const ColoredCards = ({ data }) => {
                 border_top_width={data.border_top_width}
                 text_color={data.text_color}
                 font_size={data.font_size}
+                image_scale={image_scale}
               />
             ))}
-          </Grid>
+          </Card.Group>
         </div>
       </div>
     </div>

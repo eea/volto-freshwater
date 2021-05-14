@@ -23,7 +23,7 @@ export const PresentationCardsSchemaExtender = (schema, data) => {
   };
 
   schema.properties.image_bg_size = {
-    title: 'Card Background image size',
+    title: 'Card image size',
     choices: [
       ['contain', 'Contains header area'],
       ['cover', 'Covers header area'],
@@ -33,7 +33,7 @@ export const PresentationCardsSchemaExtender = (schema, data) => {
 
   schema.properties.image_bg_min_size = {
     type: 'string',
-    title: 'Height of background image',
+    title: 'Background image height',
     default: '90px',
   };
 

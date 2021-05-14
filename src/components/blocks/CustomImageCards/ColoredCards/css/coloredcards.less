@@ -82,4 +82,25 @@
   text-align: right;
 }
 
+.ui.cards.colored-card-group {
+  margin-left: -0.75em;
+  margin-right: -0.75em;
+
+  > .ui.card {
+    margin: 0.75em;
+  }
+}
+
+@media only screen and (min-width: @tabletBreakpoint) and (max-width: @largestTabletScreen) {
+  .ui.cards > .card {
+    width: calc(50% - 2rem) !important;
+  }
+}
+
+@media only screen and (max-width: @tabletBreakpoint) {
+  .ui.cards > .card {
+    width: 100% !important;
+  }
+}
+
 .loadAddonOverrides();

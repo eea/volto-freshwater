@@ -1,20 +1,17 @@
 export const CommonCardsSchemaExtender = (schema, data) => {
-  schema.fieldsets[0].fields.splice(4, 0, 'cards_per_line');
   schema.fieldsets[0].fields.splice(4, 0, 'border_top_width');
-  schema.properties.cards_per_line = {
-    title: 'Cards per line on desktop',
-    type: 'string',
-    choices: [
-      ['three', 'Three cards'],
-      ['four', 'Four cards'],
-      ['five', 'Five cards'],
-    ],
-  };
+  schema.fieldsets[0].fields.splice(-1, 0, 'fluid_cards');
 
   schema.properties.border_top_width = {
     title: 'Card top border height',
     type: 'string',
     default: '15px',
+  };
+
+  schema.properties.fluid_cards = {
+    title: 'Fluid cards',
+    type: 'boolean',
+    default: false,
   };
 
   return schema;

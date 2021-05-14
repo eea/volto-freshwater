@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import React from 'react';
-import { Grid } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 import { LazyLoadComponent } from 'react-lazy-load-image-component';
 import { UniversalLink } from '@plone/volto/components';
 import { BodyClass } from '@plone/volto/helpers';
@@ -10,7 +10,7 @@ import { getScaleUrl, getPath } from '@eeacms/volto-freshwater/utils';
 import './css/plaincards.less';
 import { serializeNodes } from 'volto-slate/editor/render';
 
-export const Card = (props) => {
+export const CardItem = (props) => {
   const { title, text, link, attachedimage } = props;
 
   return (
@@ -77,11 +77,11 @@ const PlainCards = ({ data }) => {
       <div className={'plain-cards-grid-wrapper ui container'}>
         <div className={'plain-cards-grid'}>
           <h2 className={'plain-cards-grid-title'}>{title}</h2>
-          <Grid className={'ui four stackable cards plain-cards'}>
+          <Card.Group className="plain-card-group">
             {(cards || []).map((card, index) => (
-              <Card key={index} {...card} />
+              <CardItem key={index} {...card} />
             ))}
-          </Grid>
+          </Card.Group>
         </div>
       </div>
     </div>
