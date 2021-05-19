@@ -10,12 +10,14 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
 import { defineMessages, injectIntl } from 'react-intl';
-import { Menu, Dropdown } from 'semantic-ui-react';
+import { Menu, Dropdown, Button } from 'semantic-ui-react';
 import cx from 'classnames';
 import { getBaseUrl, flattenToAppURL } from '@plone/volto/helpers';
-
+import { Icon } from '@plone/volto/components';
 import { getNavigation } from '@plone/volto/actions';
 import { settings } from '~/config';
+
+import clearSVG from '@plone/volto/icons/clear.svg';
 
 const messages = defineMessages({
   closeMobileMenu: {
@@ -205,6 +207,15 @@ class Navigation extends Component {
           onClick={this.closeMobileMenu}
           onBlur={() => this.closeMobileMenu}
         >
+          <Button
+            icon
+            basic
+            title="Close menu"
+            className="close-button"
+            onClick={this.closeMobileMenu}
+          >
+            <Icon name={clearSVG} size="37px" />
+          </Button>
           {this.props.items.map((item) => {
             const flatUrl = flattenToAppURL(item.url);
             const itemID = item.title.split(' ').join('-').toLowerCase();

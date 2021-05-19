@@ -31,7 +31,7 @@
   padding: 0 !important;
 }
 
-.has-carousel .breadcrumbs {
+body.siteroot .breadcrumbs {
   display: none !important;
 }
 

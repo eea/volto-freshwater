@@ -28,6 +28,10 @@
     font-size: 18px;
   }
 
+  p {
+    color: @textColor;
+  }
+
   a,
   a:hover {
     color: @linkColor;

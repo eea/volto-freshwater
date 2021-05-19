@@ -42,7 +42,13 @@
   text-decoration: underline;
 }
 
-.has-carousel {
+// .ui.cards > .card > .content p,
+// .ui.card > .content p {
+//   color: @textColor;
+// }
+
+// Homepage
+body.siteroot {
   .block-editor-title {
     display: none;
   }
@@ -56,14 +62,16 @@
     position: absolute;
     z-index: 2;
     top: 20px;
-    width: 98%;
-  }
-
-  .header {
-    border-bottom: 1px solid #fff;
+    width: 94%;
   }
 
   .documentFirstHeading {
     display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .slider-wrapper .slider-slide .slide-body {
+    top: 90px;
   }
 }

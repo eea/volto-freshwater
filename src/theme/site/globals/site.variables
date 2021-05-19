@@ -50,6 +50,8 @@
 
 @lightSecondaryColor : @lightGrey;
 
+@lightBlueColor      : #00b4d5;
+
 
 /*--------------
   Page Heading

@@ -81,23 +81,51 @@ class Header extends Component {
         <Segment basic className="header-wrapper" role="banner">
           <Container>
             <div className="header">
-              <div className="logo-nav-wrapper">
-                <div className="logo">
-                  <Logo />
-                </div>
-                <div className="tools-search-wrapper">
-                  <Navigation
-                    pathname={this.props.pathname}
-                    navigation={this.props.navigationItems}
-                  />
-                  <div className="search">
-                    <SearchWidget pathname={this.props.pathname} />
-                  </div>
-                </div>
+              <div
+                className={`logo-nav-wrapper ${
+                  this.state.isHomepage ? 'home-nav' : 'page-nav'
+                }`}
+              >
+                {this.state.isHomepage ? (
+                  <>
+                    <div>
+                      <div className="logo">
+                        <Logo />
+                      </div>
+                      <div className="search">
+                        <SearchWidget pathname={this.props.pathname} />
+                      </div>
+                    </div>
+                    <div>
+                      <Navigation
+                        pathname={this.props.pathname}
+                        navigation={this.props.navigationItems}
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div>
+                      <div className="logo">
+                        <Logo />
+                      </div>
+                    </div>
+                    <div className="header-right-section">
+                      <div className="search">
+                        <SearchWidget pathname={this.props.pathname} />
+                      </div>
+                      <Navigation
+                        pathname={this.props.pathname}
+                        navigation={this.props.navigationItems}
+                      />
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </Container>
         </Segment>
+
         <React.Fragment>
           <div
             className={`header-bg ${
