@@ -7,6 +7,7 @@ import { PresentationCardsSchemaExtender } from './components/blocks/CustomImage
 import PresentationCards from './components/blocks/CustomImageCards/PresentationCards/PresentationCards';
 import { ScrollToTop } from './components';
 import installEmbedContentBlock from './components/blocks/Content';
+import installDashboardTabsBlock from './components/blocks/DashboardTabsBlock';
 
 const available_colors = [
   '#156650',
@@ -120,7 +121,10 @@ const applyConfig = (config) => {
     },
   ];
 
-  return installEmbedContentBlock(config);
+  return [installEmbedContentBlock, installDashboardTabsBlock].reduce(
+    (acc, apply) => apply(acc),
+    config,
+  );
 };
 
 export default applyConfig;

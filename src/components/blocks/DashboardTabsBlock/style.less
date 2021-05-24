@@ -1,0 +1,51 @@
+.dashboard-tabs-block {
+  margin: 1em 0;
+
+  .default.tabs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    > .ui.tab {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+    }
+
+    .ui.menu {
+      display: flex;
+      flex-basis: 30%;
+      flex-direction: column;
+      border: none;
+      margin: 0;
+      background-color: transparent;
+      border-radius: 3px;
+      box-shadow: none;
+      overflow-x: auto;
+
+      .item {
+        display: block;
+        padding: 1em;
+      }
+
+      .item.active {
+        background: none;
+        background-color: #f2f2f2;
+      }
+    }
+  }
+
+  .menu-item-title {
+    margin-bottom: 5px;
+    color: #00b4d5;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .menu-item-description {
+    color: #474747;
+    font-size: 17px;
+    font-weight: 300;
+  }
+}
