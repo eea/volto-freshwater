@@ -44,16 +44,12 @@ const DashboardTabsBlockView = (props) => {
         return <MenuItem {...props} tab={tab} index={index} />;
       },
       render: () => {
-        const dashboard_url =
-          tab.dashboard_url ||
-          'https://public.tableau.com/views/SuccessfulWomeninMusic-IronquestDiversityinData/WomeninMusic?:language=en&:display_count=y&mobile=&:origin=viz_share_link';
+        const tableau_url = tab.tableau_url || tab.source?.[0].embed_url;
         return (
           <Tab.Pane>
-            {dashboard_url && (
-              <TableauBlockView {...props} data={{ url: dashboard_url }} />
+            {tableau_url && (
+              <TableauBlockView {...props} data={{ url: tableau_url }} />
             )}
-
-            {tab.description}
           </Tab.Pane>
         );
       },
@@ -62,12 +58,16 @@ const DashboardTabsBlockView = (props) => {
 
   return (
     <div className="dashboard-tabs-block">
-      <Tab
-        className="default tabs"
-        menu={{ fluid: true }}
-        activeIndex={activeTab}
-        panes={panes}
-      />
+      {tabs.length > 0 ? (
+        <Tab
+          className="default tabs"
+          menu={{ fluid: true }}
+          activeIndex={activeTab}
+          panes={panes}
+        />
+      ) : (
+        'Add dashboard from the sidebar'
+      )}
     </div>
   );
 };

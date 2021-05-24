@@ -13,13 +13,14 @@ const ContentBlockEdit = (props) => {
     tabs.forEach((el, index) => {
       if (!el.title && el.source?.length) {
         el.title = el.source[0].title;
-        el.description = el.source[0].description;
-        // TODO: save dashboard URL ?
+        el.description = el.source[0].Description;
+        el.tableau_url = el.source[0].embed_url;
         forceRefresh(refresh + 1);
       }
       if ((el.title || el.description) && !el.source?.length) {
         el.title = null;
         el.description = null;
+        el.tableau_url = null;
         forceRefresh(refresh + 1);
       }
     });

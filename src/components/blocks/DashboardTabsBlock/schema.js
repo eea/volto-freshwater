@@ -4,16 +4,17 @@ const Tab = () => ({
     {
       id: 'default',
       title: 'Default',
-      fields: ['source', 'title', 'description'],
+      fields: ['source', 'title', 'description', 'tableau_url'],
     },
   ],
 
   properties: {
     source: {
       widget: 'object_browser',
-      title: 'Source',
       mode: 'link',
-      allowExternals: true,
+      title: 'Source',
+      description: 'Choose an existing content as source for this tab',
+      selectedItemAttrs: ['Title', 'Description', 'embed_url'],
     },
     title: {
       title: 'Title',
@@ -21,6 +22,9 @@ const Tab = () => ({
     description: {
       title: 'Description',
       widget: 'textarea',
+    },
+    tableau_url: {
+      title: 'Tableau URL',
     },
   },
 
