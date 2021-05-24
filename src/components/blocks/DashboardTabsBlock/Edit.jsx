@@ -5,8 +5,25 @@ import schema from './schema';
 
 const ContentBlockEdit = (props) => {
   const { selected, onChangeBlock, data = {}, block } = props;
+  const [refresh, forceRefresh] = React.useState(0);
 
-  console.log('props', data);
+  const { tabs = [] } = data;
+
+  React.useEffect(() => {
+    tabs.forEach((el, index) => {
+      if (!el.title && el.source?.length) {
+        el.title = el.source[0].title;
+        el.description = el.source[0].description;
+        // TODO: save dashboard URL ?
+        forceRefresh(refresh + 1);
+      }
+      if ((el.title || el.description) && !el.source?.length) {
+        el.title = null;
+        el.description = null;
+        forceRefresh(refresh + 1);
+      }
+    });
+  }, [tabs, refresh]);
 
   return (
     <>
