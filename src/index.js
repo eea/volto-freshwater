@@ -9,6 +9,8 @@ import { ScrollToTop } from './components';
 import installEmbedContentBlock from './components/blocks/Content';
 import installDashboardTabsBlock from './components/blocks/DashboardTabsBlock';
 
+import CopyrightWidget from './components/Widgets/CopyrightWidget';
+
 const available_colors = [
   '#156650',
   '#72933d',
@@ -120,6 +122,8 @@ const applyConfig = (config) => {
       component: ScrollToTop,
     },
   ];
+
+  config.widgets.id.license_copyright = CopyrightWidget;
 
   return [installEmbedContentBlock, installDashboardTabsBlock].reduce(
     (acc, apply) => apply(acc),
