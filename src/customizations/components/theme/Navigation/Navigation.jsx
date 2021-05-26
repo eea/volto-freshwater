@@ -164,37 +164,39 @@ class Navigation extends Component {
   render() {
     return (
       <nav className="navigation" ref={this.container}>
-        <div className="hamburger-wrapper mobile only">
-          <button
-            className={cx('hamburger hamburger--collapse', {
-              'is-active': this.state.isMobileMenuOpen,
-            })}
-            aria-label={
-              this.state.isMobileMenuOpen
-                ? this.props.intl.formatMessage(messages.closeMobileMenu, {
-                    type: this.props.type,
-                  })
-                : this.props.intl.formatMessage(messages.openMobileMenu, {
-                    type: this.props.type,
-                  })
-            }
-            title={
-              this.state.isMobileMenuOpen
-                ? this.props.intl.formatMessage(messages.closeMobileMenu, {
-                    type: this.props.type,
-                  })
-                : this.props.intl.formatMessage(messages.openMobileMenu, {
-                    type: this.props.type,
-                  })
-            }
-            type="button"
-            onClick={this.toggleMobileMenu}
-          >
-            <span className="hamburger-box">
-              <span className="hamburger-inner" />
-            </span>
-          </button>
-        </div>
+        {!this.state.isMobileMenuOpen && (
+          <div className="hamburger-wrapper mobile only">
+            <button
+              className={cx('hamburger hamburger--collapse', {
+                'is-active': this.state.isMobileMenuOpen,
+              })}
+              aria-label={
+                this.state.isMobileMenuOpen
+                  ? this.props.intl.formatMessage(messages.closeMobileMenu, {
+                      type: this.props.type,
+                    })
+                  : this.props.intl.formatMessage(messages.openMobileMenu, {
+                      type: this.props.type,
+                    })
+              }
+              title={
+                this.state.isMobileMenuOpen
+                  ? this.props.intl.formatMessage(messages.closeMobileMenu, {
+                      type: this.props.type,
+                    })
+                  : this.props.intl.formatMessage(messages.openMobileMenu, {
+                      type: this.props.type,
+                    })
+              }
+              type="button"
+              onClick={this.toggleMobileMenu}
+            >
+              <span className="hamburger-box">
+                <span className="hamburger-inner" />
+              </span>
+            </button>
+          </div>
+        )}
         <Menu
           stackable
           pointing

@@ -62,11 +62,23 @@ body.siteroot {
     position: absolute;
     z-index: 2;
     top: 20px;
-    width: 94%;
+    width: 100%;
   }
 
   .documentFirstHeading {
     display: none;
+  }
+}
+
+body.siteroot.has-toolbar {
+  .portal-top {
+    width: calc(100% - 80px);
+  }
+}
+
+body.siteroot.has-toolbar-collapsed:not(.has-toolbar) {
+  .portal-top {
+    width: calc(100% - 20px);
   }
 }
 

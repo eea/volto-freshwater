@@ -61,6 +61,10 @@
         overflow-x: initial;
       }
     }
+
+    .logo img {
+      max-width: none;
+    }
   }
 
   @media only screen and (max-width: @largestTabletScreen) {

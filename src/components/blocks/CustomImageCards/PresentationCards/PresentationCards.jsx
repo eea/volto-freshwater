@@ -113,7 +113,7 @@ const PresentationCards = ({ data }) => {
           <h2 className={'presentation-cards-grid-title'}>{title}</h2>
           <Card.Group
             className="presentation-cards-group"
-            itemsPerRow={fluid_cards ? data?.cards.length : ''}
+            itemsPerRow={fluid_cards ? data?.cards.length : undefined}
           >
             {(cards || []).map((card, index) => (
               <CardItem
