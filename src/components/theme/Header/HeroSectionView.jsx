@@ -10,7 +10,7 @@ import { defineMessages, injectIntl } from 'react-intl';
 import { Container } from 'semantic-ui-react';
 import { map } from 'lodash';
 
-import { blocks } from '~/config';
+import config from '@plone/volto/registry';
 
 import {
   getBlocksFieldname,
@@ -42,7 +42,7 @@ const HeroSectionView = ({ content, intl, location }) => {
       {map(content[blocksLayoutFieldName].items, (block) => {
         const block_data = content[blocksFieldName]?.[block];
         const block_type = block_data?.['@type'];
-        const Block = blocks?.blocksConfig[block_type]?.['view'] || null;
+        const Block = config.blocks?.blocksConfig[block_type]?.['view'] || null;
         return Block !== null ? (
           <React.Fragment key={block}>
             {(block_type !== 'title' || !hasContentImage) && (

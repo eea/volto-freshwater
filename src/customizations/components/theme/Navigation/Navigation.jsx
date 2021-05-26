@@ -15,7 +15,7 @@ import cx from 'classnames';
 import { getBaseUrl, flattenToAppURL } from '@plone/volto/helpers';
 import { Icon } from '@plone/volto/components';
 import { getNavigation } from '@plone/volto/actions';
-import { settings } from '~/config';
+import config from '@plone/volto/registry';
 
 import clearSVG from '@plone/volto/icons/clear.svg';
 
@@ -77,7 +77,7 @@ class Navigation extends Component {
   componentDidMount() {
     this.props.getNavigation(
       getBaseUrl(this.props.pathname),
-      settings?.navDepth || 3,
+      config.settings?.navDepth || 3,
     );
   }
 
@@ -105,7 +105,7 @@ class Navigation extends Component {
     ) {
       this.props.getNavigation(
         getBaseUrl(nextProps.pathname),
-        settings?.navDepth || 3,
+        config.settings?.navDepth || 3,
       );
       this.closeMobileMenu();
     }
