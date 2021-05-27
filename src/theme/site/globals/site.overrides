@@ -70,6 +70,12 @@ body.siteroot {
   }
 }
 
+.block-info {
+  color: #e9776d;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+}
+
 body.siteroot.has-toolbar {
   .portal-top {
     width: calc(100% - 80px);

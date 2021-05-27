@@ -41,10 +41,13 @@ const DashboardTabsBlockView = (props) => {
     return {
       id: tab,
       menuItem: () => {
-        return <MenuItem {...props} tab={tab} index={index} />;
+        return (
+          <MenuItem {...props} key={`tab-${index}`} tab={tab} index={index} />
+        );
       },
       render: () => {
-        const tableau_url = tab.tableau_url || tab.source?.[0].embed_url;
+        const source = tab.source?.[0];
+        const tableau_url = tab.tableau_url || source?.embed_url;
         return (
           <Tab.Pane>
             {tableau_url && (
@@ -66,7 +69,7 @@ const DashboardTabsBlockView = (props) => {
           panes={panes}
         />
       ) : (
-        'Add dashboard from the sidebar'
+        <div className="block-info">Add dashboard from the sidebar</div>
       )}
     </div>
   );
