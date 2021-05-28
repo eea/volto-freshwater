@@ -115,3 +115,28 @@
 .sidebar-container:not(.collapsed) .trigger::after {
   .centeredArrow(@position-amount: 5%);
 }
+
+@media screen and (max-width: 766px) {
+  #toolbar .toolbar-handler button:after {
+    .centeredArrow(@position: top);
+  }
+
+  #toolbar .expanded .toolbar-handler button:after {
+    .centeredArrow(@position: bottom);
+    top: -2px;
+    left: 42%;
+  }
+
+  #toolbar .toolbar-handler button:before,
+  #toolbar .expanded .toolbar-handler button:before {
+    left: 0;
+    width: 80px !important;
+    height: 6px;
+    border-radius: 0 0 4px 4px !important;
+  }
+
+  #toolbar .expanded .toolbar-handler button:before {
+    top: 7px;
+    border-radius: 4px 4px 0 0 !important;
+  }
+}

@@ -44,6 +44,10 @@
   }
 }
 
+body.section-edit .home-nav {
+  display: flex !important; // fix nav on home edit view
+}
+
 .ui.basic.segment .header {
   .logo-nav-wrapper {
     .navigation {
@@ -100,11 +104,11 @@ body:not(.siteroot) {
   }
 }
 
-@media only screen and (max-width: 600px) {
-  .logo img {
-    height: 35px;
-  }
-}
+// @media only screen and (max-width: 600px) {
+//   .logo img {
+//     height: 35px;
+//   }
+// }
 
 .search {
   display: none !important;

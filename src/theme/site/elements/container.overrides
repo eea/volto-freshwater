@@ -23,7 +23,7 @@
 }
 
 .has-sidebar .ui.container {
-  padding: 0 3rem;
+  padding: 0 1.5rem;
 }
 
 .has-sidebar .full-width {

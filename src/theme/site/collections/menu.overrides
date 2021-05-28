@@ -85,7 +85,7 @@ body.siteroot {
   }
 }
 
-@media only screen and (max-width: 1190px) {
+@media only screen and (max-width: 1230px) {
   body.siteroot {
     .navigation .ui.menu.large.screen.only {
       transform: translateX(100%);
@@ -132,7 +132,7 @@ body.siteroot {
 
     .hamburger-wrapper {
       position: absolute;
-      top: -10px;
+      top: -25px;
       right: 0;
       float: right;
     }
