@@ -23,7 +23,7 @@
   ],
   "dependencies": {
     "react-lazy-load-image-component": "^1.4.0",
-    "volto-slate": "^2.0.0",
+    "volto-slate": "^2.6.1",
     "@eeacms/volto-block-style": "eea/volto-block-style#master",
     "@kitconcept/volto-blocks-grid": "*"
   },
