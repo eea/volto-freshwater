@@ -4,7 +4,8 @@ import { ColoredCardsSchemaExtender } from './components/blocks/CustomImageCards
 import PlainCards from './components/blocks/CustomImageCards/PlainCards/PlainCards';
 
 import { PresentationCardsSchemaExtender } from './components/blocks/CustomImageCards/PresentationCards/schema';
-import PresentationCards from './components/blocks/CustomImageCards/PresentationCards/PresentationCards';
+import PresentationCardsView from './components/blocks/CustomImageCards/PresentationCards/PresentationCardsView';
+import PresentationCardsEdit from './components/blocks/CustomImageCards/PresentationCards/PresentationCardsEdit';
 
 import { ScrollToTop } from './components';
 import installEmbedContentBlock from './components/blocks/Content';
@@ -80,11 +81,11 @@ const applyConfig = (config) => {
         schemaExtender: null,
         view: PlainCards,
       },
-
       presentation_cards: {
         title: 'Presentation cards',
+        view: PresentationCardsView,
+        edit: PresentationCardsEdit,
         schemaExtender: PresentationCardsSchemaExtender,
-        view: PresentationCards,
       },
     },
   };
