@@ -5,11 +5,14 @@ import PlainCards from './components/blocks/CustomImageCards/PlainCards/PlainCar
 
 import { PresentationCardsSchemaExtender } from './components/blocks/CustomImageCards/PresentationCards/schema';
 import PresentationCards from './components/blocks/CustomImageCards/PresentationCards/PresentationCards';
+
 import { ScrollToTop } from './components';
 import installEmbedContentBlock from './components/blocks/Content';
 import installDashboardTabsBlock from './components/blocks/DashboardTabsBlock';
 
 import CopyrightWidget from './components/Widgets/CopyrightWidget';
+
+import DatabaseItemView from './components/Views/DatabaseItemView';
 
 const available_colors = [
   '#156650',
@@ -45,6 +48,13 @@ const applyConfig = (config) => {
   config.views.contentTypesViews = {
     ...config.views.contentTypesViews,
     Document: HeroSectionView,
+    dashboard: DatabaseItemView,
+    dataset: DatabaseItemView,
+    database: DatabaseItemView,
+    report_publication: DatabaseItemView,
+    indicator: DatabaseItemView,
+    briefing: DatabaseItemView,
+    map_interactive: DatabaseItemView,
   };
   config.views.layoutViews = {
     ...config.views.layoutViews,
