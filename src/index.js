@@ -46,6 +46,7 @@ const available_colors = [
 
 const applyConfig = (config) => {
   config.settings.navDepth = 3;
+
   config.views.contentTypesViews = {
     ...config.views.contentTypesViews,
     Document: HeroSectionView,
@@ -57,11 +58,17 @@ const applyConfig = (config) => {
     briefing: DatabaseItemView,
     map_interactive: DatabaseItemView,
   };
+
   config.views.layoutViews = {
     ...config.views.layoutViews,
     document_view: HeroSectionView,
     herosection_view: HeroSectionView,
   };
+
+  config.blocks.groupBlocksOrder = [
+    ...config.blocks.groupBlocksOrder,
+    { id: 'custom_addons', title: 'Custom addons' },
+  ];
 
   config.blocks.blocksConfig.imagecards = {
     sidebarTab: 1,

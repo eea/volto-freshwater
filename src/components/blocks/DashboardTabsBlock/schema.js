@@ -1,5 +1,5 @@
 const Tab = () => ({
-  title: 'Dashboard',
+  title: 'Dashboard tab',
   fieldsets: [
     {
       id: 'default',
@@ -31,28 +31,25 @@ const Tab = () => ({
   required: [],
 });
 
-const DashboardTabsSchema = () => {
-  return {
-    title: 'Tabs',
+const DashboardTabsSchema = {
+  title: 'Dashboard tabs',
 
-    fieldsets: [
-      {
-        id: 'default',
-        title: 'Default',
-        fields: ['tabs'],
-      },
-    ],
-
-    properties: {
-      tabs: {
-        widget: 'object_list',
-        title: 'Tabs',
-        schema: Tab(),
-      },
+  fieldsets: [
+    {
+      id: 'default',
+      title: 'Default',
+      fields: ['tabs'],
     },
+  ],
 
-    required: [],
-  };
+  properties: {
+    tabs: {
+      widget: 'object_list',
+      title: 'Tabs',
+      schema: Tab(),
+    },
+  },
+  required: [],
 };
 
 export default DashboardTabsSchema;

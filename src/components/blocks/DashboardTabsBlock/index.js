@@ -1,4 +1,4 @@
-import codeSVG from '@plone/volto/icons/code.svg';
+import tabsSVG from '@plone/volto/icons/interface.svg';
 import DashboardTabsBlockView from './View';
 import DashboardTabsBlockEdit from './Edit';
 
@@ -6,8 +6,8 @@ export default (config) => {
   config.blocks.blocksConfig.dashboardTabsBlock = {
     id: 'dashboardTabsBlock',
     title: 'Dashboard tabs block',
-    icon: codeSVG,
-    group: 'common',
+    icon: tabsSVG,
+    group: 'custom_addons',
     view: DashboardTabsBlockView,
     edit: DashboardTabsBlockEdit,
     restricted: false,
