@@ -93,3 +93,8 @@ body.siteroot.has-toolbar-collapsed:not(.has-toolbar) {
     top: 90px;
   }
 }
+
+.ui.attached.segment {
+  padding-right: 0;
+  padding-left: 0;
+}

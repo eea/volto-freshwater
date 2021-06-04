@@ -28,7 +28,7 @@ const Tab = () => ({
     },
   },
 
-  required: [],
+  required: ['source'],
 });
 
 const DashboardTabsSchema = {

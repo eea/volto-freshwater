@@ -10,6 +10,7 @@ import PresentationCardsEdit from './components/blocks/CustomImageCards/Presenta
 import { ScrollToTop } from './components';
 import installEmbedContentBlock from './components/blocks/Content';
 import installDashboardTabsBlock from './components/blocks/DashboardTabsBlock';
+import installcustomCardsBlock from './components/blocks/CustomCardsBlock';
 
 import CopyrightWidget from './components/Widgets/CopyrightWidget';
 
@@ -67,7 +68,7 @@ const applyConfig = (config) => {
 
   config.blocks.groupBlocksOrder = [
     ...config.blocks.groupBlocksOrder,
-    { id: 'custom_addons', title: 'Custom addons' },
+    { id: 'custom_addons', title: 'Freshwater' },
   ];
 
   config.blocks.blocksConfig.imagecards = {
@@ -143,10 +144,11 @@ const applyConfig = (config) => {
 
   config.widgets.id.license_copyright = CopyrightWidget;
 
-  return [installEmbedContentBlock, installDashboardTabsBlock].reduce(
-    (acc, apply) => apply(acc),
-    config,
-  );
+  return [
+    installEmbedContentBlock,
+    installDashboardTabsBlock,
+    installcustomCardsBlock,
+  ].reduce((acc, apply) => apply(acc), config);
 };
 
 export default applyConfig;

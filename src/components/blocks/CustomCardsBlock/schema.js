@@ -1,0 +1,52 @@
+import config from '@plone/volto/registry';
+
+const CustomCards = (props) => {
+  const display_types_obj =
+    config.blocks.blocksConfig.customCardsBlock.blockRenderers;
+
+  const display_types = Object.keys(display_types_obj).map((template) => [
+    template,
+    display_types_obj[template].title || template,
+  ]);
+
+  return {
+    title: 'Cards',
+
+    fieldsets: [
+      {
+        id: 'default',
+        title: 'Default',
+        fields: ['title', 'text', 'display', 'align', 'image_scale'],
+      },
+    ],
+
+    properties: {
+      title: {
+        type: 'string',
+        title: 'Title',
+      },
+      text: {
+        widget: 'slate_richtext',
+        title: 'Text',
+      },
+      display: {
+        title: 'Display',
+        choices: [...display_types],
+      },
+      image_scale: {
+        type: 'string',
+        title: 'Image scale',
+        default: 'large',
+      },
+      align: {
+        title: 'Alignment',
+        widget: 'align',
+        type: 'string',
+      },
+    },
+
+    required: ['display'],
+  };
+};
+
+export default CustomCards;

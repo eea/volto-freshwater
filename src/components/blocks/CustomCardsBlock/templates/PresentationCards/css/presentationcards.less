@@ -1,0 +1,72 @@
+@type: 'extra';
+@element: 'custom';
+
+@import (multiple, reference, optional) '../../theme.config';
+
+.presentation-cards-block {
+  padding: 2rem 0;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  background-color: inherit;
+}
+
+.presentation-card {
+  // border-top: 15px solid transparent !important;
+  box-shadow: 1px 1px 9px 0 #d3d3d3 !important;
+}
+
+.presentation-card .extra {
+  font-weight: 400;
+}
+
+.presentation-card:hover,
+.presentation-card:focus {
+  box-shadow: 0 0 3px 1px rgb(55 146 218) !important;
+}
+
+.presentation-card-link {
+  display: flex;
+  flex-direction: column;
+}
+
+.presentation-card-image {
+  height: 100%;
+  min-height: 90px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.presentation-card-header {
+  padding-top: 0.7em;
+  margin-top: 0.7em;
+  font-family: 'Poppins', serif;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.presentation-card-description {
+  margin-top: 0.7em;
+  color: #000;
+}
+
+.ui.cards.presentation-cards-group {
+  margin-right: -0.75em;
+  margin-left: -0.75em;
+
+  > .ui.card {
+    margin: 0.75em;
+  }
+}
+
+@media only screen and (min-width: @tabletBreakpoint) and (max-width: @largestTabletScreen) {
+  .ui.cards > .card {
+    width: calc(50% - 2rem) !important;
+  }
+}
+
+@media only screen and (max-width: @tabletBreakpoint) {
+  .ui.cards > .card {
+    width: 100% !important;
+  }
+}

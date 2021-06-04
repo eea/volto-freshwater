@@ -196,21 +196,21 @@ const PresentationCardsView = ({ data, isEditMode }) => {
 
   return (
     <>
-      {cards && cards.length > 0 ? (
-        <div
-          className={cx(
-            'block align presentation-cards-block',
-            {
-              center: !Boolean(data.align),
-              'full-width': data.align === 'full',
-            },
-            data.align,
-          )}
-        >
-          <BodyClass className="has-card-tiles" />
-          <div className={'presentation-cards-grid-wrapper'}>
-            <div className={'presentation-cards-grid'}>
-              <h2 className={'presentation-cards-grid-title'}>{title}</h2>
+      <div
+        className={cx(
+          'block align presentation-cards-block',
+          {
+            left: !Boolean(data.align),
+            'full-width': data.align === 'full',
+          },
+          data.align,
+        )}
+      >
+        <BodyClass className="has-card-tiles" />
+        <div className={'presentation-cards-grid-wrapper'}>
+          <div className={'presentation-cards-grid'}>
+            <h2 className={'presentation-cards-grid-title'}>{title}</h2>
+            {cards && cards.length > 0 ? (
               <Card.Group
                 className="presentation-cards-group"
                 itemsPerRow={fluid_cards ? data?.cards.length : undefined}
@@ -228,12 +228,12 @@ const PresentationCardsView = ({ data, isEditMode }) => {
                   />
                 ))}
               </Card.Group>
-            </div>
+            ) : (
+              <div className="block-info">Add cards from the sidebar</div>
+            )}
           </div>
         </div>
-      ) : (
-        <div className="block-info">Add cards from the sidebar</div>
-      )}
+      </div>
     </>
   );
 };
