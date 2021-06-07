@@ -104,9 +104,6 @@ class TokenWidget extends Component {
       getVocabFromHint(props) ||
       getVocabFromField(props) ||
       getVocabFromItems(props);
-    this.state = {
-      selectedOption: props.value,
-    };
   }
 
   /**
@@ -156,7 +153,7 @@ class TokenWidget extends Component {
    * @returns {undefined}
    */
   handleChange(selectedOption) {
-    this.setState({ selectedOption });
+    // this.setState({ selectedOption });
     this.props.onChange(
       this.props.id,
       selectedOption.label,
@@ -170,7 +167,6 @@ class TokenWidget extends Component {
    * @returns {string} Markup for the component.
    */
   render() {
-    const { selectedOption } = this.state;
     const AsyncCreatableSelect = this.props.reactSelectAsyncCreateable.default;
 
     return (
@@ -183,7 +179,7 @@ class TokenWidget extends Component {
           styles={customSelectStyles}
           theme={selectTheme}
           components={{ DropdownIndicator, Option }}
-          value={selectedOption || []}
+          value={this.props.value}
           loadOptions={this.loadOptions}
           onChange={this.handleChange}
           placeholder={this.props.intl.formatMessage(messages.select)}
@@ -207,6 +203,9 @@ export default compose(
         getVocabFromItems(props);
       const vocabState = state.vocabularies[vocabBaseUrl];
       if (vocabState) {
+        const value = props.value
+          ? vocabState.items?.find(({ label }) => label === props.value) || null
+          : null;
         return {
           choices: vocabState.items
             ? vocabState.items.map((item) => ({
@@ -216,9 +215,7 @@ export default compose(
             : [],
           itemsTotal: vocabState.itemsTotal,
           loading: Boolean(vocabState.loading),
-          value: props.value
-            ? vocabState.items?.find(({ label }) => label === props.value)
-            : props.value,
+          value,
         };
       }
       return {};
