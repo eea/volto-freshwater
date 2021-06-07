@@ -10,6 +10,7 @@ import installEmbedContentBlock from './components/blocks/Content';
 import installDashboardTabsBlock from './components/blocks/DashboardTabsBlock';
 
 import CopyrightWidget from './components/Widgets/CopyrightWidget';
+import SingleTokenWidget from './components/Widgets/SingleTokenWidget';
 
 const available_colors = [
   '#156650',
@@ -124,6 +125,7 @@ const applyConfig = (config) => {
   ];
 
   config.widgets.id.license_copyright = CopyrightWidget;
+  config.widgets.id.category = SingleTokenWidget;
 
   return [installEmbedContentBlock, installDashboardTabsBlock].reduce(
     (acc, apply) => apply(acc),
