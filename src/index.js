@@ -13,6 +13,7 @@ import installDashboardTabsBlock from './components/blocks/DashboardTabsBlock';
 import installcustomCardsBlock from './components/blocks/CustomCardsBlock';
 
 import CopyrightWidget from './components/Widgets/CopyrightWidget';
+import SingleTokenWidget from './components/Widgets/SingleTokenWidget';
 
 import DatabaseItemView from './components/Views/DatabaseItemView';
 
@@ -143,6 +144,7 @@ const applyConfig = (config) => {
   ];
 
   config.widgets.id.license_copyright = CopyrightWidget;
+  config.widgets.id.category = SingleTokenWidget;
 
   return [
     installEmbedContentBlock,
