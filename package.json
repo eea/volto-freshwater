@@ -19,11 +19,13 @@
   "addons": [
     "volto-slate:asDefault",
     "@kitconcept/volto-blocks-grid",
+    "@eeacms/volto-resize-helper",
     "@eeacms/volto-block-style"
   ],
   "dependencies": {
     "react-lazy-load-image-component": "^1.4.0",
     "volto-slate": "^2.6.1",
+    "@eeacms/volto-resize-helper": "^0.2.0",
     "@eeacms/volto-block-style": "^3.3.0",
     "@kitconcept/volto-blocks-grid": "*"
   },
