@@ -72,10 +72,9 @@ export const PresentationCardsSchemaExtender = (schema, data) => {
         id: 'style',
         title: 'Style',
         fields: [
+          'image_height',
           'border_top_width',
           'border_color',
-          'image_bg_size',
-          'image_bg_min_size',
           'fluid_cards',
         ],
       },
@@ -98,18 +97,10 @@ export const PresentationCardsSchemaExtender = (schema, data) => {
         type: 'color',
         available_colors: config.settings.available_colors,
       },
-      image_bg_size: {
-        title: 'Card image size',
-        choices: [
-          ['contain', 'Contains header area'],
-          ['cover', 'Covers header area'],
-        ],
-        default: 'contain',
-      },
-      image_bg_min_size: {
+      image_height: {
         type: 'string',
-        title: 'Background image height',
-        default: '90px',
+        title: 'Image height',
+        default: '220px',
       },
       fluid_cards: {
         title: 'Fluid cards',

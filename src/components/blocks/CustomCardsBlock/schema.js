@@ -34,8 +34,12 @@ const CustomCards = (props) => {
         choices: [...display_types],
       },
       image_scale: {
-        type: 'string',
         title: 'Image scale',
+        choices: [
+          ['preview', 'Preview'],
+          ['large', 'Large'],
+          ['panoramic', 'Panoramic'],
+        ],
         default: 'large',
       },
       align: {

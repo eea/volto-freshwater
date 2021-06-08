@@ -4,18 +4,18 @@
 @import (multiple, reference, optional) '../../theme.config';
 
 .presentation-cards-block {
-  padding: 2rem 0;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  padding: 1rem 0;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   background-color: inherit;
 }
 
 .presentation-card {
-  // border-top: 15px solid transparent !important;
   box-shadow: 1px 1px 9px 0 #d3d3d3 !important;
 }
 
 .presentation-card .extra {
+  font-size: 14px !important;
   font-weight: 400;
 }
 
@@ -31,23 +31,33 @@
 
 .presentation-card-image {
   height: 100%;
-  min-height: 90px;
-  background-position: center;
+  background-position: left center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
+}
+
+.presentation-card-description,
+.presentation-card-header {
+  padding: 0 1em;
+  margin-top: 0.7em;
+  color: #0099bb;
+  font-family: 'Poppins', serif;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .presentation-card-header {
-  padding-top: 0.7em;
-  margin-top: 0.7em;
-  font-family: 'Poppins', serif;
-  font-size: 18px;
-  font-weight: bold;
+  color: #000;
 }
 
 .presentation-card-description {
-  margin-top: 0.7em;
-  color: #000;
+  min-height: 90px;
+  margin-top: 1em;
+  margin-bottom: 1.5em;
+}
+
+.presentation-card-content {
+  padding: 0 !important;
 }
 
 .ui.cards.presentation-cards-group {

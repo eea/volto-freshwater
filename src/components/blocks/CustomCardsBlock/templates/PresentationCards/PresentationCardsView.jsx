@@ -22,8 +22,7 @@ export const CardItem = (props) => {
     border_color,
     border_top_width,
     attachedimage,
-    image_bg_size,
-    image_bg_min_size,
+    image_height = '220px',
     image_scale,
     isEditMode,
   } = props;
@@ -33,79 +32,73 @@ export const CardItem = (props) => {
   return (
     <>
       {link && !isEditMode ? (
-        <>
-          <div
-            className="ui card presentation-card has-link"
-            style={
-              border_color
-                ? {
-                    borderTop: `${
-                      border_top_width || '15px'
-                    } solid ${border_color}`,
-                  }
-                : {}
-            }
-          >
-            <div className="content presentation-card-content">
-              <UniversalLink className={'presentation-card-link'} href={link}>
-                <>
-                  {leadImage && !attachedimage ? (
-                    <LazyLoadComponent>
-                      <div
-                        className="presentation-card-image"
-                        style={{
-                          backgroundImage: `url(${props.source?.[0]['@id']
-                            .replace(config.settings.apiPath, '')
-                            .replace(
-                              config.settings.internalApiPath,
-                              '',
-                            )}/@@images/image/${image_scale || 'preview'})`,
-                          backgroundSize: `${image_bg_size}`,
-                          minHeight: `${image_bg_min_size}`,
-                        }}
-                      ></div>
-                    </LazyLoadComponent>
-                  ) : (
-                    <LazyLoadComponent>
-                      <div
-                        className="presentation-card-image"
-                        style={
-                          attachedimage
-                            ? {
-                                backgroundImage: `url(${getScaleUrl(
-                                  getPath(attachedimage),
-                                  image_scale || 'preview',
-                                )})`,
-                                backgroundSize: `${image_bg_size}`,
-                                minHeight: `${image_bg_min_size}`,
-                              }
-                            : {}
-                        }
-                      ></div>
-                    </LazyLoadComponent>
-                  )}
+        <div
+          className="ui card presentation-card has-link"
+          style={
+            border_color
+              ? {
+                  borderTop: `${
+                    border_top_width || '15px'
+                  } solid ${border_color}`,
+                }
+              : {}
+          }
+        >
+          <div className="content presentation-card-content">
+            <UniversalLink className={'presentation-card-link'} href={link}>
+              <>
+                {leadImage && !attachedimage ? (
+                  <LazyLoadComponent>
+                    <div
+                      className="presentation-card-image"
+                      style={{
+                        backgroundImage: `url(${props.source?.[0]['@id']
+                          .replace(config.settings.apiPath, '')
+                          .replace(
+                            config.settings.internalApiPath,
+                            '',
+                          )}/@@images/image/${image_scale || 'large'})`,
+                        minHeight: `${image_height}`,
+                      }}
+                    ></div>
+                  </LazyLoadComponent>
+                ) : (
+                  <LazyLoadComponent>
+                    <div
+                      className="presentation-card-image"
+                      style={
+                        attachedimage
+                          ? {
+                              backgroundImage: `url(${getScaleUrl(
+                                getPath(attachedimage),
+                                image_scale || 'large',
+                              )})`,
+                              minHeight: `${image_height}`,
+                            }
+                          : {}
+                      }
+                    ></div>
+                  </LazyLoadComponent>
+                )}
 
-                  {!hide_title && title && (
-                    <div className="presentation-card-header">{title}</div>
-                  )}
+                {!hide_title && title && (
+                  <div className="presentation-card-header">{title}</div>
+                )}
 
-                  <div className="content presentation-card-content">
-                    <div className="presentation-card-description">
-                      {description && <div>{description}</div>}
-                      {text && <div>{serializeNodes(text)}</div>}
-                    </div>
-                  </div>
-                </>
-              </UniversalLink>
-            </div>
-
-            {item_type && (
-              <div className="extra content">
-                <div className="left floated card_item_type">{item_type}</div>
-              </div>
-            )}
+                <div className="presentation-card-description">
+                  {description && <div>{description}</div>}
+                  {text && <div>{serializeNodes(text)}</div>}
+                </div>
+              </>
+            </UniversalLink>
           </div>
-        </>
+
+          {item_type && (
+            <div className="extra content">
+              <div className="left floated card_item_type">{item_type}</div>
+            </div>
+          )}
+        </div>
       ) : (
         <div
           className="ui card presentation-card"
@@ -125,16 +118,15 @@ export const CardItem = (props) => {
                 {leadImage && !attachedimage ? (
                   <LazyLoadComponent>
                     <div
-                      className="presentation-card-image"
+                      className="presentation-card-image test"
                       style={{
                         backgroundImage: `url(${props.source?.[0]['@id']
                           .replace(config.settings.apiPath, '')
                           .replace(
                             config.settings.internalApiPath,
                             '',
-                          )}/@@images/image/${image_scale || 'preview'})`,
-                        backgroundSize: `${image_bg_size}`,
-                        minHeight: `${image_bg_min_size}`,
+                          )}/@@images/image/${image_scale || 'large'})`,
+                        minHeight: `${image_height}`,
                       }}
                     ></div>
                   </LazyLoadComponent>
@@ -147,10 +139,9 @@ export const CardItem = (props) => {
                           ? {
                               backgroundImage: `url(${getScaleUrl(
                                 getPath(attachedimage),
-                                image_scale || 'preview',
+                                image_scale || 'large',
                               )})`,
-                              backgroundSize: `${image_bg_size}`,
-                              minHeight: `${image_bg_min_size}`,
+                              minHeight: `${image_height}`,
                             }
                           : {}
                       }
@@ -189,7 +180,7 @@ const PresentationCardsView = ({ data, isEditMode }) => {
     cards,
     border_color,
     image_bg_size,
-    image_bg_min_size,
+    image_height,
     image_scale,
     fluid_cards,
   } = data;
@@ -209,7 +200,10 @@ const PresentationCardsView = ({ data, isEditMode }) => {
         <BodyClass className="has-card-tiles" />
         <div className={'presentation-cards-grid-wrapper'}>
           <div className={'presentation-cards-grid'}>
-            <h2 className={'presentation-cards-grid-title'}>{title}</h2>
+            {title && (
+              <h2 className={'presentation-cards-grid-title'}>{title}</h2>
+            )}
+
             {cards && cards.length > 0 ? (
               <Card.Group
                 className="presentation-cards-group"
@@ -222,7 +216,7 @@ const PresentationCardsView = ({ data, isEditMode }) => {
                     border_color={border_color}
                     border_top_width={data.border_top_width}
                     image_bg_size={image_bg_size}
-                    image_bg_min_size={image_bg_min_size}
+                    image_height={image_height}
                     image_scale={image_scale}
                     isEditMode={isEditMode}
                   />

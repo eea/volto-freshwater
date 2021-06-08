@@ -2,10 +2,8 @@ import React from 'react';
 import { SidebarPortal } from '@plone/volto/components'; // EditBlock
 import InlineForm from '@plone/volto/components/manage/Form/InlineForm';
 import config from '@plone/volto/registry';
-
 import CustomCardsView from './View';
-
-import image_schema from './schema';
+import cards_schema from './schema';
 
 const tweakSchema = (schema, data) => {
   const { blockRenderers } = config.blocks.blocksConfig.customCardsBlock;
@@ -22,7 +20,7 @@ const tweakSchema = (schema, data) => {
 };
 
 const CustomCardsEdit = (props) => {
-  const schema = tweakSchema(image_schema(props), props.data);
+  const schema = tweakSchema(cards_schema(props), props.data);
   const display = props.data.display || 'presentation_cards';
   const CardsView =
     config.blocks.blocksConfig.customCardsBlock.blockRenderers?.[display]
