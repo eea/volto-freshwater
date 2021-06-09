@@ -18,6 +18,8 @@ import SingleTokenWidget from './components/Widgets/SingleTokenWidget';
 import DatabaseItemView from './components/Views/DatabaseItemView';
 
 const available_colors = [
+  '#0099BB',
+  '#FF4422',
   '#156650',
   '#72933d',
   '#88c24f',

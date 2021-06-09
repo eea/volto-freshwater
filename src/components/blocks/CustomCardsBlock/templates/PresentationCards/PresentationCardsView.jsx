@@ -20,7 +20,6 @@ export const CardItem = (props) => {
     item_type,
     link,
     border_color,
-    border_top_width,
     attachedimage,
     image_height = '220px',
     image_scale,
@@ -37,15 +36,13 @@ export const CardItem = (props) => {
           style={
             border_color
               ? {
-                  borderTop: `${
-                    border_top_width || '15px'
-                  } solid ${border_color}`,
+                  borderTop: `8px solid ${border_color}`,
                 }
               : {}
           }
         >
           <div className="content presentation-card-content">
-            <UniversalLink className={'presentation-card-link'} href={link}>
+            <UniversalLink className="presentation-card-link" href={link}>
               <>
                 {leadImage && !attachedimage ? (
                   <LazyLoadComponent>
@@ -105,9 +102,7 @@ export const CardItem = (props) => {
           style={
             border_color
               ? {
-                  borderTop: `${
-                    border_top_width || '15px'
-                  } solid ${border_color}`,
+                  borderTop: `8px solid ${border_color}`,
                 }
               : {}
           }
@@ -118,7 +113,7 @@ export const CardItem = (props) => {
                 {leadImage && !attachedimage ? (
                   <LazyLoadComponent>
                     <div
-                      className="presentation-card-image test"
+                      className="presentation-card-image"
                       style={{
                         backgroundImage: `url(${props.source?.[0]['@id']
                           .replace(config.settings.apiPath, '')
@@ -198,10 +193,10 @@ const PresentationCardsView = ({ data, isEditMode }) => {
         )}
       >
         <BodyClass className="has-card-tiles" />
-        <div className={'presentation-cards-grid-wrapper'}>
-          <div className={'presentation-cards-grid'}>
+        <div className="presentation-cards-grid-wrapper">
+          <div className="presentation-cards-grid">
             {title && (
-              <h2 className={'presentation-cards-grid-title'}>{title}</h2>
+              <h2 className="presentation-cards-grid-title">{title}</h2>
             )}
 
             {cards && cards.length > 0 ? (

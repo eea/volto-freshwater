@@ -16,7 +16,7 @@
 }
 
 .colored-cards-block {
-  padding: 2rem 0;
+  padding: 0;
   margin-top: @coloredCardsTopMargin;
   margin-bottom: @coloredCardsBottomMargin;
   background-color: inherit;
@@ -26,16 +26,24 @@
   text-align: @coloredCardsTextAlign;
 }
 
-.colored-card {
-  border-top: 15px solid transparent;
-}
-
 .colored-card-content {
   position: relative;
+  padding: 1em 0;
+  color: #555;
+  font-family: 'Roboto';
+  font-size: 20px;
+  font-weight: 400;
+
+  .link-button {
+    position: absolute;
+    top: 1em;
+    right: 0px;
+  }
 }
 
 .colored-card-content .header,
 .colored-card-title {
+  margin-bottom: 1em !important;
   color: inherit !important;
 }
 
@@ -60,15 +68,36 @@
 .colored-card-link {
   position: relative;
   z-index: 2;
-  padding: 0.2rem 40px;
+  padding: 0;
   background-color: @cardLinkBackgroundColor;
   border-radius: 21px;
   color: @cardLinkTextColor !important;
+
+  .colored-card-content {
+    padding-right: 3em;
+  }
 }
 
 .colored-card-link:hover {
-  background-color: @cardLinkBackgroundColorHover;
-  color: @cardLinkTextColorHover;
+  background-color: transparent;
+  color: #000 !important;
+
+  > .colored-card {
+    border-top-color: #ff4422 !important;
+  }
+
+  .colored-card-content {
+    color: #000;
+  }
+
+  .next-icon {
+    color: #ff4422;
+  }
+}
+
+.colored-cards-grid-title {
+  color: #004050;
+  font-size: 22px;
 }
 
 .center .colored-card-title {
@@ -84,12 +113,17 @@
 }
 
 .ui.cards.colored-card-group {
-  margin-right: -0.75em;
-  margin-left: -0.75em;
+  padding: 1.5rem 0;
+  margin-right: -0.75em !important;
+  margin-left: -0.75em !important;
 
   > .ui.card {
-    margin: 0.75em;
+    margin: 0.75em !important;
   }
+}
+
+.next-icon {
+  transform: rotate(180deg);
 }
 
 @media only screen and (min-width: @tabletBreakpoint) and (max-width: @largestTabletScreen) {

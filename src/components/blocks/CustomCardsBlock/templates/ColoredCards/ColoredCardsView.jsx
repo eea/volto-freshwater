@@ -1,89 +1,108 @@
-import cx from 'classnames';
 import React from 'react';
 import { Card } from 'semantic-ui-react';
-import { LazyLoadComponent } from 'react-lazy-load-image-component';
+import { Icon } from '@plone/volto/components';
 import { UniversalLink } from '@plone/volto/components';
 import { BodyClass } from '@plone/volto/helpers';
-
-import { getScaleUrl, getPath } from '@eeacms/volto-freshwater/utils';
-
-import './css/coloredcards.less';
 import { serializeNodes } from 'volto-slate/editor/render';
+import cx from 'classnames';
+
+import arrowSVG from '@plone/volto/icons/backspace.svg';
+import './css/coloredcards.less';
 
 export const CardItem = (props) => {
   const {
     title,
     text,
     link,
-    attachedimage,
-    background_color,
     border_color,
-    border_top_width = '15px',
     text_color,
     font_size,
-    sub_title,
-    image_scale,
+    isEditMode,
   } = props;
 
   return (
-    <div
-      className="ui card colored-card"
-      style={{
-        backgroundColor: `${background_color}`,
-        color: `${text_color}`,
-        borderTop: `${border_top_width} solid ${border_color}`,
-      }}
-    >
-      <>
-        {attachedimage && (
-          <LazyLoadComponent>
-            <div
-              className="colored-card-image"
-              style={
-                attachedimage
-                  ? {
-                      backgroundImage: `url(${getScaleUrl(
-                        getPath(attachedimage),
-                        image_scale || 'preview',
-                      )})`,
-                    }
-                  : {}
-              }
-            ></div>
-          </LazyLoadComponent>
-        )}
+    <>
+      {link && !isEditMode ? (
+        <>
+          <div className="ui card">
+            <UniversalLink className="colored-card-link" href={link}>
+              <div
+                className="colored-card"
+                style={
+                  border_color
+                    ? {
+                        borderTop: `8px solid ${border_color}`,
+                      }
+                    : {}
+                }
+              >
+                <div
+                  className="content colored-card-content"
+                  style={{
+                    color: `${text_color}`,
+                  }}
+                >
+                  {title && <div className="ui sub header">{title}</div>}
 
-        {title && (
-          <div className="content colored-card-content">
-            <div className="ui sub header">{title}</div>
-            <div className="colored-card-sub-header">{sub_title}</div>
+                  {text && (
+                    <>
+                      <div className={`colored-card-description ${font_size}`}>
+                        {serializeNodes(text)}
+                      </div>
+                      <div className="link-button">
+                        <Icon
+                          name={arrowSVG}
+                          size="30px"
+                          className="next-icon"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </UniversalLink>
           </div>
-        )}
+        </>
+      ) : (
+        <>
+          <div className="ui card">
+            <div className="colored-card-wrapper">
+              <div
+                className="colored-card"
+                style={
+                  border_color
+                    ? {
+                        borderTop: `8px solid ${border_color}`,
+                      }
+                    : {}
+                }
+              >
+                <div
+                  className="content colored-card-content"
+                  style={{
+                    color: `${text_color}`,
+                  }}
+                >
+                  {title && <div className="ui sub header">{title}</div>}
 
-        {text && (
-          <div className="content colored-card-content">
-            <div className={`colored-card-description ${font_size}`}>
-              {serializeNodes(text)}
+                  {text && (
+                    <div className={`colored-card-description ${font_size}`}>
+                      {serializeNodes(text)}
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
-        )}
-
-        {link && (
-          <div className="extra content">
-            <div className="right floated author">
-              <UniversalLink className={'colored-card-link'} href={link}>
-                Read more
-              </UniversalLink>
-            </div>
-          </div>
-        )}
-      </>
-    </div>
+        </>
+      )}
+    </>
   );
 };
 
-const ColoredCards = ({ data }) => {
-  const { title, cards, fluid_cards, image_scale } = data;
+const ColoredCards = ({ data, isEditMode }) => {
+  const { title, text, cards, fluid_cards, image_scale } = data;
+
   return (
     <div
       className={cx(
@@ -96,9 +115,13 @@ const ColoredCards = ({ data }) => {
       )}
     >
       <BodyClass className="has-card-tiles" />
-      <div className={'colored-cards-grid-wrapper ui container'}>
-        <div className={'colored-cards-grid'}>
-          <h2 className={'colored-cards-grid-title'}>{title}</h2>
+      <div className="colored-cards-grid-wrapper">
+        <div className="colored-cards-grid">
+          <h4 className="colored-cards-grid-title">{title}</h4>
+          {text && (
+            <div className="colored-card-grid-text">{serializeNodes(text)}</div>
+          )}
+
           <Card.Group
             className="colored-card-group"
             itemsPerRow={fluid_cards ? data?.cards.length : null}
@@ -113,6 +136,7 @@ const ColoredCards = ({ data }) => {
                 text_color={data.text_color}
                 font_size={data.font_size}
                 image_scale={image_scale}
+                isEditMode={isEditMode}
               />
             ))}
           </Card.Group>

@@ -71,12 +71,7 @@ export const PresentationCardsSchemaExtender = (schema, data) => {
       {
         id: 'style',
         title: 'Style',
-        fields: [
-          'image_height',
-          'border_top_width',
-          'border_color',
-          'fluid_cards',
-        ],
+        fields: ['image_height', 'border_color', 'fluid_cards'],
       },
     ],
     properties: {
@@ -86,14 +81,9 @@ export const PresentationCardsSchemaExtender = (schema, data) => {
         description: 'Add a list of Cards',
         schema: Card(),
       },
-      border_top_width: {
-        title: 'Card top border height',
-        type: 'string',
-        default: '15px',
-      },
       border_color: {
         widget: 'style_simple_color',
-        title: 'Card top border color',
+        title: 'Card border color',
         type: 'color',
         available_colors: config.settings.available_colors,
       },

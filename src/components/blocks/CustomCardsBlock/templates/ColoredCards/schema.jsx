@@ -6,7 +6,7 @@ const Card = () => ({
     {
       id: 'default',
       title: 'Default',
-      fields: ['title', 'sub_title', 'text', 'attachedimage', 'link'],
+      fields: ['title', 'text', 'link'],
     },
   ],
   properties: {
@@ -14,21 +14,14 @@ const Card = () => ({
       type: 'string',
       title: 'Title',
     },
-    sub_title: {
-      type: 'string',
-      title: 'Sub-title',
-    },
     text: {
       widget: 'slate_richtext',
       title: 'Text',
+      description: 'Rich text, double click on text for toolbar',
     },
     link: {
       widget: 'url',
       title: 'Link',
-    },
-    attachedimage: {
-      widget: 'attachedimage',
-      title: 'Image',
     },
   },
 
@@ -51,14 +44,7 @@ export const ColoredCardsSchemaExtender = (schema, data) => {
       {
         id: 'style',
         title: 'Style',
-        fields: [
-          'background_color',
-          'text_color',
-          'border_color',
-          'border_top_width',
-          'font_size',
-          'fluid_cards',
-        ],
+        fields: ['text_color', 'border_color', 'font_size', 'fluid_cards'],
       },
     ],
     properties: {
@@ -74,26 +60,12 @@ export const ColoredCardsSchemaExtender = (schema, data) => {
         type: 'color',
         available_colors: config.settings.available_colors,
       },
-      background_color: {
-        widget: 'style_simple_color',
-        title: 'Card Background color',
-        type: 'color',
-        available_colors: config.settings.available_colors,
-        field_props: {
-          available_colors: config.settings.available_colors,
-        },
-      },
       border_color: {
         widget: 'style_simple_color',
-        title: 'Card top border color',
+        title: 'Card border color',
         type: 'color',
         default: '#FFF',
         available_colors: config.settings.available_colors,
-      },
-      border_top_width: {
-        title: 'Card top border height',
-        type: 'string',
-        default: '15px',
       },
       font_size: {
         title: 'Card Font size',

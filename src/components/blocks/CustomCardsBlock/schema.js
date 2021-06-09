@@ -28,6 +28,7 @@ const CustomCards = (props) => {
       text: {
         widget: 'slate_richtext',
         title: 'Text',
+        description: 'Rich text, double click on text for toolbar',
       },
       display: {
         title: 'Display',
