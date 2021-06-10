@@ -18,7 +18,6 @@ import fiseLogo from '@eeacms/volto-freshwater/static/forest.svg';
 import ccaLogo from '@eeacms/volto-freshwater/static/climate_adapt.png';
 import biseLogo from '@eeacms/volto-freshwater/static/bise-logo.svg';
 import wiseLogo from '@eeacms/volto-freshwater/static/wise-logo.png';
-// import fishLogo from '@eeacms/volto-freshwater/static/footer-fishes.svg';
 
 /**
  * Component to display the footer.
@@ -28,7 +27,9 @@ import wiseLogo from '@eeacms/volto-freshwater/static/wise-logo.png';
  */
 const Footer = ({ intl }) => (
   <Segment role="contentinfo" vertical padded className="footerWrapper">
-    <Grid className="footer-top-wave"> </Grid>
+    <div className="footer-top-wave">
+      <div className="wave-shape"></div>
+    </div>
     <Container>
       <div className="footer-top-wrapper">
         <Grid stackable>
@@ -133,13 +134,6 @@ const Footer = ({ intl }) => (
             </Grid.Column>
           </Grid.Row>
         </Grid>
-        {/*<div className="footer-backdrop">*/}
-        {/*  <LazyLoadImage*/}
-        {/*    src={fishLogo}*/}
-        {/*    title="Footer Fish Logo"*/}
-        {/*    alt="Footer Fish Logo"*/}
-        {/*  />*/}
-        {/*</div>*/}
       </div>
     </Container>
   </Segment>

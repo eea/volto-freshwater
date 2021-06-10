@@ -68,6 +68,14 @@ body.siteroot {
   .documentFirstHeading {
     display: none;
   }
+
+  .imagecards-block.full {
+    margin-bottom: 200px;
+  }
+}
+
+#page-document {
+  position: relative;
 }
 
 .block-info {

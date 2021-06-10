@@ -66,7 +66,7 @@ export const PresentationCardsSchemaExtender = (schema, data) => {
       {
         id: 'default',
         title: 'Default',
-        fields: [...(defaultFieldsets?.fields || {}), 'cards'],
+        fields: [...(defaultFieldsets?.fields || {}), 'image_scale', 'cards'],
       },
       {
         id: 'style',
@@ -80,6 +80,15 @@ export const PresentationCardsSchemaExtender = (schema, data) => {
         title: 'Cards',
         description: 'Add a list of Cards',
         schema: Card(),
+      },
+      image_scale: {
+        title: 'Image scale',
+        choices: [
+          ['preview', 'Preview'],
+          ['large', 'Large'],
+          ['panoramic', 'Panoramic'],
+        ],
+        default: 'large',
       },
       border_color: {
         widget: 'style_simple_color',

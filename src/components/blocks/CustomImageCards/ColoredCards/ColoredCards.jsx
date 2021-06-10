@@ -7,7 +7,7 @@ import { BodyClass } from '@plone/volto/helpers';
 
 import { getScaleUrl, getPath } from '@eeacms/volto-freshwater/utils';
 
-import './css/coloredcards.less';
+// import './css/coloredcards.less';
 import { serializeNodes } from 'volto-slate/editor/render';
 
 export const CardItem = (props) => {

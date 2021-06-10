@@ -14,6 +14,8 @@ import { BodyClass } from '@plone/volto/helpers';
 import { HeroSection } from '../../../../components';
 import { getScaleUrl, getPath } from '@eeacms/volto-freshwater/utils';
 
+import clearLogoSVG from './freshwater_logo_clear.svg';
+
 /**
  * Header component class.
  * @class Header
@@ -90,7 +92,11 @@ class Header extends Component {
                   <>
                     <div>
                       <div className="logo">
-                        <Logo />
+                        <img
+                          className="home-logo"
+                          src={clearLogoSVG}
+                          alt="Freshwater logo"
+                        />
                       </div>
                       <div className="search">
                         <SearchWidget pathname={this.props.pathname} />

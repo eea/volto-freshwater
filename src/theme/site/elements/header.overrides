@@ -26,6 +26,10 @@
       border-top: 1px solid #fff;
       margin-top: 1em;
     }
+
+    .home-logo {
+      height: 56px;
+    }
   }
 
   .page-nav {

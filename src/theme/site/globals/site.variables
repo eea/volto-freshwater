@@ -45,8 +45,8 @@
 /*-------------------
     Brand Colors
 --------------------*/
-
-@secondaryColor      : @brown;
+@wisePrimaryColor:       : #0099BB;
+@wiseSecondaryColor      : #004050;
 
 @lightSecondaryColor : @lightGrey;
 

@@ -8,7 +8,7 @@ import { serializeNodes } from 'volto-slate/editor/render';
 import config from '@plone/volto/registry';
 import cx from 'classnames';
 
-import './css/presentationcards.less';
+// import './css/presentationcards.less';
 
 export const CardItem = (props) => {
   const {

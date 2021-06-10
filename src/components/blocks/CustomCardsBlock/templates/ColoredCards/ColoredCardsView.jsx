@@ -117,7 +117,7 @@ const ColoredCards = ({ data, isEditMode }) => {
       <BodyClass className="has-card-tiles" />
       <div className="colored-cards-grid-wrapper">
         <div className="colored-cards-grid">
-          <h4 className="colored-cards-grid-title">{title}</h4>
+          {title && <h4 className="colored-cards-grid-title">{title}</h4>}
           {text && (
             <div className="colored-card-grid-text">{serializeNodes(text)}</div>
           )}

@@ -178,6 +178,7 @@ const PresentationCardsView = ({ data, isEditMode }) => {
     image_height,
     image_scale,
     fluid_cards,
+    custom_class,
   } = data;
 
   return (
@@ -190,10 +191,11 @@ const PresentationCardsView = ({ data, isEditMode }) => {
             'full-width': data.align === 'full',
           },
           data.align,
+          custom_class,
         )}
       >
         <BodyClass className="has-card-tiles" />
-        <div className="presentation-cards-grid-wrapper">
+        <div className="presentation-cards-grid-wrapper ui container">
           <div className="presentation-cards-grid">
             {title && (
               <h2 className="presentation-cards-grid-title">{title}</h2>

@@ -16,7 +16,7 @@ const CustomCards = (props) => {
       {
         id: 'default',
         title: 'Default',
-        fields: ['title', 'text', 'display', 'align', 'image_scale'],
+        fields: ['title', 'text', 'display', 'align', 'custom_class'],
       },
     ],
 
@@ -34,19 +34,14 @@ const CustomCards = (props) => {
         title: 'Display',
         choices: [...display_types],
       },
-      image_scale: {
-        title: 'Image scale',
-        choices: [
-          ['preview', 'Preview'],
-          ['large', 'Large'],
-          ['panoramic', 'Panoramic'],
-        ],
-        default: 'large',
-      },
       align: {
         title: 'Alignment',
         widget: 'align',
         type: 'string',
+      },
+      custom_class: {
+        title: 'Custom CSS Class',
+        description: 'A custom CSS class, aplicable to this block',
       },
     },
 
