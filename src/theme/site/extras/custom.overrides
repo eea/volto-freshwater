@@ -10,6 +10,7 @@
 @import 'toolbar.overrides';
 @import 'contextnavigation';
 @import 'editor';
+@import 'home';
 //}
 
 // @kitconcept volto-grid-block style override

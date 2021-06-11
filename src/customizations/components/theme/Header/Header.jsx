@@ -10,6 +10,8 @@ import { connect } from 'react-redux';
 
 import { Logo, Navigation, SearchWidget } from '@plone/volto/components';
 import { BodyClass } from '@plone/volto/helpers';
+import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 import { HeroSection } from '../../../../components';
 import { getScaleUrl, getPath } from '@eeacms/volto-freshwater/utils';
@@ -88,45 +90,43 @@ class Header extends Component {
                   this.state.isHomepage ? 'home-nav' : 'page-nav'
                 }`}
               >
-                {this.state.isHomepage ? (
-                  <>
-                    <div>
-                      <div className="logo">
-                        <img
-                          className="home-logo"
-                          src={clearLogoSVG}
-                          alt="Freshwater logo"
-                        />
-                      </div>
-                      <div className="search">
-                        <SearchWidget pathname={this.props.pathname} />
-                      </div>
+                <div className="logo">
+                  {this.state.isHomepage ? (
+                    <img
+                      className="home-logo"
+                      src={clearLogoSVG}
+                      alt="Freshwater logo"
+                    />
+                  ) : (
+                    <Logo />
+                  )}
+                </div>
+                <div className="header-right-section">
+                  <div className="right-section-wrapper">
+                    <ul className="top-nav">
+                      <li>
+                        <a className="item" href={`mailto:WISE@eea.europa.eu`}>
+                          Contact
+                        </a>
+                      </li>
+                      <li>
+                        <Link className="item" to="/sitemap">
+                          <FormattedMessage
+                            id="sitemap"
+                            defaultMessage="Sitemap"
+                          />
+                        </Link>
+                      </li>
+                    </ul>
+                    <div className="search">
+                      <SearchWidget pathname={this.props.pathname} />
                     </div>
-                    <div>
-                      <Navigation
-                        pathname={this.props.pathname}
-                        navigation={this.props.navigationItems}
-                      />
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div>
-                      <div className="logo">
-                        <Logo />
-                      </div>
-                    </div>
-                    <div className="header-right-section">
-                      <div className="search">
-                        <SearchWidget pathname={this.props.pathname} />
-                      </div>
-                      <Navigation
-                        pathname={this.props.pathname}
-                        navigation={this.props.navigationItems}
-                      />
-                    </div>
-                  </>
-                )}
+                  </div>
+                  <Navigation
+                    pathname={this.props.pathname}
+                    navigation={this.props.navigationItems}
+                  />
+                </div>
               </div>
             </div>
           </Container>

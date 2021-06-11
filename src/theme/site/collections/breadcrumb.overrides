@@ -37,7 +37,7 @@ body.siteroot .breadcrumbs {
 
 .has-image .breadcrumb {
   position: absolute;
-  top: 84px;
+  top: 88px;
   max-width: 91%;
 }
 
