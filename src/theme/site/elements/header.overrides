@@ -10,6 +10,10 @@
 .ui.basic.segment .header {
   .logo-nav-wrapper {
     align-items: center;
+
+    .logo {
+      margin: 0.7rem 0;
+    }
   }
 
   .home-nav {
@@ -148,13 +152,37 @@ body.section-edit .home-nav {
   }
 }
 
-@media only screen and (max-width: 1425px) {
-  #main .right-section-wrapper {
-    display: none !important;
+body.is-anonymous {
+  @media only screen and (max-width: 1495px) {
+    #main .right-section-wrapper {
+      display: none !important;
+    }
+
+    #main .navigation:before {
+      background: none !important;
+    }
   }
 
-  #main .navigation:before {
-    background: none !important;
+  body.has-toolbar.has-sidebar {
+    #main .right-section-wrapper {
+      display: none !important;
+    }
+
+    #main .navigation:before {
+      background: none !important;
+    }
+  }
+}
+
+body:not(.is-anonymous) {
+  @media only screen and (max-width: 1595px) {
+    #main .right-section-wrapper {
+      display: none !important;
+    }
+
+    #main .navigation:before {
+      background: none !important;
+    }
   }
 }
 
