@@ -52,37 +52,39 @@ export const CardItem = (props) => {
         </div>
       ) : (
         <div className="ui card plain-card">
-          {attachedimage && (
-            <LazyLoadComponent>
-              <div
-                className="plain-card-image"
-                style={
-                  attachedimage
-                    ? {
-                        backgroundImage: `url(${getScaleUrl(
-                          getPath(attachedimage),
-                          'thumb',
-                        )})`,
-                      }
-                    : {}
-                }
-              ></div>
-            </LazyLoadComponent>
-          )}
+          <div className="plain-card-wrapper">
+            {attachedimage && (
+              <LazyLoadComponent>
+                <div
+                  className="plain-card-image"
+                  style={
+                    attachedimage
+                      ? {
+                          backgroundImage: `url(${getScaleUrl(
+                            getPath(attachedimage),
+                            'thumb',
+                          )})`,
+                        }
+                      : {}
+                  }
+                ></div>
+              </LazyLoadComponent>
+            )}
 
-          {title && (
-            <div className="content plain-card-content">
-              <div className="plain-card-header">{title}</div>
-            </div>
-          )}
-
-          {text && (
-            <div className="content plain-card-content">
-              <div className="plain-card-description">
-                {serializeNodes(text)}
+            {title && (
+              <div className="content plain-card-content">
+                <div className="plain-card-header">{title}</div>
               </div>
-            </div>
-          )}
+            )}
+
+            {text && (
+              <div className="content plain-card-content">
+                <div className="plain-card-description">
+                  {serializeNodes(text)}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       )}
     </>

@@ -43,3 +43,25 @@
     box-shadow: 0 0 3px 1px rgb(55 146 218) !important;
   }
 };
+
+.style-select-widget {
+  margin: 10px 0 !important;
+
+  .ui.card {
+    font-size: 14px;
+    border: 1px solid #eee;
+
+    .content .ui.tiny {
+      font-size: 12px !important;
+    }
+
+    .extra.content {
+      font-size: 13px;
+      border-top: 1px solid rgba(0,0,0,0.05)!important;
+    }
+  }
+
+  .card.active .extra.content {
+    background-color: #eee;
+  }
+}

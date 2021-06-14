@@ -13,6 +13,14 @@
   display: inline-block;
   padding: 5px 10px;
   background: #000;
+
+  .divider {
+    color: @wisePrimaryColor;
+  }
+
+  svg {
+    fill: @wisePrimaryColor !important;
+  }
 }
 
 @media only screen and (min-width: 480px) {

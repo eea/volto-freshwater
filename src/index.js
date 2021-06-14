@@ -1,3 +1,5 @@
+import React from 'react';
+
 import HeroSectionView from './components/theme/Header/HeroSectionView';
 import ColoredCards from './components/blocks/CustomImageCards/ColoredCards/ColoredCards';
 import { ColoredCardsSchemaExtender } from './components/blocks/CustomImageCards/ColoredCards/schema';
@@ -19,6 +21,7 @@ import DatabaseItemView from './components/Views/DatabaseItemView';
 
 const available_colors = [
   '#0099BB',
+  'F2F9FB',
   '#FF4422',
   '#156650',
   '#72933d',
@@ -135,6 +138,18 @@ const applyConfig = (config) => {
     { cssClass: 'h4', label: 'H4 18px' },
     { cssClass: 'h5', label: 'H5 14px' },
     { cssClass: 'p-text', label: 'Paragraph 16px' },
+  ];
+
+  // Custom block styles
+  config.settings.pluggableStyles = [
+    ...(config.settings.pluggableStyles || []),
+    {
+      id: 'uiContainer',
+      title: 'Container',
+      viewComponent: (props) => {
+        return <div className="ui container">{props.children}</div>;
+      },
+    },
   ];
 
   config.settings.appExtras = [
