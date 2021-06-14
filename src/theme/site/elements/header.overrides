@@ -158,6 +158,16 @@ body.section-edit .home-nav {
   }
 }
 
+body.has-toolbar.has-sidebar {
+  #main .right-section-wrapper {
+    display: none !important;
+  }
+
+  #main .navigation:before {
+    background: none !important;
+  }
+}
+
 // .search {
 //   display: none !important;
 // }
