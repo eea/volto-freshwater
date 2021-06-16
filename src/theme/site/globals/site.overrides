@@ -1,6 +1,10 @@
 /*-------------------
  Freshwater Site overrides
 --------------------*/
+body {
+  color: @textColor;
+}
+
 h1 {
   font-size: @h1;
 }
@@ -36,13 +40,18 @@ h5 {
   color: @wiseSecondaryColor;
 }
 
+p {
+  line-height: 28px;
+}
+
 .p-text {
   font-size: @fontSize !important;
 }
 
 .content-area .container {
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 400;
+  line-height: 28px !important;
 }
 
 .ui.inverted a {

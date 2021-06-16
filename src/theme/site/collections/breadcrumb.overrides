@@ -19,6 +19,8 @@
   }
 
   svg {
+    position: relative;
+    top: 3px;
     fill: @wisePrimaryColor !important;
   }
 }
