@@ -1,0 +1,25 @@
+import listBulletSVG from '@plone/volto/icons/list-bullet.svg';
+import SearchBlockView from './SearchBlockView';
+import SearchBlockEdit from './SearchBlockEdit';
+import SelectWidget from './SelectMetadataField';
+
+export default (config) => {
+  config.blocks.blocksConfig.searchBlock = {
+    id: 'searchBlock',
+    title: 'Search listing',
+    icon: listBulletSVG,
+    group: 'common',
+    view: SearchBlockView,
+    edit: SearchBlockEdit,
+    restricted: false,
+    mostUsed: false,
+    sidebarTab: 1,
+    security: {
+      addPermission: [],
+      view: [],
+    },
+  };
+  config.widgets.widget.select_metadata_field = SelectWidget;
+
+  return config;
+};
