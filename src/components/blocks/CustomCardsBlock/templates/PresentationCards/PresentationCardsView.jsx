@@ -4,7 +4,6 @@ import { LazyLoadComponent } from 'react-lazy-load-image-component';
 import { UniversalLink } from '@plone/volto/components';
 import { BodyClass } from '@plone/volto/helpers';
 import { getScaleUrl, getPath } from '@eeacms/volto-freshwater/utils';
-import { serializeNodes } from 'volto-slate/editor/render';
 import config from '@plone/volto/registry';
 import cx from 'classnames';
 
@@ -16,7 +15,6 @@ export const CardItem = (props) => {
     title,
     hide_title,
     description,
-    text,
     item_type,
     link,
     border_color,
@@ -78,13 +76,16 @@ export const CardItem = (props) => {
                   </LazyLoadComponent>
                 )}
 
-                {!hide_title && title && (
-                  <div className="presentation-card-header">{title}</div>
-                )}
+                <div className="presentation-cards-content-wrapper">
+                  {!hide_title && title && (
+                    <div className="presentation-card-header">{title}</div>
+                  )}
 
-                <div className="presentation-card-description">
-                  {description && <div>{description}</div>}
-                  {text && <div>{serializeNodes(text)}</div>}
+                  {description && (
+                    <div className="presentation-card-description">
+                      <div>{description}</div>
+                    </div>
+                  )}
                 </div>
               </>
             </UniversalLink>
@@ -144,15 +145,16 @@ export const CardItem = (props) => {
                   </LazyLoadComponent>
                 )}
 
-                {!hide_title && title && (
-                  <div className="presentation-card-header">{title}</div>
-                )}
+                <div className="presentation-cards-content-wrapper">
+                  {!hide_title && title && (
+                    <div className="presentation-card-header">{title}</div>
+                  )}
 
-                <div className="content presentation-card-content">
-                  <div className="presentation-card-description">
-                    {description && <div>{description}</div>}
-                    {text && <div>{serializeNodes(text)}</div>}
-                  </div>
+                  {description && (
+                    <div className="presentation-card-description">
+                      <div>{description}</div>
+                    </div>
+                  )}
                 </div>
               </>
             </div>
