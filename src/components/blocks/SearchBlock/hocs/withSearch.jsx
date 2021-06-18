@@ -114,6 +114,7 @@ const withSearch = (options) => (WrappedComponent) => {
         searchData={searchData}
         facets={facets}
         setFacets={setFacets}
+        searchedText={paramSearchText}
         searchText={searchText}
         setSearchText={setSearchText}
         onTriggerSearch={updateSearchParams}

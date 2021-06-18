@@ -1,11 +1,11 @@
 import React from 'react';
-import { selectTheme, customSelectStyles } from './SelectStyling';
+import { selectTheme, customSelectStyles } from '../SelectStyling';
 import { injectLazyLibs } from '@plone/volto/helpers/Loadable/Loadable';
 import {
   Option,
   DropdownIndicator,
 } from '@plone/volto/components/manage/Widgets/SelectStyling';
-import withQueryString from './withQueryString';
+import { withQueryString } from '../hocs';
 import { compose } from 'redux';
 import { Grid } from 'semantic-ui-react';
 

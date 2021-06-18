@@ -1,13 +1,22 @@
 import React from 'react';
-import InlineForm from '@plone/volto/components/manage/Form/InlineForm';
+import BlockDataForm from '@plone/volto/components/manage/Form/BlockDataForm';
 import Schema from './schema';
 import SearchBlockView from './SearchBlockView';
 import { SidebarPortal } from '@plone/volto/components';
 import { getBaseUrl } from '@plone/volto/helpers';
+import config from '@plone/volto/registry';
+import { addExtensionFieldToSchema } from '@plone/volto/helpers/Extensions/withBlockSchemaEnhancer';
 
 const SearchBlockEdit = (props) => {
-  const { block, onChangeBlock, data, selected } = props;
-  const schema = Schema({ data });
+  const { block, onChangeBlock, data, selected, intl } = props;
+  let schema = Schema({ data });
+  schema = addExtensionFieldToSchema({
+    schema,
+    name: 'listingBlockTemplate',
+    items: config.blocks.blocksConfig.listing.variations,
+    intl,
+    title: { id: 'Listing template' },
+  });
   return (
     <>
       <SearchBlockView
@@ -16,7 +25,7 @@ const SearchBlockEdit = (props) => {
         mode="edit"
       />
       <SidebarPortal selected={selected}>
-        <InlineForm
+        <BlockDataForm
           schema={schema}
           onChangeField={(id, value) => {
             onChangeBlock(block, {
