@@ -48,10 +48,16 @@ const DashboardTabsBlockView = (props) => {
       render: () => {
         const source = tab.source?.[0];
         const tableau_url = tab.tableau_url || source?.embed_url;
+        console.log('reasdasdas', tableau_url, tab);
         return (
           <Tab.Pane>
             {tableau_url && (
-              <TableauBlockView {...props} data={{ url: tableau_url }} />
+              <TableauBlockView {...props} data={{ url: tableau_url }}>
+                {(viz) => {
+                  console.log('viz', viz);
+                  return <strong>test</strong>;
+                }}
+              </TableauBlockView>
             )}
           </Tab.Pane>
         );
