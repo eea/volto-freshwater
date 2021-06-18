@@ -20,6 +20,9 @@ const RightColumnFacets = (props) => {
   } = props;
 
   const colWidth = 12;
+  // starting from 1, for the search button
+  // const columns = 1 + data.facets?.length + (data.showSearchInput ? 1 : 0);
+  // const colWidth = Math.floor(12 / columns);
 
   return (
     <>

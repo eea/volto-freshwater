@@ -18,7 +18,7 @@ const getListingBodyVariation = (data) => {
   return variation;
 };
 
-const SearchBlockView = (props) => {
+export const SearchBlockViewComponent = withBlockExtensions((props) => {
   const { data, searchData, mode = 'view', variation } = props;
 
   const Layout = variation.view;
@@ -37,6 +37,6 @@ const SearchBlockView = (props) => {
       </Layout>
     </div>
   );
-};
+});
 
-export default compose(withBlockExtensions, withSearch())(SearchBlockView);
+export default compose(withSearch())(SearchBlockViewComponent);

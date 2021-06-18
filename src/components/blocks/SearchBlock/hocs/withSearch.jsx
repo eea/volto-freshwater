@@ -45,14 +45,19 @@ const withSearch = (options) => (WrappedComponent) => {
             ]
           : []),
       ],
+      sort_on: data.query?.sort_on,
+      sort_order: data.query?.sort_order,
+      b_size: data.query?.b_size,
+      b_limit: data.query?.b_limit,
       block: id,
     });
+    const query = data.query || {};
 
     const updateSearchParams = React.useCallback(
       (customSearchText) => {
         const searchData = {
           query: [
-            ...(data.query?.query || []),
+            ...(query.query || []),
             ...Object.keys(facets).map((name) =>
               !isEmpty(facets[name])
                 ? {
@@ -65,6 +70,10 @@ const withSearch = (options) => (WrappedComponent) => {
                 : undefined,
             ),
           ].filter((o) => !!o),
+          sort_on: query.sort_on,
+          sort_order: query.sort_order,
+          b_size: query.b_size,
+          b_limit: query.b_limit,
           block: id,
         };
 
@@ -81,7 +90,7 @@ const withSearch = (options) => (WrappedComponent) => {
         // params.set('SearchableText', searchText);
         // history.replace({ search: params.toString() });
       },
-      [data.query?.query, facets, id, searchText],
+      [query, facets, id, searchText],
     );
 
     React.useEffect(() => {
@@ -97,10 +106,6 @@ const withSearch = (options) => (WrappedComponent) => {
       previousParamSearchText,
       updateSearchParams,
     ]);
-
-    // starting from 1, for the search button
-    // const columns = 1 + data.facets?.length + (data.showSearchInput ? 1 : 0);
-    // const colWidth = Math.floor(12 / columns);
 
     const querystringResults = useSelector(
       (state) => state.querystringsearch.subrequests,
