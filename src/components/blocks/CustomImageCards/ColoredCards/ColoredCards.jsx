@@ -85,40 +85,45 @@ export const CardItem = (props) => {
 const ColoredCards = ({ data }) => {
   const { title, cards, fluid_cards, image_scale } = data;
   return (
-    <div
-      className={cx(
-        'block align colored-cards-block',
-        {
-          center: !Boolean(data.align),
-          'full-width': data.align === 'full',
-        },
-        data.align,
-      )}
-    >
-      <BodyClass className="has-card-tiles" />
-      <div className={'colored-cards-grid-wrapper ui container'}>
-        <div className={'colored-cards-grid'}>
-          <h2 className={'colored-cards-grid-title'}>{title}</h2>
-          <Card.Group
-            className="colored-card-group"
-            itemsPerRow={fluid_cards ? data?.cards.length : null}
-          >
-            {(cards || []).map((card, index) => (
-              <CardItem
-                key={index}
-                {...card}
-                background_color={data.background_color}
-                border_color={data.border_color}
-                border_top_width={data.border_top_width}
-                text_color={data.text_color}
-                font_size={data.font_size}
-                image_scale={image_scale}
-              />
-            ))}
-          </Card.Group>
+    <>
+      <div className="block-info">
+        Deprecated. Use "Cards block" for creating cards.
+      </div>
+      <div
+        className={cx(
+          'block align colored-cards-block',
+          {
+            center: !Boolean(data.align),
+            'full-width': data.align === 'full',
+          },
+          data.align,
+        )}
+      >
+        <BodyClass className="has-card-tiles" />
+        <div className={'colored-cards-grid-wrapper ui container'}>
+          <div className={'colored-cards-grid'}>
+            <h2 className={'colored-cards-grid-title'}>{title}</h2>
+            <Card.Group
+              className="colored-card-group"
+              itemsPerRow={fluid_cards ? data?.cards.length : null}
+            >
+              {(cards || []).map((card, index) => (
+                <CardItem
+                  key={index}
+                  {...card}
+                  background_color={data.background_color}
+                  border_color={data.border_color}
+                  border_top_width={data.border_top_width}
+                  text_color={data.text_color}
+                  font_size={data.font_size}
+                  image_scale={image_scale}
+                />
+              ))}
+            </Card.Group>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

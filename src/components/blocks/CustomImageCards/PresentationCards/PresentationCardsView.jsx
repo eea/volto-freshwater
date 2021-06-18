@@ -196,7 +196,10 @@ const PresentationCardsView = ({ data, isEditMode }) => {
 
   return (
     <>
-      {cards && cards.length > 0 ? (
+      <div className="block-info">
+        Deprecated. Use "Cards block" for creating cards.
+      </div>
+      {cards && cards.length > 0 && (
         <div
           className={cx(
             'block align presentation-cards-block',
@@ -231,8 +234,6 @@ const PresentationCardsView = ({ data, isEditMode }) => {
             </div>
           </div>
         </div>
-      ) : (
-        <div className="block-info">Add cards from the sidebar</div>
       )}
     </>
   );

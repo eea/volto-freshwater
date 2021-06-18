@@ -34,6 +34,10 @@ export const PlainCardsSchemaExtender = (schema, data) => {
     (fieldset) => fieldset.id === 'default',
   )[0];
 
+  const restOfFieldsets = schema.fieldsets.filter(
+    (fieldset) => fieldset.id !== 'default',
+  )[0];
+
   return {
     title: 'Plain cards',
     fieldsets: [
@@ -42,6 +46,7 @@ export const PlainCardsSchemaExtender = (schema, data) => {
         title: 'Default',
         fields: [...(defaultFieldsets?.fields || {}), 'cards'],
       },
+      { ...restOfFieldsets },
     ],
     properties: {
       cards: {

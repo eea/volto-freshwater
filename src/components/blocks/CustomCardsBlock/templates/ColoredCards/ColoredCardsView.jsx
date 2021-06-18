@@ -107,11 +107,11 @@ const ColoredCards = ({ data, isEditMode }) => {
     <div
       className={cx(
         'block align colored-cards-block',
-        {
-          center: !Boolean(data.align),
-          'full-width': data.align === 'full',
-        },
-        data.align,
+        // {
+        //   center: !Boolean(data.align),
+        //   'full-width': data.align === 'full',
+        // },
+        // data.align,
       )}
     >
       <BodyClass className="has-card-tiles" />

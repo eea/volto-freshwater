@@ -16,28 +16,28 @@ const CustomCards = (props) => {
       {
         id: 'default',
         title: 'Default',
-        fields: ['title', 'text', 'display', 'align', 'custom_class'],
+        fields: ['title', 'text', 'display'],
+      },
+      {
+        id: 'advanced',
+        title: 'Advanced',
+        fields: ['custom_class'],
       },
     ],
 
     properties: {
       title: {
         type: 'string',
-        title: 'Title',
+        title: 'Block title',
       },
       text: {
         widget: 'slate_richtext',
-        title: 'Text',
+        title: 'Block text',
         description: 'Rich text, double click on text for toolbar',
       },
       display: {
         title: 'Display',
         choices: [...display_types],
-      },
-      align: {
-        title: 'Alignment',
-        widget: 'align',
-        type: 'string',
       },
       custom_class: {
         title: 'Custom CSS Class',

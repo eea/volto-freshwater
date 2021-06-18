@@ -92,23 +92,30 @@ export const CardItem = (props) => {
 };
 
 const PlainCards = ({ data, isEditMode }) => {
-  const { title, cards, custom_class } = data;
+  const { title, text, cards, custom_class } = data;
   return (
     <div
       className={cx(
         'block align plain-cards-block',
-        {
-          center: !Boolean(data.align),
-          'full-width': data.align === 'full',
-        },
-        data.align,
+        // {
+        //   center: !Boolean(data.align),
+        //   'full-width': data.align === 'full',
+        // },
+        // data.align,
         custom_class,
       )}
     >
       <BodyClass className="has-card-tiles" />
       <div className="plain-cards-grid-wrapper">
         <div className="plain-cards-grid">
-          <h2 className="plain-cards-grid-title">{title}</h2>
+          {title && <h2 className="plain-cards-grid-title">{title}</h2>}
+
+          {text && (
+            <div className="plain-cards-grid-description">
+              {serializeNodes(text)}
+            </div>
+          )}
+
           <Card.Group className="plain-card-group">
             {(cards || []).map((card, index) => (
               <CardItem key={index} {...card} isEditMode={isEditMode} />

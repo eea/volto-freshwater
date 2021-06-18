@@ -1,5 +1,4 @@
 import React from 'react';
-import cardsSVG from '@plone/volto/icons/apps.svg';
 import {
   BlockStyleWrapperEdit,
   BlockStyleWrapperView,
@@ -7,13 +6,17 @@ import {
 
 import CustomCardsView from './View';
 import CustomCardsEdit from './Edit';
-import AttachedImageWidget from './AttachedImageWidget';
 import { PlainCardsSchemaExtender } from './templates/PlainCards/schema';
 import PlainCardsView from './templates/PlainCards/PlainCardsView';
 import { ColoredCardsSchemaExtender } from './templates/ColoredCards/schema';
 import ColoredCardsView from './templates/ColoredCards/ColoredCardsView';
 import { PresentationCardsSchemaExtender } from './templates/PresentationCards/schema';
 import PresentationCardsView from './templates/PresentationCards/PresentationCardsView';
+
+import AttachedImageWidget from './Widgets/AttachedImageWidget';
+import TextAlignWidget from './Widgets/TextAlign';
+import UrlWidget from '@plone/volto/components/manage/Widgets/UrlWidget';
+import cardsSVG from '@plone/volto/icons/apps.svg';
 
 export default (config) => {
   config.blocks.blocksConfig.customCardsBlock = {
@@ -60,5 +63,9 @@ export default (config) => {
   if (!config.widgets.widget.attachedimage) {
     config.widgets.widget.attachedimage = AttachedImageWidget;
   }
+
+  config.widgets.widget.text_align = TextAlignWidget;
+  config.widgets.widget.object_by_path = UrlWidget;
+
   return config;
 };

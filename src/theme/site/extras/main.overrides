@@ -1,0 +1,7 @@
+.documentFirstHeading {
+  border-bottom: none;
+
+  &:before {
+    border: none;
+  }
+}

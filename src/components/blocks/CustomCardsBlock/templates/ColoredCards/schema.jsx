@@ -33,6 +33,10 @@ export const ColoredCardsSchemaExtender = (schema, data) => {
     (fieldset) => fieldset.id === 'default',
   )[0];
 
+  const restOfFieldsets = schema.fieldsets.filter(
+    (fieldset) => fieldset.id !== 'default',
+  )[0];
+
   return {
     title: 'Colored cards',
     fieldsets: [
@@ -46,6 +50,7 @@ export const ColoredCardsSchemaExtender = (schema, data) => {
         title: 'Style',
         fields: ['text_color', 'border_color', 'font_size', 'fluid_cards'],
       },
+      { ...restOfFieldsets },
     ],
     properties: {
       cards: {

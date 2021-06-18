@@ -60,19 +60,30 @@ export const PresentationCardsSchemaExtender = (schema, data) => {
     (fieldset) => fieldset.id === 'default',
   )[0];
 
+  const restOfFieldsets = schema.fieldsets.filter(
+    (fieldset) => fieldset.id !== 'default',
+  )[0];
+
   return {
     title: 'Presentation cards',
     fieldsets: [
       {
         id: 'default',
         title: 'Default',
-        fields: [...(defaultFieldsets?.fields || {}), 'image_scale', 'cards'],
+        fields: [...(defaultFieldsets?.fields || {}), 'cards'],
       },
       {
         id: 'style',
-        title: 'Style',
-        fields: ['image_height', 'border_color', 'fluid_cards'],
+        title: 'Cards style',
+        fields: [
+          'image_scale',
+          'image_height',
+          'border_color',
+          'text_align',
+          'fluid_cards',
+        ],
       },
+      { ...restOfFieldsets },
     ],
     properties: {
       cards: {
@@ -92,7 +103,7 @@ export const PresentationCardsSchemaExtender = (schema, data) => {
       },
       border_color: {
         widget: 'style_simple_color',
-        title: 'Card border color',
+        title: 'Top border color',
         type: 'color',
         available_colors: config.settings.available_colors,
       },
@@ -105,6 +116,11 @@ export const PresentationCardsSchemaExtender = (schema, data) => {
         title: 'Fluid cards',
         type: 'boolean',
         default: false,
+      },
+      text_align: {
+        title: 'Text align',
+        widget: 'text_align',
+        default: 'left',
       },
       ...(schema.properties || {}),
     },

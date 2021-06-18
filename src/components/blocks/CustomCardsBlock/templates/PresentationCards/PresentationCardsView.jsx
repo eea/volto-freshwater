@@ -4,6 +4,7 @@ import { LazyLoadComponent } from 'react-lazy-load-image-component';
 import { UniversalLink } from '@plone/volto/components';
 import { BodyClass } from '@plone/volto/helpers';
 import { getScaleUrl, getPath } from '@eeacms/volto-freshwater/utils';
+import { serializeNodes } from 'volto-slate/editor/render';
 import config from '@plone/volto/registry';
 import cx from 'classnames';
 
@@ -174,6 +175,7 @@ export const CardItem = (props) => {
 const PresentationCardsView = ({ data, isEditMode }) => {
   const {
     title,
+    text,
     cards,
     border_color,
     image_bg_size,
@@ -181,49 +183,48 @@ const PresentationCardsView = ({ data, isEditMode }) => {
     image_scale,
     fluid_cards,
     custom_class,
+    text_align = 'left',
   } = data;
 
   return (
     <>
-      <div
-        className={cx(
-          'block align presentation-cards-block',
-          {
-            left: !Boolean(data.align),
-            'full-width': data.align === 'full',
-          },
-          data.align,
-          custom_class,
-        )}
-      >
+      <div className={cx('block align presentation-cards-block', custom_class)}>
         <BodyClass className="has-card-tiles" />
-        <div className="presentation-cards-grid-wrapper ui container">
+        <div className="presentation-cards-grid-wrapper">
           <div className="presentation-cards-grid">
             {title && (
               <h2 className="presentation-cards-grid-title">{title}</h2>
             )}
 
-            {cards && cards.length > 0 ? (
-              <Card.Group
-                className="presentation-cards-group"
-                itemsPerRow={fluid_cards ? data?.cards.length : undefined}
-              >
-                {(cards || []).map((card, index) => (
-                  <CardItem
-                    key={index}
-                    {...card}
-                    border_color={border_color}
-                    border_top_width={data.border_top_width}
-                    image_bg_size={image_bg_size}
-                    image_height={image_height}
-                    image_scale={image_scale}
-                    isEditMode={isEditMode}
-                  />
-                ))}
-              </Card.Group>
-            ) : (
-              <div className="block-info">Add cards from the sidebar</div>
+            {text && (
+              <div className="presentation-cards-grid-description">
+                {serializeNodes(text)}
+              </div>
             )}
+
+            <div style={{ textAlign: `${text_align}` }}>
+              {cards && cards.length > 0 ? (
+                <Card.Group
+                  className="presentation-cards-group"
+                  itemsPerRow={fluid_cards ? data?.cards.length : undefined}
+                >
+                  {(cards || []).map((card, index) => (
+                    <CardItem
+                      key={index}
+                      {...card}
+                      border_color={border_color}
+                      border_top_width={data.border_top_width}
+                      image_bg_size={image_bg_size}
+                      image_height={image_height}
+                      image_scale={image_scale}
+                      isEditMode={isEditMode}
+                    />
+                  ))}
+                </Card.Group>
+              ) : (
+                <div className="block-info">Add cards from the sidebar</div>
+              )}
+            </div>
           </div>
         </div>
       </div>
