@@ -14,6 +14,7 @@ function usePrevious(value) {
 const withSearch = (options) => (WrappedComponent) => {
   return (props) => {
     const { data, id } = props;
+    console.log('props', props);
     const location = useLocation();
 
     const [facets, setFacets] = React.useState({});
@@ -28,7 +29,7 @@ const withSearch = (options) => (WrappedComponent) => {
 
     const [searchData, setSearchData] = React.useState({
       query: [
-        ...(data.query || []),
+        ...(data.query?.query || []),
         ...Object.keys(facets).map((name) => ({
           i: name,
           o: 'plone.app.querystring.operation.selection.is',
@@ -51,7 +52,7 @@ const withSearch = (options) => (WrappedComponent) => {
       (customSearchText) => {
         const searchData = {
           query: [
-            ...(data.query || []),
+            ...(data.query?.query || []),
             ...Object.keys(facets).map((name) =>
               !isEmpty(facets[name])
                 ? {
@@ -80,7 +81,7 @@ const withSearch = (options) => (WrappedComponent) => {
         // params.set('SearchableText', searchText);
         // history.replace({ search: params.toString() });
       },
-      [data.query, facets, id, searchText],
+      [data.query?.query, facets, id, searchText],
     );
 
     React.useEffect(() => {

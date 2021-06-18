@@ -1,14 +1,12 @@
 import React from 'react';
-import { Grid, Divider } from 'semantic-ui-react';
-
-import { Button, Input } from 'semantic-ui-react';
 
 import ListingBody from '@plone/volto/components/manage/Blocks/Listing/ListingBody';
-import { withSearch } from './hocs';
 import { withBlockExtensions } from '@plone/volto/helpers';
-import { compose } from 'redux';
 
 import config from '@plone/volto/registry';
+
+import { withSearch } from './hocs';
+import { compose } from 'redux';
 
 const getListingBodyVariation = (data) => {
   const { variations } = config.blocks.blocksConfig.listing;

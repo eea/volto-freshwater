@@ -1,5 +1,5 @@
 import React from 'react';
-import { selectTheme, customSelectStyles } from '../SelectStyling';
+import { selectTheme, customSelectStyles } from './SelectStyling';
 import { injectLazyLibs } from '@plone/volto/helpers/Loadable/Loadable';
 import {
   Option,
