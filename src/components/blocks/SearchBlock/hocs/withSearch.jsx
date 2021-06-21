@@ -31,8 +31,10 @@ const withSearch = (options) => (WrappedComponent) => {
         ...(data.query?.query || []),
         ...Object.keys(facets).map((name) => ({
           i: name,
-          o: 'plone.app.querystring.operation.selection.is',
           v: facets[name],
+
+          // TODO: make the facet operator pluggable
+          o: 'plone.app.querystring.operation.selection.is',
         })),
         ...(paramSearchText
           ? [
