@@ -5,6 +5,7 @@ import SelectWidget from './widgets/SelectMetadataField';
 import RightColumnFacets from './layout/RightColumnFacets';
 import LeftColumnFacets from './layout/LeftColumnFacets';
 import TopSideFacets from './layout/TopSideFacets';
+import { SelectFacet, CheckboxFacet } from './components';
 
 export default (config) => {
   config.blocks.blocksConfig.searchBlock = {
@@ -41,9 +42,24 @@ export default (config) => {
         isDefault: false,
       },
     ],
-    // extensions: {
-    //   layout: ,
-    // },
+    extensions: {
+      facetWidgets: {
+        types: [
+          {
+            id: 'selectFacet',
+            title: 'Select',
+            view: SelectFacet,
+            isDefault: true,
+          },
+          {
+            id: 'checkboxFacet',
+            title: 'Checkbox',
+            view: CheckboxFacet,
+            isDefault: false,
+          },
+        ],
+      },
+    },
   };
 
   config.widgets.widget.select_metadata_field = SelectWidget;

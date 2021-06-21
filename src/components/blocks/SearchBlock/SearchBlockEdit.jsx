@@ -14,7 +14,7 @@ const SearchBlockEdit = (props) => {
   let schema = Schema({ data });
   schema = addExtensionFieldToSchema({
     schema,
-    name: 'listingBlockTemplate',
+    name: 'listingBodyTemplate',
     items: config.blocks.blocksConfig.listing.variations,
     intl,
     title: { id: 'Listing template' },

@@ -1,10 +1,12 @@
+import config from '@plone/volto/registry';
+
 const FacetSchema = () => ({
   title: 'Facet',
   fieldsets: [
     {
       id: 'default',
       title: 'Default',
-      fields: ['title', 'field', 'multiple'],
+      fields: ['title', 'field', 'multiple', 'type'],
     },
   ],
   properties: {
@@ -20,6 +22,15 @@ const FacetSchema = () => ({
       type: 'boolean',
       title: 'Multiple choices?',
       default: false,
+    },
+    type: {
+      title: 'Facet widget',
+      choices: config.blocks.blocksConfig.searchBlock.extensions.facetWidgets.types.map(
+        ({ id, title }) => [id, title],
+      ),
+      defaultValue: config.blocks.blocksConfig.searchBlock.extensions.facetWidgets.types.find(
+        ({ isDefault }) => isDefault,
+      ).id,
     },
   },
   required: ['field'],

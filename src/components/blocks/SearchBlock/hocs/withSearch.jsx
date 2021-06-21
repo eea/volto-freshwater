@@ -14,10 +14,10 @@ function usePrevious(value) {
 const withSearch = (options) => (WrappedComponent) => {
   return (props) => {
     const { data, id } = props;
-    console.log('props', props);
+    // console.log('props', props);
     const location = useLocation();
 
-    // const history = useHistory();
+    const history = useHistory();
 
     const paramSearchText = location.search
       ? new URLSearchParams(location.search).get('SearchableText')
@@ -47,7 +47,7 @@ const withSearch = (options) => (WrappedComponent) => {
       sort_on: data.query?.sort_on,
       sort_order: data.query?.sort_order,
       b_size: data.query?.b_size,
-      b_limit: data.query?.b_limit,
+      limit: data.query?.limit,
       block: id,
     });
 
@@ -72,7 +72,7 @@ const withSearch = (options) => (WrappedComponent) => {
           sort_on: query.sort_on,
           sort_order: query.sort_order,
           b_size: query.b_size,
-          b_limit: query.b_limit,
+          limit: query.limit,
           block: id,
         };
 
@@ -94,13 +94,13 @@ const withSearch = (options) => (WrappedComponent) => {
     );
 
     React.useEffect(() => {
-      // if (previousParamSearchText !== paramSearchText) {
-      //   setSearchText(paramSearchText);
-      //   updateSearchParams(paramSearchText);
-      // }
-      // return () => history.replace({ search: '' });
+      if (previousParamSearchText !== paramSearchText) {
+        setSearchText(paramSearchText);
+        updateSearchParams(paramSearchText);
+      }
+      return () => history.replace({ search: '' });
     }, [
-      // history,
+      history,
       setSearchText,
       paramSearchText,
       previousParamSearchText,

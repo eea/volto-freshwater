@@ -1,27 +1,21 @@
 import React from 'react';
-import { selectTheme, customSelectStyles } from './SelectStyling';
-import { injectLazyLibs } from '@plone/volto/helpers/Loadable/Loadable';
-import {
-  Option,
-  DropdownIndicator,
-} from '@plone/volto/components/manage/Widgets/SelectStyling';
 import { withQueryString } from '../hocs';
 import { compose } from 'redux';
-import { Grid } from 'semantic-ui-react';
+import { resolveExtension } from '@plone/volto/helpers/Extensions/withBlockExtensions';
+import config from '@plone/volto/registry';
 
-const Facets = ({ reactSelect, querystring, data, facets, setFacets }) => {
-  const Select = reactSelect.default;
-  const colWidth = 3;
+const Facets = (props) => {
+  const { querystring, data, facets, setFacets, facetWrapper } = props;
+  // console.log('facetWrapper', props);
+  const FacetWrapper = facetWrapper;
+  // const colWidth = 3; // width={Math.min(3, colWidth)}
 
   return (
     <div className="search-facets">
       {data.facets?.map((facet) => {
         const index = querystring.indexes[facet?.field?.value] || {};
         const { values = {} } = index;
-        const choices = Object.keys(values).map((name) => ({
-          value: name,
-          label: values[name].title,
-        }));
+
         const isMulti = facet.multiple;
         const selectedValue = facets[facet?.field?.value];
 
@@ -36,36 +30,31 @@ const Facets = ({ reactSelect, querystring, data, facets, setFacets }) => {
                 label: index.values?.[selectedValue]?.title,
               }
           : [];
-        return (
-          <Grid.Column key={facet['@id']} width={Math.min(3, colWidth)}>
-            {choices.length ? (
-              <Select
-                placeholder={facet?.title || 'select...'}
-                className="react-select-container"
-                classNamePrefix="react-select"
-                options={choices}
-                styles={customSelectStyles}
-                theme={selectTheme}
-                components={{ DropdownIndicator, Option }}
-                onChange={(data) => {
-                  setFacets({
-                    ...facets,
-                    [facet.field.value]: isMulti
-                      ? data.map(({ value }) => value)
-                      : data.value,
-                  });
-                }}
-                isMulti={facet.multiple}
-                value={value}
-              />
-            ) : (
-              ''
-            )}
-          </Grid.Column>
+
+        const { view: FacetWidget } = resolveExtension(
+          'type',
+          config.blocks.blocksConfig.searchBlock.extensions.facetWidgets.types,
+          facet,
+        );
+
+        return FacetWrapper && Object.keys(values).length ? (
+          <FacetWrapper key={facet['@id']}>
+            <FacetWidget
+              facet={facet}
+              options={values}
+              isMulti={isMulti}
+              value={value}
+              onChange={(id, value) => {
+                setFacets({ ...facets, [id]: value });
+              }}
+            />
+          </FacetWrapper>
+        ) : (
+          ''
         );
       })}
     </div>
   );
 };
 
-export default compose(injectLazyLibs('reactSelect'), withQueryString)(Facets);
+export default compose(withQueryString)(Facets);
