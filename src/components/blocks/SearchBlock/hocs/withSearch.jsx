@@ -3,14 +3,6 @@ import { useLocation, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
 
-function usePrevious(value) {
-  const ref = React.useRef();
-  React.useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
-}
-
 function getInitialState(data, facets, urlSearchText, id) {
   return {
     query: [
@@ -80,13 +72,17 @@ const withSearch = (options) => (WrappedComponent) => {
 
     const location = useLocation();
     const history = useHistory();
-
     const urlSearchText = location.search
       ? new URLSearchParams(location.search).get('SearchableText')
       : '';
 
+    const querystringResults = useSelector(
+      (state) => state.querystringsearch.subrequests,
+    );
+    const totalItems =
+      querystringResults[id]?.total || querystringResults[id]?.items?.length;
+
     const [searchText, setSearchText] = React.useState(urlSearchText);
-    const previousSearchText = usePrevious(searchText);
     const [facets, setFacets] = React.useState({});
     const [searchData, setSearchData] = React.useState(
       getInitialState(data, facets, urlSearchText, id),
@@ -94,46 +90,15 @@ const withSearch = (options) => (WrappedComponent) => {
 
     const updateSearchParams = React.useCallback(
       (toSearch) => {
-        const query = data.query || {};
-        const searchData = getSearchData(query, facets, id, toSearch);
+        setSearchData(getSearchData(data.query || {}, facets, id, toSearch));
 
-        setSearchData(searchData);
-        // setPreviousSearchText(toSearch);
-
+        // TODO: use timeout
         const params = new URLSearchParams(location.search);
         params.set('SearchableText', toSearch || '');
         history.push({ search: params.toString() });
-        console.log('history', toSearch, params.toString());
       },
       [data.query, facets, id, history, location.search],
     );
-
-    React.useEffect(() => {
-      return () => {
-        console.log('unmount');
-      };
-    }, []);
-
-    // React.useEffect(() => {
-    //   if (previousSearchText !== searchText) {
-    //     setSearchText(searchText);
-    //     updateSearchParams(searchText);
-    //   }
-    //   // return () => history.replace({ search: '' });
-    // }, [
-    //   searchText,
-    //   setSearchText,
-    //   previousSearchText,
-    //   updateSearchParams,
-    //   history,
-    // ]);
-
-    const querystringResults = useSelector(
-      (state) => state.querystringsearch.subrequests,
-    );
-
-    const totalItems =
-      querystringResults[id]?.total || querystringResults[id]?.items?.length;
 
     return (
       <WrappedComponent
