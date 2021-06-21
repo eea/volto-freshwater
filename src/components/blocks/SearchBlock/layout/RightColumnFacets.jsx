@@ -19,7 +19,7 @@ const RightColumnFacets = (props) => {
     // variation,
   } = props;
 
-  const colWidth = 3;
+  // const colWidth = 3;
   // starting from 1, for the search button
   // const columns = 1 + data.facets?.length + (data.showSearchInput ? 1 : 0);
   // const colWidth = Math.floor(12 / columns);
@@ -32,7 +32,7 @@ const RightColumnFacets = (props) => {
       <Grid className="searchBlock-facets" stackable>
         <Grid.Column mobile={12} tablet={8} computer={9}>
           <Grid.Row>
-            <Grid columns="2">
+            <Grid columns="2" verticalAlign="bottom">
               {data.showSearchInput && (
                 <Grid.Column>
                   <div className="search-input">
@@ -67,6 +67,7 @@ const RightColumnFacets = (props) => {
               )}
             </Grid>
           </Grid.Row>
+          <Divider />
 
           {children}
         </Grid.Column>
@@ -79,7 +80,6 @@ const RightColumnFacets = (props) => {
           />
         </Grid.Column>
       </Grid>
-      <Divider />
     </>
   );
 };

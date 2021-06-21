@@ -3,7 +3,7 @@
 }
 
 .sidebar-container {
-  border-left: 4px solid #ff000063;
+  box-shadow: 0 1px 12px 3px #c7d5d8
 
   &.collapsed {
     border-left: 0px;

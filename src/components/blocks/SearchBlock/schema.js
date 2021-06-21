@@ -1,4 +1,26 @@
 import config from '@plone/volto/registry';
+import { cloneDeep } from 'lodash';
+
+const enhanceSchema = (originalSchema, formData) => {
+  const extensionName = 'facetWidgets';
+  const extensionType = 'type';
+  const variations =
+    config.blocks.blocksConfig.searchBlock.extensions[extensionName][
+      extensionType
+    ];
+
+  const activeItemName = formData?.[extensionType];
+  let activeItem = variations?.find((item) => item.id === activeItemName);
+  if (!activeItem) activeItem = variations?.find((item) => item.isDefault);
+
+  const schemaEnhancer = activeItem?.['schemaEnhancer'];
+
+  let schema = schemaEnhancer
+    ? schemaEnhancer({ schema: cloneDeep(originalSchema), formData })
+    : cloneDeep(originalSchema);
+
+  return schema;
+};
 
 const FacetSchema = () => ({
   title: 'Facet',
@@ -88,6 +110,7 @@ export default ({ data = {} }) => {
         title: 'Facets',
         widget: 'object_list',
         schema: FacetSchema(),
+        schemaExtender: enhanceSchema,
       },
       query: {
         title: 'Query',

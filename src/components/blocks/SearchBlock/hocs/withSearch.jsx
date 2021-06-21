@@ -14,7 +14,6 @@ function usePrevious(value) {
 const withSearch = (options) => (WrappedComponent) => {
   return (props) => {
     const { data, id } = props;
-    // console.log('props', props);
     const location = useLocation();
 
     const history = useHistory();
@@ -92,7 +91,7 @@ const withSearch = (options) => (WrappedComponent) => {
         // params.set('SearchableText', searchText);
         // history.replace({ search: params.toString() });
       },
-      [data.query, facets, id, searchText],
+      [data.query, history, facets, id, searchText],
     );
 
     React.useEffect(() => {
