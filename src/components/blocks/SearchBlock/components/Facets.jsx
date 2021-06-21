@@ -9,12 +9,18 @@ const Facets = (props) => {
   // console.log('facetWrapper', props);
   const FacetWrapper = facetWrapper;
   // const colWidth = 3; // width={Math.min(3, colWidth)}
+  const { searchBlock } = config.blocks.blocksConfig;
 
   return (
     <div className="search-facets">
       {data.facets?.map((facet) => {
         const index = querystring.indexes[facet?.field?.value] || {};
         const { values = {} } = index;
+
+        const choices = Object.keys(values).map((name) => ({
+          value: name,
+          label: values[name].title,
+        }));
 
         const isMulti = facet.multiple;
         const selectedValue = facets[facet?.field?.value];
@@ -33,15 +39,19 @@ const Facets = (props) => {
 
         const { view: FacetWidget } = resolveExtension(
           'type',
-          config.blocks.blocksConfig.searchBlock.extensions.facetWidgets.types,
+          searchBlock.extensions.facetWidgets.types,
           facet,
         );
+
+        const {
+          rewriteOptions = (name, options) => options,
+        } = searchBlock.extensions.facetWidgets;
 
         return FacetWrapper && Object.keys(values).length ? (
           <FacetWrapper key={facet['@id']}>
             <FacetWidget
               facet={facet}
-              options={values}
+              choices={rewriteOptions(facet?.field?.value, choices)}
               isMulti={isMulti}
               value={value}
               onChange={(id, value) => {

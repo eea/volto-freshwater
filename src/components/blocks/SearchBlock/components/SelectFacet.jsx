@@ -8,13 +8,8 @@ import {
 import { selectTheme, customSelectStyles } from './SelectStyling';
 
 const SelectFacet = (props) => {
-  const { facet, options, reactSelect, isMulti, onChange, value } = props;
+  const { facet, choices, reactSelect, isMulti, onChange, value } = props;
   const Select = reactSelect.default;
-
-  const choices = Object.keys(options).map((name) => ({
-    value: name,
-    label: options[name].title,
-  }));
 
   return (
     <Select
@@ -30,12 +25,6 @@ const SelectFacet = (props) => {
           facet.field.value,
           isMulti ? data.map(({ value }) => value) : data.value,
         );
-
-        // setFacets({
-        //   ...facets,
-        //   [facet.field.value]: isMulti
-        //     ? data.map(({ value }) => value)
-        //     : data.value,
       }}
       isMulti={facet.multiple}
       value={value}

@@ -44,6 +44,14 @@ export default (config) => {
     ],
     extensions: {
       facetWidgets: {
+        rewriteOptions: (name, choices) => {
+          return name === 'review_state'
+            ? choices.map((opt) => ({
+                ...opt,
+                label: opt.label.replace(/\[.+\]/, '').trim(),
+              }))
+            : choices;
+        },
         types: [
           {
             id: 'selectFacet',
