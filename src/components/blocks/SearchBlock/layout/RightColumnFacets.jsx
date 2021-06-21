@@ -2,7 +2,7 @@ import React from 'react';
 import { SearchInput, SearchDetails, Facets } from '../components';
 import { Grid, Divider } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
-import { debounce } from 'lodash';
+import { flushSync } from 'react-dom';
 
 const RightColumnFacets = (props) => {
   const {
@@ -53,8 +53,10 @@ const RightColumnFacets = (props) => {
             data={data}
             facets={facets}
             setFacets={(f) => {
-              setFacets(f);
-              if (isLive) onTriggerSearch(searchedText || '');
+              flushSync(() => {
+                setFacets(f);
+                if (isLive) onTriggerSearch(searchedText || '', f);
+              });
             }}
             facetWrapper={({ children }) => <div>{children}</div>}
           />

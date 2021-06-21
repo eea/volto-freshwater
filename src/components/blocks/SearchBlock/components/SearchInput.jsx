@@ -3,7 +3,6 @@ import { Input } from 'semantic-ui-react';
 
 const SearchInput = (props) => {
   const { data, searchText, setSearchText, isLive, onTriggerSearch } = props;
-  const timeoutRef = React.useRef();
 
   return (
     <div className="search-input">
@@ -21,10 +20,7 @@ const SearchInput = (props) => {
         onChange={(event, { value }) => {
           setSearchText(value);
           if (isLive) {
-            if (timeoutRef.current) clearTimeout(timeoutRef.current);
-            timeoutRef.current = setTimeout(() => {
-              onTriggerSearch(value);
-            }, 1000);
+            onTriggerSearch(value);
           }
         }}
       />

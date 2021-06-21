@@ -67,6 +67,7 @@ function getSearchData(query, facets, id, searchText) {
 }
 
 const withSearch = (options) => (WrappedComponent) => {
+  const { inputDelay = 1000 } = options || {};
   return (props) => {
     const { data, id } = props;
 
@@ -88,14 +89,24 @@ const withSearch = (options) => (WrappedComponent) => {
       getInitialState(data, facets, urlSearchText, id),
     );
 
-    const updateSearchParams = React.useCallback(
-      (toSearch) => {
-        setSearchData(getSearchData(data.query || {}, facets, id, toSearch));
+    const timeoutRef = React.useRef();
 
-        // TODO: use timeout
-        const params = new URLSearchParams(location.search);
-        params.set('SearchableText', toSearch || '');
-        history.push({ search: params.toString() });
+    const updateSearchParams = React.useCallback(
+      (toSearch, toSearchFacets) => {
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        timeoutRef.current = setTimeout(() => {
+          const searchData = getSearchData(
+            data.query || {},
+            toSearchFacets || facets,
+            id,
+            toSearch,
+          );
+          if (toSearchFacets) setFacets(toSearchFacets);
+          setSearchData(searchData);
+          const params = new URLSearchParams(location.search);
+          params.set('SearchableText', toSearch || '');
+          history.push({ search: params.toString() });
+        }, inputDelay);
       },
       [data.query, facets, id, history, location.search],
     );
