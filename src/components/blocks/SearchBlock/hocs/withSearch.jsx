@@ -3,13 +3,13 @@ import { useLocation, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
 
-function usePrevious(value) {
-  const ref = React.useRef();
-  React.useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
-}
+// function usePrevious(value) {
+//   const ref = React.useRef();
+//   React.useEffect(() => {
+//     ref.current = value;
+//   });
+//   return ref.current;
+// }
 
 const withSearch = (options) => (WrappedComponent) => {
   return (props) => {
@@ -18,13 +18,16 @@ const withSearch = (options) => (WrappedComponent) => {
 
     const history = useHistory();
 
-    const paramSearchText = location.search
+    const urlSearchText = location.search
       ? new URLSearchParams(location.search).get('SearchableText')
       : '';
-    const previousParamSearchText = usePrevious(paramSearchText);
+    const [
+      previousParamSearchText,
+      setPreviousParamSearchText,
+    ] = React.useState(urlSearchText);
 
     const [facets, setFacets] = React.useState({});
-    const [searchText, setSearchText] = React.useState(paramSearchText);
+    const [searchText, setSearchText] = React.useState(urlSearchText);
     const [searchData, setSearchData] = React.useState({
       query: [
         ...(data.query?.query || []),
@@ -35,12 +38,12 @@ const withSearch = (options) => (WrappedComponent) => {
           // TODO: make the facet operator pluggable
           o: 'plone.app.querystring.operation.selection.is',
         })),
-        ...(paramSearchText
+        ...(urlSearchText
           ? [
               {
                 i: 'SearchableText',
                 o: 'plone.app.querystring.operation.string.contains',
-                v: paramSearchText,
+                v: urlSearchText,
               },
             ]
           : []),
@@ -54,6 +57,7 @@ const withSearch = (options) => (WrappedComponent) => {
 
     const updateSearchParams = React.useCallback(
       (customSearchText) => {
+        const toSearch = customSearchText || searchText;
         const query = data.query || {};
         const searchData = {
           query: [
@@ -81,30 +85,43 @@ const withSearch = (options) => (WrappedComponent) => {
           searchData.query.push({
             i: 'SearchableText',
             o: 'plone.app.querystring.operation.string.contains',
-            v: customSearchText || searchText,
+            v: toSearch,
           });
         }
 
         setSearchData(searchData);
+        setPreviousParamSearchText(toSearch);
 
-        // const params = new URLSearchParams(searchText);
-        // params.set('SearchableText', searchText);
-        // history.replace({ search: params.toString() });
+        const params = new URLSearchParams(location.search);
+        params.set('SearchableText', toSearch);
+        history.replace({ search: params.toString() });
+        console.log('history', toSearch, params.toString());
       },
-      [data.query, history, facets, id, searchText],
+      [
+        data.query,
+        facets,
+        id,
+        searchText,
+        setPreviousParamSearchText,
+        history,
+        location.search,
+      ],
     );
 
     React.useEffect(() => {
-      if (previousParamSearchText !== paramSearchText) {
-        setSearchText(paramSearchText);
-        updateSearchParams(paramSearchText);
+      if (previousParamSearchText !== searchText) {
+        setSearchText(searchText);
+        setPreviousParamSearchText(searchText);
+        updateSearchParams(searchText);
       }
       return () => history.replace({ search: '' });
     }, [
+      searchText,
       history,
       setSearchText,
-      paramSearchText,
+      // urlSearchText,
       previousParamSearchText,
+      setPreviousParamSearchText,
       updateSearchParams,
     ]);
 
@@ -121,7 +138,7 @@ const withSearch = (options) => (WrappedComponent) => {
         searchData={searchData}
         facets={facets}
         setFacets={setFacets}
-        searchedText={paramSearchText}
+        searchedText={urlSearchText}
         searchText={searchText}
         setSearchText={setSearchText}
         onTriggerSearch={updateSearchParams}

@@ -15,7 +15,7 @@ const SelectFacet = (props) => {
               label={label}
               checked={
                 isMulti
-                  ? facetValue?.find((f) => f.value === value)
+                  ? !!facetValue?.find((f) => f.value === value)
                   : facetValue && facetValue.value === value
               }
               onChange={(e, { checked }) =>
