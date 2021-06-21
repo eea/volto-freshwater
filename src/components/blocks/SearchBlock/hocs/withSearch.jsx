@@ -17,16 +17,15 @@ const withSearch = (options) => (WrappedComponent) => {
     console.log('props', props);
     const location = useLocation();
 
-    const [facets, setFacets] = React.useState({});
-    const history = useHistory();
+    // const history = useHistory();
 
     const paramSearchText = location.search
       ? new URLSearchParams(location.search).get('SearchableText')
       : '';
     const previousParamSearchText = usePrevious(paramSearchText);
 
+    const [facets, setFacets] = React.useState({});
     const [searchText, setSearchText] = React.useState(paramSearchText);
-
     const [searchData, setSearchData] = React.useState({
       query: [
         ...(data.query?.query || []),
@@ -51,10 +50,10 @@ const withSearch = (options) => (WrappedComponent) => {
       b_limit: data.query?.b_limit,
       block: id,
     });
-    const query = data.query || {};
 
     const updateSearchParams = React.useCallback(
       (customSearchText) => {
+        const query = data.query || {};
         const searchData = {
           query: [
             ...(query.query || []),
@@ -86,21 +85,22 @@ const withSearch = (options) => (WrappedComponent) => {
         }
 
         setSearchData(searchData);
+
         // const params = new URLSearchParams(searchText);
         // params.set('SearchableText', searchText);
         // history.replace({ search: params.toString() });
       },
-      [query, facets, id, searchText],
+      [data.query, facets, id, searchText],
     );
 
     React.useEffect(() => {
-      if (previousParamSearchText !== paramSearchText) {
-        setSearchText(paramSearchText);
-        updateSearchParams(paramSearchText);
-      }
+      // if (previousParamSearchText !== paramSearchText) {
+      //   setSearchText(paramSearchText);
+      //   updateSearchParams(paramSearchText);
+      // }
       // return () => history.replace({ search: '' });
     }, [
-      history,
+      // history,
       setSearchText,
       paramSearchText,
       previousParamSearchText,

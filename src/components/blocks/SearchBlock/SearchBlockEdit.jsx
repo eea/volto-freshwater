@@ -23,7 +23,7 @@ const SearchBlockEdit = (props) => {
   const { query = {} } = data || {};
   useDeepCompareEffect(() => {
     onTriggerSearch();
-  }, [onTriggerSearch, query]);
+  }, [query, onTriggerSearch]);
 
   return (
     <>
