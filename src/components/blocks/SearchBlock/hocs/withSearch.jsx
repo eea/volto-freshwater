@@ -3,31 +3,28 @@ import { useLocation, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
 
-// function usePrevious(value) {
-//   const ref = React.useRef();
-//   React.useEffect(() => {
-//     ref.current = value;
-//   });
-//   return ref.current;
-// }
+function usePrevious(value) {
+  const ref = React.useRef();
+  React.useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
 
 const withSearch = (options) => (WrappedComponent) => {
   return (props) => {
     const { data, id } = props;
-    const location = useLocation();
 
+    const location = useLocation();
     const history = useHistory();
 
     const urlSearchText = location.search
       ? new URLSearchParams(location.search).get('SearchableText')
       : '';
-    const [
-      previousParamSearchText,
-      setPreviousParamSearchText,
-    ] = React.useState(urlSearchText);
 
-    const [facets, setFacets] = React.useState({});
     const [searchText, setSearchText] = React.useState(urlSearchText);
+    const previousSearchText = usePrevious(searchText);
+    const [facets, setFacets] = React.useState({});
     const [searchData, setSearchData] = React.useState({
       query: [
         ...(data.query?.query || []),
@@ -90,11 +87,11 @@ const withSearch = (options) => (WrappedComponent) => {
         }
 
         setSearchData(searchData);
-        setPreviousParamSearchText(toSearch);
+        // setPreviousSearchText(toSearch);
 
         const params = new URLSearchParams(location.search);
         params.set('SearchableText', toSearch);
-        history.replace({ search: params.toString() });
+        history.push({ search: params.toString() });
         console.log('history', toSearch, params.toString());
       },
       [
@@ -102,16 +99,16 @@ const withSearch = (options) => (WrappedComponent) => {
         facets,
         id,
         searchText,
-        setPreviousParamSearchText,
         history,
         location.search,
+        // setPreviousSearchText,
       ],
     );
 
     React.useEffect(() => {
-      if (previousParamSearchText !== searchText) {
+      if (previousSearchText !== searchText) {
         setSearchText(searchText);
-        setPreviousParamSearchText(searchText);
+        // setPreviousSearchText(searchText);
         updateSearchParams(searchText);
       }
       return () => history.replace({ search: '' });
@@ -119,10 +116,10 @@ const withSearch = (options) => (WrappedComponent) => {
       searchText,
       history,
       setSearchText,
-      // urlSearchText,
-      previousParamSearchText,
-      setPreviousParamSearchText,
+      previousSearchText,
       updateSearchParams,
+      // urlSearchText,
+      // setPreviousSearchText,
     ]);
 
     const querystringResults = useSelector(
