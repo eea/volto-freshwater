@@ -102,6 +102,7 @@ export default ({ data = {} }) => {
       showSearchButton: {
         type: 'boolean',
         title: 'Show search button?',
+        description: 'This disables the live search',
       },
       searchButtonLabel: {
         title: 'Search button label',

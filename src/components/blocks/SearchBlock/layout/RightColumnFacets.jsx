@@ -1,7 +1,8 @@
 import React from 'react';
-import { SearchDetails, Facets } from '../components';
+import { SearchInput, SearchDetails, Facets } from '../components';
 import { Grid, Divider } from 'semantic-ui-react';
-import { Button, Input } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
+import { debounce } from 'lodash';
 
 const RightColumnFacets = (props) => {
   const {
@@ -13,16 +14,12 @@ const RightColumnFacets = (props) => {
     onTriggerSearch,
     searchedText, // search text for previous search
     searchText, // search text currently being entered (controlled input)
-    setSearchText,
     // searchData,
     // mode = 'view',
     // variation,
   } = props;
-
-  // const colWidth = 3;
-  // starting from 1, for the search button
-  // const columns = 1 + data.facets?.length + (data.showSearchInput ? 1 : 0);
-  // const colWidth = Math.floor(12 / columns);
+  const { showSearchButton } = data;
+  const isLive = !showSearchButton;
 
   return (
     <>
@@ -35,32 +32,12 @@ const RightColumnFacets = (props) => {
             <Grid columns="2" verticalAlign="bottom">
               {data.showSearchInput && (
                 <Grid.Column>
-                  <div className="search-input">
-                    {data.searchInputPrompt && (
-                      <label className="search-block-prompt">
-                        {data.searchInputPrompt}
-                      </label>
-                    )}
-                    <Input
-                      id={`${props.id}-searchtext`}
-                      value={searchText}
-                      placeholder="Search..."
-                      fluid
-                      onKeyPress={(event) => {
-                        if (event.key === 'Enter') {
-                          onTriggerSearch();
-                        }
-                      }}
-                      onChange={(event, { value }) => {
-                        setSearchText(value);
-                      }}
-                    />
-                  </div>
+                  <SearchInput {...props} isLive={isLive} />
                 </Grid.Column>
               )}
               {data.showSearchButton && (
                 <Grid.Column>
-                  <Button onClick={() => onTriggerSearch()}>
+                  <Button onClick={() => onTriggerSearch(searchText)}>
                     {data.searchButtonLabel || 'Search!'}
                   </Button>
                 </Grid.Column>
@@ -75,7 +52,10 @@ const RightColumnFacets = (props) => {
           <Facets
             data={data}
             facets={facets}
-            setFacets={setFacets}
+            setFacets={(f) => {
+              setFacets(f);
+              if (isLive) onTriggerSearch(searchedText || '');
+            }}
             facetWrapper={({ children }) => <div>{children}</div>}
           />
         </Grid.Column>
