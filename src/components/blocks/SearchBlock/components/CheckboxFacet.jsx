@@ -13,6 +13,7 @@ const SelectFacet = (props) => {
           <div className="entry">
             <Checkbox
               label={label}
+              radio={!isMulti}
               checked={
                 isMulti
                   ? !!facetValue?.find((f) => f.value === value)
