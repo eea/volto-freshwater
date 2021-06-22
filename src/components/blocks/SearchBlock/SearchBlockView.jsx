@@ -38,7 +38,7 @@ const blockPropsAreChanged = (prevProps, nextProps) => {
   return equal;
 };
 
-export const SearchBlockViewComponent = withBlockExtensions((props) => {
+const SearchBlockView = (props) => {
   const { data, searchData, mode = 'view', variation } = props;
 
   const Layout = variation.view;
@@ -57,9 +57,11 @@ export const SearchBlockViewComponent = withBlockExtensions((props) => {
       </Layout>
     </div>
   );
-});
+};
 
-export default compose(
+export const SearchBlockViewComponent = compose(
+  withBlockExtensions,
   (Component) => React.memo(Component, blockPropsAreChanged),
-  withSearch(),
-)(SearchBlockViewComponent);
+)(SearchBlockView);
+
+export default withSearch()(SearchBlockViewComponent);
