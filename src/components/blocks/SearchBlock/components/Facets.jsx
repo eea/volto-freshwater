@@ -12,7 +12,7 @@ const Facets = (props) => {
   const { searchBlock } = config.blocks.blocksConfig;
 
   return (
-    <div className="search-facets">
+    <>
       {data.facets?.map((facet) => {
         const index = querystring.indexes[facet?.field?.value] || {};
         const { values = {} } = index;
@@ -63,7 +63,7 @@ const Facets = (props) => {
           ''
         );
       })}
-    </div>
+    </>
   );
 };
 
