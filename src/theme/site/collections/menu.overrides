@@ -31,17 +31,6 @@
   border-bottom: 1px solid @lightGreyBorderColor !important;
 }
 
-// .navigation .ui.menu .firstLevel:not(:nth-child(2)):before {
-//   position: absolute;
-//   top: 6px;
-//   left: -0.5px;
-//   display: block !important;
-//   width: 1px;
-//   height: 25px;
-//   background: @darkBlueTextColor;
-//   content: ' ';
-// }
-
 #main .dropdown:first-child:before {
   display: none !important;
 }

@@ -145,3 +145,14 @@ body.has-toolbar-collapsed.has-sidebar-collapsed {
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  body.has-toolbar:not(.has-sidebar):not(.has-sidebar-collapsed),
+  body.has-toolbar-collapsed:not(.has-sidebar):not(.has-sidebar-collapsed) {
+    .full-width {
+      .ui.container {
+        width: 100% !important;
+      }
+    }
+  }
+}

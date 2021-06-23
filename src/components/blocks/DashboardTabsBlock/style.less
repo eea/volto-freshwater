@@ -1,5 +1,16 @@
+@type: 'extra';
+@element: 'custom';
+
+@import (multiple, reference, optional) '../../theme.config';
+
 .dashboard-tabs-block {
   margin: 1em 0;
+
+  .dashboard-tabs-block-container.ui.container {
+    max-width: 100% !important;
+    // padding: 0 !important;
+    background-color: #eee;
+  }
 
   .default.tabs {
     display: flex;
@@ -10,42 +21,273 @@
       display: flex;
       flex: 1;
       flex-direction: column;
+      padding: 0;
+      background-color: #f5f5f5;
     }
 
     .ui.menu {
       display: flex;
-      flex-basis: 30%;
+      flex-basis: 15%;
       flex-direction: column;
-      border: none;
+      border: none !important;
+      border-right: 2px solid #ddd !important;
+      border-bottom: none;
       margin: 0;
-      background-color: transparent;
-      border-radius: 3px;
+      background-color: transparent !important;
+      border-radius: 0;
       box-shadow: none;
       overflow-x: auto;
 
       .item {
         display: block;
-        padding: 1em;
+        padding: 1em 0 !important;
+
+        &:before {
+          background: none !important;
+        }
       }
 
-      .item.active {
+      .active.item {
         background: none;
-        background-color: #f2f2f2;
+        background-color: transparent !important;
+
+        .menu-item-title {
+          color: @wiseSecondaryColor;
+        }
+
+        .menu-item-description {
+          display: block;
+        }
+
+        &:after {
+          border: none !important;
+        }
       }
     }
   }
 
   .menu-item-title {
-    margin-bottom: 5px;
-    color: #00b4d5;
-    font-family: 'Raleway', sans-serif;
+    margin-bottom: 0;
+    color: #7f7f7f;
+    font-family: 'POPPINS', serif;
     font-size: 20px;
     font-weight: 600;
   }
 
-  .menu-item-description {
-    color: #474747;
-    font-size: 17px;
-    font-weight: 300;
+  .dashboard-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .tableau-block {
+      position: relative;
+      display: flex;
+      flex: 1 1;
+      flex-direction: column;
+    }
+
+    .dashboard-metadata {
+      display: flex;
+      flex-basis: 30%;
+      flex-direction: column;
+      padding: 0.7rem 0.2rem;
+
+      .metadata-list {
+        padding: 0;
+        margin: 0;
+
+        li {
+          padding: 3px 0;
+          list-style-type: none;
+        }
+      }
+
+      strong {
+        font-family: 'POPPINS', serif;
+        font-weight: 500;
+      }
+
+      .geo-locations {
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: 45px;
+
+        div {
+          display: flex;
+          padding: 0 10px;
+          margin: 2px;
+          background-color: #ddd;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+.tableau-download-dialog {
+  max-width: 282px !important;
+
+  .header {
+    padding: 0.5em 0 !important;
+  }
+
+  button {
+    display: block;
+    width: 100%;
+    margin: 5px 0 !important;
+  }
+}
+
+.tableau-fullscreen {
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+}
+
+.tableau-share-dialog {
+  min-width: 460px !important;
+
+  .ui.secondary.pointing.menu .item {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 25px;
+  }
+
+  .nav-dot-title {
+    margin-top: 5px;
+    font-size: 14px;
+  }
+
+  .ui.secondary.pointing.menu .active.item {
+    border-color: @wisePrimaryColor;
+
+    .nav-dot-title {
+      font-weight: 500;
+    }
+
+    .nav-dot {
+      opacity: 1;
+    }
+  }
+
+  .nav-dot {
+    display: flex;
+    width: 37px;
+    height: 37px;
+    align-items: center;
+    justify-content: center;
+    margin: 8px auto;
+    background-color: @wisePrimaryColor;
+    border-radius: 50%;
+    opacity: 0.6;
+
+    svg {
+      fill: #fff !important;
+    }
+  }
+
+  .ui.secondary.pointing.menu .active.item:hover {
+    border-color: @wisePrimaryColor;
+  }
+
+  .ui.tab {
+    .ui.input {
+      display: block;
+      margin-bottom: 1em;
+
+      input {
+        width: 100%;
+      }
+    }
+
+    textarea {
+      display: block;
+      width: 100%;
+      height: 100px;
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      margin-bottom: 1.5em;
+      border-radius: 4px;
+      color: #696969;
+      font-family: 'Lucida Console', Monaco, monospace;
+      font-size: 13px;
+    }
+  }
+}
+
+.tableau-icons {
+  position: absolute;
+  right: -114px;
+  bottom: 15px;
+}
+
+.dashboard-wrapper {
+  padding-left: 10px;
+
+  .toolbar-button {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    padding: 2px !important;
+    background-color: #ff421b !important;
+    border-radius: 0 !important;
+    color: #fff !important;
+
+    &:hover {
+      opacity: 0.6;
+    }
+
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: 0 !important;
+      fill: #fff !important;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+.copy-button {
+  margin-top: 1rem !important;
+}
+
+.copy-button.green-button {
+  background-color: #269b65 !important;
+}
+
+.ui.page.modals {
+  z-index: 2000 !important;
+}
+
+@media screen and (max-width: 1100px) {
+  .dashboard-tabs-block {
+    .default.tabs {
+      .ui.menu {
+        display: flex;
+        flex-basis: 100%;
+        border: none !important;
+      }
+    }
+  }
+
+  .dashboard-tabs-block-container.ui.container {
+    padding-bottom: 2rem;
+  }
+
+  .tableau-icons {
+    right: 10px;
+    bottom: -15px;
+  }
+
+  .dashboard-wrapper {
+    display: block !important;
+  }
+
+  .dashboard-metadata {
+    flex-basis: 100% !important;
+    padding-top: 2rem !important;
   }
 }

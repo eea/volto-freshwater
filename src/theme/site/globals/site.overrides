@@ -72,6 +72,10 @@ p {
   position: relative;
 }
 
+#view .block-info {
+  display: none;
+}
+
 .block-info {
   color: #e9776d;
   font-family: 'Raleway', sans-serif;

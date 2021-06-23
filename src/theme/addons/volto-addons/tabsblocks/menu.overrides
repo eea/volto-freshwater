@@ -23,21 +23,6 @@
     .ui.menu {
       border-bottom: 1px solid @menuBorderColor;
     }
-
-    .active.item {
-      &:after {
-        position: absolute;
-        bottom: -31px;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border: 15px solid transparent;
-        border-top-color: @menuBorderColor;
-        content: ' ';
-        pointer-events: none;
-        transform: translate(-50%, 0);
-      }
-    }
   }
 
   .default.tabs.left.side {
@@ -96,4 +81,23 @@
 
 .tabs-block .item:first-of-type {
   margin-left: 0;
+}
+
+body.siteroot {
+  .default.tabs.inline {
+    .active.item {
+      &:after {
+        position: absolute;
+        bottom: -31px;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border: 15px solid transparent;
+        border-top-color: @menuBorderColor;
+        content: ' ';
+        pointer-events: none;
+        transform: translate(-50%, 0);
+      }
+    }
+  }
 }

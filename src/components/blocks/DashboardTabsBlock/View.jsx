@@ -1,5 +1,8 @@
 import React from 'react';
 import { Menu, Tab } from 'semantic-ui-react';
+import TableauDownload from './TableauDownload';
+import TableauShare from './TableauShare';
+import TableauFullscreen from './TableauFullscreen';
 import config from '@plone/volto/registry';
 
 import './style.less';
@@ -15,7 +18,7 @@ const DashboardTabsBlockView = (props) => {
 
   const MenuItem = (props) => {
     const { tab, index } = props;
-    const source = tab.source?.[0];
+    const source = tab?.source?.[0];
 
     return (
       <>
@@ -28,12 +31,101 @@ const DashboardTabsBlockView = (props) => {
             }}
           >
             <p className="menu-item-title">{tab.title || source.title}</p>
-            <p className="menu-item-description">
-              {tab.description || source.description}
-            </p>
           </Menu.Item>
         )}
       </>
+    );
+  };
+
+  const Metadata = (props) => {
+    const { tab } = props;
+    const source = props.tab.source?.[0];
+    const description = tab.description || source?.description;
+    const {
+      lineage,
+      original_source,
+      publisher,
+      dpsir_type,
+      category,
+      legislative_reference,
+      publication_year,
+      license_copyright,
+      temporal_coverage,
+      geo_coverage,
+      report_type,
+    } = source || {};
+
+    return (
+      <div className="dashboard-metadata">
+        {description && <p>{description}</p>}
+        <ul className="metadata-list">
+          {lineage && (
+            <li>
+              <strong>Lineage: </strong> {lineage}
+            </li>
+          )}
+          {original_source && (
+            <li>
+              <strong>Original source: </strong> {original_source}
+            </li>
+          )}
+          {publisher && (
+            <li>
+              <strong>Organization: </strong> {publisher}
+            </li>
+          )}
+          {dpsir_type && (
+            <li>
+              <strong>DPSIR: </strong> {dpsir_type}
+            </li>
+          )}
+          {category && (
+            <li>
+              <strong>Topic: </strong> {category}
+            </li>
+          )}
+          {legislative_reference && (
+            <li>
+              <strong>Legislative reference: </strong> {legislative_reference}
+            </li>
+          )}
+          {publication_year && (
+            <li>
+              <strong>Publication year: </strong> {publication_year}
+            </li>
+          )}
+          {license_copyright && (
+            <li>
+              <strong>Rights: </strong> {license_copyright}
+            </li>
+          )}
+          {report_type && (
+            <li>
+              <strong>Report type: </strong> {report_type}
+            </li>
+          )}
+          {Object.keys(temporal_coverage).length > 0 && (
+            <li>
+              <strong>Temporal coverage: </strong>{' '}
+              {temporal_coverage.temporal[0].value}
+            </li>
+          )}
+          {geo_coverage.geolocation.length > 0 && (
+            <>
+              <li>
+                <strong>Geo coverage: </strong>
+              </li>
+              <div className="geo-locations">
+                {geo_coverage.geolocation.map((geo, i) => (
+                  <div key={i}>
+                    <p>{geo.label}</p>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+        </ul>
+      </div>
     );
   };
 
@@ -48,16 +140,39 @@ const DashboardTabsBlockView = (props) => {
       render: () => {
         const source = tab.source?.[0];
         const tableau_url = tab.tableau_url || source?.embed_url;
-        console.log('reasdasdas', tableau_url, tab);
+
         return (
           <Tab.Pane>
             {tableau_url && (
-              <TableauBlockView {...props} data={{ url: tableau_url }}>
-                {(viz) => {
-                  console.log('viz', viz);
-                  return <strong>test</strong>;
-                }}
-              </TableauBlockView>
+              <div className="dashboard-wrapper">
+                <TableauBlockView
+                  {...props}
+                  data={{
+                    url: tableau_url,
+                    hideToolbar: true,
+                    version: '2.7.0',
+                  }}
+                >
+                  {(viz) => {
+                    return (
+                      <div className="tableau-icons">
+                        <TableauDownload {...props} viz={viz} />
+                        <TableauFullscreen
+                          {...props}
+                          viz={viz}
+                          data={{ url: tableau_url }}
+                        />
+                        <TableauShare
+                          {...props}
+                          viz={viz}
+                          data={{ url: tableau_url }}
+                        />
+                      </div>
+                    );
+                  }}
+                </TableauBlockView>
+                <Metadata {...props} tab={tab} />
+              </div>
             )}
           </Tab.Pane>
         );
@@ -66,18 +181,22 @@ const DashboardTabsBlockView = (props) => {
   });
 
   return (
-    <div className="dashboard-tabs-block">
+    <>
       {tabs.length > 0 ? (
-        <Tab
-          className="default tabs"
-          menu={{ fluid: true }}
-          activeIndex={activeTab}
-          panes={panes}
-        />
+        <div className="dashboard-tabs-block full-width">
+          <div className="dashboard-tabs-block-container ui container">
+            <Tab
+              className="default tabs"
+              menu={{ fluid: true }}
+              activeIndex={activeTab}
+              panes={panes}
+            />
+          </div>
+        </div>
       ) : (
-        <div className="block-info">Add dashboard from the sidebar</div>
+        <div className="block-info">Add dashboard from the sidebar.</div>
       )}
-    </div>
+    </>
   );
 };
 
