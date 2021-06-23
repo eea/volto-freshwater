@@ -1,10 +1,34 @@
+import config from '@plone/volto/registry';
+import { cloneDeep } from 'lodash';
+
+const enhanceSchema = (originalSchema, formData) => {
+  const extensionName = 'facetWidgets';
+  const extensionType = 'type';
+  const variations =
+    config.blocks.blocksConfig.searchBlock.extensions[extensionName][
+      extensionType
+    ];
+
+  const activeItemName = formData?.[extensionType];
+  let activeItem = variations?.find((item) => item.id === activeItemName);
+  if (!activeItem) activeItem = variations?.find((item) => item.isDefault);
+
+  const schemaEnhancer = activeItem?.['schemaEnhancer'];
+
+  let schema = schemaEnhancer
+    ? schemaEnhancer({ schema: cloneDeep(originalSchema), formData })
+    : cloneDeep(originalSchema);
+
+  return schema;
+};
+
 const FacetSchema = () => ({
   title: 'Facet',
   fieldsets: [
     {
       id: 'default',
       title: 'Default',
-      fields: ['title', 'field', 'multiple'],
+      fields: ['title', 'field', 'multiple', 'type'],
     },
   ],
   properties: {
@@ -20,6 +44,15 @@ const FacetSchema = () => ({
       type: 'boolean',
       title: 'Multiple choices?',
       default: false,
+    },
+    type: {
+      title: 'Facet widget',
+      choices: config.blocks.blocksConfig.searchBlock.extensions.facetWidgets.types.map(
+        ({ id, title }) => [id, title],
+      ),
+      defaultValue: config.blocks.blocksConfig.searchBlock.extensions.facetWidgets.types.find(
+        ({ isDefault }) => isDefault,
+      ).id,
     },
   },
   required: ['field'],
@@ -69,6 +102,7 @@ export default ({ data = {} }) => {
       showSearchButton: {
         type: 'boolean',
         title: 'Show search button?',
+        description: 'This disables the live search',
       },
       searchButtonLabel: {
         title: 'Search button label',
@@ -77,6 +111,7 @@ export default ({ data = {} }) => {
         title: 'Facets',
         widget: 'object_list',
         schema: FacetSchema(),
+        schemaExtender: enhanceSchema,
       },
       query: {
         title: 'Query',

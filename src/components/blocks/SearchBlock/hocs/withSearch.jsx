@@ -3,110 +3,116 @@ import { useLocation, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
 
-function usePrevious(value) {
-  const ref = React.useRef();
-  React.useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
+function getInitialState(data, facets, urlSearchText, id) {
+  return {
+    query: [
+      ...(data.query?.query || []),
+      ...Object.keys(facets).map((name) => ({
+        i: name,
+        v: facets[name],
+
+        // TODO: make the facet operator pluggable
+        o: 'plone.app.querystring.operation.selection.is',
+      })),
+      ...(urlSearchText
+        ? [
+            {
+              i: 'SearchableText',
+              o: 'plone.app.querystring.operation.string.contains',
+              v: urlSearchText,
+            },
+          ]
+        : []),
+    ],
+    sort_on: data.query?.sort_on,
+    sort_order: data.query?.sort_order,
+    b_size: data.query?.b_size,
+    limit: data.query?.limit,
+    block: id,
+  };
+}
+
+function getSearchData(query, facets, id, searchText) {
+  const res = {
+    query: [
+      ...(query.query || []),
+      ...Object.keys(facets).map((name) =>
+        !isEmpty(facets[name])
+          ? {
+              i: name,
+              o: Array.isArray(facets[name])
+                ? 'plone.app.querystring.operation.list.contains'
+                : 'plone.app.querystring.operation.selection.is',
+              v: facets[name],
+            }
+          : undefined,
+      ),
+    ].filter((o) => !!o),
+    sort_on: query.sort_on,
+    sort_order: query.sort_order,
+    b_size: query.b_size,
+    limit: query.limit,
+    block: id,
+  };
+
+  if (searchText) {
+    res.query.push({
+      i: 'SearchableText',
+      o: 'plone.app.querystring.operation.string.contains',
+      v: searchText,
+    });
+  }
+
+  return res;
 }
 
 const withSearch = (options) => (WrappedComponent) => {
+  const { inputDelay = 1000 } = options || {};
   return (props) => {
     const { data, id } = props;
+
     const location = useLocation();
-
-    const [facets, setFacets] = React.useState({});
     const history = useHistory();
-
-    const paramSearchText = location.search
+    const urlSearchText = location.search
       ? new URLSearchParams(location.search).get('SearchableText')
       : '';
-    const previousParamSearchText = usePrevious(paramSearchText);
-
-    const [searchText, setSearchText] = React.useState(paramSearchText);
-
-    const [searchData, setSearchData] = React.useState({
-      query: [
-        ...(data.query || []),
-        ...Object.keys(facets).map((name) => ({
-          i: name,
-          o: 'plone.app.querystring.operation.selection.is',
-          v: facets[name],
-        })),
-        ...(paramSearchText
-          ? [
-              {
-                i: 'SearchableText',
-                o: 'plone.app.querystring.operation.string.contains',
-                v: paramSearchText,
-              },
-            ]
-          : []),
-      ],
-      block: id,
-    });
-
-    const updateSearchParams = React.useCallback(
-      (customSearchText) => {
-        const searchData = {
-          query: [
-            ...(data.query || []),
-            ...Object.keys(facets).map((name) =>
-              !isEmpty(facets[name])
-                ? {
-                    i: name,
-                    o: Array.isArray(facets[name])
-                      ? 'plone.app.querystring.operation.list.contains'
-                      : 'plone.app.querystring.operation.selection.is',
-                    v: facets[name],
-                  }
-                : undefined,
-            ),
-          ].filter((o) => !!o),
-          block: id,
-        };
-
-        if (customSearchText || searchText) {
-          searchData.query.push({
-            i: 'SearchableText',
-            o: 'plone.app.querystring.operation.string.contains',
-            v: customSearchText || searchText,
-          });
-        }
-
-        setSearchData(searchData);
-        // const params = new URLSearchParams(searchText);
-        // params.set('SearchableText', searchText);
-        // history.replace({ search: params.toString() });
-      },
-      [data.query, facets, id, searchText],
-    );
-
-    React.useEffect(() => {
-      if (previousParamSearchText !== paramSearchText) {
-        setSearchText(paramSearchText);
-        updateSearchParams(paramSearchText);
-      }
-      // return () => history.replace({ search: '' });
-    }, [
-      history,
-      setSearchText,
-      paramSearchText,
-      previousParamSearchText,
-      updateSearchParams,
-    ]);
-
-    // starting from 1, for the search button
-    // const columns = 1 + data.facets?.length + (data.showSearchInput ? 1 : 0);
-    // const colWidth = Math.floor(12 / columns);
 
     const querystringResults = useSelector(
       (state) => state.querystringsearch.subrequests,
     );
-
     const totalItems =
       querystringResults[id]?.total || querystringResults[id]?.items?.length;
+
+    const [searchText, setSearchText] = React.useState(urlSearchText);
+    const [facets, setFacets] = React.useState({});
+    const [searchData, setSearchData] = React.useState(
+      getInitialState(data, facets, urlSearchText, id),
+    );
+
+    const timeoutRef = React.useRef();
+
+    const updateSearchParams = React.useCallback(
+      (toSearch, toSearchFacets) => {
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        timeoutRef.current = setTimeout(
+          () => {
+            const searchData = getSearchData(
+              data.query || {},
+              toSearchFacets || facets,
+              id,
+              toSearch,
+            );
+            if (toSearchFacets) setFacets(toSearchFacets);
+            setSearchData(searchData);
+            const params = new URLSearchParams(location.search);
+            params.set('SearchableText', toSearch || '');
+            history.push({ search: params.toString() });
+          },
+          toSearchFacets ? inputDelay / 3 : inputDelay,
+        );
+      },
+      [data.query, facets, id, history, location.search],
+    );
 
     return (
       <WrappedComponent
@@ -114,7 +120,7 @@ const withSearch = (options) => (WrappedComponent) => {
         searchData={searchData}
         facets={facets}
         setFacets={setFacets}
-        searchedText={paramSearchText}
+        searchedText={urlSearchText}
         searchText={searchText}
         setSearchText={setSearchText}
         onTriggerSearch={updateSearchParams}

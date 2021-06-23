@@ -13,7 +13,7 @@ import { ScrollToTop } from './components';
 import installEmbedContentBlock from './components/blocks/Content';
 import installDashboardTabsBlock from './components/blocks/DashboardTabsBlock';
 import installcustomCardsBlock from './components/blocks/CustomCardsBlock';
-// import installSearchBlock from './components/blocks/SearchBlock';
+import installSearchBlock from './components/blocks/SearchBlock';
 
 import CopyrightWidget from './components/Widgets/CopyrightWidget';
 import SingleTokenWidget from './components/Widgets/SingleTokenWidget';
@@ -168,7 +168,7 @@ const applyConfig = (config) => {
     installEmbedContentBlock,
     installDashboardTabsBlock,
     installcustomCardsBlock,
-    // installSearchBlock,
+    installSearchBlock,
   ].reduce((acc, apply) => apply(acc), config);
 };
 
