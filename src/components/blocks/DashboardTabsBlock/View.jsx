@@ -104,10 +104,16 @@ const DashboardTabsBlockView = (props) => {
               <strong>Report type: </strong> {report_type}
             </li>
           )}
-          {Object.keys(temporal_coverage).length > 0 && (
+          {temporal_coverage.temporal.length > 0 && (
             <li>
-              <strong>Temporal coverage: </strong>{' '}
-              {temporal_coverage.temporal[0].value}
+              <strong>Temporal coverage: </strong>
+              <div className="tag-types">
+                {temporal_coverage.temporal.map((temp, i) => (
+                  <div key={i}>
+                    <p>{temp.label}</p>
+                  </div>
+                ))}
+              </div>
             </li>
           )}
           {geo_coverage.geolocation.length > 0 && (
@@ -115,7 +121,7 @@ const DashboardTabsBlockView = (props) => {
               <li>
                 <strong>Geo coverage: </strong>
               </li>
-              <div className="geo-locations">
+              <div className="geo-tags tag-types">
                 {geo_coverage.geolocation.map((geo, i) => (
                   <div key={i}>
                     <p>{geo.label}</p>
