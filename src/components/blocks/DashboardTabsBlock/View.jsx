@@ -108,24 +108,25 @@ const DashboardTabsBlockView = (props) => {
                 </li>
               )}
 
-              {Object.entries(temporal_coverage).length > 0 && (
-                <>
-                  {temporal_coverage.temporal.length > 0 && (
-                    <li>
-                      <strong>Temporal coverage: </strong>
-                      <div className="tag-types">
-                        {temporal_coverage.temporal.map((temp, i) => (
-                          <div key={i}>
-                            <p>{temp.label}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </li>
-                  )}
-                </>
-              )}
+              {temporal_coverage &&
+                Object.entries(temporal_coverage).length > 0 && (
+                  <>
+                    {temporal_coverage.temporal.length > 0 && (
+                      <li>
+                        <strong>Temporal coverage: </strong>
+                        <div className="tag-types">
+                          {temporal_coverage.temporal.map((temp, i) => (
+                            <div key={i}>
+                              <p>{temp.label}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </li>
+                    )}
+                  </>
+                )}
 
-              {Object.entries(geo_coverage).length > 0 && (
+              {geo_coverage && Object.entries(geo_coverage).length > 0 && (
                 <>
                   {geo_coverage.geolocation.length > 0 && (
                     <li>
