@@ -40,9 +40,9 @@
 }
 
 #main .thirdLevel {
-  padding: 0.4rem 1rem;
+  padding: 0.3rem 0.9rem;
   border-bottom: 0;
-  margin-left: 0.5rem;
+  margin: 0;
   font-weight: normal;
   line-height: 1.1;
 

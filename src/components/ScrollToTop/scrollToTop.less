@@ -1,5 +1,18 @@
+@type: 'extra';
+@element: 'custom';
+
+@import (multiple, reference, optional) '../../theme.config';
+
 .scroll-to-top {
   position: fixed;
   right: 20px;
   bottom: 20px;
+
+  button {
+    background-color: @wiseSecondaryColor!important;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 }

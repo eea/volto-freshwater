@@ -74,7 +74,7 @@ export const PresentationCardsSchemaExtender = (schema, data) => {
       },
       {
         id: 'style',
-        title: 'Cards style',
+        title: 'Cards styling',
         fields: [
           'image_scale',
           'image_height',

@@ -47,7 +47,7 @@ export const ColoredCardsSchemaExtender = (schema, data) => {
       },
       {
         id: 'style',
-        title: 'Style',
+        title: 'Cards styling',
         fields: ['text_color', 'border_color', 'font_size', 'fluid_cards'],
       },
       { ...restOfFieldsets },
@@ -61,13 +61,13 @@ export const ColoredCardsSchemaExtender = (schema, data) => {
       },
       text_color: {
         widget: 'style_simple_color',
-        title: 'Card Text color',
+        title: 'Text color',
         type: 'color',
         available_colors: config.settings.available_colors,
       },
       border_color: {
         widget: 'style_simple_color',
-        title: 'Card border color',
+        title: 'Top border color',
         type: 'color',
         default: '#FFF',
         available_colors: config.settings.available_colors,
