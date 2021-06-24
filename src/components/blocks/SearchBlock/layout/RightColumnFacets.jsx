@@ -31,7 +31,7 @@ const RightColumnFacets = (props) => {
       </Grid.Row>
       <Grid.Row>
         <Grid.Column mobile={12} tablet={8} computer={9}>
-          <Grid container>
+          <Grid>
             <Grid.Row>
               <Grid columns="2" verticalAlign="bottom">
                 {data.showSearchInput && (
