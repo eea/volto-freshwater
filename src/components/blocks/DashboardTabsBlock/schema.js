@@ -28,8 +28,8 @@ const Tab = () => ({
         'temporal_coverage',
         'geo_coverage',
         'original_source',
-        // 'data_source_info',
         'report_type',
+        // 'data_source_info',
       ],
     },
     title: {

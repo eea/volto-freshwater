@@ -3,13 +3,21 @@
 
 @import (multiple, reference, optional) '../../theme.config';
 
+strong {
+  font-family: 'POPPINS', serif;
+  font-weight: 500;
+}
+
+.ui.page.modals {
+  z-index: 2000 !important;
+}
+
 .dashboard-tabs-block {
   margin: 1em 0;
 
   .dashboard-tabs-block-container.ui.container {
     max-width: 100% !important;
-    // padding: 0 !important;
-    background-color: #eee;
+    background-color: #f0f0f0;
   }
 
   .default.tabs {
@@ -40,7 +48,7 @@
 
       .item {
         display: block;
-        padding: 1em 0 !important;
+        padding: 1.4em 0 !important;
 
         &:before {
           background: none !important;
@@ -70,64 +78,88 @@
     margin-bottom: 0;
     color: #7f7f7f;
     font-family: 'POPPINS', serif;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 600;
+
+    &:hover {
+      color: @wiseSecondaryColor;
+    }
+  }
+}
+
+.dashboard-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-left: 10px;
+
+  .tableau-block {
+    position: relative;
+    display: flex;
+    flex: 1 1;
+    flex-direction: column;
   }
 
-  .dashboard-wrapper {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+  .toolbar-button {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    padding: 2px !important;
+    background-color: #ff421b !important;
+    border-radius: 3px !important;
+    color: #fff !important;
 
-    .tableau-block {
-      position: relative;
-      display: flex;
-      flex: 1 1;
-      flex-direction: column;
+    &:hover {
+      opacity: 0.6;
     }
 
-    .dashboard-metadata {
-      display: flex;
-      flex-basis: 30%;
-      flex-direction: column;
-      padding: 0.7rem 0.2rem;
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: 0 !important;
+      fill: #fff !important;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+  }
+}
 
-      .metadata-list {
-        padding: 0;
-        margin: 0;
+.dashboard-metadata {
+  display: flex;
+  flex-basis: 30%;
+  flex-direction: column;
+  padding: 0.7rem 0.2rem;
 
-        li {
-          padding: 3px 0;
-          list-style-type: none;
-        }
-      }
+  .metadata-list {
+    padding: 0;
+    margin: 0;
 
-      strong {
-        font-family: 'POPPINS', serif;
-        font-weight: 500;
-      }
+    li {
+      padding: 3px 0;
+      list-style-type: none;
+    }
+  }
 
-      .geo-tags {
-        display: flex !important;
-        flex-wrap: wrap;
-        padding-bottom: 45px;
+  .geo-tags {
+    display: flex !important;
+    flex-wrap: wrap;
+    padding-bottom: 45px;
 
-        div {
-          display: flex !important;
-        }
-      }
+    div {
+      display: flex !important;
+    }
+  }
 
-      .tag-types {
-        display: inline-block;
+  .tag-types {
+    display: inline-block;
 
-        div {
-          display: inline-block;
-          padding: 0 10px;
-          margin: 2px;
-          background-color: #ddd;
-          font-size: 12px;
-        }
-      }
+    div {
+      display: inline-block;
+      padding: 0 10px;
+      margin: 2px;
+      background-color: #ddd;
+      font-size: 12px;
     }
   }
 }
@@ -222,52 +254,20 @@
       font-size: 13px;
     }
   }
+
+  .copy-button {
+    margin-top: 1rem !important;
+  }
+
+  .copy-button.green-button {
+    background-color: #269b65 !important;
+  }
 }
 
 .tableau-icons {
   position: absolute;
   right: -114px;
   bottom: 15px;
-}
-
-.dashboard-wrapper {
-  padding-left: 10px;
-
-  .toolbar-button {
-    position: relative;
-    width: 32px;
-    height: 32px;
-    padding: 2px !important;
-    background-color: #ff421b !important;
-    border-radius: 0 !important;
-    color: #fff !important;
-
-    &:hover {
-      opacity: 0.6;
-    }
-
-    svg {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin: 0 !important;
-      fill: #fff !important;
-      -webkit-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-    }
-  }
-}
-
-.copy-button {
-  margin-top: 1rem !important;
-}
-
-.copy-button.green-button {
-  background-color: #269b65 !important;
-}
-
-.ui.page.modals {
-  z-index: 2000 !important;
 }
 
 @media screen and (max-width: 1100px) {

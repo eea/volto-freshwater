@@ -57,80 +57,93 @@ const DashboardTabsBlockView = (props) => {
 
     return (
       <div className="dashboard-metadata">
-        {description && <p>{description}</p>}
-        <ul className="metadata-list">
-          {lineage && (
-            <li>
-              <strong>Lineage: </strong> {lineage}
-            </li>
-          )}
-          {original_source && (
-            <li>
-              <strong>Original source: </strong> {original_source}
-            </li>
-          )}
-          {publisher && (
-            <li>
-              <strong>Organization: </strong> {publisher}
-            </li>
-          )}
-          {dpsir_type && (
-            <li>
-              <strong>DPSIR: </strong> {dpsir_type}
-            </li>
-          )}
-          {category && (
-            <li>
-              <strong>Topic: </strong> {category}
-            </li>
-          )}
-          {legislative_reference && (
-            <li>
-              <strong>Legislative reference: </strong> {legislative_reference}
-            </li>
-          )}
-          {publication_year && (
-            <li>
-              <strong>Publication year: </strong> {publication_year}
-            </li>
-          )}
-          {license_copyright && (
-            <li>
-              <strong>Rights: </strong> {license_copyright}
-            </li>
-          )}
-          {report_type && (
-            <li>
-              <strong>Report type: </strong> {report_type}
-            </li>
-          )}
-          {temporal_coverage.temporal.length > 0 && (
-            <li>
-              <strong>Temporal coverage: </strong>
-              <div className="tag-types">
-                {temporal_coverage.temporal.map((temp, i) => (
-                  <div key={i}>
-                    <p>{temp.label}</p>
-                  </div>
-                ))}
-              </div>
-            </li>
-          )}
-          {geo_coverage.geolocation.length > 0 && (
-            <>
-              <li>
-                <strong>Geo coverage: </strong>
-              </li>
-              <div className="geo-tags tag-types">
-                {geo_coverage.geolocation.map((geo, i) => (
-                  <div key={i}>
-                    <p>{geo.label}</p>
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
-        </ul>
+        {source && (
+          <>
+            {description && <p>{description}</p>}
+            <ul className="metadata-list">
+              {lineage && (
+                <li>
+                  <strong>Lineage: </strong> {lineage}
+                </li>
+              )}
+              {original_source && (
+                <li>
+                  <strong>Original source: </strong> {original_source}
+                </li>
+              )}
+              {publisher && (
+                <li>
+                  <strong>Organization: </strong> {publisher}
+                </li>
+              )}
+              {dpsir_type && (
+                <li>
+                  <strong>DPSIR: </strong> {dpsir_type}
+                </li>
+              )}
+              {category && (
+                <li>
+                  <strong>Topic: </strong> {category}
+                </li>
+              )}
+              {legislative_reference && (
+                <li>
+                  <strong>Legislative reference: </strong>{' '}
+                  {legislative_reference}
+                </li>
+              )}
+              {publication_year && (
+                <li>
+                  <strong>Publication year: </strong> {publication_year}
+                </li>
+              )}
+              {license_copyright && (
+                <li>
+                  <strong>Rights: </strong> {license_copyright}
+                </li>
+              )}
+              {report_type && (
+                <li>
+                  <strong>Report type: </strong> {report_type}
+                </li>
+              )}
+
+              {Object.entries(temporal_coverage).length > 0 && (
+                <>
+                  {temporal_coverage.temporal.length > 0 && (
+                    <li>
+                      <strong>Temporal coverage: </strong>
+                      <div className="tag-types">
+                        {temporal_coverage.temporal.map((temp, i) => (
+                          <div key={i}>
+                            <p>{temp.label}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </li>
+                  )}
+                </>
+              )}
+
+              {Object.entries(geo_coverage).length > 0 && (
+                <>
+                  {geo_coverage.geolocation.length > 0 && (
+                    <li>
+                      <strong>Geo coverage: </strong>
+                      <div className="geo-tags tag-types">
+                        {geo_coverage.geolocation.map((geo, i) => (
+                          <div key={i}>
+                            <p>{geo.label}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </li>
+                  )}
+                </>
+              )}
+            </ul>
+          </>
+        )}
       </div>
     );
   };
@@ -163,12 +176,12 @@ const DashboardTabsBlockView = (props) => {
                     return (
                       <div className="tableau-icons">
                         <TableauDownload {...props} viz={viz} />
-                        <TableauFullscreen
+                        <TableauShare
                           {...props}
                           viz={viz}
                           data={{ url: tableau_url }}
                         />
-                        <TableauShare
+                        <TableauFullscreen
                           {...props}
                           viz={viz}
                           data={{ url: tableau_url }}
