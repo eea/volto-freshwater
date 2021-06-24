@@ -22,32 +22,42 @@ const RightColumnFacets = (props) => {
   const isLive = !showSearchButton;
 
   return (
-    <>
-      <h3>{data.title}</h3>
-      <SearchDetails text={searchedText} total={totalItems} />
-
-      <Grid className="searchBlock-facets" stackable>
-        <Grid.Column mobile={12} tablet={8} computer={9}>
-          <Grid.Row>
-            <Grid columns="2" verticalAlign="bottom">
-              {data.showSearchInput && (
-                <Grid.Column>
-                  <SearchInput {...props} isLive={isLive} />
-                </Grid.Column>
-              )}
-              {data.showSearchButton && (
-                <Grid.Column>
-                  <Button onClick={() => onTriggerSearch(searchText)}>
-                    {data.searchButtonLabel || 'Search!'}
-                  </Button>
-                </Grid.Column>
-              )}
-            </Grid>
-          </Grid.Row>
-          <Divider />
-
-          {children}
+    <Grid className="searchBlock-facets right-column-facets" stackable>
+      <Grid.Row>
+        <Grid.Column width={12}>
+          <h3>{data.title}</h3>
+          <SearchDetails text={searchedText} total={totalItems} />
         </Grid.Column>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Column mobile={12} tablet={8} computer={9}>
+          <Grid>
+            <Grid.Row>
+              <Grid columns="2" verticalAlign="bottom">
+                {data.showSearchInput && (
+                  <Grid.Column>
+                    <SearchInput {...props} isLive={isLive} />
+                  </Grid.Column>
+                )}
+                {data.showSearchButton && (
+                  <Grid.Column>
+                    <Button onClick={() => onTriggerSearch(searchText)}>
+                      {data.searchButtonLabel || 'Search!'}
+                    </Button>
+                  </Grid.Column>
+                )}
+              </Grid>
+            </Grid.Row>
+
+            <Grid.Row>
+              <Grid.Column width={12}>
+                <Divider />
+                {children}
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Grid.Column>
+
         <Grid.Column mobile={12} tablet={4} computer={3}>
           <Facets
             data={data}
@@ -58,11 +68,13 @@ const RightColumnFacets = (props) => {
                 if (isLive) onTriggerSearch(searchedText || '', f);
               });
             }}
-            facetWrapper={({ children }) => <div>{children}</div>}
+            facetWrapper={({ children }) => (
+              <div className="facet">{children}</div>
+            )}
           />
         </Grid.Column>
-      </Grid>
-    </>
+      </Grid.Row>
+    </Grid>
   );
 };
 
