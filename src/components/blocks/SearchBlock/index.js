@@ -5,7 +5,11 @@ import SelectWidget from './widgets/SelectMetadataField';
 import RightColumnFacets from './layout/RightColumnFacets';
 import LeftColumnFacets from './layout/LeftColumnFacets';
 import TopSideFacets from './layout/TopSideFacets';
-import { SelectFacet, CheckboxFacet } from './components';
+import {
+  SelectFacet,
+  CheckboxFacet,
+  MetadataListingTemplate,
+} from './components';
 
 export default (config) => {
   config.blocks.blocksConfig.searchBlock = {
@@ -68,6 +72,19 @@ export default (config) => {
         ],
       },
     },
+  };
+
+  config.blocks.blocksConfig.listing = {
+    ...config.blocks.blocksConfig.listing,
+    variations: [
+      ...config.blocks.blocksConfig.listing.variations,
+      {
+        id: 'metadata',
+        title: 'Metadata Listing',
+        template: MetadataListingTemplate,
+        isDefault: false,
+      },
+    ],
   };
 
   config.widgets.widget.select_metadata_field = SelectWidget;

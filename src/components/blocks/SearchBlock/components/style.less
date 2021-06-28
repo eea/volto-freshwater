@@ -1,0 +1,55 @@
+@type: 'extra';
+@element: 'custom';
+
+@import (multiple, reference, optional) '../../theme.config';
+
+.item-metadata-table {
+  .ui.definition.table tr td:first-child:not(.ignored),
+  .ui.definition.table tr td.definition {
+    width: 220px;
+    color: @textColor !important;
+    font-family: 'POPPINS';
+    vertical-align: top;
+  }
+
+  .ui.definition.table td {
+    border: none !important;
+  }
+
+  .tag-types {
+    div {
+      display: inline-block;
+      padding: 0 10px;
+      margin: 2px;
+      background-color: #ddd;
+      font-size: 12px;
+    }
+  }
+}
+
+.item-metadata-modal {
+  margin: 3.5rem auto !important;
+
+  .header {
+    border-bottom: 1px solid #ccc !important;
+  }
+}
+
+.item-metadata {
+  display: flex;
+  margin-bottom: 0.5rem;
+  font-size: 13px;
+}
+
+.metadata-tab-title {
+  margin-right: 1px;
+  color: #929292;
+}
+
+.listing-title {
+  cursor: pointer;
+}
+
+.listing-title h3 {
+  margin-bottom: 0 !important;
+}
