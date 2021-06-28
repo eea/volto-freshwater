@@ -47,7 +47,7 @@ const SearchBlockView = (props) => {
 
   return (
     <div className="block searchBlock">
-      <Layout {...props}>
+      <Layout {...props} isEditMode={mode === 'edit'}>
         <ListingBody
           variation={listingBodyVariation}
           data={searchData || {}}
