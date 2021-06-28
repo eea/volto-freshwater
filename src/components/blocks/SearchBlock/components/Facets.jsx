@@ -5,11 +5,17 @@ import { resolveExtension } from '@plone/volto/helpers/Extensions/withBlockExten
 import config from '@plone/volto/registry';
 
 const Facets = (props) => {
-  const { querystring, data, facets, setFacets, facetWrapper } = props;
-  // console.log('facetWrapper', props);
-  const FacetWrapper = facetWrapper;
-  // const colWidth = 3; // width={Math.min(3, colWidth)}
+  const {
+    querystring,
+    data,
+    facets,
+    setFacets,
+    facetWrapper,
+    isEditMode,
+  } = props;
   const { searchBlock } = config.blocks.blocksConfig;
+
+  const FacetWrapper = facetWrapper;
 
   return (
     <>
@@ -25,12 +31,16 @@ const Facets = (props) => {
         const isMulti = facet.multiple;
         const selectedValue = facets[facet?.field?.value];
 
+        // TODO :handle changing the type of facet (multi/nonmulti)
+
         let value = selectedValue
           ? isMulti
-            ? selectedValue.map((v) => ({
-                value: v,
-                label: index.values?.[v]?.title,
-              }))
+            ? Array.isArray(selectedValue)
+              ? selectedValue.map((v) => ({
+                  value: v,
+                  label: index.values?.[v]?.title,
+                }))
+              : []
             : {
                 value: selectedValue,
                 label: index.values?.[selectedValue]?.title,
@@ -55,7 +65,7 @@ const Facets = (props) => {
               isMulti={isMulti}
               value={value}
               onChange={(id, value) => {
-                setFacets({ ...facets, [id]: value });
+                !isEditMode && setFacets({ ...facets, [id]: value });
               }}
             />
           </FacetWrapper>

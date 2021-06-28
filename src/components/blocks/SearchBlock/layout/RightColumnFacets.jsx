@@ -14,6 +14,7 @@ const RightColumnFacets = (props) => {
     onTriggerSearch,
     searchedText, // search text for previous search
     searchText, // search text currently being entered (controlled input)
+    isEditMode,
     // searchData,
     // mode = 'view',
     // variation,
@@ -62,6 +63,7 @@ const RightColumnFacets = (props) => {
           <Facets
             data={data}
             facets={facets}
+            isEditMode={isEditMode}
             setFacets={(f) => {
               flushSync(() => {
                 setFacets(f);
