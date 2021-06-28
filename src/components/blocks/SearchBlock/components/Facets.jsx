@@ -16,17 +16,30 @@ const Facets = (props) => {
   const { searchBlock } = config.blocks.blocksConfig;
 
   const FacetWrapper = facetWrapper;
+  const query_to_values = Object.assign(
+    {},
+    ...data.query?.query?.map(({ i, v }) => ({ [i]: v })),
+  );
 
   return (
     <>
       {data.facets?.map((facet) => {
-        const index = querystring.indexes[facet?.field?.value] || {};
+        const field = facet?.field?.value;
+        const index = querystring.indexes[field] || {};
         const { values = {} } = index;
 
-        const choices = Object.keys(values).map((name) => ({
-          value: name,
-          label: values[name].title,
-        }));
+        const choices = Object.keys(values)
+          .map((name) => ({
+            value: name,
+            label: values[name].title,
+          }))
+          // filter the available values based on the allowed values in the
+          // base query
+          .filter(({ value }) =>
+            query_to_values[field]
+              ? query_to_values[field].includes(value)
+              : true,
+          );
 
         const isMulti = facet.multiple;
         const selectedValue = facets[facet?.field?.value];
