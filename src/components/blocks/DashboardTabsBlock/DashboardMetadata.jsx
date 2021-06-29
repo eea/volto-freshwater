@@ -5,8 +5,6 @@ const DashboardMetadata = (props) => {
   const { item, isOpenModal, close } = props;
   const source = item?.source?.[0];
 
-  console.log('source', source);
-
   return (
     <Modal
       className="item-metadata-modal"
