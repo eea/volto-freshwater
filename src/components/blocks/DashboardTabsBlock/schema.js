@@ -18,6 +18,7 @@ const Tab = () => ({
         'Title',
         'Description',
         'embed_url',
+        'subject',
         'license_copyright',
         'lineage',
         'publisher',

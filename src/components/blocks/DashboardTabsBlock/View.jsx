@@ -1,20 +1,30 @@
 import React from 'react';
-import { Menu, Tab } from 'semantic-ui-react';
+import { Menu, Tab, Button } from 'semantic-ui-react';
+import { Icon } from '@plone/volto/components';
+import arrowSVG from '@plone/volto/icons/backspace.svg';
+import config from '@plone/volto/registry';
+
 import TableauDownload from './TableauDownload';
 import TableauShare from './TableauShare';
 import TableauFullscreen from './TableauFullscreen';
-import config from '@plone/volto/registry';
-
+import DashboardMetadata from './DashboardMetadata';
 import './style.less';
 
 const DashboardTabsBlockView = (props) => {
+  const [activeTab, setActiveTab] = React.useState(0);
+  const [isOpenModal, setOpenModal] = React.useState(false);
+  const [selectedItem, setSelectedItem] = React.useState(null);
+  const { tabs = [] } = props.data;
   const {
     blocks: { blocksConfig },
   } = config;
-  const { tabs = [] } = props.data;
-  const [activeTab, setActiveTab] = React.useState(0);
 
   const TableauBlockView = blocksConfig.tableau_block.view;
+
+  const close = (item) => {
+    setOpenModal(false);
+    setSelectedItem(null);
+  };
 
   const MenuItem = (props) => {
     const { tab, index } = props;
@@ -37,118 +47,6 @@ const DashboardTabsBlockView = (props) => {
     );
   };
 
-  const Metadata = (props) => {
-    const { tab } = props;
-    const source = props.tab.source?.[0];
-    const description = tab.description || source?.description;
-    const {
-      lineage,
-      original_source,
-      publisher,
-      dpsir_type,
-      category,
-      legislative_reference,
-      publication_year,
-      license_copyright,
-      temporal_coverage,
-      geo_coverage,
-      report_type,
-    } = source || {};
-
-    return (
-      <div className="dashboard-metadata">
-        {source && (
-          <>
-            {description && <p>{description}</p>}
-            <ul className="metadata-list">
-              {lineage && (
-                <li>
-                  <strong>Lineage: </strong> {lineage}
-                </li>
-              )}
-              {original_source && (
-                <li>
-                  <strong>Original source: </strong> {original_source}
-                </li>
-              )}
-              {publisher && (
-                <li>
-                  <strong>Organization: </strong> {publisher}
-                </li>
-              )}
-              {dpsir_type && (
-                <li>
-                  <strong>DPSIR: </strong> {dpsir_type}
-                </li>
-              )}
-              {category && (
-                <li>
-                  <strong>Topic: </strong> {category}
-                </li>
-              )}
-              {legislative_reference && (
-                <li>
-                  <strong>Legislative reference: </strong>{' '}
-                  {legislative_reference}
-                </li>
-              )}
-              {publication_year && (
-                <li>
-                  <strong>Publication year: </strong> {publication_year}
-                </li>
-              )}
-              {license_copyright && (
-                <li>
-                  <strong>Rights: </strong> {license_copyright}
-                </li>
-              )}
-              {report_type && (
-                <li>
-                  <strong>Report type: </strong> {report_type}
-                </li>
-              )}
-
-              {temporal_coverage &&
-                Object.entries(temporal_coverage).length > 0 && (
-                  <>
-                    {temporal_coverage.temporal.length > 0 && (
-                      <li>
-                        <strong>Temporal coverage: </strong>
-                        <div className="tag-types">
-                          {temporal_coverage.temporal.map((temp, i) => (
-                            <div key={i}>
-                              <p>{temp.label}</p>
-                            </div>
-                          ))}
-                        </div>
-                      </li>
-                    )}
-                  </>
-                )}
-
-              {geo_coverage && Object.entries(geo_coverage).length > 0 && (
-                <>
-                  {geo_coverage.geolocation.length > 0 && (
-                    <li>
-                      <strong>Geo coverage: </strong>
-                      <div className="geo-tags tag-types">
-                        {geo_coverage.geolocation.map((geo, i) => (
-                          <div key={i}>
-                            <p>{geo.label}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </li>
-                  )}
-                </>
-              )}
-            </ul>
-          </>
-        )}
-      </div>
-    );
-  };
-
   const panes = tabs.map((tab, index) => {
     return {
       id: tab,
@@ -160,6 +58,7 @@ const DashboardTabsBlockView = (props) => {
       render: () => {
         const source = tab.source?.[0];
         const tableau_url = tab.tableau_url || source?.embed_url;
+        const description = tab.description || source?.description;
 
         return (
           <Tab.Pane>
@@ -191,7 +90,38 @@ const DashboardTabsBlockView = (props) => {
                     );
                   }}
                 </TableauBlockView>
-                <Metadata {...props} tab={tab} />
+
+                <div className="dashboard-metadata">
+                  {source.legislative_reference && (
+                    <p>
+                      <strong>Legislative reference: </strong>{' '}
+                      {source.legislative_reference}
+                    </p>
+                  )}
+
+                  {description && <p>{description}</p>}
+
+                  <div>
+                    <Button
+                      className="read-more"
+                      onClick={() => {
+                        setOpenModal(true);
+                        setSelectedItem(tab);
+                      }}
+                    >
+                      <span>Read more</span>
+                      <Icon name={arrowSVG} size="27px" className="next-icon" />
+                    </Button>
+                  </div>
+
+                  <DashboardMetadata
+                    {...props}
+                    tab={tab}
+                    item={selectedItem}
+                    isOpenModal={isOpenModal}
+                    close={close}
+                  />
+                </div>
               </div>
             )}
           </Tab.Pane>

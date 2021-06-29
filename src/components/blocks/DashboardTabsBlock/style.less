@@ -17,7 +17,8 @@ strong {
 
   .dashboard-tabs-block-container.ui.container {
     max-width: 100% !important;
-    background-color: #f0f0f0;
+    padding: 0 !important;
+    background-color: #d6eff4;
   }
 
   .default.tabs {
@@ -30,15 +31,15 @@ strong {
       flex: 1;
       flex-direction: column;
       padding: 0;
-      background-color: #f5f5f5;
+      background-color: #d6eff4;
     }
 
     .ui.menu {
       display: flex;
-      flex-basis: 15%;
+      flex-basis: 18%;
       flex-direction: column;
       border: none !important;
-      border-right: 2px solid #ddd !important;
+      border-right: 2px solid #c6e6ed !important;
       border-bottom: none;
       margin: 0;
       background-color: transparent !important;
@@ -48,19 +49,27 @@ strong {
 
       .item {
         display: block;
-        padding: 1.4em 0 !important;
+        padding: 1.4em 1.7em !important;
 
         &:before {
           background: none !important;
         }
+
+        &:hover {
+          .menu-item-title {
+            color: #338396 !important;
+          }
+        }
       }
 
       .active.item {
+        margin: 0 !important;
         background: none;
-        background-color: transparent !important;
+        background-color: #338396 !important;
+        border-radius: 0 !important;
 
         .menu-item-title {
-          color: @wiseSecondaryColor;
+          color: #fff;
         }
 
         .menu-item-description {
@@ -70,13 +79,19 @@ strong {
         &:after {
           border: none !important;
         }
+
+        &:hover {
+          .menu-item-title {
+            color: #fff !important;
+          }
+        }
       }
     }
   }
 
   .menu-item-title {
     margin-bottom: 0;
-    color: #7f7f7f;
+    color: #004050;
     font-family: 'POPPINS', serif;
     font-size: 16px;
     font-weight: 600;
@@ -91,13 +106,14 @@ strong {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding-left: 10px;
+  background-color: #f5f5f5;
 
   .tableau-block {
     position: relative;
     display: flex;
     flex: 1 1;
     flex-direction: column;
+    padding: 1em 0.5em;
   }
 
   .toolbar-button {
@@ -127,9 +143,11 @@ strong {
 
 .dashboard-metadata {
   display: flex;
-  flex-basis: 30%;
+  flex-basis: 25%;
   flex-direction: column;
-  padding: 0.7rem 0.2rem;
+  padding: 1.4em;
+  background-color: #d6eff4;
+  color: #004050;
 
   .metadata-list {
     padding: 0;
@@ -266,8 +284,8 @@ strong {
 
 .tableau-icons {
   position: absolute;
-  right: -114px;
-  bottom: 15px;
+  right: -130px;
+  bottom: 22px;
 }
 
 @media screen and (max-width: 1100px) {
@@ -286,8 +304,8 @@ strong {
   }
 
   .tableau-icons {
-    right: 10px;
-    bottom: -15px;
+    right: 15px;
+    bottom: -45px;
   }
 
   .dashboard-wrapper {
@@ -297,5 +315,40 @@ strong {
   .dashboard-metadata {
     flex-basis: 100% !important;
     padding-top: 2rem !important;
+  }
+}
+
+.dashboard-metadata .ui.button.read-more {
+  display: flex;
+  align-items: center;
+  border: 1px solid #f5f5f5 !important;
+  background-color: #f5f5f5;
+  vertical-align: middle;
+
+  span {
+    color: @wiseSecondaryColor;
+    font-family: 'POPPINS';
+    font-weight: 500;
+  }
+
+  .icon {
+    margin: 0 !important;
+    margin-left: 5px !important;
+    fill: @wiseSecondaryColor !important;
+    opacity: 1 !important;
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    border: 1px solid #ff421b !important;
+
+    span {
+      color: #ff421b;
+    }
+
+    .icon {
+      fill: #ff421b !important;
+    }
   }
 }

@@ -123,11 +123,11 @@ export const ItemMetadata = (props) => {
 
 const MetadataListingTemplate = ({ items, isEditMode }) => {
   const [isOpenModal, setOpenModal] = React.useState(false);
-  const [selectedItem, setselectedItem] = React.useState(null);
+  const [selectedItem, setSelectedItem] = React.useState(null);
 
   const close = (item) => {
     setOpenModal(false);
-    setselectedItem(null);
+    setSelectedItem(null);
   };
 
   return (
@@ -140,9 +140,9 @@ const MetadataListingTemplate = ({ items, isEditMode }) => {
                 className="listing-title"
                 onClick={() => {
                   setOpenModal(true);
-                  setselectedItem(item);
+                  setSelectedItem(item);
                 }}
-                onKeyDown={() => setselectedItem(item)}
+                onKeyDown={() => setSelectedItem(item)}
                 role="button"
                 tabIndex="0"
               >
