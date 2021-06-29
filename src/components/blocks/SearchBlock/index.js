@@ -5,11 +5,8 @@ import SelectWidget from './widgets/SelectMetadataField';
 import RightColumnFacets from './layout/RightColumnFacets';
 import LeftColumnFacets from './layout/LeftColumnFacets';
 import TopSideFacets from './layout/TopSideFacets';
-import {
-  SelectFacet,
-  CheckboxFacet,
-  MetadataListingTemplate,
-} from './components';
+import MetadataListingTemplate from './templates/MetadataListingTemplate';
+import { SelectFacet, CheckboxFacet } from './components';
 
 export default (config) => {
   config.blocks.blocksConfig.searchBlock = {

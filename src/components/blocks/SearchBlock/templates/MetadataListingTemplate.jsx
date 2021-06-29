@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Table } from 'semantic-ui-react';
 
-import './style.less';
-
 export const ItemMetadata = (props) => {
   const { item, isOpenModal, close } = props;
   return (
@@ -38,7 +36,7 @@ export const ItemMetadata = (props) => {
 
               {item.publisher && (
                 <Table.Row>
-                  <Table.Cell>Organization:</Table.Cell>
+                  <Table.Cell>Organisation:</Table.Cell>
                   <Table.Cell>{item.publisher.title}</Table.Cell>
                 </Table.Row>
               )}
