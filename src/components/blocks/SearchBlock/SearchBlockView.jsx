@@ -9,8 +9,6 @@ import { withSearch } from './hocs';
 import { compose } from 'redux';
 import { isEqual, isFunction } from 'lodash';
 
-import './style.less';
-
 const getListingBodyVariation = (data) => {
   const { variations } = config.blocks.blocksConfig.listing;
 

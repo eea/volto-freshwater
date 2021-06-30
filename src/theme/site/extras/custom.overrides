@@ -12,6 +12,7 @@
 @import 'contextnavigation';
 @import 'editor';
 @import 'home';
+@import 'search';
 //}
 
 // @kitconcept volto-grid-block style override

@@ -15,6 +15,7 @@ const DashboardMetadata = (props) => {
       centered
     >
       <Modal.Header>{item && <h3>{item.title}</h3>}</Modal.Header>
+
       <Modal.Content>
         <div className="item-metadata-table">
           <Table celled definition basic="very">

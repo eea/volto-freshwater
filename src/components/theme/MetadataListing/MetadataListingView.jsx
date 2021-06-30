@@ -2,8 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Table } from 'semantic-ui-react';
 
+import './less/listing.less';
+
 export const ItemMetadata = (props) => {
   const { item, isOpenModal, close } = props;
+
   return (
     <Modal
       className="item-metadata-modal"
@@ -16,28 +19,30 @@ export const ItemMetadata = (props) => {
       <Modal.Header>
         <h3>{item.title ? item.title : item.id}</h3>
       </Modal.Header>
+
       <Modal.Content>
         <div className="item-metadata-table">
           <Table celled definition basic="very">
             <Table.Body>
-              {item.lineage && (
+              {item.category && (
                 <Table.Row>
-                  <Table.Cell>Lineage:</Table.Cell>
-                  <Table.Cell>{item.lineage}</Table.Cell>
+                  <Table.Cell>Topic:</Table.Cell>
+                  <Table.Cell>{item.category}</Table.Cell>
                 </Table.Row>
               )}
 
-              {item.original_source && (
+              {item.subjects && item.subjects.length > 0 && (
                 <Table.Row>
-                  <Table.Cell>Original source:</Table.Cell>
-                  <Table.Cell>{item.original_source}</Table.Cell>
-                </Table.Row>
-              )}
-
-              {item.publisher && (
-                <Table.Row>
-                  <Table.Cell>Organisation:</Table.Cell>
-                  <Table.Cell>{item.publisher.title}</Table.Cell>
+                  <Table.Cell>Tag:</Table.Cell>
+                  <Table.Cell>
+                    <div className="tag-types">
+                      {item.subjects.map((tag, i) => (
+                        <div key={i}>
+                          <p>{tag}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </Table.Cell>
                 </Table.Row>
               )}
 
@@ -48,13 +53,6 @@ export const ItemMetadata = (props) => {
                 </Table.Row>
               )}
 
-              {item.category && (
-                <Table.Row>
-                  <Table.Cell>Topic:</Table.Cell>
-                  <Table.Cell>{item.category}</Table.Cell>
-                </Table.Row>
-              )}
-
               {item.legislative_reference && (
                 <Table.Row>
                   <Table.Cell>Legislative reference:</Table.Cell>
@@ -62,24 +60,17 @@ export const ItemMetadata = (props) => {
                 </Table.Row>
               )}
 
-              {item.publication_year && (
+              {item.description && (
                 <Table.Row>
-                  <Table.Cell>Publication year:</Table.Cell>
-                  <Table.Cell>{item.publication_year}</Table.Cell>
+                  <Table.Cell>Description:</Table.Cell>
+                  <Table.Cell>{item.description}</Table.Cell>
                 </Table.Row>
               )}
 
-              {item.license_copyright && (
+              {item.lineage && (
                 <Table.Row>
-                  <Table.Cell>Rights:</Table.Cell>
-                  <Table.Cell>{item.license_copyright}</Table.Cell>
-                </Table.Row>
-              )}
-
-              {item.report_type && (
-                <Table.Row>
-                  <Table.Cell>Report type:</Table.Cell>
-                  <Table.Cell>{item.report_type.title}</Table.Cell>
+                  <Table.Cell>Lineage:</Table.Cell>
+                  <Table.Cell>{item.lineage}</Table.Cell>
                 </Table.Row>
               )}
 
@@ -113,6 +104,41 @@ export const ItemMetadata = (props) => {
                   </Table.Cell>
                 </Table.Row>
               )}
+
+              {item.publisher && (
+                <Table.Row>
+                  <Table.Cell>Organisation:</Table.Cell>
+                  <Table.Cell>{item.publisher.title}</Table.Cell>
+                </Table.Row>
+              )}
+
+              {item.original_source && (
+                <Table.Row>
+                  <Table.Cell>Original source:</Table.Cell>
+                  <Table.Cell>{item.original_source}</Table.Cell>
+                </Table.Row>
+              )}
+
+              {item.publication_year && (
+                <Table.Row>
+                  <Table.Cell>Publication year:</Table.Cell>
+                  <Table.Cell>{item.publication_year}</Table.Cell>
+                </Table.Row>
+              )}
+
+              {item.license_copyright && (
+                <Table.Row>
+                  <Table.Cell>Rights:</Table.Cell>
+                  <Table.Cell>{item.license_copyright}</Table.Cell>
+                </Table.Row>
+              )}
+
+              {item.report_type && (
+                <Table.Row>
+                  <Table.Cell>Report type:</Table.Cell>
+                  <Table.Cell>{item.report_type.title}</Table.Cell>
+                </Table.Row>
+              )}
             </Table.Body>
           </Table>
         </div>
@@ -121,7 +147,7 @@ export const ItemMetadata = (props) => {
   );
 };
 
-const MetadataListingTemplate = ({ items, isEditMode }) => {
+const MetadataListingView = ({ items, isEditMode }) => {
   const [isOpenModal, setOpenModal] = React.useState(false);
   const [selectedItem, setSelectedItem] = React.useState(null);
 
@@ -175,9 +201,9 @@ const MetadataListingTemplate = ({ items, isEditMode }) => {
   );
 };
 
-MetadataListingTemplate.propTypes = {
+MetadataListingView.propTypes = {
   items: PropTypes.arrayOf(PropTypes.any).isRequired,
   isEditMode: PropTypes.bool,
 };
 
-export default MetadataListingTemplate;
+export default MetadataListingView;

@@ -19,6 +19,7 @@ import CopyrightWidget from './components/Widgets/CopyrightWidget';
 import SingleTokenWidget from './components/Widgets/SingleTokenWidget';
 
 import DatabaseItemView from './components/Views/DatabaseItemView';
+import MetadataListingView from './components/theme/MetadataListing/MetadataListingView';
 
 const available_colors = [
   '#0099BB',
@@ -140,6 +141,20 @@ const applyConfig = (config) => {
     { cssClass: 'h5', label: 'H5 14px' },
     { cssClass: 'p-text', label: 'Paragraph 16px' },
   ];
+
+  // Search block metadata listing view
+  config.blocks.blocksConfig.listing = {
+    ...config.blocks.blocksConfig.listing,
+    variations: [
+      ...config.blocks.blocksConfig.listing.variations,
+      {
+        id: 'metadata',
+        title: 'Metadata Listing',
+        template: MetadataListingView,
+        isDefault: false,
+      },
+    ],
+  };
 
   // Custom block styles
   config.settings.pluggableStyles = [
