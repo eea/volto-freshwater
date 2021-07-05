@@ -3,11 +3,10 @@ import { Menu, Tab, Button } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
 import arrowSVG from '@plone/volto/icons/backspace.svg';
 import config from '@plone/volto/registry';
-
-import TableauDownload from './TableauDownload';
-import TableauShare from './TableauShare';
-import TableauFullscreen from './TableauFullscreen';
 import DashboardMetadata from './DashboardMetadata';
+import TableauDownload from './../../theme/Tableau/TableauDownload';
+import TableauShare from './../../theme/Tableau/TableauShare';
+import TableauFullscreen from './../../theme/Tableau/TableauFullscreen';
 import './style.less';
 
 const DashboardTabsBlockView = (props) => {

@@ -1,6 +1,20 @@
 .searchBlock {
   .facet {
-    margin: 1.5em 0;
+    padding: 1.7em 0;
+    border-bottom: 1px solid #c3e7ef;
+    margin: 0;
+  }
+
+  .facet .ui.header {
+    color: #0099bb;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  .ui.checkbox label,
+  .ui.checkbox + label {
+    font-size: 14px;
   }
 
   .listing-item {
@@ -27,6 +41,12 @@
   }
 
   .listing-title h3 {
-    margin-bottom: 0 !important;
+    margin: 0 !important;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .searchBlock .ui.stackable.grid {
+    margin-right: -1rem !important;
+    margin-left: -1rem !important;
   }
 }
