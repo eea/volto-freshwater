@@ -88,21 +88,53 @@ export const ItemMetadata = (props) => {
       </Modal.Header>
 
       <Modal.Content>
-        <MapPreview tableau_url={tableau_url} map_url={map_url} />
+        <div className="item-modal-metadata">
+          <div>
+            {item.publication_year && (
+              <div className="metadata-tab-section">
+                <span className="metadata-tab-title">
+                  Year of publication:{' '}
+                </span>
+                <span>{item.publication_year}</span>
+              </div>
+            )}
+            {item.category && (
+              <div className="metadata-tab-section">
+                <span className="metadata-tab-title">Topic: </span>
+                <span>{item.category}</span>
+              </div>
+            )}
+            {item.publisher && (
+              <div className="metadata-tab-section">
+                <span className="metadata-tab-title">Organisation: </span>
+                <span>{item.publisher.title}</span>
+              </div>
+            )}
+          </div>
+
+          {(tableau_url || map_url) && (
+            <div className="map-preview">
+              <MapPreview tableau_url={tableau_url} map_url={map_url} />
+            </div>
+          )}
+        </div>
 
         <div className="item-metadata-table">
+          {item.description && <p>{item.description}</p>}
+          {item.lineage && <p>{item.lineage}</p>}
+
           <Table celled definition basic="very">
             <Table.Body>
               {item.category && (
                 <Table.Row>
-                  <Table.Cell>Topic:</Table.Cell>
+                  <Table.Cell>Topic</Table.Cell>
                   <Table.Cell>{item.category}</Table.Cell>
                 </Table.Row>
               )}
 
               {item.subjects && item.subjects.length > 0 && (
                 <Table.Row>
-                  <Table.Cell>Tag:</Table.Cell>
+                  <Table.Cell>Tag</Table.Cell>
                   <Table.Cell>
                     <div className="tag-types">
                       {item.subjects.map((tag, i) => (
@@ -117,36 +149,36 @@ export const ItemMetadata = (props) => {
 
               {item.dpsir_type && (
                 <Table.Row>
-                  <Table.Cell>DPSIR:</Table.Cell>
+                  <Table.Cell>DPSIR</Table.Cell>
                   <Table.Cell>{item.dpsir_type.title}</Table.Cell>
                 </Table.Row>
               )}
 
               {item.legislative_reference && (
                 <Table.Row>
-                  <Table.Cell>Legislative reference:</Table.Cell>
+                  <Table.Cell>Reference legislation</Table.Cell>
                   <Table.Cell>{item.legislative_reference.title}</Table.Cell>
                 </Table.Row>
               )}
 
-              {item.description && (
+              {/*{item.description && (
                 <Table.Row>
-                  <Table.Cell>Description:</Table.Cell>
+                  <Table.Cell></Table.Cell>
                   <Table.Cell>{item.description}</Table.Cell>
                 </Table.Row>
               )}
 
               {item.lineage && (
                 <Table.Row>
-                  <Table.Cell>Lineage:</Table.Cell>
+                  <Table.Cell></Table.Cell>
                   <Table.Cell>{item.lineage}</Table.Cell>
                 </Table.Row>
-              )}
+              )}*/}
 
               {item.temporal_coverage &&
                 Object.keys(item.temporal_coverage).length > 0 && (
                   <Table.Row>
-                    <Table.Cell>Temporal coverage:</Table.Cell>
+                    <Table.Cell>Temporal coverage</Table.Cell>
                     <Table.Cell>
                       <div className="tag-types">
                         {item.temporal_coverage.temporal.map((temp, i) => (
@@ -161,7 +193,7 @@ export const ItemMetadata = (props) => {
 
               {item.geo_coverage && Object.keys(item.geo_coverage).length > 0 && (
                 <Table.Row>
-                  <Table.Cell>Geo coverage:</Table.Cell>
+                  <Table.Cell>Spatial coverage</Table.Cell>
                   <Table.Cell>
                     <div className="geo-tags tag-types">
                       {item.geo_coverage.geolocation.map((geo, i) => (
@@ -176,35 +208,37 @@ export const ItemMetadata = (props) => {
 
               {item.publisher && (
                 <Table.Row>
-                  <Table.Cell>Organisation:</Table.Cell>
+                  <Table.Cell>Organisation</Table.Cell>
                   <Table.Cell>{item.publisher.title}</Table.Cell>
                 </Table.Row>
               )}
 
               {item.original_source && (
                 <Table.Row>
-                  <Table.Cell>Original source:</Table.Cell>
-                  <Table.Cell>{item.original_source}</Table.Cell>
+                  <Table.Cell>Source</Table.Cell>
+                  <Table.Cell>
+                    <a href={item.original_source}>{item.original_source}</a>
+                  </Table.Cell>
                 </Table.Row>
               )}
 
               {item.publication_year && (
                 <Table.Row>
-                  <Table.Cell>Publication year:</Table.Cell>
+                  <Table.Cell>Year of publication</Table.Cell>
                   <Table.Cell>{item.publication_year}</Table.Cell>
                 </Table.Row>
               )}
 
               {item.license_copyright && (
                 <Table.Row>
-                  <Table.Cell>Rights:</Table.Cell>
+                  <Table.Cell>Rights</Table.Cell>
                   <Table.Cell>{item.license_copyright}</Table.Cell>
                 </Table.Row>
               )}
 
               {item.report_type && (
                 <Table.Row>
-                  <Table.Cell>Report type:</Table.Cell>
+                  <Table.Cell>Report type</Table.Cell>
                   <Table.Cell>{item.report_type.title}</Table.Cell>
                 </Table.Row>
               )}
@@ -244,16 +278,26 @@ const MetadataListingView = ({ items, isEditMode }) => {
                 <h3>{item.title ? item.title : item.id}</h3>
               </div>
               <div className="item-metadata">
-                <div className="metadata-tab">
-                  {item.publication_year && (
-                    <>
-                      <span className="metadata-tab-title">
-                        Publication year:{' '}
-                      </span>
-                      <span>{item.publication_year}</span>
-                    </>
-                  )}
-                </div>
+                {item.publication_year && (
+                  <div className="metadata-tab-section">
+                    <span className="metadata-tab-title">
+                      Year of publication:{' '}
+                    </span>
+                    <span>{item.publication_year}</span>
+                  </div>
+                )}
+                {item.category && (
+                  <div className="metadata-tab-section">
+                    <span className="metadata-tab-title">Topic: </span>
+                    <span>{item.category}</span>
+                  </div>
+                )}
+                {item.publisher && (
+                  <div className="metadata-tab-section">
+                    <span className="metadata-tab-title">Organisation: </span>
+                    <span>{item.publisher.title}</span>
+                  </div>
+                )}
               </div>
               <p>{item.description}</p>
             </div>

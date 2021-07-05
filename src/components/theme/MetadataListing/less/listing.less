@@ -7,6 +7,7 @@
   .ui.definition.table tr td:first-child:not(.ignored),
   .ui.definition.table tr td.definition {
     width: 220px;
+    background: transparent !important;
     color: @textColor !important;
     font-family: 'POPPINS';
     vertical-align: top;
@@ -33,12 +34,17 @@
   .header {
     border-bottom: 1px solid #ccc !important;
   }
+
+  .content {
+    padding-top: 0 !important;
+  }
 }
 
-.ui.button.viz-btn {
-  // margin-bottom: 10px;
-  float: right;
-}
+// .map-preview {
+//   display: flex;
+//   justify-content: flex-end;
+//   margin-bottom: 15px;
+// }
 
 .tableau-download-dialog,
 .tableau-share-dialog {
@@ -54,6 +60,24 @@
 .metadata-tab-title {
   margin-right: 1px;
   color: #929292;
+}
+
+.item-modal-metadata {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.item-metadata-table {
+  padding-top: 1.5rem;
+}
+
+.metadata-tab-section {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 13px;
 }
 
 .metadata-tableau {
