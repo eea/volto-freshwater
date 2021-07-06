@@ -24,14 +24,14 @@ const DashboardMetadata = (props) => {
                 <>
                   {source.category && (
                     <Table.Row>
-                      <Table.Cell>Topic:</Table.Cell>
+                      <Table.Cell>Topic</Table.Cell>
                       <Table.Cell>{source.category}</Table.Cell>
                     </Table.Row>
                   )}
 
                   {source.subject && source.subject.length > 0 && (
                     <Table.Row>
-                      <Table.Cell>Tag:</Table.Cell>
+                      <Table.Cell>Tag</Table.Cell>
                       <Table.Cell>
                         <div className="tag-types">
                           {source.subject.map((tag, i) => (
@@ -46,14 +46,21 @@ const DashboardMetadata = (props) => {
 
                   {source.dpsir_type && (
                     <Table.Row>
-                      <Table.Cell>DPSIR:</Table.Cell>
+                      <Table.Cell>DPSIR</Table.Cell>
                       <Table.Cell>{source.dpsir_type}</Table.Cell>
+                    </Table.Row>
+                  )}
+
+                  {source.legislative_reference && (
+                    <Table.Row>
+                      <Table.Cell>Reference legislation</Table.Cell>
+                      <Table.Cell>{source.legislative_reference}</Table.Cell>
                     </Table.Row>
                   )}
 
                   {source.lineage && (
                     <Table.Row>
-                      <Table.Cell>Lineage:</Table.Cell>
+                      <Table.Cell>Lineage</Table.Cell>
                       <Table.Cell>{source.lineage}</Table.Cell>
                     </Table.Row>
                   )}
@@ -61,7 +68,7 @@ const DashboardMetadata = (props) => {
                   {source.temporal_coverage &&
                     Object.keys(source.temporal_coverage).length > 0 && (
                       <Table.Row>
-                        <Table.Cell>Temporal coverage:</Table.Cell>
+                        <Table.Cell>Temporal coverage</Table.Cell>
                         <Table.Cell>
                           <div className="tag-types">
                             {source.temporal_coverage.temporal.map(
@@ -79,7 +86,7 @@ const DashboardMetadata = (props) => {
                   {source.geo_coverage &&
                     Object.keys(source.geo_coverage).length > 0 && (
                       <Table.Row>
-                        <Table.Cell>Geo coverage:</Table.Cell>
+                        <Table.Cell>Spatial coverage</Table.Cell>
                         <Table.Cell>
                           <div className="geo-tags tag-types">
                             {source.geo_coverage.geolocation.map((geo, i) => (
@@ -94,35 +101,39 @@ const DashboardMetadata = (props) => {
 
                   {source.publisher && (
                     <Table.Row>
-                      <Table.Cell>Organisation:</Table.Cell>
+                      <Table.Cell>Organisation</Table.Cell>
                       <Table.Cell>{source.publisher}</Table.Cell>
                     </Table.Row>
                   )}
 
                   {source.original_source && (
                     <Table.Row>
-                      <Table.Cell>Original source:</Table.Cell>
-                      <Table.Cell>{source.original_source}</Table.Cell>
+                      <Table.Cell>Source</Table.Cell>
+                      <Table.Cell>
+                        <a href={source.original_source}>
+                          {source.original_source}
+                        </a>
+                      </Table.Cell>
                     </Table.Row>
                   )}
 
                   {source.publication_year && (
                     <Table.Row>
-                      <Table.Cell>Publication year:</Table.Cell>
+                      <Table.Cell>Year of publication</Table.Cell>
                       <Table.Cell>{source.publication_year}</Table.Cell>
                     </Table.Row>
                   )}
 
                   {source.license_copyright && (
                     <Table.Row>
-                      <Table.Cell>Rights:</Table.Cell>
+                      <Table.Cell>Rights</Table.Cell>
                       <Table.Cell>{source.license_copyright}</Table.Cell>
                     </Table.Row>
                   )}
 
                   {source.report_type && (
                     <Table.Row>
-                      <Table.Cell>Report type:</Table.Cell>
+                      <Table.Cell>Report type</Table.Cell>
                       <Table.Cell>{source.report_type}</Table.Cell>
                     </Table.Row>
                   )}

@@ -91,13 +91,6 @@ const DashboardTabsBlockView = (props) => {
                 </TableauBlockView>
 
                 <div className="dashboard-metadata">
-                  {source.legislative_reference && (
-                    <p>
-                      <strong>Legislative reference: </strong>{' '}
-                      {source.legislative_reference}
-                    </p>
-                  )}
-
                   {description && <p>{description}</p>}
 
                   <div>
