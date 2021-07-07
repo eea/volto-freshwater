@@ -7,6 +7,7 @@ import { getScaleUrl, getPath } from '@eeacms/volto-freshwater/utils';
 import { serializeNodes } from 'volto-slate/editor/render';
 import ItemMetadata from './../../../../theme/ItemMetadata/ItemMetadata';
 import ItemTitle from './../../../../theme/ItemMetadata/ItemTitle';
+import ItemMetadataSnippet from './../../../../theme/ItemMetadata/ItemMetadataSnippet';
 import cx from 'classnames';
 import './css/metadatacards.less';
 
@@ -44,6 +45,7 @@ export const CardItem = (props) => {
         centered
       >
         <Modal.Header>
+          <ItemMetadataSnippet {...props} item={selectedItem} />
           <ItemTitle {...props} item={selectedItem} />
         </Modal.Header>
 

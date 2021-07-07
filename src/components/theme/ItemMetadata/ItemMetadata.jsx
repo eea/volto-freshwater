@@ -2,63 +2,27 @@ import React from 'react';
 import { Table } from 'semantic-ui-react';
 import MapPreview from './MapPreview';
 
-const formatItemType = (item) => {
-  const type =
-    item
-      .replace('_', ' / ')
-      .split(' ')
-      .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-      .join(' ') || '';
-  return type;
-};
+const EEA_LICENSE =
+  'EEA standard re-use policy: unless otherwise indicated,' +
+  're-use of content on the EEA website for commercial or ' +
+  'non-commercial purposes is permitted free of charge, ' +
+  'provided that the source is acknowledged ' +
+  '(https://www.eea.europa.eu/legal/copyright). ' +
+  'Copyright holder: European Commission.';
 
 const ItemMetadata = (props) => {
   const { item } = props;
   const source = item?.source?.[0] || item;
   const description = item.description || source?.description;
-  const type = item?.source?.[0]['@type'] || item['@type'];
   const subject = source.subject || source.subjects;
   const tableau_url = source?.embed_url;
   const map_url = source?.webmap_url;
+  const copyright =
+    source.license_copyright === 'EEA' ? EEA_LICENSE : source.license_copyright;
 
   return (
     <>
-      <div className="item-modal-metadata">
-        <div>
-          {type && (
-            <div className="metadata-tab-section">
-              <span className="metadata-tab-title">Item: </span>
-              <span>{formatItemType(type)}</span>
-            </div>
-          )}
-
-          {source.category && (
-            <div className="metadata-tab-section">
-              <span className="metadata-tab-title">Topics: </span>
-              <span>{source.category}</span>
-            </div>
-          )}
-
-          {source.publication_year && (
-            <div className="metadata-tab-section">
-              <span className="metadata-tab-title">Publication year: </span>
-              <span>{source.publication_year}</span>
-            </div>
-          )}
-
-          {source.legislative_reference && (
-            <div className="metadata-tab-section">
-              <span className="metadata-tab-title">
-                Legislative reference:{' '}
-              </span>
-              <span>
-                {source.legislative_reference.title ||
-                  source.legislative_reference}
-              </span>
-            </div>
-          )}
-        </div>
-
+      <div className="map-preview-wrapper">
         {(tableau_url || map_url) && (
           <div className="map-preview">
             <MapPreview tableau_url={tableau_url} map_url={map_url} />
@@ -142,7 +106,7 @@ const ItemMetadata = (props) => {
                 {source.license_copyright && (
                   <Table.Row>
                     <Table.Cell>Rights</Table.Cell>
-                    <Table.Cell>{source.license_copyright}</Table.Cell>
+                    <Table.Cell>{copyright}</Table.Cell>
                   </Table.Row>
                 )}
 

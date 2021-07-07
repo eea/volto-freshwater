@@ -6,6 +6,7 @@ import config from '@plone/volto/registry';
 
 import ItemMetadata from './../../theme/ItemMetadata/ItemMetadata';
 import ItemTitle from './../../theme/ItemMetadata/ItemTitle';
+import ItemMetadataSnippet from './../../theme/ItemMetadata/ItemMetadataSnippet';
 import TableauDownload from './../../theme/Tableau/TableauDownload';
 import TableauShare from './../../theme/Tableau/TableauShare';
 import TableauFullscreen from './../../theme/Tableau/TableauFullscreen';
@@ -117,6 +118,7 @@ const DashboardTabsBlockView = (props) => {
                     centered
                   >
                     <Modal.Header>
+                      <ItemMetadataSnippet {...props} item={selectedItem} />
                       <ItemTitle {...props} item={selectedItem} />
                     </Modal.Header>
 

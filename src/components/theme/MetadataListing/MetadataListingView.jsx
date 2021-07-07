@@ -2,19 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from 'semantic-ui-react';
 import ItemMetadata from './../ItemMetadata/ItemMetadata';
+import ItemMetadataSnippet from './../ItemMetadata/ItemMetadataSnippet';
 import ItemTitle from './../ItemMetadata/ItemTitle';
-
 import './less/listing.less';
-
-const formatItemType = (item) => {
-  const type =
-    item
-      .replace('_', ' / ')
-      .split(' ')
-      .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-      .join(' ') || '';
-  return type;
-};
 
 const MetadataListingView = ({ items, isEditMode }) => {
   const [isOpenModal, setOpenModal] = React.useState(false);
@@ -44,39 +34,7 @@ const MetadataListingView = ({ items, isEditMode }) => {
                 <h3>{item.title ? item.title : item.id}</h3>
               </div>
 
-              <div className="item-metadata">
-                {item['@type'] && (
-                  <div className="metadata-tab-section">
-                    <span className="metadata-tab-title">Item: </span>
-                    <span>{formatItemType(item['@type'])}</span>
-                  </div>
-                )}
-
-                {item.category && (
-                  <div className="metadata-tab-section">
-                    <span className="metadata-tab-title">Topics: </span>
-                    <span>{item.category}</span>
-                  </div>
-                )}
-
-                {item.publication_year && (
-                  <div className="metadata-tab-section">
-                    <span className="metadata-tab-title">
-                      Publication year:{' '}
-                    </span>
-                    <span>{item.publication_year}</span>
-                  </div>
-                )}
-
-                {item.legislative_reference && (
-                  <div className="metadata-tab-section">
-                    <span className="metadata-tab-title">
-                      Legislative reference:{' '}
-                    </span>
-                    <span>{item.legislative_reference.title}</span>
-                  </div>
-                )}
-              </div>
+              <ItemMetadataSnippet item={item} />
               <p>{item.description}</p>
             </div>
           </div>
@@ -91,6 +49,7 @@ const MetadataListingView = ({ items, isEditMode }) => {
           centered
         >
           <Modal.Header>
+            <ItemMetadataSnippet item={selectedItem} />
             <ItemTitle item={selectedItem} />
           </Modal.Header>
 
