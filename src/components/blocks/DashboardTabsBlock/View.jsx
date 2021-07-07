@@ -1,9 +1,11 @@
 import React from 'react';
-import { Menu, Tab, Button } from 'semantic-ui-react';
+import { Modal, Menu, Tab, Button } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
 import arrowSVG from '@plone/volto/icons/backspace.svg';
 import config from '@plone/volto/registry';
-import DashboardMetadata from './DashboardMetadata';
+
+import ItemMetadata from './../../theme/ItemMetadata/ItemMetadata';
+import ItemTitle from './../../theme/ItemMetadata/ItemTitle';
 import TableauDownload from './../../theme/Tableau/TableauDownload';
 import TableauShare from './../../theme/Tableau/TableauShare';
 import TableauFullscreen from './../../theme/Tableau/TableauFullscreen';
@@ -106,13 +108,22 @@ const DashboardTabsBlockView = (props) => {
                     </Button>
                   </div>
 
-                  <DashboardMetadata
-                    {...props}
-                    tab={tab}
-                    item={selectedItem}
-                    isOpenModal={isOpenModal}
-                    close={close}
-                  />
+                  <Modal
+                    className="item-metadata-modal"
+                    open={isOpenModal}
+                    onClose={close}
+                    size="large"
+                    closeIcon
+                    centered
+                  >
+                    <Modal.Header>
+                      <ItemTitle {...props} item={selectedItem} />
+                    </Modal.Header>
+
+                    <Modal.Content>
+                      <ItemMetadata {...props} item={selectedItem} />
+                    </Modal.Content>
+                  </Modal>
                 </div>
               </div>
             )}

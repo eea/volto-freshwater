@@ -91,3 +91,7 @@ p {
   font-family: 'POPPINS' !important;
   font-weight: 500 !important;
 }
+
+.accordion .ui.message {
+  background-color: transparent !important;
+}

@@ -12,6 +12,8 @@ import { ColoredCardsSchemaExtender } from './templates/ColoredCards/schema';
 import ColoredCardsView from './templates/ColoredCards/ColoredCardsView';
 import { PresentationCardsSchemaExtender } from './templates/PresentationCards/schema';
 import PresentationCardsView from './templates/PresentationCards/PresentationCardsView';
+import { MetadataCardsSchemaExtender } from './templates/MetadataCards/schema';
+import MetadataCardsView from './templates/MetadataCards/MetadataCardsView';
 
 import AttachedImageWidget from './Widgets/AttachedImageWidget';
 import TextAlignWidget from './Widgets/TextAlign';
@@ -52,6 +54,11 @@ export default (config) => {
         title: 'Presentation Cards',
         schemaExtender: PresentationCardsSchemaExtender,
         view: PresentationCardsView,
+      },
+      metadata_cards: {
+        title: 'Metadata Cards',
+        schemaExtender: MetadataCardsSchemaExtender,
+        view: MetadataCardsView,
       },
     },
     security: {
