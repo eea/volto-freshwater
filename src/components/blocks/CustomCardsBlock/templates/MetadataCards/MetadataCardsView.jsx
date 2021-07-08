@@ -17,14 +17,13 @@ export const CardItem = (props) => {
   const {
     source,
     title,
-    hide_title,
     description,
+    hide_description,
     item_type,
     border_color,
     attachedimage,
     image_height = '220px',
     image_scale,
-    // link,
   } = props;
 
   const leadImage = source?.[0]?.lead_image;
@@ -109,13 +108,11 @@ export const CardItem = (props) => {
               )}
 
               <div className="metadata-cards-content-wrapper">
-                {!hide_title && title && (
-                  <div className="metadata-card-header">{title}</div>
-                )}
+                {title && <div className="metadata-card-header">{title}</div>}
 
-                {description && (
+                {!hide_description && description && (
                   <div className="metadata-card-description">
-                    <div>{description}</div>
+                    <p>{description}</p>
                   </div>
                 )}
               </div>

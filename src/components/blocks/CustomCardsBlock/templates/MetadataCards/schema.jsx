@@ -9,10 +9,9 @@ const Card = () => ({
       fields: [
         'source',
         'title',
-        'hide_title',
         'description',
+        'hide_description',
         'attachedimage',
-        // 'link',
         'item_type',
       ],
     },
@@ -28,19 +27,14 @@ const Card = () => ({
       type: 'string',
       title: 'Title',
     },
-    hide_title: {
-      title: 'Hide title',
-      type: 'boolean',
-      default: false,
-    },
     description: {
       type: 'textarea',
-      title: 'Text',
+      title: 'Description',
     },
-    // link: {
-    //   widget: 'url',
-    //   title: 'Link',
-    // },
+    hide_description: {
+      type: 'boolean',
+      title: 'Hide description',
+    },
     attachedimage: {
       widget: 'attachedimage',
       title: 'Image',
@@ -52,7 +46,7 @@ const Card = () => ({
     },
   },
 
-  required: [],
+  required: ['title'],
 });
 
 export const MetadataCardsSchemaExtender = (schema, data) => {

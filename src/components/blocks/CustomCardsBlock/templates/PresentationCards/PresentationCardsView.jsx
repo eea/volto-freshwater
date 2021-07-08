@@ -14,8 +14,8 @@ export const CardItem = (props) => {
   const {
     source,
     title,
-    hide_title,
     description,
+    hide_description,
     item_type,
     link,
     border_color,
@@ -78,13 +78,13 @@ export const CardItem = (props) => {
                 )}
 
                 <div className="presentation-cards-content-wrapper">
-                  {!hide_title && title && (
+                  {title && (
                     <div className="presentation-card-header">{title}</div>
                   )}
 
-                  {description && (
+                  {!hide_description && description && (
                     <div className="presentation-card-description">
-                      <div>{description}</div>
+                      <p>{description}</p>
                     </div>
                   )}
                 </div>
@@ -147,13 +147,13 @@ export const CardItem = (props) => {
                 )}
 
                 <div className="presentation-cards-content-wrapper">
-                  {!hide_title && title && (
+                  {title && (
                     <div className="presentation-card-header">{title}</div>
                   )}
 
-                  {description && (
+                  {!hide_description && description && (
                     <div className="presentation-card-description">
-                      <div>{description}</div>
+                      <p>{description}</p>
                     </div>
                   )}
                 </div>

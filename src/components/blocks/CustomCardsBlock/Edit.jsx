@@ -36,6 +36,7 @@ const CustomCardsEdit = (props) => {
         card.title = card.source[0].title;
         card.description = card.source[0].Description;
         card.link = card.source[0].getURL;
+        card.item_type = card.source[0]?.Type;
         forceRefresh(refresh + 1);
       }
     });
