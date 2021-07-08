@@ -18,8 +18,9 @@ import installSearchBlock from './components/blocks/SearchBlock';
 import CopyrightWidget from './components/Widgets/CopyrightWidget';
 import SingleTokenWidget from './components/Widgets/SingleTokenWidget';
 
-import DatabaseItemView from './components/Views/DatabaseItemView';
+import DatabaseItemView from './components/theme/DatabaseItem/DatabaseItemView';
 import MetadataListingView from './components/theme/MetadataListing/MetadataListingView';
+import SimpleListingView from './components/theme/SimpleListing/SimpleListingView';
 
 const available_colors = [
   '#0099BB',
@@ -151,6 +152,12 @@ const applyConfig = (config) => {
         id: 'metadata',
         title: 'Metadata Listing',
         template: MetadataListingView,
+        isDefault: false,
+      },
+      {
+        id: 'simple',
+        title: 'Simple Listing',
+        template: SimpleListingView,
         isDefault: false,
       },
     ],
