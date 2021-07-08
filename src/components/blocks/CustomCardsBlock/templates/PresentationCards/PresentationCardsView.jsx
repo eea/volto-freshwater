@@ -181,7 +181,7 @@ const PresentationCardsView = ({ data, isEditMode }) => {
     image_bg_size,
     image_height,
     image_scale,
-    fluid_cards,
+    cards_per_row,
     custom_class,
     text_align = 'left',
   } = data;
@@ -206,7 +206,7 @@ const PresentationCardsView = ({ data, isEditMode }) => {
               {cards && cards.length > 0 ? (
                 <Card.Group
                   className="presentation-cards-group"
-                  itemsPerRow={fluid_cards ? data?.cards.length : undefined}
+                  itemsPerRow={cards_per_row ? cards_per_row : ''}
                 >
                   {(cards || []).map((card, index) => (
                     <CardItem

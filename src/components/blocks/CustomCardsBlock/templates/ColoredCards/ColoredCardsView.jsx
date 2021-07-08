@@ -101,19 +101,10 @@ export const CardItem = (props) => {
 };
 
 const ColoredCards = ({ data, isEditMode }) => {
-  const { title, text, cards, fluid_cards, image_scale } = data;
+  const { title, text, cards, cards_per_row, image_scale } = data;
 
   return (
-    <div
-      className={cx(
-        'block align colored-cards-block',
-        // {
-        //   center: !Boolean(data.align),
-        //   'full-width': data.align === 'full',
-        // },
-        // data.align,
-      )}
-    >
+    <div className={cx('block align colored-cards-block')}>
       <BodyClass className="has-card-tiles" />
       <div className="colored-cards-grid-wrapper">
         <div className="colored-cards-grid">
@@ -124,7 +115,7 @@ const ColoredCards = ({ data, isEditMode }) => {
 
           <Card.Group
             className="colored-card-group"
-            itemsPerRow={fluid_cards ? data?.cards.length : null}
+            itemsPerRow={cards_per_row ? cards_per_row : ''}
           >
             {(cards || []).map((card, index) => (
               <CardItem

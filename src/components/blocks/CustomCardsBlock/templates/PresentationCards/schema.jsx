@@ -79,7 +79,7 @@ export const PresentationCardsSchemaExtender = (schema, data) => {
           'image_height',
           'border_color',
           'text_align',
-          'fluid_cards',
+          'cards_per_row',
         ],
       },
       { ...restOfFieldsets },
@@ -111,10 +111,11 @@ export const PresentationCardsSchemaExtender = (schema, data) => {
         title: 'Image height',
         default: '220px',
       },
-      fluid_cards: {
-        title: 'Fluid cards',
-        type: 'boolean',
-        default: false,
+      cards_per_row: {
+        title: 'Cards per row',
+        type: 'number',
+        description:
+          'A group of cards can set how many cards should exist in a row.',
       },
       text_align: {
         title: 'Text align',

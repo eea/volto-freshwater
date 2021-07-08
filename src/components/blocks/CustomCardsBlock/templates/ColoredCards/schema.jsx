@@ -48,7 +48,7 @@ export const ColoredCardsSchemaExtender = (schema, data) => {
       {
         id: 'style',
         title: 'Cards styling',
-        fields: ['text_color', 'border_color', 'font_size', 'fluid_cards'],
+        fields: ['text_color', 'border_color', 'font_size', 'cards_per_row'],
       },
       { ...restOfFieldsets },
     ],
@@ -80,10 +80,11 @@ export const ColoredCardsSchemaExtender = (schema, data) => {
           ['h_size', 'Headers text'],
         ],
       },
-      fluid_cards: {
-        title: 'Fluid cards',
-        type: 'boolean',
-        default: false,
+      cards_per_row: {
+        title: 'Cards per row',
+        type: 'number',
+        description:
+          'A group of cards can set how many cards should exist in a row.',
       },
       ...(schema.properties || {}),
     },
