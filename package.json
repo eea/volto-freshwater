@@ -1,6 +1,6 @@
 {
   "name": "@eeacms/volto-freshwater",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Volto theme and integration for Freshwater",
   "main": "src/index.js",
   "author": "European Environment Agency: IDM2 A-Team",
@@ -19,12 +19,14 @@
   "addons": [
     "volto-slate:asDefault",
     "@kitconcept/volto-blocks-grid",
+    "@eeacms/volto-resize-helper",
     "@eeacms/volto-block-style"
   ],
   "dependencies": {
     "react-lazy-load-image-component": "^1.4.0",
-    "volto-slate": "^2.0.0",
-    "@eeacms/volto-block-style": "eea/volto-block-style#master",
+    "volto-slate": "^2.6.1",
+    "@eeacms/volto-resize-helper": "^0.2.0",
+    "@eeacms/volto-block-style": "^3.3.0",
     "@kitconcept/volto-blocks-grid": "*"
   },
   "devDependencies": {

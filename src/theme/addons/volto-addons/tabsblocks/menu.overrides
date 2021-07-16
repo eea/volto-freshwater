@@ -1,13 +1,44 @@
-.menu-item-count {
-  width: 25px;
-  min-width: 25px;
-  height: 25px;
-  justify-content: center;
-  margin: 0 0.25rem 0 0;
-  background-color: @menuItemColor;
-  border-radius: 50% !important;
-  color: #fff;
-  line-height: 1.6;
+#main .tabs-block {
+  margin: 2.5rem 0 1rem 0;
+
+  .ui.menu {
+    overflow: unset;
+    border-radius: 0;
+  }
+
+  .item {
+    padding: @menuItemPadding;
+    margin: 0;
+    border-radius: 0;
+    color: @menuItemColor;
+  }
+
+  .active.item {
+    position: relative;
+    background-color: @menuItemBackgroundActive;
+    color: @menuActiveItemColor;
+  }
+
+  .default.tabs.inline {
+    .ui.menu {
+      border-bottom: 1px solid @menuBorderColor;
+    }
+  }
+
+  .default.tabs.left.side {
+    .ui.menu {
+      border-right: 1px solid @menuBorderColor;
+    }
+
+    .item {
+      display: block;
+      width: 100%;
+    }
+
+    .ui.tab {
+      padding-left: 1.5rem;
+    }
+  }
 }
 
 .default .item {
@@ -40,8 +71,8 @@
   }
 }
 
-.active .menu-item-count {
-  background-color: @menuItemCountBackgroundActive;
+.menu-item-count {
+  display: none !important;
 }
 
 .tabs-block .ui.menu .item:first-child {
@@ -52,8 +83,21 @@
   margin-left: 0;
 }
 
-.tabs-block {
-  padding: 1rem 0.5rem;
-  border: 3px solid @borderColor;
-  box-shadow: 5px 5px 5px @borderColor;
+body.siteroot {
+  .default.tabs.inline {
+    .active.item {
+      &:after {
+        position: absolute;
+        bottom: -31px;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border: 15px solid transparent;
+        border-top-color: @menuBorderColor;
+        content: ' ';
+        pointer-events: none;
+        transform: translate(-50%, 0);
+      }
+    }
+  }
 }

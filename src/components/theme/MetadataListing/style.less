@@ -1,0 +1,126 @@
+@type: 'extra';
+@element: 'custom';
+
+@import (multiple, reference, optional) '../../theme.config';
+
+.item-metadata-table {
+  .ui.definition.table tr td:first-child:not(.ignored),
+  .ui.definition.table tr td.definition {
+    width: 220px;
+    background: transparent !important;
+    color: @textColor !important;
+    font-family: 'POPPINS';
+    vertical-align: top;
+  }
+
+  .ui.definition.table td {
+    border: none !important;
+  }
+
+  .tag-types {
+    div {
+      display: inline-block;
+      padding: 0 10px;
+      margin: 2px;
+      background-color: #ddd;
+      font-size: 12px;
+    }
+  }
+}
+
+.item-metadata-modal {
+  margin: 3.5rem auto !important;
+
+  .header {
+    border-bottom: 1px solid #ccc !important;
+
+    h3 {
+      margin-top: 0;
+    }
+  }
+
+  .content {
+    padding-top: 0 !important;
+  }
+}
+
+.item-modal-metadata {
+  display: flex;
+  font-family: 'Roboto';
+  font-weight: normal;
+}
+
+.tableau-download-dialog,
+.tableau-share-dialog {
+  z-index: 9999 !important;
+}
+
+.item-metadata {
+  display: flex;
+  margin-bottom: 0.5rem;
+  font-size: 13px;
+
+  p {
+    display: -webkit-box;
+    overflow: hidden;
+    width: 100%;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+}
+
+.metadata-tab-title {
+  margin-right: 1px;
+  color: #929292;
+}
+
+.map-preview-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.metadata-tab-section {
+  margin-right: 10px;
+  font-size: 13px;
+}
+
+.metadata-tableau {
+  position: relative;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+
+  .tableau-block {
+    position: relative;
+  }
+
+  .tableau-icons {
+    position: absolute;
+    top: 10px;
+    right: -2px;
+    bottom: -28px;
+  }
+}
+
+.toolbar-button {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  padding: 2px !important;
+  background-color: #ff421b !important;
+  border-radius: 3px !important;
+  color: #fff !important;
+}
+
+.toolbar-button svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0 !important;
+  fill: #fff !important;
+  transform: translate(-50%, -50%);
+}

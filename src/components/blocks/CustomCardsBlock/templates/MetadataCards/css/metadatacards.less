@@ -1,0 +1,85 @@
+@type: 'extra';
+@element: 'custom';
+
+@import (multiple, reference, optional) '../../theme.config';
+
+.metadata-cards-block {
+  padding: 1rem 0;
+  background-color: inherit;
+}
+
+.metadata-card {
+  background-color: white !important;
+  box-shadow: 1px 1px 9px 0 #d3d3d3 !important;
+  cursor: pointer;
+}
+
+.metadata-card .extra {
+  font-size: 14px !important;
+  font-weight: 400;
+}
+
+.metadata-card:hover,
+.metadata-card:focus {
+  box-shadow: 0 0 3px 1px rgb(55 146 218) !important;
+}
+
+.metadata-card-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.metadata-card-image {
+  height: 100%;
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.metadata-card-header {
+  padding: 0 15px;
+  color: #0099bb;
+  font-family: 'Poppins', serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.metadata-card-description {
+  padding: 0 15px;
+  font-size: 14px;
+}
+
+.metadata-cards-content-wrapper {
+  min-height: 90px;
+  margin: 15px 0;
+}
+
+.metadata-card-content {
+  padding: 0 !important;
+}
+
+.ui.cards.metadata-cards-group {
+  margin-right: -0.75em;
+  margin-left: -0.75em;
+
+  > .ui.card {
+    margin: 0.75em;
+  }
+}
+
+.metadata-cards-grid-title,
+.metadata-cards-grid-description {
+  margin-bottom: 1rem;
+}
+
+@media only screen and (min-width: @tabletBreakpoint) and (max-width: @largestTabletScreen) {
+  .ui.cards > .card {
+    width: calc(50% - 2rem) !important;
+  }
+}
+
+@media only screen and (max-width: @tabletBreakpoint) {
+  .ui.cards > .card {
+    width: 100% !important;
+  }
+}

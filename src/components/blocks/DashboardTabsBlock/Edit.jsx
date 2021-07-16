@@ -31,7 +31,7 @@ const ContentBlockEdit = (props) => {
       <DashboardTabsBlockView {...props} />
       <SidebarPortal selected={selected}>
         <BlockDataForm
-          schema={schema(props)}
+          schema={schema}
           title={schema.title}
           onChangeField={(id, value) => {
             onChangeBlock(block, {

@@ -4,13 +4,12 @@
 @menuItemHoverBackground: none;
 @menuActiveItemBackground: none;
 @menuActiveItemHoverBackground: none;
-@menuActiveItemHoverColor: @darkBlue;
-@menuActiveItemColor: @darkBlue;
-@menuItemHoverColor: @darkBlue;
-@menuItemColor: #878F93;
+@menuActiveItemHoverColor: none;
+@menuActiveItemColor: #fff;
+@menuItemHoverColor: none;
+@menuItemColor: #004050;
 @menuItemBackground: none;
 @menuItemCountDisplay: flex;
-@menuItemCountBackgroundActive: #3ec8e6;
-
-@menuItemPadding: 0 0 1rem 0;
-//#3ec8e6
+@menuItemBackgroundActive: #0099bb;
+@menuBorderColor: #0099bb;
+@menuItemPadding: 1rem 1.5rem;

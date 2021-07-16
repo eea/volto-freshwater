@@ -1,0 +1,30 @@
+@type: 'extra';
+@element: 'custom';
+
+@import (multiple, reference, optional) '../../theme.config';
+
+.block.listing {
+  font-size: 15px;
+}
+
+.simple-listing-title {
+  cursor: pointer;
+  font-family: 'POPPINS';
+  font-size: inherit;
+  font-weight: 500;
+  line-height: 22px;
+
+  &:hover {
+    color: @wisePrimaryColor;
+  }
+}
+
+.simple-listing {
+  display: inline-block;
+  vertical-align: text-top;
+
+  .metadata-tab-section {
+    position: relative;
+    top: -8px;
+  }
+}

@@ -4,7 +4,7 @@
  */
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { defineMessages, injectIntl } from 'react-intl';
@@ -25,6 +25,18 @@ import {
 import { FormFieldWrapper } from '@plone/volto/components';
 import { injectLazyLibs } from '@plone/volto/helpers/Loadable/Loadable';
 
+export function isString(obj) {
+  return typeof obj === 'string' || obj instanceof String;
+}
+
+export function isObject(obj) {
+  return (
+    obj instanceof Object &&
+    !(obj instanceof Array) &&
+    !(typeof obj === 'function')
+  );
+}
+
 const messages = defineMessages({
   select: {
     id: 'Select…',
@@ -35,6 +47,10 @@ const messages = defineMessages({
     defaultMessage: 'No options',
   },
 });
+
+function getOption(value) {
+  return isObject(value) ? value : { label: value, value: value };
+}
 
 /**
  * TokenWidget component class.
@@ -47,27 +63,27 @@ class TokenWidget extends Component {
    * @property {Object} propTypes Property types.
    * @static
    */
-  static propTypes = {
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string,
-    required: PropTypes.bool,
-    error: PropTypes.arrayOf(PropTypes.string),
-    getVocabulary: PropTypes.func.isRequired,
-    choices: PropTypes.arrayOf(PropTypes.object),
-    loading: PropTypes.bool,
-    items: PropTypes.shape({
-      vocabulary: PropTypes.object,
-    }),
-    widgetOptions: PropTypes.shape({
-      vocabulary: PropTypes.object,
-    }),
-    // value: PropTypes.arrayOf(PropTypes.string),
-    value: PropTypes.string,
-    onChange: PropTypes.func.isRequired,
-    itemsTotal: PropTypes.number,
-    wrapped: PropTypes.bool,
-  };
+  // static propTypes = {
+  //   id: PropTypes.string.isRequired,
+  //   title: PropTypes.string.isRequired,
+  //   description: PropTypes.string,
+  //   required: PropTypes.bool,
+  //   error: PropTypes.arrayOf(PropTypes.string),
+  //   getVocabulary: PropTypes.func.isRequired,
+  //   choices: PropTypes.arrayOf(PropTypes.object),
+  //   loading: PropTypes.bool,
+  //   items: PropTypes.shape({
+  //     vocabulary: PropTypes.object,
+  //   }),
+  //   widgetOptions: PropTypes.shape({
+  //     vocabulary: PropTypes.object,
+  //   }),
+  //   // value: PropTypes.arrayOf(PropTypes.string),
+  //   value: PropTypes.string,
+  //   onChange: PropTypes.func.isRequired,
+  //   itemsTotal: PropTypes.number,
+  //   wrapped: PropTypes.bool,
+  // };
 
   /**
    * Default properties
@@ -105,7 +121,7 @@ class TokenWidget extends Component {
       getVocabFromField(props) ||
       getVocabFromItems(props);
     this.state = {
-      selectedOption: props.value,
+      selectedOption: getOption(props.value),
     };
   }
 
@@ -217,7 +233,8 @@ export default compose(
           itemsTotal: vocabState.itemsTotal,
           loading: Boolean(vocabState.loading),
           value: props.value
-            ? vocabState.items?.find(({ label }) => label === props.value)
+            ? vocabState.items?.find(({ label }) => label === props.value) ||
+              props.value
             : props.value,
         };
       }

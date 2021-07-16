@@ -1,0 +1,106 @@
+@type: 'extra';
+@element: 'custom';
+
+@import (multiple, reference, optional) '../../theme.config';
+
+.presentation-cards-block {
+  padding: 1rem 0;
+  background-color: inherit;
+}
+
+.presentation-card {
+  background-color: white !important;
+  box-shadow: 1px 1px 9px 0 #d3d3d3 !important;
+}
+
+.presentation-card .extra {
+  font-size: 14px !important;
+  font-weight: 400;
+}
+
+.presentation-card:hover,
+.presentation-card:focus {
+  box-shadow: 0 0 3px 1px rgb(55 146 218) !important;
+}
+
+.presentation-card-link {
+  display: flex;
+  flex-direction: column;
+}
+
+.presentation-card-image {
+  height: 100%;
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.presentation-card-header {
+  padding: 0 15px;
+  color: #0099bb;
+  font-family: 'Poppins', serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.presentation-card-description {
+  padding: 0 15px;
+  font-size: 14px;
+}
+
+.presentation-cards-content-wrapper {
+  min-height: 90px;
+  margin: 15px 0;
+}
+
+.presentation-card-content {
+  padding: 0 !important;
+}
+
+.ui.cards.presentation-cards-group {
+  margin-right: -0.75em;
+  margin-left: -0.75em;
+
+  > .ui.card {
+    margin: 0.75em;
+  }
+}
+
+.presentation-cards-grid-title,
+.presentation-cards-grid-description {
+  margin-bottom: 1rem;
+}
+
+.home-presentation-cards {
+  position: relative;
+  padding: 7rem 0;
+
+  background-image: url('../blue-pattern.png');
+  background-repeat: repeat;
+
+  .presentation-cards-grid-title {
+    margin-bottom: 3rem;
+    color: #fff;
+  }
+
+  .presentation-card {
+    box-shadow: 4px 4px 3px 0 #00738b !important;
+  }
+
+  .presentation-card.has-link:hover {
+    box-shadow: 4px 4px 11px 0 #00738b !important;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (min-width: @tabletBreakpoint) and (max-width: @largestTabletScreen) {
+  .ui.cards > .card {
+    width: calc(50% - 2rem) !important;
+  }
+}
+
+@media only screen and (max-width: @tabletBreakpoint) {
+  .ui.cards > .card {
+    width: 100% !important;
+  }
+}

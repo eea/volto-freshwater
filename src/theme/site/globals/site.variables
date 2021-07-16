@@ -45,11 +45,9 @@
 /*-------------------
     Brand Colors
 --------------------*/
-
-@secondaryColor      : @brown;
-
+@wiseSecondaryColor      : #004050;
+@wisePrimaryColor      : #0099BB;
 @lightSecondaryColor : @lightGrey;
-
 @lightBlueColor      : #00b4d5;
 
 
@@ -95,6 +93,7 @@
 --------------------*/
 
 @pageBackground      : @white;
+@textColor           : #333;
 
 
 /*-------------------
@@ -106,7 +105,7 @@
        Links
 --------------------*/
 
-//#1978b5
+
 @linkColor           : #0077bc;
 
 

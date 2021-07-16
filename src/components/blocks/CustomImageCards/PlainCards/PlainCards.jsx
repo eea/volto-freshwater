@@ -7,7 +7,7 @@ import { BodyClass } from '@plone/volto/helpers';
 
 import { getScaleUrl, getPath } from '@eeacms/volto-freshwater/utils';
 
-import './css/plaincards.less';
+// import './css/plaincards.less';
 import { serializeNodes } from 'volto-slate/editor/render';
 
 export const CardItem = (props) => {
@@ -63,28 +63,33 @@ export const CardItem = (props) => {
 const PlainCards = ({ data }) => {
   const { title, cards } = data;
   return (
-    <div
-      className={cx(
-        'block align plain-cards-block',
-        {
-          center: !Boolean(data.align),
-          'full-width': data.align === 'full',
-        },
-        data.align,
-      )}
-    >
-      <BodyClass className="has-card-tiles" />
-      <div className={'plain-cards-grid-wrapper ui container'}>
-        <div className={'plain-cards-grid'}>
-          <h2 className={'plain-cards-grid-title'}>{title}</h2>
-          <Card.Group className="plain-card-group">
-            {(cards || []).map((card, index) => (
-              <CardItem key={index} {...card} />
-            ))}
-          </Card.Group>
+    <>
+      <div className="block-info">
+        Deprecated. Use "Cards block" for creating cards.
+      </div>
+      <div
+        className={cx(
+          'block align plain-cards-block',
+          {
+            center: !Boolean(data.align),
+            'full-width': data.align === 'full',
+          },
+          data.align,
+        )}
+      >
+        <BodyClass className="has-card-tiles" />
+        <div className={'plain-cards-grid-wrapper ui container'}>
+          <div className={'plain-cards-grid'}>
+            <h2 className={'plain-cards-grid-title'}>{title}</h2>
+            <Card.Group className="plain-card-group">
+              {(cards || []).map((card, index) => (
+                <CardItem key={index} {...card} />
+              ))}
+            </Card.Group>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

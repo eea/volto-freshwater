@@ -1,11 +1,20 @@
-@width: 1520px;
+@maxWidth: 1525px;
 
+@toolbarWidth: 80px;
+@sidebarWidth: 375px;
+@collapsedWidth: 20px;
+
+@largestMobileScreen: 765px;
+
+/* All Sizes */
 .ui.container {
-  max-width: @width !important;
-}
-// #129211 ensure grid column is still centered
-.ui.container.grid {
-  margin: 0 auto;
+  display: block;
+  width: 100% !important;
+  max-width: @maxWidth !important;
+  padding-right: 2rem;
+  padding-left: 2rem;
+  margin-right: auto !important;
+  margin-left: auto !important;
 }
 
 .ui.twelve {
@@ -26,23 +35,6 @@
   padding: 0 3rem;
 }
 
-.has-sidebar .full-width {
-  position: relative;
-  right: 50%;
-  left: 55%;
-  width: 71vw !important;
-  max-width: initial !important;
-  margin-right: -37vw !important;
-  margin-left: -39vw !important;
-}
-
-.has-sidebar-collapsed {
-  .full-width {
-    width: 80vw !important;
-    margin-right: -50vw !important;
-    margin-left: -40vw !important;
-  }
-}
 @media only screen and (max-width: @largestMobileScreen) {
   .contentWidthMedia(@mobileWidth, @mobileGutter, -12px);
 
@@ -96,5 +88,71 @@
 @media only screen and (min-width: 1520px) {
   .has-sidebar .ui.container {
     max-width: 1450px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .full-width {
+    left: 51%;
+    width: 98vw !important;
+  }
+}
+
+body.has-toolbar:not(.has-sidebar):not(.has-sidebar-collapsed) {
+  .full-width {
+    .ui.container {
+      width: calc(100% - @toolbarWidth) !important;
+    }
+  }
+}
+
+body.has-toolbar.has-sidebar {
+  .full-width {
+    .ui.container {
+      width: calc(100% - (@toolbarWidth + @sidebarWidth)) !important;
+    }
+  }
+}
+
+body.has-toolbar.has-sidebar-collapsed {
+  .full-width {
+    .ui.container {
+      width: calc(100% - (@toolbarWidth + @collapsedWidth)) !important;
+    }
+  }
+}
+
+body.has-toolbar-collapsed:not(.has-sidebar):not(.has-sidebar-collapsed) {
+  .full-width {
+    .ui.container {
+      width: calc(100% - @collapsedWidth) !important;
+    }
+  }
+}
+
+body.has-toolbar-collapsed.has-sidebar {
+  .full-width {
+    .ui.container {
+      width: calc(100% - (@collapsedWidth + @sidebarWidth)) !important;
+    }
+  }
+}
+
+body.has-toolbar-collapsed.has-sidebar-collapsed {
+  .full-width {
+    .ui.container {
+      width: calc(100% - (@collapsedWidth + @collapsedWidth)) !important;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body.has-toolbar:not(.has-sidebar):not(.has-sidebar-collapsed),
+  body.has-toolbar-collapsed:not(.has-sidebar):not(.has-sidebar-collapsed) {
+    .full-width {
+      .ui.container {
+        width: 100% !important;
+      }
+    }
   }
 }

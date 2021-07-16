@@ -1,0 +1,66 @@
+body.siteroot {
+  .block-editor-title {
+    display: none;
+  }
+
+  .ui.content-area {
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+  .portal-top {
+    position: absolute;
+    z-index: 2;
+    top: 20px;
+    width: 100%;
+  }
+
+  .documentFirstHeading {
+    display: none;
+  }
+
+  @media only screen and (min-width: 1280px) {
+    .imagecards-block.full {
+      margin-bottom: 200px;
+    }
+  }
+}
+
+body.siteroot.has-toolbar {
+  .portal-top {
+    width: calc(100% - 80px);
+  }
+}
+
+body.siteroot.has-toolbar-collapsed:not(.has-toolbar) {
+  .portal-top {
+    width: calc(100% - 20px);
+  }
+}
+
+.slider-wrapper,
+.slider-wrapper .slide-img {
+  height: 648px !important;
+}
+
+.slider-wrapper .slide-description,
+.slider-wrapper .slide-description > p {
+  font-family: 'Poppins', serif;
+  font-size: 22px;
+  text-shadow: -4px 4px 5px rgba(0, 0, 0, 0.49);
+}
+
+.slider-wrapper .slide-title {
+  font-family: 'Poppins', serif;
+  text-shadow: -4px 4px 5px rgba(0, 0, 0, 0.49);
+}
+
+.slider-wrapper .slider-slide .slide-img {
+  background-position: center left;
+}
+
+@media (max-width: 600px) {
+  .slider-wrapper .slider-slide .slide-body {
+    top: 90px;
+  }
+}

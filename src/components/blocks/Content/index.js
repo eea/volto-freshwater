@@ -1,4 +1,4 @@
-import codeSVG from '@plone/volto/icons/code.svg';
+import contentSVG from '@plone/volto/icons/content-existing.svg';
 import ContentBlockView from './ContentView';
 import ContentBlockEdit from './ContentEdit';
 
@@ -6,8 +6,8 @@ export default (config) => {
   config.blocks.blocksConfig.embedContent = {
     id: 'embedContent',
     title: 'Embed content',
-    icon: codeSVG,
-    group: 'common',
+    icon: contentSVG,
+    group: 'custom_addons',
     view: ContentBlockView,
     edit: ContentBlockEdit,
     restricted: false,

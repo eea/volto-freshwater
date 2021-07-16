@@ -1,18 +1,31 @@
+import React from 'react';
+
 import HeroSectionView from './components/theme/Header/HeroSectionView';
 import ColoredCards from './components/blocks/CustomImageCards/ColoredCards/ColoredCards';
 import { ColoredCardsSchemaExtender } from './components/blocks/CustomImageCards/ColoredCards/schema';
 import PlainCards from './components/blocks/CustomImageCards/PlainCards/PlainCards';
 
 import { PresentationCardsSchemaExtender } from './components/blocks/CustomImageCards/PresentationCards/schema';
-import PresentationCards from './components/blocks/CustomImageCards/PresentationCards/PresentationCards';
+import PresentationCardsView from './components/blocks/CustomImageCards/PresentationCards/PresentationCardsView';
+import PresentationCardsEdit from './components/blocks/CustomImageCards/PresentationCards/PresentationCardsEdit';
+
 import { ScrollToTop } from './components';
 import installEmbedContentBlock from './components/blocks/Content';
 import installDashboardTabsBlock from './components/blocks/DashboardTabsBlock';
+import installcustomCardsBlock from './components/blocks/CustomCardsBlock';
+import installSearchBlock from './components/blocks/SearchBlock';
 
 import CopyrightWidget from './components/Widgets/CopyrightWidget';
 import SingleTokenWidget from './components/Widgets/SingleTokenWidget';
 
+import DatabaseItemView from './components/theme/DatabaseItem/DatabaseItemView';
+import MetadataListingView from './components/theme/MetadataListing/MetadataListingView';
+import SimpleListingView from './components/theme/SimpleListing/SimpleListingView';
+
 const available_colors = [
+  '#0099BB',
+  'F2F9FB',
+  '#FF4422',
   '#156650',
   '#72933d',
   '#88c24f',
@@ -43,15 +56,29 @@ const available_colors = [
 
 const applyConfig = (config) => {
   config.settings.navDepth = 3;
+
   config.views.contentTypesViews = {
     ...config.views.contentTypesViews,
     Document: HeroSectionView,
+    dashboard: DatabaseItemView,
+    dataset: DatabaseItemView,
+    database: DatabaseItemView,
+    report_publication: DatabaseItemView,
+    indicator: DatabaseItemView,
+    briefing: DatabaseItemView,
+    map_interactive: DatabaseItemView,
   };
+
   config.views.layoutViews = {
     ...config.views.layoutViews,
     document_view: HeroSectionView,
     herosection_view: HeroSectionView,
   };
+
+  config.blocks.groupBlocksOrder = [
+    ...config.blocks.groupBlocksOrder,
+    { id: 'custom_addons', title: 'Freshwater' },
+  ];
 
   config.blocks.blocksConfig.imagecards = {
     sidebarTab: 1,
@@ -71,11 +98,11 @@ const applyConfig = (config) => {
         schemaExtender: null,
         view: PlainCards,
       },
-
       presentation_cards: {
         title: 'Presentation cards',
+        view: PresentationCardsView,
+        edit: PresentationCardsEdit,
         schemaExtender: PresentationCardsSchemaExtender,
-        view: PresentationCards,
       },
     },
   };
@@ -116,6 +143,38 @@ const applyConfig = (config) => {
     { cssClass: 'p-text', label: 'Paragraph 16px' },
   ];
 
+  // Search block metadata listing view
+  config.blocks.blocksConfig.listing = {
+    ...config.blocks.blocksConfig.listing,
+    variations: [
+      ...config.blocks.blocksConfig.listing.variations,
+      {
+        id: 'metadata',
+        title: 'Metadata Listing',
+        template: MetadataListingView,
+        isDefault: false,
+      },
+      {
+        id: 'simple',
+        title: 'Simple Listing',
+        template: SimpleListingView,
+        isDefault: false,
+      },
+    ],
+  };
+
+  // Custom block styles
+  config.settings.pluggableStyles = [
+    ...(config.settings.pluggableStyles || []),
+    {
+      id: 'uiContainer',
+      title: 'Container',
+      viewComponent: (props) => {
+        return <div className="ui container">{props.children}</div>;
+      },
+    },
+  ];
+
   config.settings.appExtras = [
     ...config.settings.appExtras,
     {
@@ -127,10 +186,12 @@ const applyConfig = (config) => {
   config.widgets.id.license_copyright = CopyrightWidget;
   config.widgets.id.category = SingleTokenWidget;
 
-  return [installEmbedContentBlock, installDashboardTabsBlock].reduce(
-    (acc, apply) => apply(acc),
-    config,
-  );
+  return [
+    installEmbedContentBlock,
+    installDashboardTabsBlock,
+    installcustomCardsBlock,
+    installSearchBlock,
+  ].reduce((acc, apply) => apply(acc), config);
 };
 
 export default applyConfig;

@@ -1,24 +1,33 @@
 /*-------------------
  Freshwater Site overrides
 --------------------*/
+body {
+  color: @textColor;
+}
+
+h1,
 .h1 {
-  font-size: @h1 !important;
+  font-size: @h1;
 }
 
+h2,
 .h2 {
-  font-size: @h2 !important;
+  font-size: @h2;
 }
 
+h3,
 .h3 {
-  font-size: @h3 !important;
+  font-size: @h3;
 }
 
+h4,
 .h4 {
-  font-size: @h4 !important;
+  font-size: @h4;
 }
 
+h5,
 .h5 {
-  font-size: @h5 !important;
+  font-size: @h5;
 }
 
 .h1,
@@ -28,13 +37,26 @@
   line-height: 1.2;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: @wiseSecondaryColor;
+}
+
+p {
+  line-height: 28px;
+}
+
 .p-text {
   font-size: @fontSize !important;
 }
 
 .content-area .container {
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 400;
+  line-height: 28px !important;
 }
 
 .ui.inverted a {
@@ -42,32 +64,16 @@
   text-decoration: underline;
 }
 
-// .ui.cards > .card > .content p,
-// .ui.card > .content p {
-//   color: @textColor;
-// }
+.content-body > #page-document.ui.container {
+  width: 100% !important;
+}
 
-// Homepage
-body.siteroot {
-  .block-editor-title {
-    display: none;
-  }
+#page-document {
+  position: relative;
+}
 
-  .ui.content-area {
-    padding-top: 0;
-    margin-top: 0;
-  }
-
-  .portal-top {
-    position: absolute;
-    z-index: 2;
-    top: 20px;
-    width: 100%;
-  }
-
-  .documentFirstHeading {
-    display: none;
-  }
+#view .block-info {
+  display: none;
 }
 
 .block-info {
@@ -76,20 +82,16 @@ body.siteroot {
   font-weight: 600;
 }
 
-body.siteroot.has-toolbar {
-  .portal-top {
-    width: calc(100% - 80px);
-  }
+.ui.attached.segment {
+  padding-right: 0;
+  padding-left: 0;
 }
 
-body.siteroot.has-toolbar-collapsed:not(.has-toolbar) {
-  .portal-top {
-    width: calc(100% - 20px);
-  }
+.ui.button {
+  font-family: 'POPPINS' !important;
+  font-weight: 500 !important;
 }
 
-@media (max-width: 600px) {
-  .slider-wrapper .slider-slide .slide-body {
-    top: 90px;
-  }
+.accordion .ui.message {
+  background-color: transparent !important;
 }

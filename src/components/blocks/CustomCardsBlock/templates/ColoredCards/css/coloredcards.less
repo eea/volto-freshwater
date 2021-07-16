@@ -1,0 +1,147 @@
+@import 'globals.less';
+
+@addon: 'volto-addons';
+@addontype: 'imagecard';
+@addonelement: 'coloredcards';
+
+.loadAddonVariables();
+
+.simple-color-picker-widget .button {
+  border: 1px solid #ececec !important;
+}
+
+.github-picker {
+  position: absolute;
+  z-index: 10;
+}
+
+.colored-cards-block {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: @coloredCardsBottomMargin;
+  background-color: inherit;
+}
+
+.colored-cards-grid {
+  text-align: @coloredCardsTextAlign;
+}
+
+.colored-card-content {
+  position: relative;
+  padding: 1em 0;
+  color: #555;
+  font-family: 'Roboto';
+  font-size: 20px;
+  font-weight: 400;
+
+  .link-button {
+    position: absolute;
+    top: 1em;
+    right: 0px;
+  }
+}
+
+.colored-card-content .header,
+.colored-card-title {
+  margin-bottom: 1em !important;
+  color: inherit !important;
+}
+
+.h_size,
+.h_size > * {
+  font-family: 'POPPINS', serif;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.colored-card:hover .colored-card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.5;
+}
+
+.colored-card-link {
+  position: relative;
+  z-index: 2;
+  padding: 0;
+  background-color: @cardLinkBackgroundColor;
+  border-radius: 21px;
+  color: @cardLinkTextColor !important;
+
+  .colored-card-content {
+    padding-right: 3em;
+  }
+}
+
+.colored-card-link:hover {
+  background-color: transparent;
+  color: #000 !important;
+
+  > .colored-card {
+    border-top-color: #ff4422 !important;
+  }
+
+  .colored-card-content {
+    color: #000;
+  }
+
+  .next-icon {
+    color: #ff4422;
+  }
+}
+
+.colored-cards-grid-title {
+  padding-top: 3rem;
+  color: #004050;
+  font-size: 22px;
+}
+
+.colored-cards-grid-title,
+.colored-cards-grid-description {
+  margin-bottom: 1rem;
+}
+
+.center .colored-card-title {
+  text-align: center;
+}
+
+.left .colored-card-title {
+  text-align: left;
+}
+
+.right .colored-card-title {
+  text-align: right;
+}
+
+.ui.cards.colored-card-group {
+  padding-top: 1.5rem;
+  margin-right: -0.75em !important;
+  margin-left: -0.75em !important;
+
+  > .ui.card {
+    margin: 0.75em !important;
+  }
+}
+
+.next-icon {
+  transform: rotate(180deg);
+}
+
+@media only screen and (min-width: @tabletBreakpoint) and (max-width: @largestTabletScreen) {
+  .ui.cards > .card {
+    width: calc(50% - 2rem) !important;
+  }
+}
+
+@media only screen and (max-width: @tabletBreakpoint) {
+  .ui.cards > .card {
+    width: 100% !important;
+  }
+}
+
+.loadAddonOverrides();

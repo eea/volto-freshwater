@@ -1,7 +1,7 @@
 // taken from storybook, to be properly integrated
 
 .in_path {
-  font-weight: bold !important;
+  font-weight: 500 !important;
 }
 
 .list .content .list {
@@ -15,7 +15,6 @@
   margin: 1rem 0;
   background: white;
   border-radius: 4px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
   list-style-type: none;
 }
 
@@ -27,17 +26,23 @@
   padding: 0 !important;
 }
 
+.context-navigation .active.item a {
+  background-color: #f2f9fb;
+  color: #0099bb;
+  font-weight: 500 !important;
+}
+
 .context-navigation .item a {
   position: relative;
   display: block;
-  padding: 0.6rem 1rem;
-  border-bottom: 1px solid #eee;
-  color: @darkBlueTextColor;
-  font-size: 1rem;
-  font-weight: 400;
+  padding: 0.8rem 1rem;
+  color: #333;
+  font-size: 16px !important;
+  font-weight: 400 !important;
 }
 
 .context-navigation > .list {
+  border-bottom: 1px solid @wiseSecondaryColor;
   margin: 0;
 }
 
@@ -60,32 +65,33 @@
 }
 
 .context-navigation .item a:hover {
-  background: @midGrey;
-  color: @darkBlueTextColor;
+  background: #ffe9e3;
+  color: #ff421b;
 }
 
 .context-navigation-header {
-  padding: 1rem;
-  border-bottom: 3px solid @midGrey;
+  padding: 1rem 0;
+  border-bottom: 3px solid @wiseSecondaryColor;
   box-shadow: 0 4px 19px rgba(0, 0, 1, 0.07);
-  color: #333;
-  font-size: 16px;
+  color: @wiseSecondaryColor;
+  font-size: 20px;
   font-weight: 500;
 }
 
 .context-navigation-header a {
-  color: #444;
+  color: @wiseSecondaryColor;
   font-size: 1.3rem;
   font-weight: 100;
 }
 
 .context-navigation .active-indicator {
-  position: absolute;
-  top: 56%;
-  right: -5px;
-  color: @darkBlueTextColor;
-  font-weight: bold;
-  transform: translateY(-50%);
+  // position: absolute;
+  // top: 56%;
+  // right: -5px;
+  // color: @darkBlueTextColor;
+  // font-weight: bold;
+  // transform: translateY(-50%);
+  display: none;
 }
 
 .context-navigation .item a:hover .active-indicator {
