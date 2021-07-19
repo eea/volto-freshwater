@@ -25,10 +25,21 @@ const ItemMetadataSnippet = (props) => {
           </div>
         )}
 
-        {source.category && (
+        {source.category && source.category.length > 0 && (
           <div className="metadata-tab-section">
             <span className="metadata-tab-title">Topics: </span>
-            <span>{source.category}</span>
+            {Array.isArray(source.category) ? (
+              <>
+                {source.category.map((topic, i) => (
+                  <span key={i}>
+                    {topic}
+                    {i < source.category.length - 1 ? ', ' : ''}
+                  </span>
+                ))}
+              </>
+            ) : (
+              <span>{source.category}</span>
+            )}
           </div>
         )}
 
@@ -39,15 +50,29 @@ const ItemMetadataSnippet = (props) => {
           </div>
         )}
 
-        {source.legislative_reference && (
-          <div className="metadata-tab-section">
-            <span className="metadata-tab-title">Legislative reference: </span>
-            <span>
-              {source.legislative_reference.title ||
-                source.legislative_reference}
-            </span>
-          </div>
-        )}
+        {source.legislative_reference &&
+          source.legislative_reference.length > 0 && (
+            <div className="metadata-tab-section">
+              <span className="metadata-tab-title">
+                Legislative reference:{' '}
+              </span>
+              {Array.isArray(source.legislative_reference) ? (
+                <>
+                  {source.legislative_reference.map((tag, i) => (
+                    <span key={i}>
+                      {tag.title || tag}
+                      {i < source.legislative_reference.length - 1 ? ', ' : ''}
+                    </span>
+                  ))}
+                </>
+              ) : (
+                <span>
+                  {source.legislative_reference.title ||
+                    source.legislative_reference}
+                </span>
+              )}
+            </div>
+          )}
       </div>
     </>
   );

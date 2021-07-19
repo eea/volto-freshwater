@@ -16,7 +16,8 @@ import installcustomCardsBlock from './components/blocks/CustomCardsBlock';
 import installSearchBlock from './components/blocks/SearchBlock';
 
 import CopyrightWidget from './components/Widgets/CopyrightWidget';
-import SingleTokenWidget from './components/Widgets/SingleTokenWidget';
+import TokenWidget from '@plone/volto/components/manage/Widgets/TokenWidget';
+// import SingleTokenWidget from './components/Widgets/SingleTokenWidget';
 
 import DatabaseItemView from './components/theme/DatabaseItem/DatabaseItemView';
 import MetadataListingView from './components/theme/MetadataListing/MetadataListingView';
@@ -184,7 +185,7 @@ const applyConfig = (config) => {
   ];
 
   config.widgets.id.license_copyright = CopyrightWidget;
-  config.widgets.id.category = SingleTokenWidget;
+  config.widgets.id.category = TokenWidget;
 
   return [
     installEmbedContentBlock,
