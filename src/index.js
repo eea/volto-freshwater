@@ -1,4 +1,5 @@
 import React from 'react';
+import TokenWidget from '@plone/volto/components/manage/Widgets/TokenWidget';
 
 import HeroSectionView from './components/theme/Header/HeroSectionView';
 import ColoredCards from './components/blocks/CustomImageCards/ColoredCards/ColoredCards';
@@ -16,7 +17,6 @@ import installcustomCardsBlock from './components/blocks/CustomCardsBlock';
 import installSearchBlock from './components/blocks/SearchBlock';
 
 import CopyrightWidget from './components/Widgets/CopyrightWidget';
-import TokenWidget from '@plone/volto/components/manage/Widgets/TokenWidget';
 // import SingleTokenWidget from './components/Widgets/SingleTokenWidget';
 
 import DatabaseItemView from './components/theme/DatabaseItem/DatabaseItemView';
@@ -185,6 +185,7 @@ const applyConfig = (config) => {
   ];
 
   config.widgets.id.license_copyright = CopyrightWidget;
+  // config.widgets.id.category = SingleTokenWidget;
   config.widgets.id.category = TokenWidget;
 
   return [
