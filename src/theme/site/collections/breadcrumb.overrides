@@ -34,7 +34,12 @@
 
 .ui.breadcrumb a:hover,
 .ui.breadcrumb .section {
-  color: #fff;
+  color: @wisePrimaryColor !important;
+}
+
+.ui.breadcrumb .active:hover,
+.ui.breadcrumb .active.section {
+  color: #fff !important;
 }
 
 .breadcrumbs {
