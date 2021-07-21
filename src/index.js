@@ -1,12 +1,10 @@
 import React from 'react';
-
 import PlainCards from './components/blocks/CustomImageCards/PlainCards/PlainCards';
 import ColoredCards from './components/blocks/CustomImageCards/ColoredCards/ColoredCards';
 import { ColoredCardsSchemaExtender } from './components/blocks/CustomImageCards/ColoredCards/schema';
 import { PresentationCardsSchemaExtender } from './components/blocks/CustomImageCards/PresentationCards/schema';
 import PresentationCardsView from './components/blocks/CustomImageCards/PresentationCards/PresentationCardsView';
 import PresentationCardsEdit from './components/blocks/CustomImageCards/PresentationCards/PresentationCardsEdit';
-
 import {
   ScrollToTop,
   HeroSectionView,
@@ -186,6 +184,7 @@ const applyConfig = (config) => {
   ];
 
   config.widgets.id.license_copyright = CopyrightWidget;
+  // config.widgets.id.category = SingleTokenWidget;
   config.widgets.id.category = TokenWidget;
 
   return [
