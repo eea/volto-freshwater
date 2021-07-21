@@ -3,8 +3,10 @@ import { Modal, Button } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
 import config from '@plone/volto/registry';
 import fullscreenSVG from '@plone/volto/icons/slider.svg';
-import TableauDownload from './../Tableau/TableauDownload';
-import TableauShare from './../Tableau/TableauShare';
+import {
+  TableauDownload,
+  TableauShare,
+} from '@eeacms/volto-freshwater/components';
 
 const MapPreview = (props) => {
   const { map_url, tableau_url } = props;

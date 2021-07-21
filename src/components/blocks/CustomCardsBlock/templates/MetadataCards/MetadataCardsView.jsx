@@ -5,10 +5,13 @@ import { BodyClass } from '@plone/volto/helpers';
 import config from '@plone/volto/registry';
 import { getScaleUrl, getPath } from '@eeacms/volto-freshwater/utils';
 import { serializeNodes } from 'volto-slate/editor/render';
-import ItemMetadata from './../../../../theme/ItemMetadata/ItemMetadata';
-import ItemTitle from './../../../../theme/ItemMetadata/ItemTitle';
-import ItemMetadataSnippet from './../../../../theme/ItemMetadata/ItemMetadataSnippet';
 import cx from 'classnames';
+import {
+  ItemMetadata,
+  ItemTitle,
+  ItemMetadataSnippet,
+} from '@eeacms/volto-freshwater/components';
+
 import './css/metadatacards.less';
 
 export const CardItem = (props) => {

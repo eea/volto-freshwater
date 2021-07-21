@@ -17,6 +17,11 @@
   .secondLevel:hover {
     color: @wiseSecondaryColor !important;
   }
+
+  .firstLevel > .menu {
+    border: 1px solid #f1f1f1 !important;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 10%) !important;
+  }
 }
 
 .navigation .ui.secondary.pointing.menu .item {
@@ -39,10 +44,15 @@
   color: @secondaryPointingHoverTextColor;
 }
 
+#main .secondLevel {
+  font-size: 14px;
+}
+
 #main .thirdLevel {
   padding: 0.3rem 0.9rem;
   border-bottom: 0;
   margin: 0;
+  font-size: 14px;
   font-weight: normal;
   line-height: 1.1;
 
@@ -145,10 +155,6 @@ body.has-toolbar.has-sidebar {
   #main .navigation .hamburger-wrapper.mobile.only {
     display: block !important;
   }
-
-  // .hamburger-wrapper {
-  //   top: 10px !important;
-  // }
 }
 
 body.has-toolbar.has-sidebar.siteroot {
@@ -190,6 +196,11 @@ body.has-toolbar.has-sidebar.siteroot {
 
     > .menu {
       display: none !important;
+      box-shadow: none !important;
+    }
+
+    .item {
+      border: none !important;
     }
 
     &.active > .menu,
@@ -220,6 +231,10 @@ body.has-toolbar.has-sidebar.siteroot {
       right: 0;
       font-size: 20px;
     }
+  }
+
+  .secondLevel {
+    color: #166578;
   }
 
   .secondLevel,
