@@ -2,7 +2,7 @@
   position: relative;
 
   .ui.secondary.pointing.menu .dropdown.item:hover {
-    background-color: #cdd6dd;
+    background-color: #ecf4fa;
     color: @wiseSecondaryColor;
   }
 
@@ -177,6 +177,8 @@ body.has-toolbar.has-sidebar.siteroot {
   padding: 0 15px;
   background-color: #f1fdff;
   box-shadow: -5px 5px 17px -7px rgba(0, 0, 0, 0.3);
+  overflow-x: auto;
+  overflow-y: auto;
   transform: translateX(0);
   transition: all 0.5s ease;
   visibility: visible;
@@ -197,6 +199,14 @@ body.has-toolbar.has-sidebar.siteroot {
     > .menu {
       display: none !important;
       box-shadow: none !important;
+
+      > .item {
+        padding: 0 !important;
+
+        .submenu-wrapper {
+          margin-bottom: 10px;
+        }
+      }
     }
 
     .item {
