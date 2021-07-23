@@ -174,7 +174,7 @@ body.has-toolbar.has-sidebar.siteroot {
   width: 100%;
   max-width: 400px;
   height: 100%;
-  padding: 0 15px;
+  // padding: 0 15px;
   background-color: #f1fdff;
   box-shadow: -5px 5px 17px -7px rgba(0, 0, 0, 0.3);
   overflow-x: auto;
@@ -183,12 +183,20 @@ body.has-toolbar.has-sidebar.siteroot {
   transition: all 0.5s ease;
   visibility: visible;
 
+  > .active.item.firstLevel {
+    background-color: #e4f9fc !important;
+
+    &:hover {
+      background-color: #e4f9fc !important;
+    }
+  }
+
   > .item.firstLevel {
     position: relative;
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
-    padding: 12px 20px 12px 0 !important;
+    padding: 15px 20px 15px 20px !important;
     float: none;
     text-align: left;
 
@@ -220,7 +228,7 @@ body.has-toolbar.has-sidebar.siteroot {
 
     &:hover {
       border-color: transparent !important;
-      background: transparent !important;
+      background-color: transparent !important;
 
       > .menu {
         display: none !important;
@@ -237,9 +245,13 @@ body.has-toolbar.has-sidebar.siteroot {
     > i.dropdown.icon {
       position: absolute;
       z-index: 999;
-      top: 7px;
-      right: 0;
+      top: 10px;
+      right: 20px;
       font-size: 20px;
+
+      &:hover {
+        color: #004050;
+      }
     }
   }
 
@@ -256,7 +268,7 @@ body.has-toolbar.has-sidebar.siteroot {
 
 .navigation .menu .close-button {
   display: none;
-  margin: 1em 0 1em 0 !important;
+  margin: 1em 8px 1em 8px !important;
   background-color: transparent !important;
   float: right;
 
