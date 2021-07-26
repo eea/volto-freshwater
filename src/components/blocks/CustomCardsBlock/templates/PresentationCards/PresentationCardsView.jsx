@@ -188,22 +188,24 @@ const PresentationCardsView = ({ data, isEditMode }) => {
 
   return (
     <>
-      <div className={cx('block align presentation-cards-block', custom_class)}>
-        <BodyClass className="has-card-tiles" />
-        <div className="presentation-cards-grid-wrapper">
-          <div className="presentation-cards-grid">
-            {title && (
-              <h2 className="presentation-cards-grid-title">{title}</h2>
-            )}
+      {cards && cards.length > 0 ? (
+        <div
+          className={cx('block align presentation-cards-block', custom_class)}
+        >
+          <BodyClass className="has-card-tiles" />
+          <div className="presentation-cards-grid-wrapper">
+            <div className="presentation-cards-grid">
+              {title && (
+                <h2 className="presentation-cards-grid-title">{title}</h2>
+              )}
 
-            {text && (
-              <div className="presentation-cards-grid-description">
-                {serializeNodes(text)}
-              </div>
-            )}
+              {text && (
+                <div className="presentation-cards-grid-description">
+                  {serializeNodes(text)}
+                </div>
+              )}
 
-            <div style={{ textAlign: `${text_align}` }}>
-              {cards && cards.length > 0 ? (
+              <div style={{ textAlign: `${text_align}` }}>
                 <Card.Group
                   className="presentation-cards-group"
                   itemsPerRow={cards_per_row ? cards_per_row : ''}
@@ -221,13 +223,13 @@ const PresentationCardsView = ({ data, isEditMode }) => {
                     />
                   ))}
                 </Card.Group>
-              ) : (
-                <div className="block-info">Add cards from the sidebar</div>
-              )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div className="block-info">Add cards from the sidebar</div>
+      )}
     </>
   );
 };

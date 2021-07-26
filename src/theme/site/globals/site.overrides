@@ -49,6 +49,10 @@ p {
   line-height: 28px;
 }
 
+a {
+  color: @wisePrimaryColor;
+}
+
 .p-text {
   font-size: @fontSize !important;
 }
