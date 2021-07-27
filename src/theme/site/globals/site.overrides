@@ -86,11 +86,6 @@ a {
   font-weight: 600;
 }
 
-.ui.attached.segment {
-  padding-right: 0;
-  padding-left: 0;
-}
-
 .ui.button {
   font-family: 'POPPINS' !important;
   font-weight: 500 !important;
