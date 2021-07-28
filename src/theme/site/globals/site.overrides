@@ -72,6 +72,11 @@ a {
   width: 100% !important;
 }
 
+.nine.wide.column.content-body > #page-document.ui.container {
+  padding-right: 0;
+  padding-left: 0;
+}
+
 #page-document {
   position: relative;
 }

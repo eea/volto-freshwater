@@ -11,8 +11,8 @@
   display: block;
   width: 100% !important;
   max-width: @maxWidth !important;
-  padding-right: 2rem;
-  padding-left: 2rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
   margin-right: auto !important;
   margin-left: auto !important;
 }
@@ -93,8 +93,8 @@
 
 @media only screen and (max-width: 992px) {
   .full-width {
-    left: 51%;
-    width: 98vw !important;
+    left: 50%;
+    width: 100vw !important;
   }
 }
 
@@ -143,6 +143,13 @@ body.has-toolbar-collapsed.has-sidebar-collapsed {
     .ui.container {
       width: calc(100% - (@collapsedWidth + @collapsedWidth)) !important;
     }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  body.has-toolbar-collapsed.has-sidebar-collapsed .full-width .ui.container,
+  body.has-toolbar.has-sidebar-collapsed .full-width .ui.container {
+    width: 100% !important;
   }
 }
 

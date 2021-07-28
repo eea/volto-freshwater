@@ -38,7 +38,7 @@
 }
 
 .sidebar-container.collapsed {
-  right: -343px;
+  right: -355px;
 
   .trigger,
   .trigger:focus,

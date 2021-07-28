@@ -13,14 +13,13 @@ import {
   SimpleListingView,
 } from './components';
 
+import CopyrightWidget from './components/Widgets/CopyrightWidget';
+import TokenWidget from '@plone/volto/components/manage/Widgets/TokenWidget';
+
 import installEmbedContentBlock from './components/blocks/Content';
 import installDashboardTabsBlock from './components/blocks/DashboardTabsBlock';
 import installcustomCardsBlock from './components/blocks/CustomCardsBlock';
 import installSearchBlock from './components/blocks/SearchBlock';
-
-import CopyrightWidget from './components/Widgets/CopyrightWidget';
-import TokenWidget from '@plone/volto/components/manage/Widgets/TokenWidget';
-// import SingleTokenWidget from './components/Widgets/SingleTokenWidget.jsx';
 
 const available_colors = [
   '#0099BB',
@@ -135,12 +134,12 @@ const applyConfig = (config) => {
     ...(config.settings.slate.styleMenu?.inlineStyles || []),
     { cssClass: 'blue-text', label: 'Blue text' },
     { cssClass: 'grey-text', label: 'Grey text' },
+    { cssClass: 'p-text', label: 'Paragraph 16px' },
     { cssClass: 'h1', label: 'H1 36px' },
     { cssClass: 'h2', label: 'H2 30px' },
     { cssClass: 'h3', label: 'H3 24px' },
     { cssClass: 'h4', label: 'H4 18px' },
     { cssClass: 'h5', label: 'H5 14px' },
-    { cssClass: 'p-text', label: 'Paragraph 16px' },
   ];
 
   // Search block metadata listing view
@@ -184,7 +183,6 @@ const applyConfig = (config) => {
   ];
 
   config.widgets.id.license_copyright = CopyrightWidget;
-  // config.widgets.id.category = SingleTokenWidget;
   config.widgets.id.category = TokenWidget;
 
   return [
