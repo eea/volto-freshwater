@@ -1,5 +1,3 @@
-// taken from storybook, to be properly integrated
-
 .in_path {
   font-weight: 500 !important;
 }
@@ -9,6 +7,10 @@
   padding-bottom: 0 !important;
 }
 
+.drag .context-navigation {
+  max-width: 380px;
+}
+
 .context-navigation {
   overflow: hidden;
   padding: 0;
@@ -16,57 +18,55 @@
   background: white;
   border-radius: 4px;
   list-style-type: none;
-}
 
-.drag .context-navigation {
-  max-width: 380px;
-}
+  .item {
+    padding: 0 !important;
 
-.context-navigation .item {
-  padding: 0 !important;
-}
-
-.context-navigation .active.item a {
-  background-color: #f2f9fb;
-  color: #0099bb;
-  font-weight: 500 !important;
-}
-
-.context-navigation .item a {
-  position: relative;
-  display: block;
-  padding: 0.8rem 1rem;
-  color: #333;
-  font-size: 16px !important;
-  font-weight: 400 !important;
-}
-
-.context-navigation > .list {
-  border-bottom: 1px solid @wiseSecondaryColor;
-  margin: 0;
-}
-
-.context-navigation .level-1 a {
-  padding-left: 1rem;
-}
-
-.context-navigation .level-2 a {
-  padding-left: 1.5rem;
-}
-
-.context-navigation .level-3 a {
-  padding-left: 2rem;
-}
-
-@media (min-width: 1200px) and (max-width: 1500px) {
-  .context-navigation .item a {
-    font-size: 0.9rem;
+    a:hover {
+      background: #ffe9e3;
+      color: #ff421b;
+    }
   }
-}
 
-.context-navigation .item a:hover {
-  background: #ffe9e3;
-  color: #ff421b;
+  .active.item a {
+    background-color: #f2f9fb;
+    color: #0099bb;
+    font-weight: 500 !important;
+  }
+
+  .item a {
+    position: relative;
+    display: block;
+    padding: 0.8rem 1rem;
+    color: #333;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+
+    > img {
+      display: none !important;
+    }
+  }
+
+  > .list {
+    border-bottom: 1px solid @wiseSecondaryColor;
+    margin: 0;
+  }
+
+  .level-1 a {
+    padding-left: 1rem;
+  }
+
+  .level-2 a {
+    padding-left: 1.5rem;
+  }
+
+  .level-3 a {
+    padding-left: 2rem;
+  }
+
+  .active-indicator {
+    display: none;
+  }
 }
 
 .context-navigation-header {
@@ -76,24 +76,16 @@
   color: @wiseSecondaryColor;
   font-size: 20px;
   font-weight: 500;
+
+  a {
+    color: @wiseSecondaryColor;
+    font-size: 1.3rem;
+    font-weight: 100;
+  }
 }
 
-.context-navigation-header a {
-  color: @wiseSecondaryColor;
-  font-size: 1.3rem;
-  font-weight: 100;
-}
-
-.context-navigation .active-indicator {
-  // position: absolute;
-  // top: 56%;
-  // right: -5px;
-  // color: @darkBlueTextColor;
-  // font-weight: bold;
-  // transform: translateY(-50%);
-  display: none;
-}
-
-.context-navigation .item a:hover .active-indicator {
-  color: white !important;
+@media (min-width: 1200px) and (max-width: 1500px) {
+  .context-navigation .item a {
+    font-size: 0.9rem;
+  }
 }

@@ -49,6 +49,10 @@ p {
   line-height: 28px;
 }
 
+a {
+  color: @wisePrimaryColor;
+}
+
 .p-text {
   font-size: @fontSize !important;
 }
@@ -68,6 +72,11 @@ p {
   width: 100% !important;
 }
 
+.nine.wide.column.content-body > #page-document.ui.container {
+  padding-right: 0;
+  padding-left: 0;
+}
+
 #page-document {
   position: relative;
 }
@@ -80,11 +89,6 @@ p {
   color: #e9776d;
   font-family: 'Raleway', sans-serif;
   font-weight: 600;
-}
-
-.ui.attached.segment {
-  padding-right: 0;
-  padding-left: 0;
 }
 
 .ui.button {

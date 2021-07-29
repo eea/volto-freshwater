@@ -1,26 +1,25 @@
 import React from 'react';
-
-import HeroSectionView from './components/theme/Header/HeroSectionView';
+import PlainCards from './components/blocks/CustomImageCards/PlainCards/PlainCards';
 import ColoredCards from './components/blocks/CustomImageCards/ColoredCards/ColoredCards';
 import { ColoredCardsSchemaExtender } from './components/blocks/CustomImageCards/ColoredCards/schema';
-import PlainCards from './components/blocks/CustomImageCards/PlainCards/PlainCards';
-
 import { PresentationCardsSchemaExtender } from './components/blocks/CustomImageCards/PresentationCards/schema';
 import PresentationCardsView from './components/blocks/CustomImageCards/PresentationCards/PresentationCardsView';
 import PresentationCardsEdit from './components/blocks/CustomImageCards/PresentationCards/PresentationCardsEdit';
+import {
+  ScrollToTop,
+  HeroSectionView,
+  DatabaseItemView,
+  MetadataListingView,
+  SimpleListingView,
+} from './components';
 
-import { ScrollToTop } from './components';
+import CopyrightWidget from './components/Widgets/CopyrightWidget';
+import TokenWidget from '@plone/volto/components/manage/Widgets/TokenWidget';
+
 import installEmbedContentBlock from './components/blocks/Content';
 import installDashboardTabsBlock from './components/blocks/DashboardTabsBlock';
 import installcustomCardsBlock from './components/blocks/CustomCardsBlock';
 import installSearchBlock from './components/blocks/SearchBlock';
-
-import CopyrightWidget from './components/Widgets/CopyrightWidget';
-import SingleTokenWidget from './components/Widgets/SingleTokenWidget';
-
-import DatabaseItemView from './components/theme/DatabaseItem/DatabaseItemView';
-import MetadataListingView from './components/theme/MetadataListing/MetadataListingView';
-import SimpleListingView from './components/theme/SimpleListing/SimpleListingView';
 
 const available_colors = [
   '#0099BB',
@@ -135,12 +134,12 @@ const applyConfig = (config) => {
     ...(config.settings.slate.styleMenu?.inlineStyles || []),
     { cssClass: 'blue-text', label: 'Blue text' },
     { cssClass: 'grey-text', label: 'Grey text' },
+    { cssClass: 'p-text', label: 'Paragraph 16px' },
     { cssClass: 'h1', label: 'H1 36px' },
     { cssClass: 'h2', label: 'H2 30px' },
     { cssClass: 'h3', label: 'H3 24px' },
     { cssClass: 'h4', label: 'H4 18px' },
     { cssClass: 'h5', label: 'H5 14px' },
-    { cssClass: 'p-text', label: 'Paragraph 16px' },
   ];
 
   // Search block metadata listing view
@@ -184,7 +183,7 @@ const applyConfig = (config) => {
   ];
 
   config.widgets.id.license_copyright = CopyrightWidget;
-  config.widgets.id.category = SingleTokenWidget;
+  config.widgets.id.category = TokenWidget;
 
   return [
     installEmbedContentBlock,

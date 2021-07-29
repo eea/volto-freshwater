@@ -1,0 +1,84 @@
+// sidebar
+.sidebar-container.full-size.no-toolbar {
+  width: 100%;
+}
+
+#sidebar .sidebar-container {
+  .trigger,
+  .trigger:focus,
+  .trigger:hover {
+    padding: 0;
+    margin-top: -40px;
+    box-shadow: none;
+  }
+}
+
+#sidebar {
+  .button,
+  .button:focus,
+  .button:hover {
+    background-color: transparent;
+  }
+
+  .tab-wrapper {
+    padding: 0;
+  }
+}
+
+.sidebar-container:not(.collapsed) {
+  .trigger,
+  .trigger:focus,
+  .trigger:hover {
+    opacity: 0.45;
+  }
+
+  .trigger::before {
+    left: 0;
+  }
+}
+
+.sidebar-container.collapsed {
+  right: -355px;
+
+  .trigger,
+  .trigger:focus,
+  .trigger:hover {
+    opacity: 0.7;
+  }
+}
+
+// disable animation from sidebar-container so that it behaves like the toolbar
+// trigger
+.sidebar-container .trigger {
+  animation: none;
+}
+
+.sidebar-container .trigger:hover,
+.sidebar-container .trigger:focus {
+  animation: none;
+  transition: none;
+}
+
+.sidebar-container .trigger::before {
+  width: 6px;
+  animation: none;
+  background-color: red;
+  opacity: 0.9;
+}
+
+// add rounded borders to sidebar button
+.sidebar-container.collapsed .trigger::before {
+  border-radius: 4px 0 0 4px;
+}
+
+.sidebar-container:not(.collapsed) .trigger::before {
+  border-radius: 0 4px 4px 0;
+}
+
+.sidebar-container.collapsed .trigger::after {
+  .centeredArrow(@position: right);
+}
+
+.sidebar-container:not(.collapsed) .trigger::after {
+  .centeredArrow(@position-amount: 5%);
+}

@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from 'semantic-ui-react';
-import ItemMetadata from './../ItemMetadata/ItemMetadata';
-import ItemMetadataSnippet from './../ItemMetadata/ItemMetadataSnippet';
-import ItemTitle from './../ItemMetadata/ItemTitle';
+import {
+  ItemMetadata,
+  ItemTitle,
+  ItemMetadataSnippet,
+} from '@eeacms/volto-freshwater/components';
 import './style.less';
 
 const formatItemType = (item) => {

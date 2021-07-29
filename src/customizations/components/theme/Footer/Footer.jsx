@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { Container, Segment, Grid } from 'semantic-ui-react';
+import { Container, Grid } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
@@ -26,7 +26,7 @@ import marineLogo from '@eeacms/volto-freshwater/static/marine-logo.png';
  * @returns {string} Markup of the component
  */
 const Footer = ({ intl }) => (
-  <Segment role="contentinfo" vertical padded className="footerWrapper">
+  <div className="footerWrapper">
     <div className="footer-top-wave">
       <div className="wave-shape"></div>
     </div>
@@ -136,7 +136,7 @@ const Footer = ({ intl }) => (
         </Grid>
       </div>
     </Container>
-  </Segment>
+  </div>
 );
 
 /**

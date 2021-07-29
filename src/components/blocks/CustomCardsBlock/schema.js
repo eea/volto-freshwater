@@ -37,6 +37,7 @@ const CustomCards = (props) => {
       },
       display: {
         title: 'Display',
+        description: 'Choose a template',
         choices: [...display_types],
       },
       custom_class: {

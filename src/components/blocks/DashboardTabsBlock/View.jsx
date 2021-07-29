@@ -3,13 +3,15 @@ import { Modal, Menu, Tab, Button } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
 import arrowSVG from '@plone/volto/icons/backspace.svg';
 import config from '@plone/volto/registry';
+import {
+  ItemMetadata,
+  ItemTitle,
+  ItemMetadataSnippet,
+  TableauDownload,
+  TableauShare,
+  TableauFullscreen,
+} from '@eeacms/volto-freshwater/components';
 
-import ItemMetadata from './../../theme/ItemMetadata/ItemMetadata';
-import ItemTitle from './../../theme/ItemMetadata/ItemTitle';
-import ItemMetadataSnippet from './../../theme/ItemMetadata/ItemMetadataSnippet';
-import TableauDownload from './../../theme/Tableau/TableauDownload';
-import TableauShare from './../../theme/Tableau/TableauShare';
-import TableauFullscreen from './../../theme/Tableau/TableauFullscreen';
 import './style.less';
 
 const DashboardTabsBlockView = (props) => {

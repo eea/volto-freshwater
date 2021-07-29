@@ -104,36 +104,44 @@ const ColoredCards = ({ data, isEditMode }) => {
   const { title, text, cards, cards_per_row, image_scale } = data;
 
   return (
-    <div className={cx('block align colored-cards-block')}>
-      <BodyClass className="has-card-tiles" />
-      <div className="colored-cards-grid-wrapper">
-        <div className="colored-cards-grid">
-          {title && <h4 className="colored-cards-grid-title">{title}</h4>}
-          {text && (
-            <div className="colored-card-grid-text">{serializeNodes(text)}</div>
-          )}
+    <>
+      {cards && cards.length > 0 ? (
+        <div className={cx('block align colored-cards-block')}>
+          <BodyClass className="has-card-tiles" />
+          <div className="colored-cards-grid-wrapper">
+            <div className="colored-cards-grid">
+              {title && <h4 className="colored-cards-grid-title">{title}</h4>}
+              {text && (
+                <div className="colored-card-grid-text">
+                  {serializeNodes(text)}
+                </div>
+              )}
 
-          <Card.Group
-            className="colored-card-group"
-            itemsPerRow={cards_per_row ? cards_per_row : ''}
-          >
-            {(cards || []).map((card, index) => (
-              <CardItem
-                key={index}
-                {...card}
-                background_color={data.background_color}
-                border_color={data.border_color}
-                border_top_width={data.border_top_width}
-                text_color={data.text_color}
-                font_size={data.font_size}
-                image_scale={image_scale}
-                isEditMode={isEditMode}
-              />
-            ))}
-          </Card.Group>
+              <Card.Group
+                className="colored-card-group"
+                itemsPerRow={cards_per_row ? cards_per_row : ''}
+              >
+                {(cards || []).map((card, index) => (
+                  <CardItem
+                    key={index}
+                    {...card}
+                    background_color={data.background_color}
+                    border_color={data.border_color}
+                    border_top_width={data.border_top_width}
+                    text_color={data.text_color}
+                    font_size={data.font_size}
+                    image_scale={image_scale}
+                    isEditMode={isEditMode}
+                  />
+                ))}
+              </Card.Group>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <div className="block-info">Add cards from the sidebar</div>
+      )}
+    </>
   );
 };
 
