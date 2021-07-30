@@ -46,7 +46,7 @@ const LeftColumnFacets = (props) => {
           />
         </Grid.Column>
         <Grid.Column mobile={12} tablet={8} computer={9}>
-          <Grid>
+          <Grid container>
             <Grid.Row>
               <Grid columns="2" verticalAlign="bottom">
                 {data.showSearchInput && (

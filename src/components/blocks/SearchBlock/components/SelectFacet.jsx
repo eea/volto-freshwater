@@ -1,5 +1,4 @@
 import React from 'react';
-import { compose } from 'redux';
 import { injectLazyLibs } from '@plone/volto/helpers/Loadable/Loadable';
 import {
   Option,
@@ -10,10 +9,11 @@ import { selectTheme, customSelectStyles } from './SelectStyling';
 const SelectFacet = (props) => {
   const { facet, choices, reactSelect, isMulti, onChange, value } = props;
   const Select = reactSelect.default;
+  const v = Array.isArray(value) && value.length === 0 ? null : value;
 
   return (
     <Select
-      placeholder={facet?.title || 'select...'}
+      placeholder={facet?.title ?? (facet?.field?.label || 'select...')}
       className="react-select-container"
       classNamePrefix="react-select"
       options={choices}
@@ -27,9 +27,9 @@ const SelectFacet = (props) => {
         );
       }}
       isMulti={facet.multiple}
-      value={value}
+      value={v}
     />
   );
 };
 
-export default compose(injectLazyLibs('reactSelect'))(SelectFacet);
+export default injectLazyLibs('reactSelect')(SelectFacet);

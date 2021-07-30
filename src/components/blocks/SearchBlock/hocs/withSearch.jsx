@@ -66,16 +66,72 @@ function getSearchData(query, facets, id, searchText) {
   return res;
 }
 
+const urlFields = [
+  'sort_on',
+  'sort_order',
+  'b_size',
+  'limit',
+  'SearchableText',
+];
+const getSearchFields = (searchData) => {
+  return Object.assign(
+    {},
+    ...urlFields.map((k) => {
+      return searchData[k] ? { [k]: searchData[k] } : {};
+    }),
+    searchData.query ? { query: JSON.stringify(searchData['query']) } : {},
+  );
+};
+
+const useLocationStateManager = () => {
+  const location = useLocation();
+  const history = useHistory();
+
+  const oldState = new URLSearchParams(location.search);
+  const current = Object.assign(
+    {},
+    ...Array.from(oldState.keys()).map((k) => ({ [k]: oldState.get(k) })),
+  );
+
+  const setSearchData = React.useCallback(
+    (searchData) => {
+      const newParams = new URLSearchParams('');
+
+      let changed = false;
+
+      Object.keys(searchData)
+        .sort()
+        .forEach((k) => {
+          if (searchData[k]) {
+            newParams.set(k, searchData[k]);
+            if (oldState.get(k) !== searchData[k]) {
+              changed = true;
+            }
+          }
+        });
+
+      if (changed) history.push({ search: newParams.toString() });
+    },
+    [history, oldState],
+  );
+
+  return [current, setSearchData];
+};
+
 const withSearch = (options) => (WrappedComponent) => {
   const { inputDelay = 1000 } = options || {};
   return (props) => {
     const { data, id } = props;
 
-    const location = useLocation();
-    const history = useHistory();
-    const urlSearchText = location.search
-      ? new URLSearchParams(location.search).get('SearchableText')
-      : '';
+    const [
+      locationSearchData,
+      setLocationSearchData,
+    ] = useLocationStateManager();
+
+    const urlSearchText = locationSearchData.SearchableText || '';
+    const urlQuery = locationSearchData.query
+      ? JSON.parse(locationSearchData.query)
+      : [];
 
     const querystringResults = useSelector(
       (state) => state.querystringsearch.subrequests,
@@ -83,8 +139,30 @@ const withSearch = (options) => (WrappedComponent) => {
     const totalItems =
       querystringResults[id]?.total || querystringResults[id]?.items?.length;
 
+    // TODO: should use only useLocationStateManager()
     const [searchText, setSearchText] = React.useState(urlSearchText);
-    const [facets, setFacets] = React.useState({});
+    const configuredFacets = data.facets?.map((facet) => facet?.field?.value);
+    const multiFacets = data.facets
+      ?.filter((facet) => facet?.multiple)
+      .map((facet) => facet?.field?.value);
+    const [facets, setFacets] = React.useState(
+      Object.assign(
+        {},
+        ...urlQuery.map(({ i, v }) => ({ [i]: v })),
+        // supporting simple filters like ?Subject=something
+        ...configuredFacets.map((f) =>
+          locationSearchData[f]
+            ? {
+                [f]:
+                  multiFacets.indexOf(f) > -1
+                    ? [locationSearchData[f]]
+                    : locationSearchData[f],
+              }
+            : {},
+        ),
+      ),
+    );
+
     const [searchData, setSearchData] = React.useState(
       getInitialState(data, facets, urlSearchText, id),
     );
@@ -104,14 +182,12 @@ const withSearch = (options) => (WrappedComponent) => {
             );
             if (toSearchFacets) setFacets(toSearchFacets);
             setSearchData(searchData);
-            const params = new URLSearchParams(location.search);
-            params.set('SearchableText', toSearch || '');
-            history.push({ search: params.toString() });
+            setLocationSearchData(getSearchFields(searchData));
           },
           toSearchFacets ? inputDelay / 3 : inputDelay,
         );
       },
-      [data.query, facets, id, history, location.search],
+      [data.query, facets, id, setLocationSearchData],
     );
 
     return (

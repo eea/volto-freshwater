@@ -28,7 +28,7 @@ const FacetSchema = () => ({
     {
       id: 'default',
       title: 'Default',
-      fields: ['title', 'field', 'multiple', 'type'],
+      fields: ['title', 'field', 'multiple', 'type', 'hidden'],
     },
   ],
   properties: {
@@ -44,6 +44,13 @@ const FacetSchema = () => ({
       type: 'boolean',
       title: 'Multiple choices?',
       default: false,
+    },
+    hidden: {
+      type: 'boolean',
+      title: 'Hide facet?',
+      default: false,
+      description:
+        'Hidden facets will still filter the results if proper parameters are passed in URLs',
     },
     type: {
       title: 'Facet widget',
@@ -106,6 +113,7 @@ export default ({ data = {} }) => {
       },
       searchButtonLabel: {
         title: 'Search button label',
+        placeholder: 'Search!',
       },
       facets: {
         title: 'Facets',

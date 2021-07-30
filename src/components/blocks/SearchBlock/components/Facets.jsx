@@ -23,69 +23,71 @@ const Facets = (props) => {
 
   return (
     <>
-      {data.facets?.map((facet) => {
-        const field = facet?.field?.value;
-        const index = querystring.indexes[field] || {};
-        const { values = {} } = index;
+      {data.facets
+        ?.filter((facet) => !facet.hidden)
+        .map((facet) => {
+          const field = facet?.field?.value;
+          const index = querystring.indexes[field] || {};
+          const { values = {} } = index;
 
-        const choices = Object.keys(values)
-          .map((name) => ({
-            value: name,
-            label: values[name].title,
-          }))
-          // filter the available values based on the allowed values in the
-          // base query
-          .filter(({ value }) =>
-            query_to_values[field]
-              ? query_to_values[field].includes(value)
-              : true,
+          const choices = Object.keys(values)
+            .map((name) => ({
+              value: name,
+              label: values[name].title,
+            }))
+            // filter the available values based on the allowed values in the
+            // base query
+            .filter(({ value }) =>
+              query_to_values[field]
+                ? query_to_values[field].includes(value)
+                : true,
+            );
+
+          const isMulti = facet.multiple;
+          const selectedValue = facets[facet?.field?.value];
+
+          // TODO :handle changing the type of facet (multi/nonmulti)
+
+          let value = selectedValue
+            ? isMulti
+              ? Array.isArray(selectedValue)
+                ? selectedValue.map((v) => ({
+                    value: v,
+                    label: index.values?.[v]?.title,
+                  }))
+                : []
+              : {
+                  value: selectedValue,
+                  label: index.values?.[selectedValue]?.title,
+                }
+            : [];
+
+          const { view: FacetWidget } = resolveExtension(
+            'type',
+            searchBlock.extensions.facetWidgets.types,
+            facet,
           );
 
-        const isMulti = facet.multiple;
-        const selectedValue = facets[facet?.field?.value];
+          const {
+            rewriteOptions = (name, options) => options,
+          } = searchBlock.extensions.facetWidgets;
 
-        // TODO :handle changing the type of facet (multi/nonmulti)
-
-        let value = selectedValue
-          ? isMulti
-            ? Array.isArray(selectedValue)
-              ? selectedValue.map((v) => ({
-                  value: v,
-                  label: index.values?.[v]?.title,
-                }))
-              : []
-            : {
-                value: selectedValue,
-                label: index.values?.[selectedValue]?.title,
-              }
-          : [];
-
-        const { view: FacetWidget } = resolveExtension(
-          'type',
-          searchBlock.extensions.facetWidgets.types,
-          facet,
-        );
-
-        const {
-          rewriteOptions = (name, options) => options,
-        } = searchBlock.extensions.facetWidgets;
-
-        return FacetWrapper && Object.keys(values).length ? (
-          <FacetWrapper key={facet['@id']}>
-            <FacetWidget
-              facet={facet}
-              choices={rewriteOptions(facet?.field?.value, choices)}
-              isMulti={isMulti}
-              value={value}
-              onChange={(id, value) => {
-                !isEditMode && setFacets({ ...facets, [id]: value });
-              }}
-            />
-          </FacetWrapper>
-        ) : (
-          ''
-        );
-      })}
+          return FacetWrapper && Object.keys(values).length ? (
+            <FacetWrapper key={facet['@id']}>
+              <FacetWidget
+                facet={facet}
+                choices={rewriteOptions(facet?.field?.value, choices)}
+                isMulti={isMulti}
+                value={value}
+                onChange={(id, value) => {
+                  !isEditMode && setFacets({ ...facets, [id]: value });
+                }}
+              />
+            </FacetWrapper>
+          ) : (
+            ''
+          );
+        })}
     </>
   );
 };
