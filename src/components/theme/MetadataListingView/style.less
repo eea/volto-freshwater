@@ -13,6 +13,10 @@
     vertical-align: top;
   }
 
+  .ui.definition.table tr td a {
+    word-break: break-word;
+  }
+
   .ui.definition.table tr:last-child {
     border-bottom: none;
   }
@@ -29,6 +33,12 @@
       background-color: #ddd;
       font-size: 12px;
     }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .item-metadata-table .ui.definition.table tr {
+    box-shadow: none !important;
   }
 }
 

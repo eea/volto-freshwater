@@ -13,6 +13,8 @@
   display: inline-block;
   padding: 5px 10px;
   background: #000;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 
   .divider {
     color: @wisePrimaryColor;
@@ -22,13 +24,6 @@
     position: relative;
     top: 3px;
     fill: @wisePrimaryColor !important;
-  }
-}
-
-@media only screen and (min-width: 480px) {
-  .ui.breadcrumb {
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
   }
 }
 
@@ -52,20 +47,20 @@ body.siteroot .breadcrumbs {
 
 .has-image .breadcrumb {
   position: absolute;
-  top: 88px;
+  top: 86px;
   max-width: 91%;
 }
 
 @media only screen and (max-width: 768px) {
   body.has-toolbar {
     .ui.breadcrumb {
-      top: 184px;
+      top: 186px;
     }
   }
 
   body.has-toolbar-collapsed {
     .ui.breadcrumb {
-      top: 104px;
+      top: 106px;
     }
   }
 }

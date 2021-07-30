@@ -25,11 +25,8 @@
     }
   }
 
-  .default.tabs.left.side {
-    .ui.menu {
-      border-right: 1px solid @menuBorderColor;
-    }
-
+  .default.tabs.left.side,
+  .default.tabs.right.side {
     .item {
       display: block;
       width: 100%;
@@ -37,6 +34,18 @@
 
     .ui.tab {
       padding-left: 1.5rem;
+    }
+  }
+
+  .default.tabs.left.side {
+    .ui.menu {
+      border-right: 1px solid @menuBorderColor;
+    }
+  }
+
+  .default.tabs.right.side {
+    .ui.menu {
+      border-left: 1px solid @menuBorderColor;
     }
   }
 }
