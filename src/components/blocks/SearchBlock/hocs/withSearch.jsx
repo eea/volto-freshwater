@@ -141,7 +141,8 @@ const withSearch = (options) => (WrappedComponent) => {
 
     // TODO: should use only useLocationStateManager()
     const [searchText, setSearchText] = React.useState(urlSearchText);
-    const configuredFacets = data.facets?.map((facet) => facet?.field?.value);
+    const configuredFacets =
+      data.facets?.map((facet) => facet?.field?.value) || [];
     const multiFacets = data.facets
       ?.filter((facet) => facet?.multiple)
       .map((facet) => facet?.field?.value);

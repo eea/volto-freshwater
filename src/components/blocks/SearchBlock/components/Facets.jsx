@@ -7,7 +7,7 @@ import config from '@plone/volto/registry';
 const Facets = (props) => {
   const {
     querystring,
-    data,
+    data = {},
     facets,
     setFacets,
     facetWrapper,
@@ -18,12 +18,12 @@ const Facets = (props) => {
   const FacetWrapper = facetWrapper;
   const query_to_values = Object.assign(
     {},
-    ...data.query?.query?.map(({ i, v }) => ({ [i]: v })),
+    ...(data?.query?.query?.map(({ i, v }) => ({ [i]: v })) || []),
   );
 
   return (
     <>
-      {data.facets
+      {data?.facets
         ?.filter((facet) => !facet.hidden)
         .map((facet) => {
           const field = facet?.field?.value;
