@@ -165,7 +165,9 @@ const MetadataCardsView = ({ data, isEditMode }) => {
               <div style={{ textAlign: `${text_align}` }}>
                 <Card.Group
                   className="metadata-cards-group"
-                  itemsPerRow={cards_per_row ? cards_per_row : ''}
+                  {...(cards_per_row && cards_per_row > 0
+                    ? { itemsPerRow: cards_per_row }
+                    : {})}
                 >
                   {(cards || []).map((card, index) => (
                     <CardItem

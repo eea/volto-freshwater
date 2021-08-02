@@ -208,7 +208,9 @@ const PresentationCardsView = ({ data, isEditMode }) => {
               <div style={{ textAlign: `${text_align}` }}>
                 <Card.Group
                   className="presentation-cards-group"
-                  itemsPerRow={cards_per_row ? cards_per_row : ''}
+                  {...(cards_per_row && cards_per_row > 0
+                    ? { itemsPerRow: cards_per_row }
+                    : {})}
                 >
                   {(cards || []).map((card, index) => (
                     <CardItem

@@ -119,7 +119,9 @@ const ColoredCards = ({ data, isEditMode }) => {
 
               <Card.Group
                 className="colored-card-group"
-                itemsPerRow={cards_per_row ? cards_per_row : ''}
+                {...(cards_per_row && cards_per_row > 0
+                  ? { itemsPerRow: cards_per_row }
+                  : {})}
               >
                 {(cards || []).map((card, index) => (
                   <CardItem
