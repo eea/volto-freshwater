@@ -16,7 +16,7 @@ import { FormattedMessage } from 'react-intl';
 import { HeroSection } from '../../../../components';
 import { getScaleUrl, getPath } from '@eeacms/volto-freshwater/utils';
 
-import clearLogoSVG from './freshwater_logo_clear.svg';
+import clearLogoSVG from '@eeacms/volto-freshwater/static/freshwater_logo_clear.svg';
 
 /**
  * Header component class.
