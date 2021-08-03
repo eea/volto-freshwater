@@ -103,12 +103,26 @@
   flex-wrap: wrap;
   background-color: #f5f5f5;
 
-  .tableau-block {
+  .tableau-block,
+  .map-wrapper {
     position: relative;
     display: flex;
     flex: 1 1;
     flex-direction: column;
+  }
+
+  .tableau-block {
     padding: 1em 0.5em;
+  }
+
+  .map-wrapper {
+    > .block {
+      margin: 0 !important;
+    }
+
+    iframe {
+      height: 100% !important;
+    }
   }
 
   .toolbar-button {

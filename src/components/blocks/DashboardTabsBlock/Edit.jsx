@@ -15,12 +15,14 @@ const ContentBlockEdit = (props) => {
         el.title = el.source[0].title;
         el.description = el.source[0].Description;
         el.tableau_url = el.source[0].embed_url;
+        el.webmap_url = el.source[0].webmap_url;
         forceRefresh(refresh + 1);
       }
       if ((el.title || el.description) && !el.source?.length) {
         el.title = null;
         el.description = null;
         el.tableau_url = null;
+        el.webmap_url = null;
         forceRefresh(refresh + 1);
       }
     });
@@ -31,7 +33,7 @@ const ContentBlockEdit = (props) => {
       <DashboardTabsBlockView {...props} />
       <SidebarPortal selected={selected}>
         <BlockDataForm
-          schema={schema}
+          schema={schema(props)}
           title={schema.title}
           onChangeField={(id, value) => {
             onChangeBlock(block, {

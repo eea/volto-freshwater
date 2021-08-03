@@ -24,6 +24,7 @@ const DashboardTabsBlockView = (props) => {
   } = config;
 
   const TableauBlockView = blocksConfig.tableau_block.view;
+  const MapBlockView = blocksConfig.maps.view;
 
   const close = (item) => {
     setOpenModal(false);
@@ -63,11 +64,12 @@ const DashboardTabsBlockView = (props) => {
         const source = tab.source?.[0];
         const tableau_url = tab.tableau_url || source?.embed_url;
         const description = tab.description || source?.description;
+        const map_url = tab?.webmap_url || source?.webmap_url;
 
         return (
           <Tab.Pane>
-            {tableau_url && (
-              <div className="dashboard-wrapper">
+            <div className="dashboard-wrapper">
+              {tableau_url && (
                 <TableauBlockView
                   {...props}
                   data={{
@@ -94,43 +96,49 @@ const DashboardTabsBlockView = (props) => {
                     );
                   }}
                 </TableauBlockView>
+              )}
 
-                <div className="dashboard-metadata">
-                  {description && <p>{description}</p>}
-
-                  <div>
-                    <Button
-                      className="read-more"
-                      onClick={() => {
-                        setOpenModal(true);
-                        setSelectedItem(tab);
-                      }}
-                    >
-                      <span>Read more</span>
-                      <Icon name={arrowSVG} size="27px" className="next-icon" />
-                    </Button>
-                  </div>
-
-                  <Modal
-                    className="item-metadata-modal"
-                    open={isOpenModal}
-                    onClose={close}
-                    size="large"
-                    closeIcon
-                    centered
-                  >
-                    <Modal.Header>
-                      <ItemMetadataSnippet {...props} item={selectedItem} />
-                      <ItemTitle {...props} item={selectedItem} />
-                    </Modal.Header>
-
-                    <Modal.Content>
-                      <ItemMetadata {...props} item={selectedItem} />
-                    </Modal.Content>
-                  </Modal>
+              {map_url && (
+                <div className="map-wrapper">
+                  <MapBlockView {...props} data={{ url: map_url }} />
                 </div>
+              )}
+
+              <div className="dashboard-metadata">
+                {description && <p>{description}</p>}
+
+                <div>
+                  <Button
+                    className="read-more"
+                    onClick={() => {
+                      setOpenModal(true);
+                      setSelectedItem(tab);
+                    }}
+                  >
+                    <span>Read more</span>
+                    <Icon name={arrowSVG} size="27px" className="next-icon" />
+                  </Button>
+                </div>
+
+                <Modal
+                  className="item-metadata-modal"
+                  open={isOpenModal}
+                  onClose={close}
+                  size="large"
+                  closeIcon
+                  centered
+                >
+                  <Modal.Header>
+                    <ItemMetadataSnippet {...props} item={selectedItem} />
+                    <ItemTitle {...props} item={selectedItem} />
+                  </Modal.Header>
+
+                  <Modal.Content>
+                    <ItemMetadata {...props} item={selectedItem} />
+                  </Modal.Content>
+                </Modal>
               </div>
-            )}
+            </div>
           </Tab.Pane>
         );
       },

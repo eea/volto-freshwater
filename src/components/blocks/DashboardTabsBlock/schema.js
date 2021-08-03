@@ -4,7 +4,7 @@ const Tab = () => ({
     {
       id: 'default',
       title: 'Default',
-      fields: ['source', 'title', 'description', 'tableau_url'],
+      fields: ['source', 'title', 'description', 'tableau_url', 'webmap_url'],
     },
   ],
 
@@ -25,30 +25,35 @@ const Tab = () => ({
     tableau_url: {
       title: 'Tableau URL',
     },
+    webmap_url: {
+      title: 'Embed URL',
+    },
   },
 
   required: ['source'],
 });
 
-const DashboardTabsSchema = {
-  title: 'Dashboard tabs',
+const DashboardTabsSchema = (props) => {
+  return {
+    title: 'Dashboard tabs',
 
-  fieldsets: [
-    {
-      id: 'default',
-      title: 'Default',
-      fields: ['tabs'],
-    },
-  ],
+    fieldsets: [
+      {
+        id: 'default',
+        title: 'Default',
+        fields: ['tabs'],
+      },
+    ],
 
-  properties: {
-    tabs: {
-      widget: 'object_list',
-      title: 'Tabs',
-      schema: Tab(),
+    properties: {
+      tabs: {
+        widget: 'object_list',
+        title: 'Tabs',
+        schema: Tab(),
+      },
     },
-  },
-  required: [],
+    required: [],
+  };
 };
 
 export default DashboardTabsSchema;
