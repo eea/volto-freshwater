@@ -10,6 +10,8 @@ import {
   TableauDownload,
   TableauShare,
   TableauFullscreen,
+  MapShare,
+  MapFullscreen,
 } from '@eeacms/volto-freshwater/components';
 
 import './style.less';
@@ -80,7 +82,7 @@ const DashboardTabsBlockView = (props) => {
                 >
                   {(viz) => {
                     return (
-                      <div className="tableau-icons">
+                      <div className="map-icons tableau-icons">
                         <TableauDownload {...props} viz={viz} />
                         <TableauShare
                           {...props}
@@ -101,6 +103,10 @@ const DashboardTabsBlockView = (props) => {
               {map_url && (
                 <div className="map-wrapper">
                   <MapBlockView {...props} data={{ url: map_url }} />
+                  <div className="map-icons">
+                    <MapShare {...props} data={{ url: map_url }} />
+                    <MapFullscreen {...props} data={{ url: map_url }} />
+                  </div>
                 </div>
               )}
 

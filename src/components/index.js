@@ -10,3 +10,5 @@ export ItemMetadataSnippet from './theme/ItemMetadata/ItemMetadataSnippet';
 export TableauDownload from './theme/Tableau/TableauDownload';
 export TableauShare from './theme/Tableau/TableauShare';
 export TableauFullscreen from './theme/Tableau/TableauFullscreen';
+export MapFullscreen from './theme/Webmap/MapFullscreen';
+export MapShare from './theme/Webmap/MapShare';
