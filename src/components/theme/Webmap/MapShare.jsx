@@ -7,7 +7,7 @@ import cx from 'classnames';
 import shareSVG from '@plone/volto/icons/share.svg';
 
 const MapShare = (props) => {
-  const tableau_url = props.data.url;
+  const map_url = props.data.url;
 
   const CopyUrlButton = ({ url, buttonText }) => {
     const [copyUrlStatus, copyUrl] = useCopyToClipboard(url);
@@ -44,8 +44,8 @@ const MapShare = (props) => {
     >
       <Popup.Header>Share</Popup.Header>
       <Popup.Content>
-        <Input defaultValue={tableau_url} />
-        <CopyUrlButton url={tableau_url} buttonText="Copy sharing URL" />
+        <Input defaultValue={map_url} />
+        <CopyUrlButton url={map_url} buttonText="Copy sharing URL" />
       </Popup.Content>
     </Popup>
   );
