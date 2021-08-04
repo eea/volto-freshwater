@@ -33,27 +33,24 @@ const Tab = () => ({
   required: ['source'],
 });
 
-const DashboardTabsSchema = (props) => {
-  return {
-    title: 'Dashboard tabs',
-
-    fieldsets: [
-      {
-        id: 'default',
-        title: 'Default',
-        fields: ['tabs'],
-      },
-    ],
-
-    properties: {
-      tabs: {
-        widget: 'object_list',
-        title: 'Tabs',
-        schema: Tab(),
-      },
+const DashboardTabsSchema = {
+  title: 'Dashboard tabs',
+  fieldsets: [
+    {
+      id: 'default',
+      title: 'Default',
+      fields: ['tabs'],
     },
-    required: [],
-  };
+  ],
+
+  properties: {
+    tabs: {
+      widget: 'object_list',
+      title: 'Tabs',
+      schema: Tab(),
+    },
+  },
+  required: [],
 };
 
 export default DashboardTabsSchema;
