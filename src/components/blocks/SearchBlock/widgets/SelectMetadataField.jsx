@@ -36,18 +36,7 @@ class SelectWidget extends Component {
     description: PropTypes.string,
     required: PropTypes.bool,
     error: PropTypes.arrayOf(PropTypes.string),
-    getVocabulary: PropTypes.func.isRequired,
-    getVocabularyTokenTitle: PropTypes.func.isRequired,
-    choices: PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-    ),
     loading: PropTypes.bool,
-    items: PropTypes.shape({
-      vocabulary: PropTypes.object,
-    }),
-    widgetOptions: PropTypes.shape({
-      vocabulary: PropTypes.object,
-    }),
     value: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.string,
@@ -58,8 +47,8 @@ class SelectWidget extends Component {
     onClick: PropTypes.func,
     onEdit: PropTypes.func,
     onDelete: PropTypes.func,
-    itemsTotal: PropTypes.number,
     wrapped: PropTypes.bool,
+    querystring: PropTypes.object,
   };
 
   /**

@@ -1,8 +1,14 @@
 import React from 'react';
-import { SearchInput, SearchDetails, Facets } from '../components';
-import { Grid, Divider } from 'semantic-ui-react';
+import { SearchInput, SearchDetails, Facets, FilterList } from '../components';
+import { Grid, Segment } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
 import { flushSync } from 'react-dom';
+
+const FacetWrapper = ({ children }) => (
+  <Segment basic className="facet">
+    {children}
+  </Segment>
+);
 
 const RightColumnFacets = (props) => {
   const {
@@ -26,37 +32,40 @@ const RightColumnFacets = (props) => {
     <Grid className="searchBlock-facets right-column-facets" stackable>
       <Grid.Row>
         <Grid.Column width={12}>
-          <h3>{data.title}</h3>
+          {data.title && <h3>{data.title}</h3>}
           <SearchDetails text={searchedText} total={totalItems} />
         </Grid.Column>
       </Grid.Row>
+
+      {data.showSearchInput && (
+        <Grid.Row verticalAlign="bottom">
+          <Grid.Column width={12}>
+            <div className="search-wrapper">
+              <SearchInput {...props} isLive={isLive} />
+              {data.showSearchButton && (
+                <Button onClick={() => onTriggerSearch(searchText)}>
+                  {data.searchButtonLabel || 'Search'}
+                </Button>
+              )}
+            </div>
+          </Grid.Column>
+        </Grid.Row>
+      )}
+
+      <FilterList
+        {...props}
+        isEditMode={isEditMode}
+        setFacets={(f) => {
+          flushSync(() => {
+            setFacets(f);
+            onTriggerSearch(searchedText || '', f);
+          });
+        }}
+      />
+
       <Grid.Row>
         <Grid.Column mobile={12} tablet={8} computer={9}>
-          <Grid>
-            <Grid.Row>
-              <Grid columns="2" verticalAlign="bottom">
-                {data.showSearchInput && (
-                  <Grid.Column>
-                    <SearchInput {...props} isLive={isLive} />
-                  </Grid.Column>
-                )}
-                {data.showSearchButton && (
-                  <Grid.Column>
-                    <Button onClick={() => onTriggerSearch(searchText)}>
-                      {data.searchButtonLabel || 'Search!'}
-                    </Button>
-                  </Grid.Column>
-                )}
-              </Grid>
-            </Grid.Row>
-
-            <Grid.Row>
-              <Grid.Column width={12}>
-                <Divider />
-                {children}
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
+          {children}
         </Grid.Column>
 
         <Grid.Column mobile={12} tablet={4} computer={3}>
@@ -67,12 +76,10 @@ const RightColumnFacets = (props) => {
             setFacets={(f) => {
               flushSync(() => {
                 setFacets(f);
-                if (isLive) onTriggerSearch(searchedText || '', f);
+                onTriggerSearch(searchedText || '', f);
               });
             }}
-            facetWrapper={({ children }) => (
-              <div className="facet">{children}</div>
-            )}
+            facetWrapper={FacetWrapper}
           />
         </Grid.Column>
       </Grid.Row>

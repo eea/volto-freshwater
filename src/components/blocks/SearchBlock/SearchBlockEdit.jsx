@@ -11,7 +11,7 @@ import useDeepCompareEffect from 'use-deep-compare-effect';
 
 const SearchBlockEdit = (props) => {
   const { block, onChangeBlock, data, selected, intl, onTriggerSearch } = props;
-  let schema = Schema({ data });
+  let schema = Schema({ data, intl });
   schema = addExtensionFieldToSchema({
     schema,
     name: 'listingBodyTemplate',
