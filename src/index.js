@@ -1,10 +1,4 @@
 import React from 'react';
-import PlainCards from './components/Blocks/CustomImageCards/PlainCards/PlainCards';
-import ColoredCards from './components/Blocks/CustomImageCards/ColoredCards/ColoredCards';
-import { ColoredCardsSchemaExtender } from './components/Blocks/CustomImageCards/ColoredCards/schema';
-import { PresentationCardsSchemaExtender } from './components/Blocks/CustomImageCards/PresentationCards/schema';
-import PresentationCardsView from './components/Blocks/CustomImageCards/PresentationCards/PresentationCardsView';
-import PresentationCardsEdit from './components/Blocks/CustomImageCards/PresentationCards/PresentationCardsEdit';
 import {
   ScrollToTop,
   HeroSectionView,
@@ -78,33 +72,6 @@ const applyConfig = (config) => {
     ...config.blocks.groupBlocksOrder,
     { id: 'freshwater_addons', title: 'Freshwater' },
   ];
-
-  config.blocks.blocksConfig.imagecards = {
-    sidebarTab: 1,
-    ...config.blocks.blocksConfig.imagecards,
-    display_types: {
-      ...config.blocks.blocksConfig.imagecards?.display_types,
-    },
-    blockRenderers: {
-      ...config.blocks.blocksConfig.imagecards?.blockRenderers,
-      colored_cards: {
-        title: 'Colored cards',
-        schemaExtender: ColoredCardsSchemaExtender,
-        view: ColoredCards,
-      },
-      plain_cards: {
-        title: 'Plain cards',
-        schemaExtender: null,
-        view: PlainCards,
-      },
-      presentation_cards: {
-        title: 'Presentation cards',
-        view: PresentationCardsView,
-        edit: PresentationCardsEdit,
-        schemaExtender: PresentationCardsSchemaExtender,
-      },
-    },
-  };
 
   // on home contextNavigation should return false
   config.blocks.blocksConfig.contextNavigation = {
