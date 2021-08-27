@@ -76,7 +76,7 @@ const applyConfig = (config) => {
 
   config.blocks.groupBlocksOrder = [
     ...config.blocks.groupBlocksOrder,
-    { id: 'custom_addons', title: 'Freshwater' },
+    { id: 'freshwater_addons', title: 'Freshwater' },
   ];
 
   config.blocks.blocksConfig.imagecards = {

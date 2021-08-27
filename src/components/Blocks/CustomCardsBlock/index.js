@@ -25,7 +25,7 @@ export default (config) => {
     id: 'customCardsBlock',
     title: 'Cards block',
     icon: cardsSVG,
-    group: 'custom_addons',
+    group: 'freshwater_addons',
     view: (props) => (
       <BlockStyleWrapperView {...props}>
         <CustomCardsView {...props} />

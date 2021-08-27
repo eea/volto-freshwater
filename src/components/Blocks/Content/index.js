@@ -7,7 +7,7 @@ export default (config) => {
     id: 'embedContent',
     title: 'Embed content',
     icon: contentSVG,
-    group: 'custom_addons',
+    group: 'freshwater_addons',
     view: ContentBlockView,
     edit: ContentBlockEdit,
     restricted: false,

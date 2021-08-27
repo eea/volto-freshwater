@@ -7,7 +7,7 @@ export default (config) => {
     id: 'dashboardTabsBlock',
     title: 'Dashboard tabs block',
     icon: tabsSVG,
-    group: 'custom_addons',
+    group: 'freshwater_addons',
     view: DashboardTabsBlockView,
     edit: DashboardTabsBlockEdit,
     restricted: false,
