@@ -1,6 +1,6 @@
 export HeroSection from './theme/Header/HeroSection';
 export HeroSectionView from './theme/Header/HeroSectionView';
-export ScrollToTop from './ScrollToTop/ScrollToTop';
+export ScrollToTop from './theme/ScrollToTop/ScrollToTop';
 export DatabaseItemView from './theme/DatabaseItemView/DatabaseItemView';
 export MetadataListingView from './theme/MetadataListingView/MetadataListingView';
 export SimpleListingView from './theme/SimpleListingView/SimpleListingView';

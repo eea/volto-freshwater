@@ -1,10 +1,10 @@
 import React from 'react';
-import PlainCards from './components/blocks/CustomImageCards/PlainCards/PlainCards';
-import ColoredCards from './components/blocks/CustomImageCards/ColoredCards/ColoredCards';
-import { ColoredCardsSchemaExtender } from './components/blocks/CustomImageCards/ColoredCards/schema';
-import { PresentationCardsSchemaExtender } from './components/blocks/CustomImageCards/PresentationCards/schema';
-import PresentationCardsView from './components/blocks/CustomImageCards/PresentationCards/PresentationCardsView';
-import PresentationCardsEdit from './components/blocks/CustomImageCards/PresentationCards/PresentationCardsEdit';
+import PlainCards from './components/Blocks/CustomImageCards/PlainCards/PlainCards';
+import ColoredCards from './components/Blocks/CustomImageCards/ColoredCards/ColoredCards';
+import { ColoredCardsSchemaExtender } from './components/Blocks/CustomImageCards/ColoredCards/schema';
+import { PresentationCardsSchemaExtender } from './components/Blocks/CustomImageCards/PresentationCards/schema';
+import PresentationCardsView from './components/Blocks/CustomImageCards/PresentationCards/PresentationCardsView';
+import PresentationCardsEdit from './components/Blocks/CustomImageCards/PresentationCards/PresentationCardsEdit';
 import {
   ScrollToTop,
   HeroSectionView,
@@ -16,10 +16,10 @@ import {
 import CopyrightWidget from './components/Widgets/CopyrightWidget';
 import TokenWidget from '@plone/volto/components/manage/Widgets/TokenWidget';
 
-import installEmbedContentBlock from './components/blocks/Content';
-import installDashboardTabsBlock from './components/blocks/DashboardTabsBlock';
-import installcustomCardsBlock from './components/blocks/CustomCardsBlock';
-import installSearchBlock from './components/blocks/SearchBlock';
+import installEmbedContentBlock from './components/Blocks/Content';
+import installDashboardTabsBlock from './components/Blocks/DashboardTabsBlock';
+import installcustomCardsBlock from './components/Blocks/CustomCardsBlock';
+import installSearchBlock from './components/Blocks/SearchBlock';
 
 const available_colors = [
   '#0099BB',
