@@ -1,13 +1,3 @@
 .content-area .segment.inverted {
   border-radius: @borderRadius;
 }
-
-.ui.attached.segment {
-  padding-right: 0;
-  padding-left: 0;
-
-  .ui.list {
-    padding-right: 1em;
-    padding-left: 1em;
-  }
-}

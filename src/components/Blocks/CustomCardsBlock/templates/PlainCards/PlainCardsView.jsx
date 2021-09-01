@@ -10,7 +10,7 @@ import cx from 'classnames';
 import './css/plaincards.less';
 
 export const CardItem = (props) => {
-  const { title, text, link, attachedimage, isEditMode } = props;
+  const { title, description, link, attachedimage, isEditMode } = props;
 
   return (
     <>
@@ -41,11 +41,9 @@ export const CardItem = (props) => {
               </div>
             )}
 
-            {text && (
+            {description && (
               <div className="content plain-card-content">
-                <div className="plain-card-description">
-                  {serializeNodes(text)}
-                </div>
+                <div className="plain-card-description">{description}</div>
               </div>
             )}
           </UniversalLink>
@@ -77,11 +75,9 @@ export const CardItem = (props) => {
               </div>
             )}
 
-            {text && (
+            {description && (
               <div className="content plain-card-content">
-                <div className="plain-card-description">
-                  {serializeNodes(text)}
-                </div>
+                <div className="plain-card-description">{description}</div>
               </div>
             )}
           </div>
