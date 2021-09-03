@@ -27,6 +27,7 @@
     "volto-slate": "^2.6.1",
     "@eeacms/volto-resize-helper": "^0.2.0",
     "@eeacms/volto-block-style": "^3.3.0",
+    "@eeacms/volto-datablocks": "2.0.11",
     "@kitconcept/volto-blocks-grid": "*"
   },
   "devDependencies": {
