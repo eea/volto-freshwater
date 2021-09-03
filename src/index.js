@@ -14,6 +14,7 @@ import installEmbedContentBlock from './components/Blocks/Content';
 import installDashboardTabsBlock from './components/Blocks/DashboardTabsBlock';
 import installcustomCardsBlock from './components/Blocks/CustomCardsBlock';
 import installSearchBlock from './components/Blocks/SearchBlock';
+import installCountryHeaderDataBlock from './components/Blocks/CountryHeaderDataBlock';
 
 const available_colors = [
   '#0099BB',
@@ -157,6 +158,7 @@ const applyConfig = (config) => {
     installDashboardTabsBlock,
     installcustomCardsBlock,
     installSearchBlock,
+    installCountryHeaderDataBlock,
   ].reduce((acc, apply) => apply(acc), config);
 };
 
