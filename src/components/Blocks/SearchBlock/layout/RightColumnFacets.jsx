@@ -37,9 +37,9 @@ const RightColumnFacets = (props) => {
         </Grid.Column>
       </Grid.Row>
 
-      {data.showSearchInput && (
-        <Grid.Row verticalAlign="bottom">
-          <Grid.Column width={12}>
+      <Grid.Row>
+        <Grid.Column mobile={12} tablet={8} computer={9}>
+          {data.showSearchInput && (
             <div className="search-wrapper">
               <SearchInput {...props} isLive={isLive} />
               {data.showSearchButton && (
@@ -48,23 +48,19 @@ const RightColumnFacets = (props) => {
                 </Button>
               )}
             </div>
-          </Grid.Column>
-        </Grid.Row>
-      )}
+          )}
 
-      <FilterList
-        {...props}
-        isEditMode={isEditMode}
-        setFacets={(f) => {
-          flushSync(() => {
-            setFacets(f);
-            onTriggerSearch(searchedText || '', f);
-          });
-        }}
-      />
+          <FilterList
+            {...props}
+            isEditMode={isEditMode}
+            setFacets={(f) => {
+              flushSync(() => {
+                setFacets(f);
+                onTriggerSearch(searchedText || '', f);
+              });
+            }}
+          />
 
-      <Grid.Row>
-        <Grid.Column mobile={12} tablet={8} computer={9}>
           {children}
         </Grid.Column>
 
