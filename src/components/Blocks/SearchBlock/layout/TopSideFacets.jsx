@@ -30,10 +30,12 @@ const TopSideFacets = (props) => {
 
   return (
     <Grid className="searchBlock-facets" stackable>
-      <Grid.Column width={12}>
-        {data.title && <h3>{data.title}</h3>}
-        <SearchDetails text={searchedText} total={totalItems} as="h5" />
-      </Grid.Column>
+      <Grid.Row>
+        <Grid.Column>
+          {data.title && <h3>{data.title}</h3>}
+          <SearchDetails text={searchedText} total={totalItems} as="h5" />
+        </Grid.Column>
+      </Grid.Row>
 
       {data.showSearchInput && (
         <Grid.Row verticalAlign="bottom">
@@ -41,7 +43,7 @@ const TopSideFacets = (props) => {
             <div className="search-wrapper">
               <SearchInput {...props} isLive={isLive} />
               {data.showSearchButton && (
-                <Button onClick={() => onTriggerSearch(searchText)}>
+                <Button primary onClick={() => onTriggerSearch(searchText)}>
                   {data.searchButtonLabel || 'Search'}
                 </Button>
               )}
@@ -62,7 +64,8 @@ const TopSideFacets = (props) => {
       />
 
       <Grid.Row>
-        <Grid.Column width={12}>
+        <Grid.Column className="facets">
+          {data.facetsTitle && <h3>{data.facetsTitle}</h3>}
           <Grid verticalAlign="bottom" columns={12}>
             <Facets
               data={data}
@@ -80,7 +83,7 @@ const TopSideFacets = (props) => {
       </Grid.Row>
 
       <Grid.Row>
-        <Grid.Column width={12}>{children}</Grid.Column>
+        <Grid.Column>{children}</Grid.Column>
       </Grid.Row>
     </Grid>
   );

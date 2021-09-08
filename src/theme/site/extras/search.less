@@ -33,9 +33,15 @@
     margin-bottom: 0.5rem;
   }
 
-  .segment.facet {
-    padding-right: 0;
-    padding-left: 0;
+  .facets {
+    > .facet:first-child {
+      padding-top: 0 !important;
+    }
+
+    .segment.facet {
+      padding-right: 0;
+      padding-left: 0;
+    }
   }
 
   .items {
@@ -43,10 +49,15 @@
   }
 
   .ui.accordion.filter-listing {
-    padding: 0.5rem 1rem 0.5rem 0.5rem;
     margin: 1em 0;
-    background-color: #e9e9e9;
-    border-radius: 0.3rem;
+
+    .filter-list-header {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem;
+      background-color: #faf8f8;
+      border-radius: 0.3rem;
+    }
 
     .active.title .filter-list-title svg {
       transform: rotate(90deg);
@@ -54,11 +65,6 @@
 
     .ui.basic.button:hover {
       background: transparent !important;
-    }
-
-    .filter-list-header {
-      display: flex;
-      justify-content: space-between;
     }
 
     .filter-list-title {
@@ -83,8 +89,10 @@
       }
 
       .ui.label {
+        border: 1px solid #f3f3f3;
         margin-left: 0.8em;
-        background-color: #fff;
+        background-color: transparent;
+        font-weight: bold;
       }
 
       .label-title {
@@ -145,22 +153,6 @@
       display: block;
       padding-bottom: 0.5rem;
     }
-
-    .ui.button {
-      padding-top: 13px;
-      padding-bottom: 13px;
-      margin: 0;
-      background-color: #064c7f;
-      background-image: none;
-      color: #fff;
-      text-shadow: none;
-
-      &:hover {
-        background-color: #003e6c;
-        color: #fff;
-        text-shadow: none;
-      }
-    }
   }
 
   .ui.divider {
@@ -168,15 +160,21 @@
     margin: 0 !important;
   }
 
+  .facets {
+    > .facet:first-of-type {
+      .checkbox-facet {
+        padding-top: 0 !important;
+      }
+    }
+
+    h3 {
+      font-size: 20px;
+    }
+  }
+
   .facet {
     padding: 0;
     margin: 0;
-  }
-
-  .three.wide.column > .facet:first-child {
-    .checkbox-facet {
-      padding-top: 0 !important;
-    }
   }
 
   .checkbox-facet {

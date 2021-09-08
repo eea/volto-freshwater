@@ -19,6 +19,7 @@
   "addons": [
     "volto-slate:asDefault",
     "@kitconcept/volto-blocks-grid",
+    "@eeacms/volto-datablocks",
     "@eeacms/volto-resize-helper",
     "@eeacms/volto-block-style"
   ],

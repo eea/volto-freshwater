@@ -31,7 +31,7 @@ const RightColumnFacets = (props) => {
   return (
     <Grid className="searchBlock-facets right-column-facets" stackable>
       <Grid.Row>
-        <Grid.Column width={12}>
+        <Grid.Column>
           {data.title && <h3>{data.title}</h3>}
           <SearchDetails text={searchedText} total={totalItems} />
         </Grid.Column>
@@ -43,7 +43,7 @@ const RightColumnFacets = (props) => {
             <div className="search-wrapper">
               <SearchInput {...props} isLive={isLive} />
               {data.showSearchButton && (
-                <Button onClick={() => onTriggerSearch(searchText)}>
+                <Button primary onClick={() => onTriggerSearch(searchText)}>
                   {data.searchButtonLabel || 'Search'}
                 </Button>
               )}
@@ -64,7 +64,8 @@ const RightColumnFacets = (props) => {
           {children}
         </Grid.Column>
 
-        <Grid.Column mobile={12} tablet={4} computer={3}>
+        <Grid.Column className="facets" mobile={12} tablet={4} computer={3}>
+          {data.facetsTitle && <h3>{data.facetsTitle}</h3>}
           <Facets
             data={data}
             facets={facets}
