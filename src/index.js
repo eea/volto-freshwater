@@ -153,6 +153,10 @@ const applyConfig = (config) => {
   config.widgets.id.license_copyright = CopyrightWidget;
   config.widgets.id.category = TokenWidget;
 
+  config.blocks.blocksConfig.plotly_chart =
+    config.blocks.blocksConfig.connected_plotly_chart;
+  config.blocks.blocksConfig.plotly_chart.restricted = false;
+
   return [
     installEmbedContentBlock,
     installDashboardTabsBlock,
