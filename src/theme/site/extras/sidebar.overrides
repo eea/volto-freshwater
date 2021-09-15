@@ -3,6 +3,16 @@
   width: 100%;
 }
 
+.sidebar-container {
+  .ui.breadcrumbs {
+    padding: 1em 0.5em !important;
+  }
+
+  .ui.breadcrumb {
+    display: inline-block;
+  }
+}
+
 #sidebar .sidebar-container {
   .trigger,
   .trigger:focus,
