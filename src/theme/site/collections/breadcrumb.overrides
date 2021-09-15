@@ -1,51 +1,54 @@
-.ui.vertical.segment.breadcrumbs {
-  border-bottom: 0;
-  background: none;
-}
-@media only screen and (max-width: 480px) {
-  .ui.breadcrumbs {
-    right: 0;
-    left: 0;
+#main {
+  .ui.vertical.segment.breadcrumbs {
+    border-bottom: 0;
+    background: none;
+  }
+
+  @media only screen and (max-width: 480px) {
+    .ui.breadcrumbs {
+      right: 0;
+      left: 0;
+    }
+  }
+
+  .ui.breadcrumb {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #000;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    .divider {
+      color: @wisePrimaryColor;
+    }
+
+    svg {
+      position: relative;
+      top: 3px;
+      fill: @wisePrimaryColor !important;
+    }
+  }
+
+  .ui.breadcrumb a:hover,
+  .ui.breadcrumb .section {
+    color: @wisePrimaryColor !important;
+  }
+
+  .ui.breadcrumb .active:hover,
+  .ui.breadcrumb .active.section {
+    color: #fff !important;
+  }
+
+  .breadcrumbs {
+    padding: 0 !important;
   }
 }
 
-.ui.breadcrumb {
-  display: inline-block;
-  padding: 5px 10px;
-  background: #000;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-
-  .divider {
-    color: @wisePrimaryColor;
-  }
-
-  svg {
-    position: relative;
-    top: 3px;
-    fill: @wisePrimaryColor !important;
-  }
-}
-
-.ui.breadcrumb a:hover,
-.ui.breadcrumb .section {
-  color: @wisePrimaryColor !important;
-}
-
-.ui.breadcrumb .active:hover,
-.ui.breadcrumb .active.section {
-  color: #fff !important;
-}
-
-.breadcrumbs {
-  padding: 0 !important;
-}
-
-body.siteroot .breadcrumbs {
+body.siteroot #main .breadcrumbs {
   display: none !important;
 }
 
-.has-image .breadcrumb {
+.has-image #main .breadcrumb {
   position: absolute;
   top: 86px;
   max-width: 91%;
@@ -53,13 +56,13 @@ body.siteroot .breadcrumbs {
 
 @media only screen and (max-width: 768px) {
   body.has-toolbar {
-    .ui.breadcrumb {
+    #main .ui.breadcrumb {
       top: 186px;
     }
   }
 
   body.has-toolbar-collapsed {
-    .ui.breadcrumb {
+    #main .ui.breadcrumb {
       top: 106px;
     }
   }
