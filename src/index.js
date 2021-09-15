@@ -15,6 +15,7 @@ import installDashboardTabsBlock from './components/Blocks/DashboardTabsBlock';
 import installcustomCardsBlock from './components/Blocks/CustomCardsBlock';
 import installSearchBlock from './components/Blocks/SearchBlock';
 import installCountryHeaderDataBlock from './components/Blocks/CountryHeaderDataBlock';
+import installConditionalDataBlock from './components/Blocks/ConditionalDataBlock';
 
 const available_colors = [
   '#0099BB',
@@ -163,6 +164,7 @@ const applyConfig = (config) => {
     installcustomCardsBlock,
     installSearchBlock,
     installCountryHeaderDataBlock,
+    installConditionalDataBlock,
   ].reduce((acc, apply) => apply(acc), config);
 };
 
