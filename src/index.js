@@ -14,7 +14,10 @@ import installEmbedContentBlock from './components/Blocks/Content';
 import installDashboardTabsBlock from './components/Blocks/DashboardTabsBlock';
 import installcustomCardsBlock from './components/Blocks/CustomCardsBlock';
 import installSearchBlock from './components/Blocks/SearchBlock';
+import installPinListingBlock from './components/Blocks/PinListingBlock';
 import installCountryHeaderDataBlock from './components/Blocks/CountryHeaderDataBlock';
+
+import pinLists from './reducers/pinLists/';
 
 const available_colors = [
   '#0099BB',
@@ -110,6 +113,8 @@ const applyConfig = (config) => {
     { cssClass: 'h5', label: 'H5 14px' },
   ];
 
+  config.settings.persistentReducers = ['pinLists'];
+
   // Search block metadata listing view
   config.blocks.blocksConfig.listing = {
     ...config.blocks.blocksConfig.listing,
@@ -156,12 +161,14 @@ const applyConfig = (config) => {
   config.blocks.blocksConfig.plotly_chart =
     config.blocks.blocksConfig.connected_plotly_chart;
   config.blocks.blocksConfig.plotly_chart.restricted = false;
+  config.addonReducers = { ...(config.addonReducers || {}), pinLists };
 
   return [
     installEmbedContentBlock,
     installDashboardTabsBlock,
     installcustomCardsBlock,
     installSearchBlock,
+    installPinListingBlock,
     installCountryHeaderDataBlock,
   ].reduce((acc, apply) => apply(acc), config);
 };
