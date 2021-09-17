@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  ScrollToTop,
   HeroSectionView,
   DatabaseItemView,
   MetadataListingView,
@@ -146,14 +145,6 @@ const applyConfig = (config) => {
       viewComponent: (props) => {
         return <div className="ui container">{props.children}</div>;
       },
-    },
-  ];
-
-  config.settings.appExtras = [
-    ...(config.settings.appExtras || []),
-    {
-      match: '',
-      component: ScrollToTop,
     },
   ];
 
