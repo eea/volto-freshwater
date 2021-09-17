@@ -10,10 +10,10 @@ import {
   ItemMetadataSnippet,
 } from '@eeacms/volto-freshwater/components';
 import { addItemToBasket } from '@eeacms/volto-freshwater/actions/pinLists';
-import starSVG from '@plone/volto/icons/star.svg';
+import bookmarkSVG from '@plone/volto/icons/bookmark.svg';
 import './style.less';
 
-const MetadataListingView = ({ basket, items, isEditMode }) => {
+const MetadataListingView = ({ basket, token, items, isEditMode }) => {
   const [isOpenModal, setOpenModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const dispatch = useDispatch();
@@ -44,11 +44,12 @@ const MetadataListingView = ({ basket, items, isEditMode }) => {
               <Button
                 basic
                 className="add-pin-btn"
-                onClick={() => dispatch(addItemToBasket(item))}
+                onClick={() => {
+                  dispatch(addItemToBasket(item));
+                }}
               >
-                <Icon name={starSVG} size="20px" />
+                <Icon name={bookmarkSVG} size="20px" />
               </Button>
-
               <ItemMetadataSnippet item={item} />
               <p>{item.description}</p>
             </div>
@@ -86,6 +87,7 @@ export default compose(
   connect(
     (state) => ({
       basket: state.pinLists.basket,
+      token: state.userSession.token,
     }),
     { addItemToBasket },
   ),

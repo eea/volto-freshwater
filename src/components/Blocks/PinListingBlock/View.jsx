@@ -9,7 +9,6 @@ import {
   ItemMetadataSnippet,
 } from '@eeacms/volto-freshwater/components';
 import { Icon } from '@plone/volto/components';
-
 import clearSVG from '@plone/volto/icons/clear.svg';
 
 const PinListingBlockView = (props) => {
@@ -24,7 +23,7 @@ const PinListingBlockView = (props) => {
   };
 
   return (
-    <>
+    <div className="favorites-listing container">
       <div className="items">
         <h2>Pin list:</h2>
         {basket &&
@@ -56,6 +55,7 @@ const PinListingBlockView = (props) => {
               </div>
             </div>
           ))}
+
         <Modal
           className="item-metadata-modal"
           open={isOpenModal}
@@ -73,10 +73,8 @@ const PinListingBlockView = (props) => {
             <ItemMetadata item={selectedItem} />
           </Modal.Content>
         </Modal>
-
-        {/*<Button primary>Create new Pin list</Button>*/}
       </div>
-    </>
+    </div>
   );
 };
 

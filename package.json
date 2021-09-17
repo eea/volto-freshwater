@@ -19,6 +19,7 @@
   "addons": [
     "volto-slate:asDefault",
     "@kitconcept/volto-blocks-grid",
+    "@collective/volto-bookmarks",
     "@eeacms/volto-plotlycharts",
     "@eeacms/volto-datablocks",
     "@eeacms/volto-resize-helper",
@@ -31,7 +32,8 @@
     "@eeacms/volto-block-style": "^3.3.0",
     "@eeacms/volto-datablocks": "2.0.11",
     "@eeacms/volto-plotlycharts": "*",
-    "@kitconcept/volto-blocks-grid": "*"
+    "@kitconcept/volto-blocks-grid": "*",
+    "@collective/volto-bookmarks": "collective/volto-bookmarks#master"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.9.5",

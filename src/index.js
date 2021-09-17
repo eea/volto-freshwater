@@ -7,8 +7,9 @@ import {
   SimpleListingView,
 } from './components';
 
-import CopyrightWidget from './components/Widgets/CopyrightWidget';
 import TokenWidget from '@plone/volto/components/manage/Widgets/TokenWidget';
+import CopyrightWidget from './components/Widgets/CopyrightWidget';
+import PinListingBlockView from './components/Blocks/PinListingBlock/View';
 
 import installEmbedContentBlock from './components/Blocks/Content';
 import installDashboardTabsBlock from './components/Blocks/DashboardTabsBlock';
@@ -17,6 +18,7 @@ import installSearchBlock from './components/Blocks/SearchBlock';
 import installPinListingBlock from './components/Blocks/PinListingBlock';
 import installCountryHeaderDataBlock from './components/Blocks/CountryHeaderDataBlock';
 
+import installAppExtras from './components/theme/AppExtras';
 import pinLists from './reducers/pinLists/';
 
 const available_colors = [
@@ -148,10 +150,23 @@ const applyConfig = (config) => {
   ];
 
   config.settings.appExtras = [
-    ...config.settings.appExtras,
+    ...(config.settings.appExtras || []),
     {
       match: '',
       component: ScrollToTop,
+    },
+  ];
+
+  config.settings = {
+    ...config.settings,
+    nonContentRoutes: [...config.settings.nonContentRoutes, '/favorites'],
+  };
+
+  config.addonRoutes = [
+    ...config.addonRoutes,
+    {
+      path: '/favorites',
+      component: PinListingBlockView,
     },
   ];
 
@@ -170,6 +185,7 @@ const applyConfig = (config) => {
     installSearchBlock,
     installPinListingBlock,
     installCountryHeaderDataBlock,
+    installAppExtras,
   ].reduce((acc, apply) => apply(acc), config);
 };
 
