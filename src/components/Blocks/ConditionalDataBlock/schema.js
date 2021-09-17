@@ -20,11 +20,11 @@ export const ConditionalDataBlockSchema = () => ({
     },
     operator: {
       title: 'Operator',
-      choices: ['=', '<', '>']
+      choices: ['=', '<', '>'],
     },
     condition: {
       title: 'Condition value',
-      widget: 'textarea'
+      widget: 'textarea',
     },
   },
 
