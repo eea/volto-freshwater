@@ -15,6 +15,7 @@ import installDashboardTabsBlock from './components/Blocks/DashboardTabsBlock';
 import installcustomCardsBlock from './components/Blocks/CustomCardsBlock';
 import installSearchBlock from './components/Blocks/SearchBlock';
 import installCountryHeaderDataBlock from './components/Blocks/CountryHeaderDataBlock';
+import installConditionalDataBlock from './components/Blocks/ConditionalDataBlock';
 import installAppExtras from './components/theme/AppExtras';
 
 import favBoard from './reducers/favBoard/';
@@ -174,6 +175,7 @@ const applyConfig = (config) => {
     installcustomCardsBlock,
     installSearchBlock,
     installCountryHeaderDataBlock,
+    installConditionalDataBlock,
     installAppExtras,
   ].reduce((acc, apply) => apply(acc), config);
 };
