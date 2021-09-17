@@ -9,7 +9,7 @@ import {
   ItemTitle,
   ItemMetadataSnippet,
 } from '@eeacms/volto-freshwater/components';
-import { addItemToBasket } from '@eeacms/volto-freshwater/actions/pinLists';
+import { addItemToBasket } from '@eeacms/volto-freshwater/actions/favBoard';
 import bookmarkSVG from '@plone/volto/icons/bookmark.svg';
 import './style.less';
 
@@ -86,7 +86,7 @@ MetadataListingView.propTypes = {
 export default compose(
   connect(
     (state) => ({
-      basket: state.pinLists.basket,
+      basket: state.favBoard.basket,
       token: state.userSession.token,
     }),
     { addItemToBasket },

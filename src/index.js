@@ -6,19 +6,18 @@ import {
   SimpleListingView,
 } from './components';
 
+import FavBoardListingView from './components/theme/FavBoardListingView/FavBoardListingView';
 import TokenWidget from '@plone/volto/components/manage/Widgets/TokenWidget';
 import CopyrightWidget from './components/Widgets/CopyrightWidget';
-import PinListingBlockView from './components/Blocks/PinListingBlock/View';
 
 import installEmbedContentBlock from './components/Blocks/Content';
 import installDashboardTabsBlock from './components/Blocks/DashboardTabsBlock';
 import installcustomCardsBlock from './components/Blocks/CustomCardsBlock';
 import installSearchBlock from './components/Blocks/SearchBlock';
-import installPinListingBlock from './components/Blocks/PinListingBlock';
 import installCountryHeaderDataBlock from './components/Blocks/CountryHeaderDataBlock';
-
 import installAppExtras from './components/theme/AppExtras';
-import pinLists from './reducers/pinLists/';
+
+import favBoard from './reducers/favBoard/';
 
 const available_colors = [
   '#0099BB',
@@ -114,7 +113,7 @@ const applyConfig = (config) => {
     { cssClass: 'h5', label: 'H5 14px' },
   ];
 
-  config.settings.persistentReducers = ['pinLists'];
+  config.settings.persistentReducers = ['favBoard'];
 
   // Search block metadata listing view
   config.blocks.blocksConfig.listing = {
@@ -157,7 +156,7 @@ const applyConfig = (config) => {
     ...config.addonRoutes,
     {
       path: '/favorites',
-      component: PinListingBlockView,
+      component: FavBoardListingView,
     },
   ];
 
@@ -167,14 +166,13 @@ const applyConfig = (config) => {
   config.blocks.blocksConfig.plotly_chart =
     config.blocks.blocksConfig.connected_plotly_chart;
   config.blocks.blocksConfig.plotly_chart.restricted = false;
-  config.addonReducers = { ...(config.addonReducers || {}), pinLists };
+  config.addonReducers = { ...(config.addonReducers || {}), favBoard };
 
   return [
     installEmbedContentBlock,
     installDashboardTabsBlock,
     installcustomCardsBlock,
     installSearchBlock,
-    installPinListingBlock,
     installCountryHeaderDataBlock,
     installAppExtras,
   ].reduce((acc, apply) => apply(acc), config);

@@ -1,1 +1,1 @@
-export pinLists from './pinLists';
+export favBoard from './favBoard';

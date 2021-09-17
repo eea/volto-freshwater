@@ -1,1 +1,1 @@
-export * from './pinLists';
+export * from './favBoard';

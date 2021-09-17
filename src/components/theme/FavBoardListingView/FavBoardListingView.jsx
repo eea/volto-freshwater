@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { removeItemFromBasket } from '@eeacms/volto-freshwater/actions/pinLists';
+import { removeItemFromBasket } from '@eeacms/volto-freshwater/actions/favBoard';
 import { compose } from 'redux';
 import { Modal, Button } from 'semantic-ui-react';
 import {
@@ -11,7 +11,7 @@ import {
 import { Icon } from '@plone/volto/components';
 import clearSVG from '@plone/volto/icons/clear.svg';
 
-const PinListingBlockView = (props) => {
+const FavBoardListingView = (props) => {
   const { basket } = props;
   const [isOpenModal, setOpenModal] = React.useState(false);
   const [selectedItem, setSelectedItem] = React.useState(null);
@@ -25,7 +25,7 @@ const PinListingBlockView = (props) => {
   return (
     <div className="favorites-listing container">
       <div className="items">
-        <h2>Pin list:</h2>
+        <h2>Favorites:</h2>
         {basket &&
           basket.map((item, i) => (
             <div className="listing-item" key={item['@id']}>
@@ -81,8 +81,8 @@ const PinListingBlockView = (props) => {
 export default compose(
   connect(
     (state) => ({
-      basket: state.pinLists.basket,
+      basket: state.favBoard.basket,
     }),
     { removeItemFromBasket },
   ),
-)(PinListingBlockView);
+)(FavBoardListingView);

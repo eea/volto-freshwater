@@ -1,7 +1,7 @@
 import React from 'react';
 import { Portal } from 'react-portal';
 import { connect, useDispatch } from 'react-redux';
-import { removeItemFromBasket } from '@eeacms/volto-freshwater/actions/pinLists';
+import { removeItemFromBasket } from '@eeacms/volto-freshwater/actions/favBoard';
 import { compose } from 'redux';
 import { Button } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
@@ -87,7 +87,7 @@ const FavoritesToolbarButton = (props) => {
 export default compose(
   connect(
     (state) => ({
-      basket: state.pinLists.basket,
+      basket: state.favBoard.basket,
     }),
     { removeItemFromBasket },
   ),
