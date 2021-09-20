@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import { compose } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { get, groupBy, sortBy } from 'lodash';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import config from '@plone/volto/registry';
 import { List, Button } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
 import { Link } from 'react-router-dom';
-import { removeItemFromBasket } from '@eeacms/volto-freshwater/actions/favBoard';
 import {
   getAllBookmarks,
   deleteBookmark,
