@@ -23,7 +23,7 @@ const evaluateCondition = (value1, operator, value2) => {
 const View = (props) => {
   const { data, provider_data, connected_data_parameters } = props;
   const {
-    // provider_url,,
+    // provider_url,
     column_data,
     operator,
     condition,
