@@ -1,88 +1,100 @@
-import React from 'react';
-import { connect, useDispatch } from 'react-redux';
-import { removeItemFromBasket } from '@eeacms/volto-freshwater/actions/favBoard';
+import React, { useState, useEffect } from 'react';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { compose } from 'redux';
-import { Modal, Button } from 'semantic-ui-react';
-import {
-  ItemMetadata,
-  ItemTitle,
-  ItemMetadataSnippet,
-} from '@eeacms/volto-freshwater/components';
+import { get, groupBy, sortBy } from 'lodash';
+import { flattenToAppURL } from '@plone/volto/helpers';
+import config from '@plone/volto/registry';
+import { List, Button } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
+import { Link } from 'react-router-dom';
+import { removeItemFromBasket } from '@eeacms/volto-freshwater/actions/favBoard';
+import {
+  getAllBookmarks,
+  deleteBookmark,
+} from '@collective/volto-bookmarks/actions';
 import clearSVG from '@plone/volto/icons/clear.svg';
+import './style.less';
 
 const FavBoardListingView = (props) => {
-  const { basket } = props;
-  const [isOpenModal, setOpenModal] = React.useState(false);
-  const [selectedItem, setSelectedItem] = React.useState(null);
+  const items = useSelector((state) => state.collectivebookmarks?.items || []);
+  const bookmarkdelete = useSelector(
+    (state) => state.collectivebookmarks?.delete || {},
+  );
+  const [groupedItems, setGroupedItems] = useState({});
   const dispatch = useDispatch();
 
-  const close = (item) => {
-    setOpenModal(false);
-    setSelectedItem(null);
+  useEffect(() => {
+    if (bookmarkdelete === 'loaded') {
+      dispatch(getAllBookmarks());
+    }
+  }, [bookmarkdelete, dispatch]);
+
+  useEffect(() => {
+    const favItems = groupBy(items, (item) => item['group']);
+    Object.keys(favItems).forEach((item) => {
+      favItems[item] = sortBy(favItems[item], [
+        function (o) {
+          return o.title.toLowerCase();
+        },
+      ]);
+    });
+    setGroupedItems(favItems);
+  }, [dispatch, items]);
+
+  const handleDeleteBookmark = (uid, group, searchquery) => {
+    dispatch(deleteBookmark(uid, group, searchquery));
   };
 
   return (
-    <div className="favorites-listing container">
-      <div className="items">
-        <h2>Favorites:</h2>
-        {basket &&
-          basket.map((item, i) => (
-            <div className="listing-item" key={item['@id']}>
-              <div className="listing-body">
-                <div
-                  className="listing-title"
-                  onClick={() => {
-                    setOpenModal(true);
-                    setSelectedItem(item);
-                  }}
-                  onKeyDown={() => setSelectedItem(item)}
-                  role="button"
-                  tabIndex="0"
-                >
-                  <h3>{item.title ? item.title : item.id}</h3>
-                </div>
-                <Button
-                  className="remove-pin-btn"
-                  basic
-                  onClick={() => dispatch(removeItemFromBasket(item))}
-                >
-                  <Icon name={clearSVG} size="20px" />
-                </Button>
+    <div className="favorites-listing ui container">
+      <h2>Boards:</h2>
 
-                <ItemMetadataSnippet item={item} />
-                <p>{item.description}</p>
-              </div>
-            </div>
-          ))}
+      {Object.keys(groupedItems)
+        .sort()
+        .map((grp, index) => {
+          return (
+            <>
+              <h3>
+                {get(
+                  config.settings?.bookmarks?.bookmarkgroupmapping,
+                  grp,
+                  grp,
+                )}
+              </h3>
 
-        <Modal
-          className="item-metadata-modal"
-          open={isOpenModal}
-          onClose={close}
-          size="large"
-          closeIcon
-          centered
-        >
-          <Modal.Header>
-            <ItemMetadataSnippet item={selectedItem} />
-            <ItemTitle item={selectedItem} />
-          </Modal.Header>
-
-          <Modal.Content>
-            <ItemMetadata item={selectedItem} />
-          </Modal.Content>
-        </Modal>
-      </div>
+              {groupedItems[grp].map((item, index) => (
+                <List key={index}>
+                  <List.Item>
+                    <List.Content>
+                      <Link
+                        title={item.description || ''}
+                        to={`${flattenToAppURL(item['@id'])}`}
+                      >
+                        {item.title}
+                      </Link>
+                      <Button
+                        icon
+                        basic
+                        className="delete-fav-btn"
+                        onClick={() => {
+                          handleDeleteBookmark(
+                            item.uid,
+                            item.group,
+                            item.queryparams || '',
+                          );
+                        }}
+                      >
+                        <Icon name={clearSVG} size="25px" />
+                      </Button>
+                    </List.Content>
+                  </List.Item>
+                </List>
+              ))}
+            </>
+          );
+        })}
     </div>
   );
 };
 
-export default compose(
-  connect(
-    (state) => ({
-      basket: state.favBoard.basket,
-    }),
-    { removeItemFromBasket },
-  ),
-)(FavBoardListingView);
+export default FavBoardListingView;
