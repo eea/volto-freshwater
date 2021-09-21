@@ -5,7 +5,7 @@ export const ConditionalDataBlockSchema = () => ({
     {
       id: 'default',
       title: 'Default',
-      fields: [], // 'title', 'provider_url', 'column_data', 'operator', 'condition'
+      fields: ['title', 'provider_url', 'column_data', 'operator', 'condition'],
     },
   ],
 
