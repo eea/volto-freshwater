@@ -5,11 +5,16 @@ export const ConditionalDataBlockSchema = () => ({
     {
       id: 'default',
       title: 'Default',
-      fields: ['provider_url', 'column_data', 'operator', 'condition'],
+      fields: ['title', 'provider_url', 'column_data', 'operator', 'condition'],
     },
   ],
 
   properties: {
+    title: {
+      title: 'Title',
+      description: 'Section friendly name',
+      type: 'string',
+    },
     provider_url: {
       widget: 'pick_provider',
       title: 'Data provider',
