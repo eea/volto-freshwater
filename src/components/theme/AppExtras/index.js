@@ -9,7 +9,7 @@ export default (config) => {
       component: ScrollToTop,
     },
     {
-      match: '',
+      match: '/data-maps-and-tools/metadata',
       component: FavoritesToolbarButton,
     },
   ];

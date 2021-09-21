@@ -19,7 +19,7 @@
   box-shadow: 0 1px 2px 0 #c7d5d8;
 
   .fav-menu-content {
-    padding: 20px;
+    padding: 0 20px 20px 20px;
   }
 
   .fav-menu-listing {
@@ -28,7 +28,12 @@
     justify-content: center;
     padding: 0;
     margin-top: 0;
+    margin-bottom: 0;
     list-style: none;
+  }
+
+  .fav-menu-list-item:first-child {
+    padding-top: 0 !important;
   }
 
   .fav-menu-list-item {
@@ -37,7 +42,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0.6em 0;
-    border-bottom: 1px solid #b8c6c8;
+    border-bottom: 1px solid #e7e7e7;
 
     button {
       margin-bottom: 0 !important;
@@ -52,17 +57,12 @@
     display: -webkit-box;
     overflow: hidden;
     -webkit-box-orient: vertical;
-    font-family: 'Poppins';
     font-size: 14px;
-    font-weight: 500;
     -webkit-line-clamp: 2;
-    text-transform: uppercase;
   }
 }
 
 .fav-group-title {
-  padding-bottom: 0.9em;
-  border-bottom: 1px solid #b8c6c8;
   margin-bottom: 0.3em !important;
 
   label {
@@ -72,9 +72,48 @@
   }
 }
 
+.toolbar-menu-title {
+  padding: 0.8em 0;
+  font-family: 'Poppins';
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.fav-boards-list {
+  border-bottom: 1px solid #b8c6c8;
+}
+
+.board-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 0.7em;
+  color: #0099bb;
+  cursor: pointer;
+  font-weight: 500;
+
+  svg {
+    margin-right: 5px !important;
+  }
+
+  &:hover {
+    color: #004050 !important;
+  }
+}
+
+.board-item.active {
+  color: #269b65 !important;
+}
+
+.check-icon {
+  margin-left: 5px;
+}
+
 .fav-board-save {
   display: block !important;
   padding: 10px !important;
+  margin: 1em 0 !important;
   margin-bottom: 0 !important;
   background-color: #064c7f !important;
   color: #fff !important;
@@ -82,4 +121,10 @@
 
 .fav-toolbar-menu {
   display: none;
+}
+
+.fav-menu-info {
+  display: block;
+  margin: 1em 0;
+  font-weight: 500;
 }
