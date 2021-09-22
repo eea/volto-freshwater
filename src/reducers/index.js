@@ -1,2 +1,2 @@
 export favBoard from './favBoard';
-export favBoardComment from './favBoardComment';
+export favBoardComment from './favBoardComments';

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { compose } from 'redux';
-import { Button, Form, Segment, Item } from 'semantic-ui-react';
+import { Button, Form, Item } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
 import jwtDecode from 'jwt-decode';
 import {
@@ -18,8 +18,6 @@ const FavBoardComments = (props) => {
   );
   const [comment, setComment] = useState('');
   const dispatch = useDispatch();
-
-  console.log('userID', userId);
 
   return (
     <div className="fav-board-comments-wrapper">
