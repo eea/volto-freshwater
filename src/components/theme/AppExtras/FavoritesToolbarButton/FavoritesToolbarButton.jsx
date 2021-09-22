@@ -5,6 +5,7 @@ import { Icon } from '@plone/volto/components';
 import { Grid } from 'semantic-ui-react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { compose } from 'redux';
+import jwtDecode from 'jwt-decode';
 import {
   addBookmark,
   getAllBookmarks,
@@ -24,7 +25,9 @@ const FavoritesToolbarButton = (props) => {
   const [activeGroup, setActiveGroup] = useState('');
   const [boardTitle, setBoardTitle] = useState('Default');
   const [groups, setGroups] = useState({});
+  const [boardCreated, setBoardCreated] = useState(false);
   const items = useSelector((state) => state.collectivebookmarks?.items || []);
+  const menuRef = React.useRef(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -49,10 +52,24 @@ const FavoritesToolbarButton = (props) => {
     setGroups(groups);
   }, [dispatch, items]);
 
+  useEffect(() => {
+    const outsideClick = (e) => {
+      if (showMenu && menuRef.current && !menuRef.current.contains(e.target)) {
+        setShowMenu(false);
+        setBoardCreated(false);
+      }
+    };
+    document.addEventListener('mousedown', outsideClick);
+    return () => {
+      document.removeEventListener('mousedown', outsideClick);
+    };
+  }, [showMenu]);
+
   const handleCreateBoard = () => {
     for (let item of basket) {
       dispatch(addBookmark(item.UID, boardTitle));
-      setTimeout(() => dispatch(removeItemFromBasket(item)), 2500);
+      dispatch(removeItemFromBasket(item));
+      setBoardCreated(true);
       setBoardTitle('Default');
     }
   };
@@ -60,17 +77,21 @@ const FavoritesToolbarButton = (props) => {
   const handleSaveToBoard = (group) => {
     for (let item of basket) {
       dispatch(addBookmark(item.UID, group));
-      setTimeout(() => dispatch(removeItemFromBasket(item)), 2500);
+      dispatch(removeItemFromBasket(item));
+      setTimeout(() => setActiveGroup(''), 2000);
     }
   };
 
   return (
     <div>
       <Portal node={__CLIENT__ && document.querySelector('.toolbar-bottom')}>
-        <div className="fav-toolbar-menu">
+        <div className="fav-toolbar-menu" ref={menuRef}>
           <Button
             className="fav-toolbar-btn"
-            onClick={() => setShowMenu(!showMenu)}
+            onClick={() => {
+              setShowMenu(!showMenu);
+              setBoardCreated(false);
+            }}
             title="Favorites"
           >
             <Icon name={briefcaseSVG} size="35px" />
@@ -82,9 +103,9 @@ const FavoritesToolbarButton = (props) => {
                 <h2>Save to board</h2>
               </header>
               <div className="fav-menu-content">
-                {basket && basket.length > 0 ? (
-                  <>
-                    <div className="toolbar-menu-title">Selected items: </div>
+                <div className="toolbar-menu-title">Selected items: </div>
+                <>
+                  {basket && basket.length > 0 ? (
                     <ul className="fav-menu-listing">
                       {basket.map((item, i) => (
                         <li
@@ -96,94 +117,100 @@ const FavoritesToolbarButton = (props) => {
                           <Button
                             className="remove-pin-btn"
                             title="Remove favorite"
-                            onClick={() => dispatch(removeItemFromBasket(item))}
+                            onClick={() => {
+                              dispatch(removeItemFromBasket(item));
+                            }}
                           >
                             <Icon name={clearSVG} size="20px" />
                           </Button>
                         </li>
                       ))}
                     </ul>
+                  ) : (
+                    <span className="fav-menu-info">
+                      No selected items to save in a board.
+                    </span>
+                  )}
 
-                    {items && items.length > 0 && (
-                      <div className="fav-boards-list">
-                        <div className="toolbar-menu-title">
-                          Save to an existing board:
-                        </div>
-
-                        {Object.entries(groups)
-                          .sort()
-                          .map(([group, items], index) => {
-                            return (
-                              <div
-                                key={index}
-                                className={cx('board-item', {
-                                  active: activeGroup === group,
-                                })}
-                                onClick={() => {
-                                  handleSaveToBoard(group);
-                                  setActiveGroup(group);
-                                }}
-                                onKeyDown={() => {
-                                  handleSaveToBoard(group);
-                                  setActiveGroup(group);
-                                }}
-                                role="button"
-                                tabIndex="0"
-                              >
-                                <Icon name={starSVG} size="16px" />
-                                {group} ({items.length})
-                                {activeGroup === group && (
-                                  <Icon
-                                    className="check-icon"
-                                    name={checkSVG}
-                                    size="16px"
-                                  />
-                                )}
-                              </div>
-                            );
-                          })}
+                  {items && items.length > 0 && (
+                    <div className="fav-boards-list">
+                      <div className="toolbar-menu-title">
+                        Save to an existing board:
                       </div>
+
+                      {Object.entries(groups)
+                        .sort()
+                        .map(([group, items], index) => {
+                          return (
+                            <div
+                              key={index}
+                              className={cx('board-item', {
+                                active: activeGroup === group,
+                              })}
+                              onClick={() => {
+                                handleSaveToBoard(group);
+                                setActiveGroup(group);
+                              }}
+                              onKeyDown={() => {
+                                handleSaveToBoard(group);
+                                setActiveGroup(group);
+                              }}
+                              role="button"
+                              tabIndex="0"
+                            >
+                              <Icon name={starSVG} size="16px" />
+                              {group} ({items.length})
+                              {activeGroup === group && (
+                                <Icon
+                                  className="check-icon"
+                                  name={checkSVG}
+                                  size="16px"
+                                />
+                              )}
+                            </div>
+                          );
+                        })}
+                    </div>
+                  )}
+
+                  <div className="fav-group-title">
+                    <div className="toolbar-menu-title">Create new board:</div>
+
+                    <Grid>
+                      <Grid.Row>
+                        <Grid.Column width={3}>
+                          <label htmlFor="field-title">Board Name</label>
+                        </Grid.Column>
+
+                        <Grid.Column width={9}>
+                          <div className="ui input">
+                            <input
+                              id="field-title"
+                              name="title"
+                              type="text"
+                              value={boardTitle}
+                              onChange={(e) => setBoardTitle(e.target.value)}
+                            />
+                          </div>
+                        </Grid.Column>
+                      </Grid.Row>
+                    </Grid>
+
+                    {boardCreated && (
+                      <p className="board-created-info">Board created.</p>
                     )}
 
-                    <div className="fav-group-title">
-                      <div className="toolbar-menu-title">
-                        Create new board:
-                      </div>
-
-                      <Grid>
-                        <Grid.Row>
-                          <Grid.Column width={3}>
-                            <label htmlFor="field-title">Board Name</label>
-                          </Grid.Column>
-
-                          <Grid.Column width={9}>
-                            <div className="ui input">
-                              <input
-                                id="field-title"
-                                name="title"
-                                type="text"
-                                value={boardTitle}
-                                onChange={(e) => setBoardTitle(e.target.value)}
-                              />
-                            </div>
-                          </Grid.Column>
-                        </Grid.Row>
-                      </Grid>
-                      <Button
-                        primary
-                        size="mini"
-                        className="fav-board-save"
-                        onClick={handleCreateBoard}
-                      >
-                        Save
-                      </Button>
-                    </div>
-                  </>
-                ) : (
-                  <span className="fav-menu-info">
-                    There are no selected items to save in a board.
-                  </span>
-                )}
+                    <Button
+                      primary
+                      size="mini"
+                      className="fav-board-save"
+                      disabled={basket.length === 0}
+                      onClick={handleCreateBoard}
+                    >
+                      Save
+                    </Button>
+                  </div>
+                </>
               </div>
             </div>
           ) : null}
@@ -197,6 +224,9 @@ export default compose(
   connect(
     (state) => ({
       basket: state.favBoard.basket,
+      userId: state.userSession.token
+        ? jwtDecode(state.userSession.token).sub
+        : '',
     }),
     { removeItemFromBasket },
   ),

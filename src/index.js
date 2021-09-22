@@ -19,6 +19,7 @@ import installConditionalDataBlock from './components/Blocks/ConditionalDataBloc
 import installAppExtras from './components/theme/AppExtras';
 
 import favBoard from './reducers/favBoard/';
+import favBoardComments from './reducers/favBoardComments';
 
 const available_colors = [
   '#0099BB',
@@ -114,7 +115,7 @@ const applyConfig = (config) => {
     { cssClass: 'h5', label: 'H5 14px' },
   ];
 
-  config.settings.persistentReducers = ['favBoard'];
+  config.settings.persistentReducers = ['favBoard', 'favBoardComments'];
 
   // Search block metadata listing view
   config.blocks.blocksConfig.listing = {
@@ -167,7 +168,11 @@ const applyConfig = (config) => {
   config.blocks.blocksConfig.plotly_chart =
     config.blocks.blocksConfig.connected_plotly_chart;
   config.blocks.blocksConfig.plotly_chart.restricted = false;
-  config.addonReducers = { ...(config.addonReducers || {}), favBoard };
+  config.addonReducers = {
+    ...(config.addonReducers || {}),
+    favBoard,
+    favBoardComments,
+  };
 
   return [
     installEmbedContentBlock,

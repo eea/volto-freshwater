@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { get, groupBy, sortBy } from 'lodash';
+import { groupBy, sortBy } from 'lodash';
 import { flattenToAppURL } from '@plone/volto/helpers';
-import config from '@plone/volto/registry';
-import { List, Button } from 'semantic-ui-react';
+import { List, Button, Form, Segment } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
 import { Link } from 'react-router-dom';
 import {
   getAllBookmarks,
   deleteBookmark,
 } from '@collective/volto-bookmarks/actions';
-import clearSVG from '@plone/volto/icons/clear.svg';
+import {
+  addComment,
+  deleteComment,
+} from '@eeacms/volto-freshwater/actions/favBoardComments';
+import clearSVG from '@plone/volto/icons/delete.svg';
 import './style.less';
 
 const FavBoardListingView = (props) => {
@@ -18,7 +21,12 @@ const FavBoardListingView = (props) => {
   const bookmarkdelete = useSelector(
     (state) => state.collectivebookmarks?.delete || {},
   );
+  const comments = useSelector(
+    (state) => state.favBoardComments?.comments || [],
+  );
+
   const [groupedItems, setGroupedItems] = useState({});
+  const [comment, setComment] = useState('');
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -45,22 +53,13 @@ const FavBoardListingView = (props) => {
 
   return (
     <div className="favorites-listing ui container">
-      <h2>Boards:</h2>
-
       {Object.keys(groupedItems)
         .sort()
-        .map((grp, index) => {
+        .map((group, index) => {
           return (
-            <>
-              <h3>
-                {get(
-                  config.settings?.bookmarks?.bookmarkgroupmapping,
-                  grp,
-                  grp,
-                )}
-              </h3>
-
-              {groupedItems[grp].map((item, index) => (
+            <div className="fav-listing-board" key={index}>
+              <h3>{group}</h3>
+              {groupedItems[group].map((item, index) => (
                 <List key={index}>
                   <List.Item>
                     <List.Content>
@@ -82,13 +81,54 @@ const FavBoardListingView = (props) => {
                           );
                         }}
                       >
-                        <Icon name={clearSVG} size="25px" />
+                        <Icon name={clearSVG} size="16px" />
                       </Button>
                     </List.Content>
                   </List.Item>
                 </List>
               ))}
-            </>
+
+              {comments
+                .filter((item, i) => item.group === group)
+                .map((item, i) => (
+                  <div key={i} className="comment-wrapper">
+                    <Segment>
+                      <p>{item.comment}</p>
+                    </Segment>
+                    <Button
+                      icon
+                      basic
+                      className="delete-comment"
+                      onClick={() => {
+                        dispatch(deleteComment(item.comment, group));
+                      }}
+                    >
+                      <Icon name={clearSVG} size="16px" />
+                    </Button>
+                  </div>
+                ))}
+
+              <Form className="comment-form">
+                <Form.Field>
+                  <label htmlFor="field-comment">Enter comments below:</label>
+                  <textarea
+                    id="field-comment"
+                    rows="4"
+                    cols="50"
+                    onChange={(e) => setComment(e.target.value)}
+                  ></textarea>
+                </Form.Field>
+                <Button
+                  primary
+                  onClick={() => {
+                    dispatch(addComment(comment, group));
+                    setComment('');
+                  }}
+                >
+                  Comment
+                </Button>
+              </Form>
+            </div>
           );
         })}
     </div>
