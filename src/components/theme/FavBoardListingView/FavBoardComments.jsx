@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Button, Form, Segment } from 'semantic-ui-react';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { compose } from 'redux';
+import { Button, Form, Segment, Item } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
+import jwtDecode from 'jwt-decode';
 import {
   addComment,
   deleteComment,
@@ -10,47 +12,58 @@ import clearSVG from '@plone/volto/icons/delete.svg';
 import './style.less';
 
 const FavBoardComments = (props) => {
-  const { board } = props;
+  const { board, userId } = props;
   const comments = useSelector(
     (state) => state.favBoardComments?.comments || [],
   );
   const [comment, setComment] = useState('');
   const dispatch = useDispatch();
 
+  console.log('userID', userId);
+
   return (
     <div className="fav-board-comments-wrapper">
-      {comments
-        .filter((item, i) => item.group === board)
-        .map((item, i) => (
-          <div key={i} className="board-comment">
-            <Segment>
-              <p>{item.comment}</p>
-            </Segment>
-            <Button
-              icon
-              basic
-              className="delete-comment"
-              onClick={() => {
-                dispatch(deleteComment(item.comment, board));
-              }}
-            >
-              <Icon name={clearSVG} size="16px" />
-            </Button>
-          </div>
-        ))}
+      <Item.Group className="board-comments">
+        {comments
+          .filter((item, i) => item.group === board)
+          .map((item, i) => (
+            <Item key={i}>
+              <Item.Content>
+                <Item.Meta>
+                  <div>{userId}:</div>
+                  <Button
+                    icon
+                    basic
+                    className="delete-comment"
+                    onClick={() => {
+                      dispatch(deleteComment(item.comment, board));
+                    }}
+                  >
+                    <Icon name={clearSVG} size="16px" />
+                  </Button>
+                </Item.Meta>
+                <Item.Description>
+                  <p>{item.comment}</p>
+                </Item.Description>
+              </Item.Content>
+            </Item>
+          ))}
+      </Item.Group>
 
       <Form className="comment-form">
         <Form.Field>
-          <label htmlFor="field-comment">Add comments below:</label>
+          <label htmlFor="field-comment">Leave a comment:</label>
           <textarea
             id="field-comment"
             rows="4"
             cols="50"
+            placeholder="Add a comment..."
             onChange={(e) => setComment(e.target.value)}
           ></textarea>
         </Form.Field>
         <Button
           primary
+          size="mini"
           onClick={() => {
             dispatch(addComment(comment, board));
             setComment('');
@@ -63,4 +76,10 @@ const FavBoardComments = (props) => {
   );
 };
 
-export default FavBoardComments;
+export default compose(
+  connect((state) => ({
+    userId: state.userSession.token
+      ? jwtDecode(state.userSession.token).sub
+      : '',
+  })),
+)(FavBoardComments);

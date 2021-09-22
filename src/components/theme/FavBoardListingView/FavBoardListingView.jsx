@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { compose } from 'redux';
 import { groupBy, sortBy } from 'lodash';
 import { flattenToAppURL } from '@plone/volto/helpers';
-import { List, Button, Modal } from 'semantic-ui-react';
-import { Icon } from '@plone/volto/components';
+import { List, Modal } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import {
-  getAllBookmarks,
-  deleteBookmark,
-} from '@collective/volto-bookmarks/actions';
+import { Portal } from 'react-portal';
+import { Toolbar } from '@plone/volto/components';
+import { getAllBookmarks } from '@collective/volto-bookmarks/actions';
 import {
   ItemMetadata,
   ItemTitle,
   ItemMetadataSnippet,
+  FavBoardComments,
+  FavItemToolbar,
 } from '@eeacms/volto-freshwater/components';
-import FavBoardComments from './FavBoardComments';
-import clearSVG from '@plone/volto/icons/delete.svg';
 import './style.less';
 
 const CATALOGUE_CONTENT_TYPES = [
@@ -56,10 +55,6 @@ const FavBoardListingView = (props) => {
     setGroupedItems(favItems);
   }, [dispatch, items]);
 
-  const handleDeleteBookmark = (uid, group, searchquery) => {
-    dispatch(deleteBookmark(uid, group, searchquery));
-  };
-
   const closeModal = (item) => {
     setOpenModal(false);
     setSelectedItem(null);
@@ -73,9 +68,9 @@ const FavBoardListingView = (props) => {
           return (
             <div className="fav-listing-board" key={index}>
               <h3>{group}</h3>
-              {groupedItems[group].map((item, index) => (
-                <List key={index}>
-                  <List.Item>
+              <List key={index}>
+                {groupedItems[group].map((item, index) => (
+                  <List.Item key={index}>
                     <List.Content>
                       {CATALOGUE_CONTENT_TYPES.includes(item['@type']) ? (
                         <div
@@ -88,7 +83,7 @@ const FavBoardListingView = (props) => {
                           role="button"
                           tabIndex="0"
                         >
-                          <h4>{item.title}</h4>
+                          {item.title}
                         </div>
                       ) : (
                         <Link
@@ -100,24 +95,11 @@ const FavBoardListingView = (props) => {
                         </Link>
                       )}
 
-                      <Button
-                        icon
-                        basic
-                        className="delete-fav-btn"
-                        onClick={() => {
-                          handleDeleteBookmark(
-                            item.uid,
-                            item.group,
-                            item.queryparams || '',
-                          );
-                        }}
-                      >
-                        <Icon name={clearSVG} size="16px" />
-                      </Button>
+                      <FavItemToolbar item={item} />
                     </List.Content>
                   </List.Item>
-                </List>
-              ))}
+                ))}
+              </List>
 
               <FavBoardComments board={group} />
             </div>
@@ -141,8 +123,18 @@ const FavBoardListingView = (props) => {
           <ItemMetadata item={selectedItem} />
         </Modal.Content>
       </Modal>
+
+      {props.token && (
+        <Portal node={document.getElementById('toolbar')}>
+          <Toolbar inner={<span />} />
+        </Portal>
+      )}
     </div>
   );
 };
 
-export default FavBoardListingView;
+export default compose(
+  connect((state) => ({
+    token: state.userSession.token,
+  })),
+)(FavBoardListingView);

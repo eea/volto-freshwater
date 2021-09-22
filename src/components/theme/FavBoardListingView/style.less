@@ -1,6 +1,18 @@
 .favorites-listing {
   .listing-title {
+    display: flex;
+    overflow: hidden;
+    width: 170px;
+    flex: 1;
+    align-items: center;
     cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    white-space: nowrap;
+
+    &:hover {
+      color: #0099bb;
+    }
   }
 
   .item > .content {
@@ -9,18 +21,35 @@
   }
 }
 
-.board-comment {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+.ui.items.board-comments {
+  margin-top: 1.5em;
 
-  .ui.segment {
-    width: 100%;
-    border: none;
-    margin-right: 10px;
-    background-color: #eee;
+  .item {
+    padding: 0.5em 1em;
+    background-color: #f9f9f9;
     border-radius: 5px;
-    box-shadow: none;
+
+    &:hover {
+      .delete-comment {
+        visibility: visible;
+      }
+    }
+  }
+
+  .meta {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 14px !important;
+    font-weight: 500;
+  }
+
+  .description p {
+    font-size: 16px;
+  }
+
+  .delete-comment {
+    visibility: hidden;
   }
 }
 
@@ -30,4 +59,35 @@
 
 .fav-listing-board {
   margin: 1.5em 0;
+
+  .ui.list {
+    .item {
+      padding: 0.7em 0.3em !important;
+      border-bottom: 1px solid #ddd;
+
+      &:hover {
+        background-color: #fafafa;
+
+        .fav-item-toolbar {
+          display: block;
+        }
+      }
+    }
+
+    .content {
+      position: relative;
+    }
+
+    .fav-item-toolbar {
+      display: none;
+
+      .button {
+        margin: 0 5px;
+
+        &:hover svg {
+          color: #004050;
+        }
+      }
+    }
+  }
 }

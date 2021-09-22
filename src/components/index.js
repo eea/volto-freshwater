@@ -11,3 +11,5 @@ export TableauShare from './theme/Tableau/TableauShare';
 export TableauFullscreen from './theme/Tableau/TableauFullscreen';
 export MapFullscreen from './theme/Webmap/MapFullscreen';
 export MapShare from './theme/Webmap/MapShare';
+export FavBoardComments from './theme/FavBoardListingView/FavBoardComments';
+export FavItemToolbar from './theme/FavBoardListingView/FavItemToolbar';
