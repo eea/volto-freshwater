@@ -67,7 +67,7 @@ const FavoritesToolbarButton = (props) => {
 
   const handleCreateBoard = () => {
     for (let item of basket) {
-      dispatch(addBookmark(item.UID, boardTitle));
+      dispatch(addBookmark(item.UID, boardTitle, '', { data: item }));
       dispatch(removeItemFromBasket(item));
       setBoardCreated(true);
       setBoardTitle('Default');
@@ -76,7 +76,7 @@ const FavoritesToolbarButton = (props) => {
 
   const handleSaveToBoard = (group) => {
     for (let item of basket) {
-      dispatch(addBookmark(item.UID, group));
+      dispatch(addBookmark(item.UID, group, '', { data: item }));
       dispatch(removeItemFromBasket(item));
       setTimeout(() => setActiveGroup(''), 2000);
     }

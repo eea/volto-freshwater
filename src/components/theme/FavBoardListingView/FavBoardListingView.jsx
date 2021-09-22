@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { groupBy, sortBy } from 'lodash';
 import { flattenToAppURL } from '@plone/volto/helpers';
-import { List, Button, Form, Segment } from 'semantic-ui-react';
+import { List, Button, Modal } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
 import { Link } from 'react-router-dom';
 import {
@@ -10,23 +10,32 @@ import {
   deleteBookmark,
 } from '@collective/volto-bookmarks/actions';
 import {
-  addComment,
-  deleteComment,
-} from '@eeacms/volto-freshwater/actions/favBoardComments';
+  ItemMetadata,
+  ItemTitle,
+  ItemMetadataSnippet,
+} from '@eeacms/volto-freshwater/components';
+import FavBoardComments from './FavBoardComments';
 import clearSVG from '@plone/volto/icons/delete.svg';
 import './style.less';
+
+const CATALOGUE_CONTENT_TYPES = [
+  'dashboard',
+  'dataset',
+  'database',
+  'report_publication',
+  'indicator',
+  'briefing',
+  'map_interactive',
+];
 
 const FavBoardListingView = (props) => {
   const items = useSelector((state) => state.collectivebookmarks?.items || []);
   const bookmarkdelete = useSelector(
     (state) => state.collectivebookmarks?.delete || {},
   );
-  const comments = useSelector(
-    (state) => state.favBoardComments?.comments || [],
-  );
-
+  const [isOpenModal, setOpenModal] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
   const [groupedItems, setGroupedItems] = useState({});
-  const [comment, setComment] = useState('');
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -51,6 +60,11 @@ const FavBoardListingView = (props) => {
     dispatch(deleteBookmark(uid, group, searchquery));
   };
 
+  const closeModal = (item) => {
+    setOpenModal(false);
+    setSelectedItem(null);
+  };
+
   return (
     <div className="favorites-listing ui container">
       {Object.keys(groupedItems)
@@ -63,12 +77,29 @@ const FavBoardListingView = (props) => {
                 <List key={index}>
                   <List.Item>
                     <List.Content>
-                      <Link
-                        title={item.description || ''}
-                        to={`${flattenToAppURL(item['@id'])}`}
-                      >
-                        {item.title}
-                      </Link>
+                      {CATALOGUE_CONTENT_TYPES.includes(item['@type']) ? (
+                        <div
+                          className="listing-title"
+                          onClick={() => {
+                            setOpenModal(true);
+                            setSelectedItem(item.payload.data);
+                          }}
+                          onKeyDown={() => setSelectedItem(item.payload.data)}
+                          role="button"
+                          tabIndex="0"
+                        >
+                          <h4>{item.title}</h4>
+                        </div>
+                      ) : (
+                        <Link
+                          to={`${flattenToAppURL(item['@id'])}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <h4>{item.title}</h4>
+                        </Link>
+                      )}
+
                       <Button
                         icon
                         basic
@@ -88,49 +119,28 @@ const FavBoardListingView = (props) => {
                 </List>
               ))}
 
-              {comments
-                .filter((item, i) => item.group === group)
-                .map((item, i) => (
-                  <div key={i} className="comment-wrapper">
-                    <Segment>
-                      <p>{item.comment}</p>
-                    </Segment>
-                    <Button
-                      icon
-                      basic
-                      className="delete-comment"
-                      onClick={() => {
-                        dispatch(deleteComment(item.comment, group));
-                      }}
-                    >
-                      <Icon name={clearSVG} size="16px" />
-                    </Button>
-                  </div>
-                ))}
-
-              <Form className="comment-form">
-                <Form.Field>
-                  <label htmlFor="field-comment">Enter comments below:</label>
-                  <textarea
-                    id="field-comment"
-                    rows="4"
-                    cols="50"
-                    onChange={(e) => setComment(e.target.value)}
-                  ></textarea>
-                </Form.Field>
-                <Button
-                  primary
-                  onClick={() => {
-                    dispatch(addComment(comment, group));
-                    setComment('');
-                  }}
-                >
-                  Comment
-                </Button>
-              </Form>
+              <FavBoardComments board={group} />
             </div>
           );
         })}
+
+      <Modal
+        className="item-metadata-modal"
+        open={isOpenModal}
+        onClose={closeModal}
+        size="large"
+        closeIcon
+        centered
+      >
+        <Modal.Header>
+          <ItemMetadataSnippet item={selectedItem} />
+          <ItemTitle item={selectedItem} />
+        </Modal.Header>
+
+        <Modal.Content>
+          <ItemMetadata item={selectedItem} />
+        </Modal.Content>
+      </Modal>
     </div>
   );
 };
