@@ -11,6 +11,7 @@ export default (config) => {
     view: View,
     edit: Edit,
     restricted: false,
+    blockHasOwnFocusManagement: true,
     mostUsed: false,
     sidebarTab: 1,
     security: {

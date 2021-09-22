@@ -33,7 +33,7 @@ export const ConditionalDataBlockSchema = () => ({
     },
   },
 
-  required: ['provider_url', 'column_data', 'condition'],
+  required: [], // 'provider_url', 'column_data', 'condition'
 });
 
 export default ConditionalDataBlockSchema;
