@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { compose } from 'redux';
 import { groupBy, sortBy } from 'lodash';
+import queryString from 'query-string';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import { List, Modal } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { Portal } from 'react-portal';
 import { Toolbar } from '@plone/volto/components';
-import { getAllBookmarks } from '@collective/volto-bookmarks/actions';
+// import { getAllBookmarks } from '@collective/volto-bookmarks/actions';
 import {
   ItemMetadata,
   ItemTitle,
@@ -26,8 +27,22 @@ const CATALOGUE_CONTENT_TYPES = [
   'briefing',
   'map_interactive',
 ];
+const getAllBookmarks = (owner) => {
+  return {
+    type: 'GET_BOOKMARKS',
+    request: {
+      op: 'get',
+      path: `/@bookmarks-all` + (owner ? `?owner=${owner}` : ``),
+    },
+  };
+};
 
 const FavBoardListingView = (props) => {
+  const urlParams = queryString.parse(props.location.search);
+  const paramOwner = urlParams ? urlParams['user'] : null;
+  const paramGroup = urlParams ? urlParams['group'] : null;
+  const paramUID = urlParams ? urlParams['uid'] : null;
+
   const items = useSelector((state) => state.collectivebookmarks?.items || []);
   const bookmarkdelete = useSelector(
     (state) => state.collectivebookmarks?.delete || {},
@@ -35,11 +50,30 @@ const FavBoardListingView = (props) => {
   const [isOpenModal, setOpenModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [groupedItems, setGroupedItems] = useState({});
+  const filteredGroupedItems = {};
+  Object.keys(groupedItems).map((group) => {
+    if (paramGroup && group !== paramGroup) {
+      return false;
+    }
+    const items = groupedItems[group].filter((item) => {
+      if (paramUID && item.uid !== paramUID) {
+        return false;
+      }
+      if (paramOwner && item.owner !== paramOwner) {
+        return false;
+      }
+
+      return true;
+    });
+
+    filteredGroupedItems[group] = items;
+  });
+  console.log('filteredGroupedItems', filteredGroupedItems);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (bookmarkdelete === 'loaded') {
-      dispatch(getAllBookmarks());
+      dispatch(getAllBookmarks(paramOwner));
     }
   }, [bookmarkdelete, dispatch]);
 
@@ -62,14 +96,14 @@ const FavBoardListingView = (props) => {
 
   return (
     <div className="favorites-listing ui container">
-      {Object.keys(groupedItems)
+      {Object.keys(filteredGroupedItems)
         .sort()
         .map((group, index) => {
           return (
             <div className="fav-listing-board" key={index}>
               <h3>{group}</h3>
               <List key={index}>
-                {groupedItems[group].map((item, index) => (
+                {filteredGroupedItems[group].map((item, index) => (
                   <List.Item key={index}>
                     <List.Content>
                       {CATALOGUE_CONTENT_TYPES.includes(item['@type']) ? (
