@@ -124,7 +124,7 @@ const FavBoardListingView = (props) => {
         </Modal.Content>
       </Modal>
 
-      {props.token && (
+      {__CLIENT__ && props.token && (
         <Portal node={document.getElementById('toolbar')}>
           <Toolbar inner={<span />} />
         </Portal>
