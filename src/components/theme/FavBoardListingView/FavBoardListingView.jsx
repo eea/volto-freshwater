@@ -8,7 +8,7 @@ import { List, Modal } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { Portal } from 'react-portal';
 import { Toolbar } from '@plone/volto/components';
-// import { getAllBookmarks } from '@collective/volto-bookmarks/actions';
+import jwtDecode from 'jwt-decode';
 import {
   ItemMetadata,
   ItemTitle,
@@ -27,6 +27,7 @@ const CATALOGUE_CONTENT_TYPES = [
   'briefing',
   'map_interactive',
 ];
+
 const getAllBookmarks = (owner) => {
   return {
     type: 'GET_BOOKMARKS',
@@ -37,38 +38,117 @@ const getAllBookmarks = (owner) => {
   };
 };
 
+const ListingView = (props) => {
+  const groupedItems = props.groupedItems;
+
+  return Object.keys(groupedItems).map((username) => {
+    return (
+      <div>
+        {Object.keys(groupedItems[username])
+          .sort()
+          .map((group, index) => {
+            return (
+              <div className="fav-listing-board" key={index}>
+                <h3>
+                  {group} by {username}
+                </h3>
+                <List key={index}>
+                  {groupedItems[username][group].map((item, index) => (
+                    <List.Item key={index}>
+                      <List.Content>
+                        {CATALOGUE_CONTENT_TYPES.includes(item['@type']) ? (
+                          <div
+                            className="listing-title"
+                            onClick={() => {
+                              setOpenModal(true);
+                              setSelectedItem(item.payload.data);
+                            }}
+                            onKeyDown={() => setSelectedItem(item.payload.data)}
+                            role="button"
+                            tabIndex="0"
+                          >
+                            {item.title}
+                          </div>
+                        ) : (
+                          <Link
+                            to={`${flattenToAppURL(item['@id'])}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <h4>{item.title}</h4>
+                          </Link>
+                        )}
+
+                        <FavItemToolbar item={item} />
+                      </List.Content>
+                    </List.Item>
+                  ))}
+                </List>
+
+                <FavBoardComments board={group} />
+              </div>
+            );
+          })}
+      </div>
+    );
+  });
+};
+
 const FavBoardListingView = (props) => {
+  const userSession = useSelector((state) => state.userSession);
+  const userID = userSession.token ? jwtDecode(userSession.token).sub : '';
+
+  const [isOpenModal, setOpenModal] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [groupedItems, setGroupedItems] = useState({});
+
   const urlParams = queryString.parse(props.location.search);
-  const paramOwner = urlParams ? urlParams['user'] : null;
-  const paramGroup = urlParams ? urlParams['group'] : null;
-  const paramUID = urlParams ? urlParams['uid'] : null;
+  const paramOwner = urlParams ? urlParams['user'] : '';
+  const paramGroup = urlParams ? urlParams['group'] : '';
+  const paramUID = urlParams ? urlParams['uid'] : '';
 
   const items = useSelector((state) => state.collectivebookmarks?.items || []);
   const bookmarkdelete = useSelector(
     (state) => state.collectivebookmarks?.delete || {},
   );
-  const [isOpenModal, setOpenModal] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [groupedItems, setGroupedItems] = useState({});
-  const filteredGroupedItems = {};
-  Object.keys(groupedItems).map((group) => {
-    if (paramGroup && group !== paramGroup) {
+
+  let myGroupedItems = {};
+  let otherPublicGroupedItems = {};
+
+  // filter the bookmarks by parameters from url
+  // and group them by group
+  Object.keys(groupedItems).map((username) => {
+    if (paramOwner && username !== paramOwner) {
       return false;
     }
-    const items = groupedItems[group].filter((item) => {
-      if (paramUID && item.uid !== paramUID) {
-        return false;
-      }
-      if (paramOwner && item.owner !== paramOwner) {
-        return false;
-      }
 
-      return true;
+    const items = groupedItems[username].map((item) => {
+      if (paramUID && item.uid !== paramUID) {
+        return;
+      }
+      if (paramGroup && item.group !== paramGroup) {
+        return;
+      }
+      return item;
     });
 
-    filteredGroupedItems[group] = items;
+    const byGroups = groupBy(items, (item) => item['group']);
+    Object.keys(byGroups).forEach((item) => {
+      byGroups[item] = sortBy(byGroups[item], [
+        function (o) {
+          return o.title.toLowerCase();
+        },
+      ]);
+    });
+
+    if (username === userID) {
+      myGroupedItems[username] = byGroups;
+    } else {
+      otherPublicGroupedItems[username] = byGroups;
+    }
   });
-  console.log('filteredGroupedItems', filteredGroupedItems);
+  console.log('myGroupedItems', myGroupedItems);
+  console.log('otherPublicGroupedItems', otherPublicGroupedItems);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -78,7 +158,7 @@ const FavBoardListingView = (props) => {
   }, [bookmarkdelete, dispatch]);
 
   useEffect(() => {
-    const favItems = groupBy(items, (item) => item['group']);
+    const favItems = groupBy(items, (item) => item['owner']);
     Object.keys(favItems).forEach((item) => {
       favItems[item] = sortBy(favItems[item], [
         function (o) {
@@ -96,49 +176,10 @@ const FavBoardListingView = (props) => {
 
   return (
     <div className="favorites-listing ui container">
-      {Object.keys(filteredGroupedItems)
-        .sort()
-        .map((group, index) => {
-          return (
-            <div className="fav-listing-board" key={index}>
-              <h3>{group}</h3>
-              <List key={index}>
-                {filteredGroupedItems[group].map((item, index) => (
-                  <List.Item key={index}>
-                    <List.Content>
-                      {CATALOGUE_CONTENT_TYPES.includes(item['@type']) ? (
-                        <div
-                          className="listing-title"
-                          onClick={() => {
-                            setOpenModal(true);
-                            setSelectedItem(item.payload.data);
-                          }}
-                          onKeyDown={() => setSelectedItem(item.payload.data)}
-                          role="button"
-                          tabIndex="0"
-                        >
-                          {item.title}
-                        </div>
-                      ) : (
-                        <Link
-                          to={`${flattenToAppURL(item['@id'])}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <h4>{item.title}</h4>
-                        </Link>
-                      )}
-
-                      <FavItemToolbar item={item} />
-                    </List.Content>
-                  </List.Item>
-                ))}
-              </List>
-
-              <FavBoardComments board={group} />
-            </div>
-          );
-        })}
+      <h1>My bookmarks</h1>
+      <ListingView groupedItems={myGroupedItems} />
+      <h1>Other public bookmarks</h1>
+      <ListingView groupedItems={otherPublicGroupedItems} />
 
       <Modal
         className="item-metadata-modal"
