@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { Portal } from 'react-portal';
 import { Toolbar } from '@plone/volto/components';
 import jwtDecode from 'jwt-decode';
+import { deStringifySearchquery } from '@collective/volto-bookmarks/helpers';
 import {
   ItemMetadata,
   ItemTitle,
@@ -71,11 +72,16 @@ const ListingView = (props) => {
                           </div>
                         ) : (
                           <Link
-                            to={`${flattenToAppURL(item['@id'])}`}
+                            className="listing-title"
+                            to={`${
+                              flattenToAppURL(item['@id']) +
+                              '#' +
+                              deStringifySearchquery(item.queryparams)
+                            }`}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            <h4>{item.title}</h4>
+                            {item.title}
                           </Link>
                         )}
 

@@ -1,6 +1,7 @@
 import {
   BasketToolbarButton,
   FavoritesToolbarButton,
+  AddToFavBoardButton,
 } from './FavoritesToolbarButton';
 import ScrollToTop from './ScrollToTop';
 
@@ -12,12 +13,16 @@ export default (config) => {
       component: ScrollToTop,
     },
     {
-      match: '/data-maps-and-tools/metadata',
+      match: '',
       component: BasketToolbarButton,
     },
     {
       match: '',
       component: FavoritesToolbarButton,
+    },
+    {
+      match: '',
+      component: AddToFavBoardButton,
     },
   ];
 

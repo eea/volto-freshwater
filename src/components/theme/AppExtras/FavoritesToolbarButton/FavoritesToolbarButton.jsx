@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Portal } from 'react-portal';
 import { Link } from 'react-router-dom';
 import { Icon } from '@plone/volto/components';
-import starSVG from '@plone/volto/icons/star.svg';
+import bookSVG from '@plone/volto/icons/book.svg';
 
 const BasketToolbarButton = (props) => {
   const items = useSelector((state) => state.collectivebookmarks?.items || []);
@@ -13,7 +13,7 @@ const BasketToolbarButton = (props) => {
       <Portal node={__CLIENT__ && document.querySelector('.toolbar-bottom')}>
         <div className="fav-toolbar-menu">
           <Link className="fav-toolbar-btn" title="Favorites" to="/favorites">
-            <Icon name={starSVG} size="35px" />
+            <Icon name={bookSVG} size="35px" />
           </Link>
         </div>
       </Portal>

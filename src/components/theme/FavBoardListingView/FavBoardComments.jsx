@@ -21,6 +21,7 @@ const FavBoardComments = (props) => {
 
   return (
     <div className="fav-board-comments-wrapper">
+      <h4>Comments:</h4>
       <Item.Group className="board-comments">
         {comments
           .filter((item, i) => item.group === board)
