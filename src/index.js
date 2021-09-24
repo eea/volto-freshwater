@@ -4,6 +4,7 @@ import {
   DatabaseItemView,
   MetadataListingView,
   SimpleListingView,
+  FavBoardView,
 } from './components';
 
 import FavBoardListingView from './components/theme/FavBoardListingView/FavBoardListingView';
@@ -151,11 +152,19 @@ const applyConfig = (config) => {
 
   config.settings = {
     ...config.settings,
-    nonContentRoutes: [...config.settings.nonContentRoutes, '/favorites'],
+    nonContentRoutes: [
+      ...config.settings.nonContentRoutes,
+      '/favorites/board',
+      '/favorites',
+    ],
   };
 
   config.addonRoutes = [
     ...config.addonRoutes,
+    {
+      path: '/favorites/board',
+      component: FavBoardView,
+    },
     {
       path: '/favorites',
       component: FavBoardListingView,

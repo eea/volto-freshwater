@@ -13,3 +13,4 @@ export MapFullscreen from './theme/Webmap/MapFullscreen';
 export MapShare from './theme/Webmap/MapShare';
 export FavBoardComments from './theme/FavBoardListingView/FavBoardComments';
 export FavItemToolbar from './theme/FavBoardListingView/FavItemToolbar';
+export FavBoardView from './theme/FavBoardListingView/FavBoardView';
