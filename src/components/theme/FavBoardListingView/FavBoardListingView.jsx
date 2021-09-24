@@ -17,6 +17,8 @@ import {
   FavBoardComments,
   FavItemToolbar,
 } from '@eeacms/volto-freshwater/components';
+import {getAllBookmarks} from '@eeacms/volto-freshwater/actions'
+import ToggleButton from './FavToggleStatusButton';
 import './style.less';
 
 const CATALOGUE_CONTENT_TYPES = [
@@ -29,18 +31,8 @@ const CATALOGUE_CONTENT_TYPES = [
   'map_interactive',
 ];
 
-const getAllBookmarks = (owner) => {
-  return {
-    type: 'GET_BOOKMARKS',
-    request: {
-      op: 'get',
-      path: `/@bookmarks-all` + (owner ? `?owner=${owner}` : ``),
-    },
-  };
-};
-
 const ListingView = (props) => {
-  const groupedItems = props.groupedItems;
+  const { showToggle, groupedItems } = props;
 
   return Object.keys(groupedItems).map((username) => {
     return (
@@ -50,9 +42,16 @@ const ListingView = (props) => {
           .map((group, index) => {
             return (
               <div className="fav-listing-board" key={index}>
-                <h3>
-                  {group} by {username}
-                </h3>
+                <div className="fav-listing-board-grouptitle">
+                  <h3>
+                    {group} <sup>{username}</sup>
+                  </h3>
+                  {showToggle && (
+                    <ToggleButton
+                      groupedItems={groupedItems[username][group]}
+                    />
+                  )}
+                </div>
                 <List key={index}>
                   {groupedItems[username][group].map((item, index) => (
                     <List.Item key={index}>
@@ -118,6 +117,31 @@ const FavBoardListingView = (props) => {
     (state) => state.collectivebookmarks?.delete || {},
   );
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (bookmarkdelete === 'loaded') {
+      dispatch(getAllBookmarks(paramOwner));
+    }
+  }, [bookmarkdelete, dispatch]);
+
+  useEffect(() => {
+    const favItems = groupBy(items, (item) => item['owner']);
+    Object.keys(favItems).forEach((username) => {
+      favItems[username] = sortBy(favItems[username], [
+        function (o) {
+          return o.title.toLowerCase();
+        },
+      ]);
+    });
+    setGroupedItems(favItems);
+  }, [dispatch, items]);
+
+  const closeModal = (item) => {
+    setOpenModal(false);
+    setSelectedItem(null);
+  };
+
   let myGroupedItems = {};
   let otherPublicGroupedItems = {};
 
@@ -125,17 +149,21 @@ const FavBoardListingView = (props) => {
   // and group them by group
   Object.keys(groupedItems).map((username) => {
     if (paramOwner && username !== paramOwner) {
-      return false;
+      return;
     }
 
-    const items = groupedItems[username].map((item) => {
+    const items = groupedItems[username].filter((item) => {
       if (paramUID && item.uid !== paramUID) {
-        return;
+        return false;
       }
       if (paramGroup && item.group !== paramGroup) {
+        return false;
+      }
+      if (username !== userID && item.payload?.status === 'private') {
         return;
       }
-      return item;
+
+      return true;
     });
 
     const byGroups = groupBy(items, (item) => item['group']);
@@ -153,39 +181,17 @@ const FavBoardListingView = (props) => {
       otherPublicGroupedItems[username] = byGroups;
     }
   });
+
+  // console.log('userID', userID);
   console.log('myGroupedItems', myGroupedItems);
   console.log('otherPublicGroupedItems', otherPublicGroupedItems);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (bookmarkdelete === 'loaded') {
-      dispatch(getAllBookmarks(paramOwner));
-    }
-  }, [bookmarkdelete, dispatch]);
-
-  useEffect(() => {
-    const favItems = groupBy(items, (item) => item['owner']);
-    Object.keys(favItems).forEach((item) => {
-      favItems[item] = sortBy(favItems[item], [
-        function (o) {
-          return o.title.toLowerCase();
-        },
-      ]);
-    });
-    setGroupedItems(favItems);
-  }, [dispatch, items]);
-
-  const closeModal = (item) => {
-    setOpenModal(false);
-    setSelectedItem(null);
-  };
 
   return (
     <div className="favorites-listing ui container">
       <h1>My bookmarks</h1>
-      <ListingView groupedItems={myGroupedItems} />
+      <ListingView showToggle={true} groupedItems={myGroupedItems} />
       <h1>Other public bookmarks</h1>
-      <ListingView groupedItems={otherPublicGroupedItems} />
+      <ListingView showToggle={false} groupedItems={otherPublicGroupedItems} />
 
       <Modal
         className="item-metadata-modal"

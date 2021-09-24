@@ -67,7 +67,10 @@ const BasketToolbarButton = (props) => {
   const handleCreateBoard = () => {
     for (let item of basket) {
       dispatch(
-        addBookmark(item.UID, boardTitle, item.hash || '', { data: item }),
+        addBookmark(item.UID, boardTitle, item.hash || '', {
+          status: 'private',
+          data: item,
+        }),
       );
       dispatch(removeItemFromBasket(item));
       setBoardCreated(true);
@@ -77,7 +80,12 @@ const BasketToolbarButton = (props) => {
 
   const handleSaveToBoard = (group) => {
     for (let item of basket) {
-      dispatch(addBookmark(item.UID, group, item.hash || '', { data: item }));
+      dispatch(
+        addBookmark(item.UID, group, item.hash || '', {
+          status: 'private',
+          data: item,
+        }),
+      );
       dispatch(removeItemFromBasket(item));
       setTimeout(() => setActiveGroup(''), 2000);
     }
