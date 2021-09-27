@@ -41,9 +41,7 @@ const CommentForm = (props) => {
                 modifyBookmark(item.uid, item.group, item.hash || '', {
                   data: item.payload.data,
                   status: item.payload.status,
-                  comments: [
-                    ...(comments ? [...comments, inputComment] : inputComment),
-                  ],
+                  comments: [...(comments ? [...comments] : ''), inputComment],
                 }),
               );
             }
@@ -106,7 +104,7 @@ const FavBoardComments = (props) => {
                   </Button>
                 </Item.Meta>
                 <Item.Description>
-                  <p>world {comment}</p>
+                  <p>{comment}</p>
                 </Item.Description>
               </Item.Content>
             </Item>
