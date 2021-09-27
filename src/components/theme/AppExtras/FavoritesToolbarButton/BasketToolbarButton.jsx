@@ -8,9 +8,9 @@ import { compose } from 'redux';
 import {
   addBookmark,
   getAllBookmarks,
-} from '@collective/volto-bookmarks/actions';
+} from '@eeacms/volto-freshwater/actions/favBoards';
 import { groupBy, sortBy } from 'lodash';
-import { removeItemFromBasket } from '@eeacms/volto-freshwater/actions/favBoard';
+import { removeItemFromBasket } from '@eeacms/volto-freshwater/actions/favBasket';
 import briefcaseSVG from '@plone/volto/icons/briefcase.svg';
 import clearSVG from '@plone/volto/icons/clear.svg';
 import starSVG from '@plone/volto/icons/star.svg';
@@ -25,7 +25,7 @@ const BasketToolbarButton = (props) => {
   const [boardTitle, setBoardTitle] = useState('Default');
   const [groups, setGroups] = useState({});
   const [boardCreated, setBoardCreated] = useState(false);
-  const items = useSelector((state) => state.collectivebookmarks?.items || []);
+  const items = useSelector((state) => state.favBoards?.items || []);
   const menuRef = React.useRef(null);
   const dispatch = useDispatch();
 
@@ -240,7 +240,7 @@ const BasketToolbarButton = (props) => {
 export default compose(
   connect(
     (state) => ({
-      basket: state.favBoard.basket,
+      basket: state.favBasket.basket,
     }),
     { removeItemFromBasket },
   ),

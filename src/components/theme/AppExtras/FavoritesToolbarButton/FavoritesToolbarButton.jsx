@@ -6,7 +6,7 @@ import { Icon } from '@plone/volto/components';
 import bookSVG from '@plone/volto/icons/book.svg';
 
 const BasketToolbarButton = (props) => {
-  const items = useSelector((state) => state.collectivebookmarks?.items || []);
+  const items = useSelector((state) => state.favBoards?.items || []);
 
   return items && items.length > 0 ? (
     <div>

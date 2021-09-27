@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { Portal } from 'react-portal';
 import { Toolbar } from '@plone/volto/components';
 import jwtDecode from 'jwt-decode';
-import { deStringifySearchquery } from '@collective/volto-bookmarks/helpers';
+import { deStringifySearchquery } from '@eeacms/volto-freshwater/utils';
 import {
   ItemMetadata,
   ItemTitle,
@@ -90,7 +90,11 @@ const ListingView = (props) => {
                   ))}
                 </List>
 
-                <FavBoardComments board={group} />
+                <FavBoardComments
+                  {...props}
+                  board={group}
+                  groupedItems={groupedItems[username][group]}
+                />
               </div>
             );
           })}
@@ -102,10 +106,8 @@ const ListingView = (props) => {
 const FavBoardView = (props) => {
   const userSession = useSelector((state) => state.userSession);
   const userID = userSession.token ? jwtDecode(userSession.token).sub : '';
-  const items = useSelector((state) => state.collectivebookmarks?.items || []);
-  const bookmarkdelete = useSelector(
-    (state) => state.collectivebookmarks?.delete || {},
-  );
+  const items = useSelector((state) => state.favBoards?.items || []);
+  const bookmarkdelete = useSelector((state) => state.favBoards?.delete || {});
   const dispatch = useDispatch();
 
   const [isOpenModal, setOpenModal] = useState(false);

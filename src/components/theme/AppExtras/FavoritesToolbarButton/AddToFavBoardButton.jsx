@@ -4,10 +4,10 @@ import { Portal } from 'react-portal';
 import { Button } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
 import bookmarkSVG from '@plone/volto/icons/bookmark.svg';
-import { addItemToBasket } from '@eeacms/volto-freshwater/actions/favBoard';
+import { addItemToBasket } from '@eeacms/volto-freshwater/actions/favBasket';
 
 const AddToFavBoardButton = (props) => {
-  const items = useSelector((state) => state.collectivebookmarks?.items || []);
+  const items = useSelector((state) => state.favBoards?.items || []);
   const dispatch = useDispatch();
 
   return items && items.length > 0 ? (

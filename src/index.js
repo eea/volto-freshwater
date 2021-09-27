@@ -19,8 +19,8 @@ import installCountryHeaderDataBlock from './components/Blocks/CountryHeaderData
 import installConditionalDataBlock from './components/Blocks/ConditionalDataBlock';
 import installAppExtras from './components/theme/AppExtras';
 
-import favBoard from './reducers/favBoard/';
-import favBoardComments from './reducers/favBoardComments';
+import favBasket from './reducers/favBasket/';
+import favBoards from './reducers/favBoards/';
 
 const available_colors = [
   '#0099BB',
@@ -116,7 +116,7 @@ const applyConfig = (config) => {
     { cssClass: 'h5', label: 'H5 14px' },
   ];
 
-  config.settings.persistentReducers = ['favBoard', 'favBoardComments'];
+  config.settings.persistentReducers = ['favBasket'];
 
   // Search block metadata listing view
   config.blocks.blocksConfig.listing = {
@@ -179,8 +179,8 @@ const applyConfig = (config) => {
   config.blocks.blocksConfig.plotly_chart.restricted = false;
   config.addonReducers = {
     ...(config.addonReducers || {}),
-    favBoard,
-    favBoardComments,
+    favBasket,
+    favBoards,
   };
 
   return [

@@ -2,7 +2,7 @@ const initialState = {
   basket: [],
 };
 
-export default function favBoard(state = initialState, action) {
+export default function favBasket(state = initialState, action) {
   switch (action.type) {
     case 'ADD_TO_BASKET':
       return {

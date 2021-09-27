@@ -31,3 +31,23 @@ export const useCopyToClipboard = (text) => {
 
   return [copyStatus, copy];
 };
+
+export const doStringifySearchquery = (querystring) => {
+  const params = new URLSearchParams(querystring);
+  let obj = {};
+  for (var key of params.keys()) {
+    obj[key] = params.getAll(key);
+  }
+  return JSON.stringify(obj);
+};
+
+export const deStringifySearchquery = (searchparamstring) => {
+  const obj = JSON.parse(searchparamstring);
+  const params = new URLSearchParams();
+  for (const [key, value] of Object.entries(obj)) {
+    for (const el of value) {
+      params.append(key, el);
+    }
+  }
+  return params.toString();
+};

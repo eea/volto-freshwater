@@ -1,12 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-
 import { Button } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
-
+import { deleteBookmark } from '@eeacms/volto-freshwater/actions/favBoards';
 import clearSVG from '@plone/volto/icons/delete.svg';
 import linkSVG from '@plone/volto/icons/share.svg';
-import { deleteBookmark } from '@collective/volto-bookmarks/actions';
 
 const FavItemToolbar = (props) => {
   const { item } = props;

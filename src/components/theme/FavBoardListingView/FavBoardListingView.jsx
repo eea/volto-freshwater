@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { Portal } from 'react-portal';
 import { Toolbar } from '@plone/volto/components';
 import jwtDecode from 'jwt-decode';
-import { deStringifySearchquery } from '@collective/volto-bookmarks/helpers';
+import { deStringifySearchquery } from '@eeacms/volto-freshwater/utils';
 import {
   ItemMetadata,
   ItemTitle,
@@ -17,7 +17,7 @@ import {
   FavBoardComments,
   FavItemToolbar,
 } from '@eeacms/volto-freshwater/components';
-import {getAllBookmarks} from '@eeacms/volto-freshwater/actions'
+import { getAllBookmarks } from '@eeacms/volto-freshwater/actions/favBoards';
 import ToggleButton from './FavToggleStatusButton';
 import './style.less';
 
@@ -112,10 +112,8 @@ const FavBoardListingView = (props) => {
   const paramGroup = urlParams ? urlParams['group'] : '';
   const paramUID = urlParams ? urlParams['uid'] : '';
 
-  const items = useSelector((state) => state.collectivebookmarks?.items || []);
-  const bookmarkdelete = useSelector(
-    (state) => state.collectivebookmarks?.delete || {},
-  );
+  const items = useSelector((state) => state.favBoards?.items || []);
+  const bookmarkdelete = useSelector((state) => state.favBoards?.delete || {});
 
   const dispatch = useDispatch();
 
@@ -123,7 +121,7 @@ const FavBoardListingView = (props) => {
     if (bookmarkdelete === 'loaded') {
       dispatch(getAllBookmarks(paramOwner));
     }
-  }, [bookmarkdelete, dispatch]);
+  }, [paramOwner, bookmarkdelete, dispatch]);
 
   useEffect(() => {
     const favItems = groupBy(items, (item) => item['owner']);

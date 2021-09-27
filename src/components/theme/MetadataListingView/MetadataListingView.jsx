@@ -8,7 +8,7 @@ import {
   ItemTitle,
   ItemMetadataSnippet,
 } from '@eeacms/volto-freshwater/components';
-import { addItemToBasket } from '@eeacms/volto-freshwater/actions/favBoard';
+import { addItemToBasket } from '@eeacms/volto-freshwater/actions/favBasket';
 import starSVG from '@plone/volto/icons/star.svg';
 import './style.less';
 
