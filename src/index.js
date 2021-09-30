@@ -22,6 +22,8 @@ import installAppExtras from './components/theme/AppExtras';
 import favBasket from './reducers/favBasket/';
 import favBoards from './reducers/favBoards/';
 
+import './slate-styles.less'
+
 const available_colors = [
   '#0099BB',
   'F2F9FB',
@@ -107,6 +109,10 @@ const applyConfig = (config) => {
   config.settings.slate.styleMenu.inlineStyles = [
     ...(config.settings.slate.styleMenu?.inlineStyles || []),
     { cssClass: 'blue-text', label: 'Blue text' },
+    { cssClass: 'blue-chart-text', label: 'Blue plot-chart text' },
+    { cssClass: 'orange-chart-text', label: 'Orange plot-chart text' },
+    { cssClass: 'green-chart-text', label: 'Green plot-chart text' },
+    { cssClass: 'red-chart-text', label: 'red plot-chart text' },
     { cssClass: 'grey-text', label: 'Grey text' },
     { cssClass: 'p-text', label: 'Paragraph 16px' },
     { cssClass: 'h1', label: 'H1 36px' },
