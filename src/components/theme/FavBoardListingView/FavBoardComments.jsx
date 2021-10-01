@@ -13,13 +13,16 @@ import clearSVG from '@plone/volto/icons/delete.svg';
 import './style.less';
 
 const CommentForm = (props) => {
-  const { dispatch, groupedItems, comments } = props;
+  const { dispatch, groupedItems, comments, userId } = props;
   const [inputComment, setInputComment] = useState();
   const urlParams = queryString.parse(props.location.search);
   const paramOwner = urlParams ? urlParams['user'] : '';
+  const date = new Date();
+  const month = date.toLocaleString('default', { month: 'long' });
+  const datestring = month + ' ' + date.getDay() + ', ' + date.getFullYear();
 
   return (
-    paramOwner === props.userId && (
+    paramOwner === userId && (
       <Form className="comment-form">
         <Form.Field>
           <label htmlFor="field-comment">Leave a comment:</label>
@@ -41,7 +44,10 @@ const CommentForm = (props) => {
                 modifyBookmark(item.uid, item.group, item.hash || '', {
                   data: item.payload.data,
                   status: item.payload.status,
-                  comments: [...(comments ? [...comments] : ''), inputComment],
+                  comments: [
+                    ...(comments ? [...comments] : ''),
+                    { comment: inputComment, date: datestring },
+                  ],
                 }),
               );
             }
@@ -69,14 +75,18 @@ const FavBoardComments = (props) => {
 
   return (
     <div className="fav-board-comments-wrapper">
-      <h4>Comments:</h4>
+      {comments && comments.length > 0 && <h4>Comments:</h4>}
       {groupedItems && groupedItems.length > 0 && (
         <Item.Group className="board-comments">
-          {(comments || []).map((comment, i) => (
+          {(comments || []).map((c, i) => (
             <Item key={i}>
               <Item.Content>
                 <Item.Meta>
-                  <div>{userId}:</div>
+                  <div className="meta-left-section">
+                    <span>{userId}</span>
+                    <span className="comment-dot"></span>
+                    <span className="comment-date">{c.date}</span>
+                  </div>
                   <Button
                     icon
                     basic
@@ -104,11 +114,12 @@ const FavBoardComments = (props) => {
                   </Button>
                 </Item.Meta>
                 <Item.Description>
-                  <p>{comment}</p>
+                  <p>{c.comment}</p>
                 </Item.Description>
               </Item.Content>
             </Item>
           ))}
+
           <CommentForm
             {...props}
             groupedItems={groupedItems}

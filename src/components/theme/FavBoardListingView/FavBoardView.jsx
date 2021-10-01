@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { compose } from 'redux';
 import { groupBy } from 'lodash';
 import queryString from 'query-string';
 import { flattenToAppURL } from '@plone/volto/helpers';
@@ -16,6 +17,7 @@ import {
   FavBoardComments,
   FavItemToolbar,
 } from '@eeacms/volto-freshwater/components';
+import { getAllBookmarks } from '@eeacms/volto-freshwater/actions/favBoards';
 import './style.less';
 
 const CATALOGUE_CONTENT_TYPES = [
@@ -27,16 +29,6 @@ const CATALOGUE_CONTENT_TYPES = [
   'briefing',
   'map_interactive',
 ];
-
-const getAllBookmarks = (owner) => {
-  return {
-    type: 'GET_BOOKMARKS',
-    request: {
-      op: 'get',
-      path: `/@bookmarks-all` + (owner ? `?owner=${owner}` : ``),
-    },
-  };
-};
 
 const ListingView = (props) => {
   const { groupedItems, setOpenModal, setSelectedItem } = props;
@@ -50,7 +42,8 @@ const ListingView = (props) => {
             return (
               <div className="fav-listing-board" key={index}>
                 <h1>
-                  {group} by {username}
+                  {group}
+                  {/*by {username}*/}
                 </h1>
                 <List key={index}>
                   {groupedItems[username][group].map((item, index) => (
@@ -117,8 +110,16 @@ const FavBoardView = (props) => {
   const urlParams = queryString.parse(props.location.search);
   const paramOwner = urlParams ? urlParams['user'] : '';
   const paramGroup = urlParams ? urlParams['group'] : '';
-  // const paramUID = urlParams ? urlParams['uid'] : '';
+  const paramStatus = urlParams ? urlParams['status'] : '';
 
+  useEffect(() => {
+    if (bookmarkdelete === 'loaded') {
+      dispatch(getAllBookmarks(paramOwner));
+    }
+  }, [paramOwner, bookmarkdelete, dispatch]);
+
+  // filter the bookmarks by parameters from url
+  // and group them by group
   useEffect(() => {
     const favItems = groupBy(items, (item) => item['owner']);
 
@@ -131,52 +132,52 @@ const FavBoardView = (props) => {
       );
       const byGroups = groupBy(items, (item) => item['group']);
 
-      if (item === userID) {
-        favItems[item] = byGroups;
-      }
+      setGroupedItems({ [item]: byGroups });
     });
-
-    setGroupedItems(favItems);
   }, [items, paramOwner, paramGroup, userID]);
-
-  useEffect(() => {
-    if (bookmarkdelete === 'loaded') {
-      dispatch(getAllBookmarks(paramOwner));
-    }
-  }, [paramOwner, bookmarkdelete, dispatch]);
 
   const closeModal = (item) => {
     setOpenModal(false);
     setSelectedItem(null);
   };
 
+  const showList =
+    paramOwner === userID ||
+    (paramOwner !== userID && paramStatus === 'public');
+
   return (
     <div className="favorites-listing ui container">
       <h3 className="boards-title">Board</h3>
-      <ListingView
-        {...props}
-        groupedItems={groupedItems}
-        setOpenModal={setOpenModal}
-        setSelectedItem={setSelectedItem}
-      />
+      {showList ? (
+        <>
+          <ListingView
+            {...props}
+            groupedItems={groupedItems}
+            setOpenModal={setOpenModal}
+            setSelectedItem={setSelectedItem}
+          />
 
-      <Modal
-        className="item-metadata-modal"
-        open={isOpenModal}
-        onClose={closeModal}
-        size="large"
-        closeIcon
-        centered
-      >
-        <Modal.Header>
-          <ItemMetadataSnippet item={selectedItem} />
-          <ItemTitle item={selectedItem} />
-        </Modal.Header>
+          <Modal
+            className="item-metadata-modal"
+            open={isOpenModal}
+            onClose={closeModal}
+            size="large"
+            closeIcon
+            centered
+          >
+            <Modal.Header>
+              <ItemMetadataSnippet item={selectedItem} />
+              <ItemTitle item={selectedItem} />
+            </Modal.Header>
 
-        <Modal.Content>
-          <ItemMetadata item={selectedItem} />
-        </Modal.Content>
-      </Modal>
+            <Modal.Content>
+              <ItemMetadata item={selectedItem} />
+            </Modal.Content>
+          </Modal>
+        </>
+      ) : (
+        <p>This board is private.</p>
+      )}
 
       {__CLIENT__ && props.token && (
         <Portal node={document.getElementById('toolbar')}>
@@ -187,4 +188,8 @@ const FavBoardView = (props) => {
   );
 };
 
-export default FavBoardView;
+export default compose(
+  connect((state) => ({
+    token: state.userSession.token,
+  })),
+)(FavBoardView);

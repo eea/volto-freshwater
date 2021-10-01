@@ -6,22 +6,21 @@ import './toggle.less';
 
 const ToggleButton = (props) => {
   const { className, groupedItems } = props;
-  const initialState = groupedItems[0].payload['status'] || 'public';
+  const initialState = groupedItems.items[0].payload['status'] || 'public';
   const [toggle, setToggle] = useState(initialState);
   const dispatch = useDispatch();
 
   const triggerToggle = () => {
     const newState = toggle === 'public' ? 'private' : 'public';
-    console.log('newState', newState);
-    groupedItems.map((item) => {
-      console.log('item', item);
+
+    for (let item of groupedItems.items) {
       dispatch(
         modifyBookmark(item.uid, item.group, item.hash || '', {
           data: item,
           status: newState,
         }),
       );
-    });
+    }
 
     setToggle(toggle === 'public' ? 'private' : 'public');
   };
@@ -34,7 +33,13 @@ const ToggleButton = (props) => {
   );
 
   return (
-    <div onClick={triggerToggle} className={toggleClasses}>
+    <div
+      className={toggleClasses}
+      onClick={triggerToggle}
+      onKeyDown={triggerToggle}
+      role="button"
+      tabIndex="0"
+    >
       <div className="wrg-toggle-container">
         <div className="wrg-toggle-check">
           <span>Private</span>

@@ -9,29 +9,34 @@ import {
   addBookmark,
   getAllBookmarks,
 } from '@eeacms/volto-freshwater/actions/favBoards';
-import { groupBy, sortBy } from 'lodash';
+import { groupBy } from 'lodash';
 import { removeItemFromBasket } from '@eeacms/volto-freshwater/actions/favBasket';
 import briefcaseSVG from '@plone/volto/icons/briefcase.svg';
 import clearSVG from '@plone/volto/icons/clear.svg';
 import starSVG from '@plone/volto/icons/star.svg';
 import checkSVG from '@plone/volto/icons/check.svg';
 import cx from 'classnames';
+import jwtDecode from 'jwt-decode';
 import './style.less';
 
 const BasketToolbarButton = (props) => {
   const { basket } = props;
+  const items = useSelector((state) => state.favBoards?.items || []);
+  const userSession = useSelector((state) => state.userSession);
+  const userID = userSession.token ? jwtDecode(userSession.token).sub : '';
+
   const [showMenu, setShowMenu] = useState(false);
   const [activeGroup, setActiveGroup] = useState('');
   const [boardTitle, setBoardTitle] = useState('Default');
-  const [groups, setGroups] = useState({});
   const [boardCreated, setBoardCreated] = useState(false);
-  const items = useSelector((state) => state.favBoards?.items || []);
+  const [groupedItems, setGroupedItems] = useState({});
+
   const menuRef = React.useRef(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllBookmarks());
-  }, [dispatch]);
+    dispatch(getAllBookmarks(userID));
+  }, [dispatch, userID]);
 
   useEffect(() => {
     if (basket && basket.length > 0) {
@@ -40,16 +45,17 @@ const BasketToolbarButton = (props) => {
   }, [basket]);
 
   useEffect(() => {
-    const groups = groupBy(items, (item) => item['group']);
-    Object.keys(groups).forEach((item) => {
-      groups[item] = sortBy(groups[item], [
-        function (o) {
-          return o.title.toLowerCase();
-        },
-      ]);
+    const favItems = groupBy(items, (item) => item['owner']);
+
+    Object.keys(favItems).forEach((item) => {
+      if (item !== userID) {
+        return false;
+      }
+      const items = favItems[item].filter((item) => item.owner === userID);
+      const byGroups = groupBy(items, (item) => item['group']);
+      setGroupedItems({ [item]: byGroups });
     });
-    setGroups(groups);
-  }, [dispatch, items]);
+  }, [items, userID]);
 
   useEffect(() => {
     const outsideClick = (e) => {
@@ -152,38 +158,46 @@ const BasketToolbarButton = (props) => {
                           Save to an existing board:
                         </div>
 
-                        {Object.entries(groups)
-                          .sort()
-                          .map(([group, items], index) => {
-                            return (
-                              <div
-                                key={index}
-                                className={cx('board-item', {
-                                  active: activeGroup === group,
+                        {Object.keys(groupedItems).map((user) => {
+                          return (
+                            <div>
+                              {Object.keys(groupedItems[user])
+                                .sort()
+                                .map((group, index) => {
+                                  return (
+                                    <div
+                                      key={index}
+                                      className={cx('board-item', {
+                                        active: activeGroup === group,
+                                      })}
+                                      onClick={() => {
+                                        handleSaveToBoard(group);
+                                        setActiveGroup(group);
+                                      }}
+                                      onKeyDown={() => {
+                                        handleSaveToBoard(group);
+                                        setActiveGroup(group);
+                                      }}
+                                      role="button"
+                                      tabIndex="0"
+                                    >
+                                      <Icon name={starSVG} size="16px" />
+                                      {group}
+                                      {/*({items.length}){' '}*/}
+                                      <sup>{user}</sup>
+                                      {activeGroup === group && (
+                                        <Icon
+                                          className="check-icon"
+                                          name={checkSVG}
+                                          size="16px"
+                                        />
+                                      )}
+                                    </div>
+                                  );
                                 })}
-                                onClick={() => {
-                                  handleSaveToBoard(group);
-                                  setActiveGroup(group);
-                                }}
-                                onKeyDown={() => {
-                                  handleSaveToBoard(group);
-                                  setActiveGroup(group);
-                                }}
-                                role="button"
-                                tabIndex="0"
-                              >
-                                <Icon name={starSVG} size="16px" />
-                                {group} ({items.length})
-                                {activeGroup === group && (
-                                  <Icon
-                                    className="check-icon"
-                                    name={checkSVG}
-                                    size="16px"
-                                  />
-                                )}
-                              </div>
-                            );
-                          })}
+                            </div>
+                          );
+                        })}
                       </div>
                     )}
 

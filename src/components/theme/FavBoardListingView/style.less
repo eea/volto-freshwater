@@ -43,12 +43,36 @@
     }
   }
 
+  .item .meta * {
+    margin-right: 7px !important;
+  }
+
   .meta {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    color: #939393 !important;
     font-size: 14px !important;
     font-weight: 500;
+
+    .meta-left-section {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .comment-dot {
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      background-color: #939393;
+      border-radius: 50%;
+    }
+  }
+
+  .comment-date {
+    font-size: 13px;
+    font-weight: normal;
   }
 
   .description p {
@@ -65,7 +89,7 @@
 }
 
 .fav-listing-board {
-  margin: 1.5em 0;
+  margin: 1em 0;
 
   .fav-listing-board-grouptitle {
     display: flex;

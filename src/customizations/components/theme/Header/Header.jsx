@@ -80,9 +80,13 @@ class Header extends Component {
     let imageCaption = this.props.content?.image_caption;
     let contentTitle = this.props.content?.title;
     let contentDescription = this.props.content?.description;
+    let stagingBanner =
+      __CLIENT__ && document.getElementsByClassName('stagingBanner').length > 0;
+
     return (
       <div className="portal-top">
         {leadImageUrl && <BodyClass className="has-image" />}
+        {stagingBanner && <BodyClass className="staging-banner" />}
         <Segment basic className="header-wrapper" role="banner">
           <Container>
             <div className="header">
