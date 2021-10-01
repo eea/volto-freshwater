@@ -22,8 +22,8 @@ import installAppExtras from './components/theme/AppExtras';
 import favBasket from './reducers/favBasket/';
 import favBoards from './reducers/favBoards/';
 
-import './slate-styles.less'
-import './block-styles.less'
+import './slate-styles.less';
+import './block-styles.less';
 
 const available_colors = [
   '#0099BB',
@@ -160,7 +160,7 @@ const applyConfig = (config) => {
       id: 'marginBottomBlock',
       title: 'Margin bottom block',
       cssClass: 'margin-bottom-block',
-    }
+    },
   ];
 
   config.settings = {

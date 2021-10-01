@@ -85,14 +85,14 @@ const Edit = (props) => {
         title={data.placeholder}
         onSelectBlock={setSelectedBlock}
         onChangeFormData={(newFormData) => {
-          console.log('onchangeformdata', newFormData);
+          // console.log('onchangeformdata', newFormData);
           onChangeBlock(block, {
             ...data,
             data: newFormData,
           });
         }}
         onChangeField={(id, value) => {
-          console.log('onchangefield', data);
+          // console.log('onchangefield', data);
           if (['blocks', 'blocks_layout'].indexOf(id) > -1) {
             blockState.current[id] = value;
             onChangeBlock(block, {
