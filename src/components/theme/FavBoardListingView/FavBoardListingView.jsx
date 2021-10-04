@@ -7,11 +7,12 @@ import { Link } from 'react-router-dom';
 import { Portal } from 'react-portal';
 import { Toolbar } from '@plone/volto/components';
 import ToggleButton from './FavToggleStatusButton';
+import { Tab, Menu } from 'semantic-ui-react';
 import { getAllBookmarks } from '@eeacms/volto-freshwater/actions/favBoards';
 import './style.less';
 
 const ListingView = (props) => {
-  const { showToggle, groupedItems } = props;
+  const { showToggle, groupedItems, userID } = props;
 
   return Object.keys(groupedItems).map((username) => {
     return (
@@ -19,19 +20,18 @@ const ListingView = (props) => {
         {groupedItems[username].sort().map((group, index) => {
           return (
             <div className="fav-listing-board" key={index}>
-              <div className="fav-listing-board-grouptitle">
-                <div className="fav-listing-board" key={index}>
-                  <Link
-                    to={`${props.location.pathname}/board?user=${username}&group=${group.board}&status=${group.status}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <h3>
-                      {group.board}
-                      {/*<sup>{username}</sup>*/}
-                    </h3>
-                  </Link>
-                </div>
+              <div className="fav-listing-board-item" key={index}>
+                <Link
+                  className="fav-board-link"
+                  to={`${props.location.pathname}/board?user=${username}&group=${group.board}&status=${group.status}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span>
+                    {group.board}
+                    {username !== userID && <span> by {username} </span>}
+                  </span>
+                </Link>
                 {showToggle && <ToggleButton groupedItems={group} />}
               </div>
             </div>
@@ -86,25 +86,56 @@ const FavBoardListingView = (props) => {
       if (username === userID) {
         setMyGroupedItems({ [username]: byBoards });
       } else {
-        setOtherPublicGroupedItems({ [username]: byBoards });
+        if (byBoards.length > 0)
+          setOtherPublicGroupedItems({ [username]: byBoards });
       }
     });
   }, [dispatch, items, userID]);
 
-  // console.log('myGroupedItems', myGroupedItems);
-  // console.log('otherPublicGroupedItems', otherPublicGroupedItems);
+  const panes = [
+    {
+      menuItem: (
+        <Menu.Item key="my-boards">
+          <h4>My boards</h4>
+        </Menu.Item>
+      ),
+      render: () => (
+        <Tab.Pane>
+          <ListingView
+            {...props}
+            userID={userID}
+            showToggle={true}
+            groupedItems={myGroupedItems}
+          />
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: (
+        <Menu.Item key="other-boards">
+          <h4>Other public boards</h4>
+        </Menu.Item>
+      ),
+      render: () => (
+        <Tab.Pane>
+          {Object.keys(otherPublicGroupedItems).length > 0 ? (
+            <ListingView
+              {...props}
+              userID={userID}
+              showToggle={false}
+              groupedItems={otherPublicGroupedItems}
+            />
+          ) : (
+            <span>There are no public boards at the moment.</span>
+          )}
+        </Tab.Pane>
+      ),
+    },
+  ];
 
   return (
     <div className="favorites-listing ui container">
-      <h2>My boards:</h2>
-      <ListingView {...props} showToggle={true} groupedItems={myGroupedItems} />
-
-      <h2>Other public boards:</h2>
-      <ListingView
-        {...props}
-        showToggle={false}
-        groupedItems={otherPublicGroupedItems}
-      />
+      <Tab menu={{ secondary: true, fluid: true }} panes={panes} />
 
       {__CLIENT__ && props.token && (
         <Portal node={document.getElementById('toolbar')}>

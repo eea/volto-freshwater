@@ -31,7 +31,13 @@ const CATALOGUE_CONTENT_TYPES = [
 ];
 
 const ListingView = (props) => {
-  const { groupedItems, setOpenModal, setSelectedItem } = props;
+  const {
+    groupedItems,
+    setOpenModal,
+    setSelectedItem,
+    userID,
+    paramOwner,
+  } = props;
 
   return Object.keys(groupedItems).map((username, i) => {
     return (
@@ -41,10 +47,10 @@ const ListingView = (props) => {
           .map((group, index) => {
             return (
               <div className="fav-listing-board" key={index}>
-                <h1>
-                  {group}
-                  {/*by {username}*/}
-                </h1>
+                <h1 className="board-title">{group}</h1>
+                {username !== userID && (
+                  <span className="createdBy">Created by {username} </span>
+                )}
                 <List key={index}>
                   {groupedItems[username][group].map((item, index) => (
                     <List.Item key={index}>
@@ -147,11 +153,13 @@ const FavBoardView = (props) => {
 
   return (
     <div className="favorites-listing ui container">
-      <h3 className="boards-title">Board</h3>
+      <h3 className="board-upper-title">Board</h3>
       {showList ? (
         <>
           <ListingView
             {...props}
+            userID={userID}
+            paramOwner={paramOwner}
             groupedItems={groupedItems}
             setOpenModal={setOpenModal}
             setSelectedItem={setSelectedItem}
