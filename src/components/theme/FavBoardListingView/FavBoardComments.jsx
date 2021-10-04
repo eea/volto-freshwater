@@ -13,13 +13,9 @@ import clearSVG from '@plone/volto/icons/delete.svg';
 import './style.less';
 
 const CommentForm = (props) => {
-  const { dispatch, groupedItems, comments, userId } = props;
+  const { dispatch, groupedItems, comments, userId, paramOwner } = props;
   const [inputComment, setInputComment] = useState();
-  const urlParams = queryString.parse(props.location.search);
-  const paramOwner = urlParams ? urlParams['user'] : '';
   const date = new Date();
-  const month = date.toLocaleString('default', { month: 'long' });
-  const datestring = month + ' ' + date.getDay() + ', ' + date.getFullYear();
 
   return (
     paramOwner === userId && (
@@ -46,7 +42,7 @@ const CommentForm = (props) => {
                   status: item.payload.status,
                   comments: [
                     ...(comments ? [...comments] : ''),
-                    { comment: inputComment, date: datestring },
+                    { comment: inputComment, date: date },
                   ],
                 }),
               );
@@ -62,16 +58,27 @@ const CommentForm = (props) => {
 };
 
 const FavBoardComments = (props) => {
-  const { userId, groupedItems = [] } = props;
+  const { groupedItems = [] } = props;
   const modified = useSelector((state) => state.favBoards?.modify || {});
   const dispatch = useDispatch();
   const comments = groupedItems[0]?.payload?.comments;
+  const owner = groupedItems[0].owner;
+  const urlParams = queryString.parse(props.location.search);
+  const paramOwner = urlParams ? urlParams['user'] : '';
 
   React.useEffect(() => {
     if (modified === 'loaded') {
-      dispatch(getAllBookmarks());
+      dispatch(getAllBookmarks(paramOwner));
     }
-  }, [dispatch, modified]);
+  }, [dispatch, modified, paramOwner]);
+
+  const getCommentDate = (d) => {
+    const date = new Date(d);
+    const day = date.toLocaleString('default', { day: '2-digit' });
+    const month = date.toLocaleString('default', { month: 'long' });
+    const year = date.toLocaleString('default', { year: 'numeric' });
+    return month + ' ' + day + ', ' + year;
+  };
 
   return (
     <div className="fav-board-comments-wrapper">
@@ -83,9 +90,11 @@ const FavBoardComments = (props) => {
               <Item.Content>
                 <Item.Meta>
                   <div className="meta-left-section">
-                    <span>{userId}</span>
+                    <span>{owner}</span>
                     <span className="comment-dot"></span>
-                    <span className="comment-date">{c.date}</span>
+                    <span className="comment-date">
+                      {getCommentDate(c.date)}
+                    </span>
                   </div>
                   <Button
                     icon
@@ -123,6 +132,7 @@ const FavBoardComments = (props) => {
           <CommentForm
             {...props}
             groupedItems={groupedItems}
+            paramOwner={paramOwner}
             dispatch={dispatch}
             comments={comments}
           />

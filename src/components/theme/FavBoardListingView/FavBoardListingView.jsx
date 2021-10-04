@@ -28,7 +28,7 @@ const ListingView = (props) => {
                   >
                     <h3>
                       {group.board}
-                      <sup>{username}</sup>
+                      {/*<sup>{username}</sup>*/}
                     </h3>
                   </Link>
                 </div>
@@ -96,10 +96,10 @@ const FavBoardListingView = (props) => {
 
   return (
     <div className="favorites-listing ui container">
-      <h2>My bookmarks:</h2>
+      <h2>My boards:</h2>
       <ListingView {...props} showToggle={true} groupedItems={myGroupedItems} />
 
-      <h2>Other public bookmarks:</h2>
+      <h2>Other public boards:</h2>
       <ListingView
         {...props}
         showToggle={false}
