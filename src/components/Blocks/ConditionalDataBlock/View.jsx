@@ -21,6 +21,13 @@ const evaluateCondition = (value1, operator, value2) => {
 
       return value1 === value2;
 
+    case operator === '!=':
+      if (isNumber(value1) && isNumber(value2)) {
+        return parseFloat(value1) !== parseFloat(value2);
+      }
+
+      return value1 !== value2;
+
     case operator === '<':
       return parseFloat(value1) < parseFloat(value2);
     case operator === '>':
