@@ -13,6 +13,9 @@ const isNumber = (n) => {
 };
 
 const evaluateCondition = (value1, operator, value2) => {
+  const values = value2.split(',').map((item) => {
+    return item.trim();
+  });
   value1 = value1[0];
 
   switch (true) {
@@ -31,17 +34,9 @@ const evaluateCondition = (value1, operator, value2) => {
       return String(value1) !== String(value2);
 
     case operator === 'in':
-      values = value2.split(',').map((item) => {
-        return item.trim();
-      });
-
       return values.includes(value1);
 
     case operator === 'not in':
-      values = value2.split(',').map((item) => {
-        return item.trim();
-      });
-
       return !values.includes(value1);
 
     case operator === '<':
