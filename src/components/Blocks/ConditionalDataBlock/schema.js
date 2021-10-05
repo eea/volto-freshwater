@@ -28,6 +28,8 @@ export const ConditionalDataBlockSchema = () => ({
       choices: [
         ['=', '='],
         ['!=', '!='],
+        ['in', 'in'],
+        ['not in', 'not in'],
         ['<', '<'],
         ['>', '>'],
       ],

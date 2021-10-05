@@ -13,20 +13,36 @@ const isNumber = (n) => {
 };
 
 const evaluateCondition = (value1, operator, value2) => {
+  value1 = value1[0];
+
   switch (true) {
     case operator === '=':
       if (isNumber(value1) && isNumber(value2)) {
         return parseFloat(value1) === parseFloat(value2);
       }
 
-      return value1 === value2;
+      return String(value1) === String(value2);
 
     case operator === '!=':
       if (isNumber(value1) && isNumber(value2)) {
         return parseFloat(value1) !== parseFloat(value2);
       }
 
-      return value1 !== value2;
+      return String(value1) !== String(value2);
+
+    case operator === 'in':
+      values = value2.split(',').map((item) => {
+        return item.trim();
+      });
+
+      return values.includes(value1);
+
+    case operator === 'not in':
+      values = value2.split(',').map((item) => {
+        return item.trim();
+      });
+
+      return !values.includes(value1);
 
     case operator === '<':
       return parseFloat(value1) < parseFloat(value2);
