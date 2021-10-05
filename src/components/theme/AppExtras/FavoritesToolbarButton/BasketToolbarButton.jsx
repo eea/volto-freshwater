@@ -11,7 +11,7 @@ import {
 } from '@eeacms/volto-freshwater/actions/favBoards';
 import { groupBy } from 'lodash';
 import { removeItemFromBasket } from '@eeacms/volto-freshwater/actions/favBasket';
-import briefcaseSVG from '@plone/volto/icons/briefcase.svg';
+import packSVG from '@plone/volto/icons/pack.svg';
 import clearSVG from '@plone/volto/icons/clear.svg';
 import starSVG from '@plone/volto/icons/star.svg';
 import checkSVG from '@plone/volto/icons/check.svg';
@@ -114,7 +114,7 @@ const BasketToolbarButton = (props) => {
                 <span>{basket.length}</span>
               </div>
 
-              <Icon name={briefcaseSVG} size="35px" />
+              <Icon name={packSVG} size="35px" />
             </Button>
 
             {showMenu ? (
@@ -152,7 +152,7 @@ const BasketToolbarButton = (props) => {
                       </span>
                     )}
 
-                    {items && items.length > 0 && (
+                    {groupedItems && Object.keys(groupedItems).length > 0 && (
                       <div className="fav-boards-list">
                         <div className="toolbar-menu-title">
                           Save to an existing board:
@@ -182,9 +182,8 @@ const BasketToolbarButton = (props) => {
                                       tabIndex="0"
                                     >
                                       <Icon name={starSVG} size="16px" />
-                                      {group}
-                                      {/*({items.length}){' '}*/}
-                                      <sup>{user}</sup>
+                                      {group} (
+                                      {groupedItems[user][group].length})
                                       {activeGroup === group && (
                                         <Icon
                                           className="check-icon"
@@ -203,7 +202,7 @@ const BasketToolbarButton = (props) => {
 
                     <div className="fav-group-title">
                       <div className="toolbar-menu-title">
-                        Create new board:
+                        Create a new board:
                       </div>
 
                       <Grid>
@@ -237,7 +236,7 @@ const BasketToolbarButton = (props) => {
                         // disabled={basket.length === 0}
                         onClick={handleCreateBoard}
                       >
-                        Save
+                        Create
                       </Button>
                     </div>
                   </>

@@ -21,7 +21,7 @@ const CommentForm = (props) => {
     paramOwner === userId && (
       <Form className="comment-form">
         <Form.Field>
-          <label htmlFor="field-comment">Leave a comment:</label>
+          {/*<label htmlFor="field-comment">Leave a comment:</label>*/}
           <textarea
             id="field-comment"
             rows="4"
@@ -74,15 +74,17 @@ const FavBoardComments = (props) => {
 
   const getCommentDate = (d) => {
     const date = new Date(d);
-    const day = date.toLocaleString('default', { day: '2-digit' });
-    const month = date.toLocaleString('default', { month: 'long' });
+    const day = date.toLocaleString('default', { day: 'numeric' });
+    const month = date.toLocaleString('default', { month: 'short' });
     const year = date.toLocaleString('default', { year: 'numeric' });
     return month + ' ' + day + ', ' + year;
   };
 
   return (
     <div className="fav-board-comments-wrapper">
-      {comments && comments.length > 0 && <h4>Comments:</h4>}
+      {comments && comments.length > 0 && (
+        <h4 className="comments-title">COMMENTS:</h4>
+      )}
       {groupedItems && groupedItems.length > 0 && (
         <Item.Group className="board-comments">
           {(comments || []).map((c, i) => (
@@ -90,8 +92,7 @@ const FavBoardComments = (props) => {
               <Item.Content>
                 <Item.Meta>
                   <div className="meta-left-section">
-                    <span>{owner}</span>
-                    <span className="comment-dot"></span>
+                    <span className="comment-owner">{owner}</span>
                     <span className="comment-date">
                       {getCommentDate(c.date)}
                     </span>

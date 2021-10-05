@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
+import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import { Modal, Button } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
@@ -8,11 +9,15 @@ import {
   ItemTitle,
   ItemMetadataSnippet,
 } from '@eeacms/volto-freshwater/components';
-import { addItemToBasket } from '@eeacms/volto-freshwater/actions/favBasket';
-import starSVG from '@plone/volto/icons/star.svg';
+import {
+  addItemToBasket,
+  removeItemFromBasket,
+} from '@eeacms/volto-freshwater/actions/favBasket';
+import starSVG from '@plone/volto/icons/half-star.svg';
+import starFullSVG from '@eeacms/volto-freshwater/icons/star-full.svg';
 import './style.less';
 
-const MetadataListingView = ({ items, isEditMode }) => {
+const MetadataListingView = ({ items, isEditMode, basket }) => {
   const [isOpenModal, setOpenModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const dispatch = useDispatch();
@@ -39,16 +44,34 @@ const MetadataListingView = ({ items, isEditMode }) => {
             >
               <h3>{item.title ? item.title : item.id}</h3>
             </div>
-            <Button
-              basic
-              className="add-fav-btn"
-              title="Add to favorites board"
-              onClick={() => {
-                dispatch(addItemToBasket(item));
-              }}
-            >
-              <Icon name={starSVG} size="18px" />
-            </Button>
+
+            {basket.includes(item) ? (
+              <Button
+                basic
+                className="add-fav-btn"
+                title="Add to favorites board"
+                onClick={() => {
+                  dispatch(removeItemFromBasket(item));
+                }}
+              >
+                <Icon name={starFullSVG} size="18px" />
+              </Button>
+            ) : (
+              <Button
+                basic
+                className="add-fav-btn"
+                title="Add to favorites board"
+                onClick={() => {
+                  dispatch(addItemToBasket(item));
+                }}
+              >
+                {basket.includes(item) ? (
+                  <Icon name={starFullSVG} size="18px" />
+                ) : (
+                  <Icon name={starSVG} size="18px" />
+                )}
+              </Button>
+            )}
             <ItemMetadataSnippet item={item} />
             <p>{item.description}</p>
           </div>
@@ -81,4 +104,8 @@ MetadataListingView.propTypes = {
   isEditMode: PropTypes.bool,
 };
 
-export default MetadataListingView;
+export default compose(
+  connect((state) => ({
+    basket: state.favBasket.basket,
+  })),
+)(MetadataListingView);

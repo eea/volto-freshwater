@@ -31,13 +31,7 @@ const CATALOGUE_CONTENT_TYPES = [
 ];
 
 const ListingView = (props) => {
-  const {
-    groupedItems,
-    setOpenModal,
-    setSelectedItem,
-    userID,
-    paramOwner,
-  } = props;
+  const { groupedItems, setOpenModal, setSelectedItem, userID } = props;
 
   return Object.keys(groupedItems).map((username, i) => {
     return (

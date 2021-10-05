@@ -40,6 +40,15 @@
   text-transform: uppercase;
 }
 
+.fav-board-comments-wrapper {
+  margin-top: 3em;
+
+  .comments-title {
+    color: #7b7b7b;
+    font-size: 16px;
+  }
+}
+
 .ui.items.board-comments {
   margin-top: 1.5em;
 
@@ -73,13 +82,18 @@
       align-items: center;
     }
 
-    .comment-dot {
-      display: inline-block;
-      width: 5px;
-      height: 5px;
-      background-color: #939393;
-      border-radius: 50%;
-    }
+    // .comment-dot {
+    //   display: inline-block;
+    //   width: 5px;
+    //   height: 5px;
+    //   background-color: #939393;
+    //   border-radius: 50%;
+    // }
+  }
+
+  .comment-owner {
+    color: #707070;
+    font-size: 16px;
   }
 
   .comment-date {
@@ -97,7 +111,13 @@
 }
 
 .comment-form {
-  width: 50%;
+  width: 100%;
+
+  textarea {
+    padding: 1em !important;
+    border: 1px solid #ddd !important;
+    border-radius: 5px !important;
+  }
 }
 
 .fav-listing-board {
