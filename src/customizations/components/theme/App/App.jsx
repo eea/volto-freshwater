@@ -43,7 +43,7 @@ import {
 import clearSVG from '@plone/volto/icons/clear.svg';
 import MultilingualRedirector from '@plone/volto/components/theme/MultilingualRedirector/MultilingualRedirector';
 import WorkingCopyToastsFactory from '@plone/volto/components/manage/WorkingCopyToastsFactory/WorkingCopyToastsFactory';
-import LockingToastsFactory from '@plone/volto/components/manage/LockingToastsFactory/LockingToastsFactory';
+// import LockingToastsFactory from '@plone/volto/components/manage/LockingToastsFactory/LockingToastsFactory';
 
 import * as Sentry from '@sentry/browser';
 
@@ -155,10 +155,10 @@ class App extends Component {
           </Segment>
         </MultilingualRedirector>
         <Footer />
-        <LockingToastsFactory
+        {/*<LockingToastsFactory
           content={this.props.content}
           user={this.props.userId}
-        />
+        />*/}
         <WorkingCopyToastsFactory content={this.props.content} />
         <ToastContainer
           position={toast.POSITION.BOTTOM_CENTER}
