@@ -68,3 +68,44 @@
     background-color: #eee;
   }
 }
+
+.stagingBanner .ui.warning.message {
+  padding: 1em 1.5em !important;
+  padding-bottom: 0.5em !important;
+}
+
+body.siteroot.staging-banner {
+  .portal-top {
+    top: 110px;
+  }
+}
+
+@media only screen and (max-width: 1480px) {
+  body.has-image.staging-banner #main .breadcrumb {
+    top: 161px !important;
+  }
+}
+
+body.has-image.staging-banner #main .breadcrumb {
+  top: 163px;
+}
+
+@media only screen and (max-width: 1400px) and (min-width: 768px) {
+  body:not(.has-toolbar):not(.has-sidebar):not(.has-toolbar-collapsed):not(.has-sidebar-collapsed)
+    #main
+    .ui.container {
+    padding: 0 2rem !important;
+  }
+
+  body.has-toolbar:not(.has-sidebar):not(.has-sidebar-collapsed)
+    #main
+    .stagingBanner
+    .ui.warning.message,
+  body:not(.has-toolbar):not(.has-sidebar):not(.has-toolbar-collapsed):not(.has-sidebar-collapsed)
+    #main
+    .stagingBanner
+    .ui.warning.message {
+    padding: 1em 1.5em !important;
+    padding-bottom: 0.5em !important;
+  }
+}
