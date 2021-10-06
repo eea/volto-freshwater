@@ -11,10 +11,10 @@ import {
 } from '@eeacms/volto-freshwater/actions/favBoards';
 import { groupBy } from 'lodash';
 import { removeItemFromBasket } from '@eeacms/volto-freshwater/actions/favBasket';
-import packSVG from '@plone/volto/icons/pack.svg';
 import clearSVG from '@plone/volto/icons/clear.svg';
 import starSVG from '@plone/volto/icons/star.svg';
 import checkSVG from '@plone/volto/icons/check.svg';
+import basketSVG from '@eeacms/volto-freshwater/icons/basket.svg';
 import cx from 'classnames';
 import jwtDecode from 'jwt-decode';
 import './style.less';
@@ -39,9 +39,7 @@ const BasketToolbarButton = (props) => {
   }, [dispatch, userID]);
 
   useEffect(() => {
-    if (basket && basket.length > 0) {
-      setActiveGroup('');
-    }
+    if (basket && basket.length > 0) setActiveGroup('');
   }, [basket]);
 
   useEffect(() => {
@@ -108,13 +106,13 @@ const BasketToolbarButton = (props) => {
                 setShowMenu(!showMenu);
                 setBoardCreated(false);
               }}
-              title="Favorites"
+              title="Save to board"
             >
               <div className="basket-count">
                 <span>{basket.length}</span>
               </div>
 
-              <Icon name={packSVG} size="35px" />
+              <Icon name={basketSVG} size="36px" />
             </Button>
 
             {showMenu ? (
