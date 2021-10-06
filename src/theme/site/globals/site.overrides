@@ -104,18 +104,3 @@ a {
   padding-bottom: 1rem !important;
   padding-left: 0 !important;
 }
-
-// Temporary fix QueryWidget style
-#default-data_query .fields {
-  flex-wrap: wrap;
-  padding-bottom: 20px;
-  border-bottom: 1px dotted #ccc;
-}
-
-#default-data_query .main-fields-wrapper {
-  display: flex;
-  width: 100%;
-  flex: 1 0 auto;
-  padding-right: 0.5em;
-  padding-left: 0.5em;
-}
