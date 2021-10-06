@@ -157,9 +157,14 @@ const applyConfig = (config) => {
       },
     },
     {
-      id: 'marginBottomBlock',
-      title: 'Margin bottom block',
-      cssClass: 'margin-bottom-block',
+      id: 'marginBottom5em',
+      title: 'Margin bottom 5em',
+      cssClass: 'margin-bottom-5em',
+    },
+    {
+      id: 'marginBottom1em',
+      title: 'Margin bottom 1em',
+      cssClass: 'margin-bottom-1em',
     },
   ];
 
