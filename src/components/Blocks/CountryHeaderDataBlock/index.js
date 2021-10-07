@@ -1,12 +1,12 @@
-import worldSVG from '@plone/volto/icons/world.svg';
 import View from './View';
 import Edit from './Edit';
+import headerSVG from '@plone/volto/icons/hero.svg';
 
 export default (config) => {
   config.blocks.blocksConfig.countryHeaderDataBlock = {
     id: 'countryHeaderDataBlock',
     title: 'Country header data block',
-    icon: worldSVG,
+    icon: headerSVG,
     group: 'freshwater_addons',
     view: View,
     edit: Edit,
