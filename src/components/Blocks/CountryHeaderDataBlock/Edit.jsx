@@ -3,12 +3,17 @@ import { SidebarPortal } from '@plone/volto/components';
 import InlineForm from '@plone/volto/components/manage/Form/InlineForm';
 import { connectBlockToProviderData } from '@eeacms/volto-datablocks/hocs';
 import View from './View';
+import countryNames from './data/countries';
 import { CountryHeaderDataBlockSchema } from './schema';
 
 class Edit extends React.Component {
   getSchema = () => {
     const provider_data = this.props.provider_data || {};
     const schema = CountryHeaderDataBlockSchema();
+
+    schema.properties.country_flag.choices = Object.keys(
+      countryNames,
+    ).map((k) => [k, countryNames[k]]);
 
     const choices = Object.keys(provider_data)
       .sort()

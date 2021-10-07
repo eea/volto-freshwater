@@ -5,7 +5,7 @@ import Edit from './Edit';
 export default (config) => {
   config.blocks.blocksConfig.countryHeaderDataBlock = {
     id: 'countryHeaderDataBlock',
-    title: 'UWW country data block',
+    title: 'Country header data block',
     icon: worldSVG,
     group: 'freshwater_addons',
     view: View,

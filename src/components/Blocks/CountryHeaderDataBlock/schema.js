@@ -1,11 +1,16 @@
 export const CountryHeaderDataBlockSchema = () => ({
-  title: 'UWW country data block',
+  title: 'Country header data block',
 
   fieldsets: [
     {
       id: 'default',
       title: 'Default',
       fields: ['provider_url', 'column_data', 'description'],
+    },
+    {
+      id: 'options',
+      title: 'Options',
+      fields: ['country_flag'],
     },
   ],
 
@@ -21,6 +26,10 @@ export const CountryHeaderDataBlockSchema = () => ({
     description: {
       title: 'Description',
       widget: 'textarea',
+    },
+    country_flag: {
+      title: 'Country flag',
+      choices: [],
     },
   },
 

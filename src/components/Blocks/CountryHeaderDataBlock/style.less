@@ -1,6 +1,87 @@
+@type: 'extra';
+@element: 'custom';
+
+@import (multiple, reference, optional) '../../theme.config';
+
 .uww-country-wrapper {
   display: flex;
   flex-direction: column;
+
+  .blue-bg {
+    color: #8dcdf4;
+  }
+
+  .green-bg {
+    color: #a3deaa;
+  }
+
+  .yellow-bg {
+    color: #f6f6bc;
+  }
+
+  .orange-bg {
+    color: #fdae61;
+  }
+
+  .red-bg {
+    color: #ff5a5d;
+  }
+}
+
+.uww-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.uww-country-block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+
+  .uww-data {
+    margin-right: 15px;
+    font-family: 'Poppins', serif;
+    font-size: 33px;
+    font-weight: 500;
+    line-height: 33px;
+  }
+
+  .uww-text {
+    max-width: 160px;
+    margin-top: 0.5em;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    color: @wiseSecondaryColor;
+    font-size: 14px;
+    line-height: 16px;
+  }
+}
+
+.uww-country-legend {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 20px;
+
+  .legend-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 12px;
+
+    .legend-box {
+      width: 26px;
+      height: 26px;
+      margin-right: 6px;
+    }
+
+    .legend-text {
+      font-family: 'Poppins', serif;
+      font-size: 13px;
+    }
+  }
 
   .blue-bg {
     background-color: #8dcdf4;
@@ -23,52 +104,117 @@
   }
 }
 
-.uww-country-block {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0.8em;
-  border-radius: 5px;
-  font-family: 'Poppins', serif;
+#view {
+  .country-header-block {
+    position: relative;
+    height: 200px;
 
-  .upper {
-    margin-right: 15px;
-    font-size: 2.75rem;
-    font-weight: 500;
-    line-height: 2.75rem;
-  }
+    &:before {
+      position: absolute;
+      z-index: -1;
+      top: -63px;
+      right: 0;
+      left: 0;
+      width: 100%;
+      height: 160px;
+      background-color: #f5f5f5;
+      content: '';
+    }
 
-  .lower {
-    max-width: 200px;
-    margin-top: 0.5em;
-    margin-top: 0 !important;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
+    &:after {
+      position: absolute;
+      z-index: -1;
+      top: 97px;
+      right: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: #d8d8d8;
+      content: '';
+    }
+
+    .country-header-wrapper {
+      position: absolute;
+      top: 28px;
+
+      &.no-flag {
+        top: 45px;
+      }
+    }
   }
 }
 
-.uww-country-legend {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 10px;
+.country-header-block {
+  position: relative;
 
-  .legend-wrapper {
+  .country-header-wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0 5px;
+  }
 
-    .legend-box {
-      width: 28px;
-      height: 18px;
-      margin-right: 3px;
+  .country-profile-flag {
+    img {
+      height: 130px;
+      padding-right: 40px;
     }
+  }
+}
 
-    .legend-text {
-      font-size: 12px;
-      line-height: 14px;
-    }
+.ui.selection.visible.dropdown,
+.ui.selection.dropdown.countries-dd {
+  padding: 0 !important;
+  border: none !important;
+
+  > .text,
+  > .text:not(.default) {
+    min-height: 1rem;
+    padding: 0em;
+    margin-right: 10px;
+    color: @wiseSecondaryColor !important;
+    font-family: @headerFont;
+    font-size: @h1;
+    font-weight: @headerFontWeight !important;
+    line-height: @headerLineHeight;
+  }
+
+  .text {
+    font-family: @headerFont;
+    font-weight: 400;
+  }
+
+  > .menu {
+    border: 1px solid #f1f1f1 !important;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.08) !important;
+  }
+}
+
+.ui.selection.dropdown.countries-dd {
+  display: inline-block !important;
+  border: none;
+  background-color: transparent;
+
+  i.icon {
+    color: @wiseSecondaryColor !important;
+    font-size: 30px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .uww-country-block {
+    position: relative;
+    top: 15px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .uww-country-legend {
+    position: relative;
+    top: 10px;
+    margin-left: 0;
+  }
+
+  .legend-wrapper:first-child {
+    padding-left: 0;
   }
 }

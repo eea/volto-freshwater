@@ -7,6 +7,7 @@ import {
   FavBoardView,
 } from './components';
 
+// import { GET_CONTENT } from '@plone/volto/constants/ActionTypes';
 import FavBoardListingView from './components/theme/FavBoardListingView/FavBoardListingView';
 import TokenWidget from '@plone/volto/components/manage/Widgets/TokenWidget';
 import CopyrightWidget from './components/Widgets/CopyrightWidget';
@@ -145,6 +146,14 @@ const applyConfig = (config) => {
       },
     ],
   };
+
+  config.settings.apiExpanders = [
+    ...config.settings.apiExpanders,
+    {
+      match: '/',
+      GET_CONTENT: ['siblings'],
+    },
+  ];
 
   // Custom block styles
   config.settings.pluggableStyles = [
