@@ -26,6 +26,7 @@
     "@eeacms/volto-block-style"
   ],
   "dependencies": {
+    "@plone/volto": "plone/volto#slots_quanta_split",
     "react-lazy-load-image-component": "^1.4.0",
     "volto-slate": "^2.6.1",
     "@eeacms/volto-resize-helper": "^0.2.0",
