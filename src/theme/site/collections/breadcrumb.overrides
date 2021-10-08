@@ -48,7 +48,7 @@ body.siteroot #main .breadcrumbs {
   display: none !important;
 }
 
-.has-image #main .breadcrumb {
+.has-image #main .breadcrumbs .breadcrumb {
   position: absolute;
   top: 86px;
   max-width: 91%;
@@ -56,13 +56,13 @@ body.siteroot #main .breadcrumbs {
 
 @media only screen and (max-width: 768px) {
   body.has-toolbar {
-    #main .ui.breadcrumb {
+    #main .breadcrumbs .ui.breadcrumb {
       top: 186px;
     }
   }
 
   body.has-toolbar-collapsed {
-    #main .ui.breadcrumb {
+    #main .breadcrumbs .ui.breadcrumb {
       top: 106px;
     }
   }

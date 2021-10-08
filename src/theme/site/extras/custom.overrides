@@ -81,12 +81,12 @@ body.siteroot.staging-banner {
 }
 
 @media only screen and (max-width: 1480px) {
-  body.has-image.staging-banner #main .breadcrumb {
+  body.has-image.staging-banner #main .breadcrumbs .breadcrumb {
     top: 161px !important;
   }
 }
 
-body.has-image.staging-banner #main .breadcrumb {
+body.has-image.staging-banner #main .breadcrumbs .breadcrumb {
   top: 163px;
 }
 
