@@ -1,4 +1,10 @@
 /* avoid visibility of block types when output is production */
+.blocks-chooser {
+  .ui.button {
+    font-family: inherit !important;
+  }
+}
+
 .blocks-chooser .ui.accordion .content {
   padding: 0 !important;
 }
@@ -35,7 +41,7 @@
 // add visual queue for selection TODO: move into a package such as volto-slate
 .block.multiSelected .block::before {
   z-index: 1;
-  background-color: rgba(120,192,215,.375);
   border-width: 1px;
-  border-color: rgba(120,192,215,.75);
+  border-color: rgba(120, 192, 215, 0.75);
+  background-color: rgba(120, 192, 215, 0.375);
 }

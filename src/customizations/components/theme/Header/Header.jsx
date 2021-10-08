@@ -13,10 +13,10 @@ import { BodyClass } from '@plone/volto/helpers';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
-import { HeroSection } from '../../../../components';
+import { HeroSection } from '@eeacms/volto-freshwater/components';
 import { getScaleUrl, getPath } from '@eeacms/volto-freshwater/utils';
 
-import clearLogoSVG from './freshwater_logo_clear.svg';
+import clearLogoSVG from '@eeacms/volto-freshwater/static/freshwater_logo_clear.svg';
 
 /**
  * Header component class.
@@ -27,7 +27,7 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isHomepage: !this.props.pathname,
+      isHomepage: this.props.actualPathName === '/',
     };
   }
   /**
@@ -38,6 +38,7 @@ class Header extends Component {
   static propTypes = {
     token: PropTypes.string,
     pathname: PropTypes.string.isRequired,
+    actualPathName: PropTypes.string.isRequired,
     leadImage: PropTypes.object,
     content: PropTypes.object,
   };
@@ -52,17 +53,17 @@ class Header extends Component {
   };
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.pathname !== this.props.pathname) {
+    if (nextProps.actualPathName !== this.props.actualPathName) {
       this.setState({
-        isHomepage: !nextProps.pathname,
+        isHomepage: nextProps.actualPathName === '/',
       });
     }
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.pathname !== this.props.pathname) {
+    if (prevProps.actualPathName !== this.props.actualPathName) {
       this.setState({
-        isHomepage: !this.props.pathname,
+        isHomepage: this.props.actualPathName === '/',
       });
     }
   }
@@ -79,9 +80,13 @@ class Header extends Component {
     let imageCaption = this.props.content?.image_caption;
     let contentTitle = this.props.content?.title;
     let contentDescription = this.props.content?.description;
+    let stagingBanner =
+      __CLIENT__ && document.getElementsByClassName('stagingBanner').length > 0;
+
     return (
       <div className="portal-top">
         {leadImageUrl && <BodyClass className="has-image" />}
+        {stagingBanner && <BodyClass className="staging-banner" />}
         <Segment basic className="header-wrapper" role="banner">
           <Container>
             <div className="header">

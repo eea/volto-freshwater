@@ -13,6 +13,10 @@
     vertical-align: top;
   }
 
+  .ui.definition.table tr td a {
+    word-break: break-word;
+  }
+
   .ui.definition.table tr:last-child {
     border-bottom: none;
   }
@@ -32,6 +36,12 @@
   }
 }
 
+@media only screen and (max-width: 767px) {
+  .item-metadata-table .ui.definition.table tr {
+    box-shadow: none !important;
+  }
+}
+
 .item-metadata-modal {
   margin: 3.5rem auto !important;
 
@@ -44,6 +54,8 @@
   }
 
   .content {
+    overflow: auto;
+    max-height: 600px;
     padding-top: 0 !important;
   }
 }
@@ -53,6 +65,34 @@
   font-family: 'Roboto';
   font-weight: normal;
   line-height: 18px;
+}
+
+.item-metadata-modal {
+  .header a {
+    color: @wiseSecondaryColor;
+
+    &:hover {
+      color: @wisePrimaryColor;
+    }
+  }
+}
+
+.listing-body {
+  position: relative;
+  margin-top: 1.5em;
+
+  .add-fav-btn {
+    position: absolute;
+    top: 5px;
+    left: -20px;
+    opacity: 0.6;
+  }
+}
+
+.listing-title h3 {
+  display: inline-block;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .tableau-download-dialog,
@@ -76,7 +116,8 @@
 
 .metadata-tab-title {
   margin-right: 1px;
-  color: #929292;
+  color: #0099bb;
+  font-weight: 500;
 }
 
 .map-preview-wrapper {
@@ -106,9 +147,8 @@
 
   .tableau-icons {
     position: absolute;
-    top: 10px;
-    right: -2px;
-    bottom: -28px;
+    right: -2px !important;
+    bottom: -30px;
   }
 }
 

@@ -1,25 +1,31 @@
 import React from 'react';
-import PlainCards from './components/blocks/CustomImageCards/PlainCards/PlainCards';
-import ColoredCards from './components/blocks/CustomImageCards/ColoredCards/ColoredCards';
-import { ColoredCardsSchemaExtender } from './components/blocks/CustomImageCards/ColoredCards/schema';
-import { PresentationCardsSchemaExtender } from './components/blocks/CustomImageCards/PresentationCards/schema';
-import PresentationCardsView from './components/blocks/CustomImageCards/PresentationCards/PresentationCardsView';
-import PresentationCardsEdit from './components/blocks/CustomImageCards/PresentationCards/PresentationCardsEdit';
 import {
-  ScrollToTop,
   HeroSectionView,
   DatabaseItemView,
   MetadataListingView,
   SimpleListingView,
+  FavBoardView,
 } from './components';
 
-import CopyrightWidget from './components/Widgets/CopyrightWidget';
+// import { GET_CONTENT } from '@plone/volto/constants/ActionTypes';
+import FavBoardListingView from './components/theme/FavBoardListingView/FavBoardListingView';
 import TokenWidget from '@plone/volto/components/manage/Widgets/TokenWidget';
+import CopyrightWidget from './components/Widgets/CopyrightWidget';
 
-import installEmbedContentBlock from './components/blocks/Content';
-import installDashboardTabsBlock from './components/blocks/DashboardTabsBlock';
-import installcustomCardsBlock from './components/blocks/CustomCardsBlock';
-import installSearchBlock from './components/blocks/SearchBlock';
+import installEmbedContentBlock from './components/Blocks/Content';
+import installDashboardTabsBlock from './components/Blocks/DashboardTabsBlock';
+import installcustomCardsBlock from './components/Blocks/CustomCardsBlock';
+import installSearchBlock from './components/Blocks/SearchBlock';
+import installCountryHeaderDataBlock from './components/Blocks/CountryHeaderDataBlock';
+import installConditionalDataBlock from './components/Blocks/ConditionalDataBlock';
+import installCountriesListingBlock from './components/Blocks/CountriesListingBlock';
+import installAppExtras from './components/theme/AppExtras';
+
+import favBasket from './reducers/favBasket/';
+import favBoards from './reducers/favBoards/';
+
+import './slate-styles.less';
+import './block-styles.less';
 
 const available_colors = [
   '#0099BB',
@@ -76,35 +82,8 @@ const applyConfig = (config) => {
 
   config.blocks.groupBlocksOrder = [
     ...config.blocks.groupBlocksOrder,
-    { id: 'custom_addons', title: 'Freshwater' },
+    { id: 'freshwater_addons', title: 'Freshwater' },
   ];
-
-  config.blocks.blocksConfig.imagecards = {
-    sidebarTab: 1,
-    ...config.blocks.blocksConfig.imagecards,
-    display_types: {
-      ...config.blocks.blocksConfig.imagecards?.display_types,
-    },
-    blockRenderers: {
-      ...config.blocks.blocksConfig.imagecards?.blockRenderers,
-      colored_cards: {
-        title: 'Colored cards',
-        schemaExtender: ColoredCardsSchemaExtender,
-        view: ColoredCards,
-      },
-      plain_cards: {
-        title: 'Plain cards',
-        schemaExtender: null,
-        view: PlainCards,
-      },
-      presentation_cards: {
-        title: 'Presentation cards',
-        view: PresentationCardsView,
-        edit: PresentationCardsEdit,
-        schemaExtender: PresentationCardsSchemaExtender,
-      },
-    },
-  };
 
   // on home contextNavigation should return false
   config.blocks.blocksConfig.contextNavigation = {
@@ -133,7 +112,12 @@ const applyConfig = (config) => {
   config.settings.slate.styleMenu.inlineStyles = [
     ...(config.settings.slate.styleMenu?.inlineStyles || []),
     { cssClass: 'blue-text', label: 'Blue text' },
+    { cssClass: 'blue-chart-text', label: 'Blue plot-chart text' },
+    { cssClass: 'orange-chart-text', label: 'Orange plot-chart text' },
+    { cssClass: 'green-chart-text', label: 'Green plot-chart text' },
+    { cssClass: 'red-chart-text', label: 'red plot-chart text' },
     { cssClass: 'grey-text', label: 'Grey text' },
+    { cssClass: 'black-text', label: 'Black text' },
     { cssClass: 'p-text', label: 'Paragraph 16px' },
     { cssClass: 'h1', label: 'H1 36px' },
     { cssClass: 'h2', label: 'H2 30px' },
@@ -141,6 +125,8 @@ const applyConfig = (config) => {
     { cssClass: 'h4', label: 'H4 18px' },
     { cssClass: 'h5', label: 'H5 14px' },
   ];
+
+  config.settings.persistentReducers = ['favBasket'];
 
   // Search block metadata listing view
   config.blocks.blocksConfig.listing = {
@@ -162,6 +148,14 @@ const applyConfig = (config) => {
     ],
   };
 
+  config.settings.apiExpanders = [
+    ...config.settings.apiExpanders,
+    {
+      match: '/',
+      GET_CONTENT: ['siblings'],
+    },
+  ];
+
   // Custom block styles
   config.settings.pluggableStyles = [
     ...(config.settings.pluggableStyles || []),
@@ -172,24 +166,60 @@ const applyConfig = (config) => {
         return <div className="ui container">{props.children}</div>;
       },
     },
+    {
+      id: 'marginBottom5em',
+      title: 'Margin bottom 5em',
+      cssClass: 'margin-bottom-5em',
+    },
+    {
+      id: 'marginBottom1em',
+      title: 'Margin bottom 1em',
+      cssClass: 'margin-bottom-1em',
+    },
   ];
 
-  config.settings.appExtras = [
-    ...config.settings.appExtras,
+  config.settings = {
+    ...config.settings,
+    nonContentRoutes: [
+      ...config.settings.nonContentRoutes,
+      '/favorites/board',
+      '/favorites',
+    ],
+  };
+
+  config.addonRoutes = [
+    ...config.addonRoutes,
     {
-      match: '',
-      component: ScrollToTop,
+      path: '/favorites/board',
+      component: FavBoardView,
+    },
+    {
+      path: '/favorites',
+      component: FavBoardListingView,
     },
   ];
 
   config.widgets.id.license_copyright = CopyrightWidget;
   config.widgets.id.category = TokenWidget;
 
+  config.blocks.blocksConfig.plotly_chart =
+    config.blocks.blocksConfig.connected_plotly_chart;
+  config.blocks.blocksConfig.plotly_chart.restricted = false;
+  config.addonReducers = {
+    ...(config.addonReducers || {}),
+    favBasket,
+    favBoards,
+  };
+
   return [
     installEmbedContentBlock,
     installDashboardTabsBlock,
     installcustomCardsBlock,
     installSearchBlock,
+    installCountryHeaderDataBlock,
+    installConditionalDataBlock,
+    installCountriesListingBlock,
+    installAppExtras,
   ].reduce((acc, apply) => apply(acc), config);
 };
 

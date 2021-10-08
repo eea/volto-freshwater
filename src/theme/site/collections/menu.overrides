@@ -64,6 +64,13 @@ body.siteroot {
         color: #fff !important;
       }
     }
+
+    .ui.pointing.secondary.stackable.open.menu {
+      > .item.firstLevel > a,
+      .dropdown.icon {
+        color: #004050 !important;
+      }
+    }
   }
 
   #main {

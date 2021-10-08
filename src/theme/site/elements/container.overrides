@@ -11,10 +11,15 @@
   display: block;
   width: 100% !important;
   max-width: @maxWidth !important;
-  padding-right: 1rem;
-  padding-left: 1rem;
+  padding-right: 2rem;
+  padding-left: 2rem;
   margin-right: auto !important;
   margin-left: auto !important;
+
+  @media only screen and (max-width: 480px) {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
 }
 
 .ui.twelve {
