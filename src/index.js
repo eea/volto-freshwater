@@ -14,7 +14,7 @@ import CopyrightWidget from './components/Widgets/CopyrightWidget';
 
 import installEmbedContentBlock from './components/Blocks/Content';
 import installDashboardTabsBlock from './components/Blocks/DashboardTabsBlock';
-import installcustomCardsBlock from './components/Blocks/CustomCardsBlock';
+import installCustomCardsBlock from './components/Blocks/CustomCardsBlock';
 import installSearchBlock from './components/Blocks/SearchBlock';
 import installCountryHeaderDataBlock from './components/Blocks/CountryHeaderDataBlock';
 import installConditionalDataBlock from './components/Blocks/ConditionalDataBlock';
@@ -214,7 +214,7 @@ const applyConfig = (config) => {
   return [
     installEmbedContentBlock,
     installDashboardTabsBlock,
-    installcustomCardsBlock,
+    installCustomCardsBlock,
     installSearchBlock,
     installCountryHeaderDataBlock,
     installConditionalDataBlock,

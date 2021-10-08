@@ -50,7 +50,7 @@ const View = (props) => {
   const filteredData =
     filterDataByParameters(provider_data, connected_data_parameters) || {};
   const column_value = Array.from(new Set(filteredData?.[column_data])).sort();
-  const siblings = getContentSiblings(content['@components'].siblings);
+  const siblings = getContentSiblings(content?.['@components'].siblings);
   const country_profiles = siblings.filter(
     (item) => item.key !== 'discodata' && item.key !== 'queries',
   );
@@ -85,6 +85,7 @@ const View = (props) => {
             <Dropdown
               selection
               className="countries-dd"
+              text={content.title}
               options={country_profiles}
               defaultValue={content.title.toLowerCase()}
               icon="angle down"
