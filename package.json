@@ -18,6 +18,7 @@
   },
   "addons": [
     "volto-slate:asDefault",
+    "@plone/volto",
     "@kitconcept/volto-blocks-grid",
     "@eeacms/volto-plotlycharts",
     "@eeacms/volto-datablocks",
