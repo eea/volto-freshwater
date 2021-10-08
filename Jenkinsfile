@@ -5,7 +5,7 @@ pipeline {
         GIT_NAME = "volto-freshwater"
         NAMESPACE = "@eeacms"
         SONARQUBE_TAGS = "volto.eea.europa.eu"
-        DEPENDENCIES = "@plone/volto volto-slate @eeacms/volto-corsproxy @eeacms/volto-datablocks @eeacms/volto-embed"
+        DEPENDENCIES = "volto-slate @eeacms/volto-corsproxy @eeacms/volto-datablocks @eeacms/volto-embed"
     }
 
   stages {
