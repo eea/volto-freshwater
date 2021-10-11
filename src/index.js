@@ -20,6 +20,7 @@ import installCountryHeaderDataBlock from './components/Blocks/CountryHeaderData
 import installConditionalDataBlock from './components/Blocks/ConditionalDataBlock';
 import installCountriesListingBlock from './components/Blocks/CountriesListingBlock';
 import installAppExtras from './components/theme/AppExtras';
+import installSlatePopup from './components/Blocks/SlatePopup';
 
 import favBasket from './reducers/favBasket/';
 import favBoards from './reducers/favBoards/';
@@ -220,6 +221,7 @@ const applyConfig = (config) => {
     installConditionalDataBlock,
     installCountriesListingBlock,
     installAppExtras,
+    installSlatePopup,
   ].reduce((acc, apply) => apply(acc), config);
 };
 
