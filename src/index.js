@@ -17,7 +17,7 @@ import installDashboardTabsBlock from './components/Blocks/DashboardTabsBlock';
 import installCustomCardsBlock from './components/Blocks/CustomCardsBlock';
 import installSearchBlock from './components/Blocks/SearchBlock';
 import installCountryHeaderDataBlock from './components/Blocks/CountryHeaderDataBlock';
-import installFilteredConnectedPlotlyChart from './components/Blocks/ConnectedPlotlyChart'
+import installFilteredConnectedPlotlyChart from './components/Blocks/ConnectedPlotlyChart';
 import installConditionalDataBlock from './components/Blocks/ConditionalDataBlock';
 import installCountriesListingBlock from './components/Blocks/CountriesListingBlock';
 import installAppExtras from './components/theme/AppExtras';
