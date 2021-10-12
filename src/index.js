@@ -14,12 +14,14 @@ import CopyrightWidget from './components/Widgets/CopyrightWidget';
 
 import installEmbedContentBlock from './components/Blocks/Content';
 import installDashboardTabsBlock from './components/Blocks/DashboardTabsBlock';
-import installcustomCardsBlock from './components/Blocks/CustomCardsBlock';
+import installCustomCardsBlock from './components/Blocks/CustomCardsBlock';
 import installSearchBlock from './components/Blocks/SearchBlock';
 import installCountryHeaderDataBlock from './components/Blocks/CountryHeaderDataBlock';
+import installFilteredConnectedPlotlyChart from './components/Blocks/ConnectedPlotlyChart';
 import installConditionalDataBlock from './components/Blocks/ConditionalDataBlock';
 import installCountriesListingBlock from './components/Blocks/CountriesListingBlock';
 import installAppExtras from './components/theme/AppExtras';
+import installSlatePopup from './components/Blocks/SlatePopup';
 
 import favBasket from './reducers/favBasket/';
 import favBoards from './reducers/favBoards/';
@@ -57,6 +59,7 @@ const available_colors = [
   '#C1E1C5',
   '#BEDADC',
   '#BED3F3',
+  '#f5f5f5',
 ];
 
 const applyConfig = (config) => {
@@ -100,6 +103,7 @@ const applyConfig = (config) => {
   config.blocks.blocksConfig.__grid.title = 'Teasers row';
   config.blocks.blocksConfig.__grid.mostUsed = false;
   config.settings.available_colors = available_colors;
+  config.blocks.blocksConfig.columnsBlock.available_colors = available_colors;
 
   // workaround to invalidate render of empty slot blocksConfig with hidden value
   // needed in order to delete the block to get add button to show up on slot edit
@@ -112,10 +116,12 @@ const applyConfig = (config) => {
   config.settings.slate.styleMenu.inlineStyles = [
     ...(config.settings.slate.styleMenu?.inlineStyles || []),
     { cssClass: 'blue-text', label: 'Blue text' },
-    { cssClass: 'blue-chart-text', label: 'Blue plot-chart text' },
+    { cssClass: 'lightblue-chart-text', label: 'Lightblue plot-chart text' },
+    { cssClass: 'lightgreen-chart-text', label: 'Lightgreen plot-chart text' },
+    { cssClass: 'yellow-chart-text', label: 'Yellow plot-chart text' },
     { cssClass: 'orange-chart-text', label: 'Orange plot-chart text' },
-    { cssClass: 'green-chart-text', label: 'Green plot-chart text' },
-    { cssClass: 'red-chart-text', label: 'red plot-chart text' },
+    { cssClass: 'blue-circle text-circle', label: 'Blue circle' },
+    { cssClass: 'grey-circle text-circle', label: 'Grey circle' },
     { cssClass: 'grey-text', label: 'Grey text' },
     { cssClass: 'black-text', label: 'Black text' },
     { cssClass: 'p-text', label: 'Paragraph 16px' },
@@ -214,12 +220,14 @@ const applyConfig = (config) => {
   return [
     installEmbedContentBlock,
     installDashboardTabsBlock,
-    installcustomCardsBlock,
+    installCustomCardsBlock,
     installSearchBlock,
     installCountryHeaderDataBlock,
     installConditionalDataBlock,
+    installFilteredConnectedPlotlyChart,
     installCountriesListingBlock,
     installAppExtras,
+    installSlatePopup,
   ].reduce((acc, apply) => apply(acc), config);
 };
 

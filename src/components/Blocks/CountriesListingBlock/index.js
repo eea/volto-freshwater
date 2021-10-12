@@ -3,8 +3,8 @@ import CountriesListingEdit from './CountriesListingEdit';
 import listBulletSVG from '@plone/volto/icons/list-bullet.svg';
 
 export default (config) => {
-  config.blocks.blocksConfig.wiseCountriesListing = {
-    id: 'wiseCountriesListing',
+  config.blocks.blocksConfig.countriesListing = {
+    id: 'countriesListing',
     title: 'Countries Listing',
     icon: listBulletSVG,
     group: 'freshwater_addons',
@@ -12,7 +12,6 @@ export default (config) => {
     edit: CountriesListingEdit,
     restricted: false,
     mostUsed: false,
-    blockHasOwnFocusManagement: false,
     sidebarTab: 1,
     security: {
       addPermission: [],
