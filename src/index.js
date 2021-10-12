@@ -58,6 +58,7 @@ const available_colors = [
   '#C1E1C5',
   '#BEDADC',
   '#BED3F3',
+  '#f5f5f5',
 ];
 
 const applyConfig = (config) => {
@@ -101,6 +102,7 @@ const applyConfig = (config) => {
   config.blocks.blocksConfig.__grid.title = 'Teasers row';
   config.blocks.blocksConfig.__grid.mostUsed = false;
   config.settings.available_colors = available_colors;
+  config.blocks.blocksConfig.columnsBlock.available_colors = available_colors;
 
   // workaround to invalidate render of empty slot blocksConfig with hidden value
   // needed in order to delete the block to get add button to show up on slot edit
@@ -117,6 +119,8 @@ const applyConfig = (config) => {
     { cssClass: 'orange-chart-text', label: 'Orange plot-chart text' },
     { cssClass: 'green-chart-text', label: 'Green plot-chart text' },
     { cssClass: 'red-chart-text', label: 'red plot-chart text' },
+    { cssClass: 'blue-circle text-circle', label: 'Blue circle' },
+    { cssClass: 'grey-circle text-circle', label: 'Grey circle' },
     { cssClass: 'grey-text', label: 'Grey text' },
     { cssClass: 'black-text', label: 'Black text' },
     { cssClass: 'p-text', label: 'Paragraph 16px' },
