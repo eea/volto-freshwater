@@ -48,33 +48,6 @@ const evaluateCondition = (value1, operator, value2) => {
   }
 };
 
-// const View2 = (props) => {
-//   const { data, provider_data, connected_data_parameters } = props;
-//   const {
-//     // provider_url,,
-//     column_data,
-//     operator,
-//     condition,
-//     // placeholder = '-',
-//   } = data;
-//   const filteredData =
-//     filterDataByParameters(provider_data, connected_data_parameters) || {};
-//   const columnValue = Array.from(new Set(filteredData?.[column_data])).sort();
-//   const evalResult = evaluateCondition(columnValue, operator, condition);
-//
-//   return (
-//     <div className="uww-country-wrapper">
-//       <div>
-//         {columnValue}
-//         {operator}
-//         {condition}
-//       </div>
-//       <div>{evalResult.toString()}</div>
-//       {evalResult && <div>This is a conditional block</div>}
-//     </div>
-//   );
-// };
-
 const View = (props) => {
   const { data, provider_data, connected_data_parameters } = props;
   const {

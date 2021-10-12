@@ -17,6 +17,7 @@ import installDashboardTabsBlock from './components/Blocks/DashboardTabsBlock';
 import installCustomCardsBlock from './components/Blocks/CustomCardsBlock';
 import installSearchBlock from './components/Blocks/SearchBlock';
 import installCountryHeaderDataBlock from './components/Blocks/CountryHeaderDataBlock';
+import installFilteredConnectedPlotlyChart from './components/Blocks/ConnectedPlotlyChart';
 import installConditionalDataBlock from './components/Blocks/ConditionalDataBlock';
 import installCountriesListingBlock from './components/Blocks/CountriesListingBlock';
 import installAppExtras from './components/theme/AppExtras';
@@ -115,10 +116,10 @@ const applyConfig = (config) => {
   config.settings.slate.styleMenu.inlineStyles = [
     ...(config.settings.slate.styleMenu?.inlineStyles || []),
     { cssClass: 'blue-text', label: 'Blue text' },
-    { cssClass: 'blue-chart-text', label: 'Blue plot-chart text' },
+    { cssClass: 'lightblue-chart-text', label: 'Lightblue plot-chart text' },
+    { cssClass: 'lightgreen-chart-text', label: 'Lightgreen plot-chart text' },
+    { cssClass: 'yellow-chart-text', label: 'Yellow plot-chart text' },
     { cssClass: 'orange-chart-text', label: 'Orange plot-chart text' },
-    { cssClass: 'green-chart-text', label: 'Green plot-chart text' },
-    { cssClass: 'red-chart-text', label: 'red plot-chart text' },
     { cssClass: 'blue-circle text-circle', label: 'Blue circle' },
     { cssClass: 'grey-circle text-circle', label: 'Grey circle' },
     { cssClass: 'grey-text', label: 'Grey text' },
@@ -223,6 +224,7 @@ const applyConfig = (config) => {
     installSearchBlock,
     installCountryHeaderDataBlock,
     installConditionalDataBlock,
+    installFilteredConnectedPlotlyChart,
     installCountriesListingBlock,
     installAppExtras,
     installSlatePopup,
