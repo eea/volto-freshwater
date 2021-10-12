@@ -44,3 +44,11 @@
   font-weight: 500;
   .setFontSrc(@headerFontName, @fontWeight: 'SemiBold');
 }
+
+@font-face {
+  font-display: swap;
+  font-family: @headerFontName;
+  font-style: normal;
+  font-weight: 600;
+  .setFontSrc(@headerFontName, @fontWeight: 'Bold');
+}
