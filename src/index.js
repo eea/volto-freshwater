@@ -124,6 +124,7 @@ const applyConfig = (config) => {
     { cssClass: 'blue-circle text-circle', label: 'Blue circle' },
     { cssClass: 'green-circle text-circle', label: 'Green circle' },
     { cssClass: 'orange-circle text-circle', label: 'Orange circle' },
+    { cssClass: 'yellow-circle text-circle', label: 'Yellow circle' },
     { cssClass: 'grey-circle text-circle', label: 'Grey circle' },
     { cssClass: 'grey-text', label: 'Grey text' },
     { cssClass: 'black-text', label: 'Black text' },
