@@ -5,12 +5,17 @@ export const CountryHeaderDataBlockSchema = () => ({
     {
       id: 'default',
       title: 'Default',
-      fields: ['provider_url', 'column_data', 'description'],
+      fields: ['country_flag'],
     },
     {
-      id: 'options',
-      title: 'Options',
-      fields: ['country_flag'],
+      id: 'data',
+      title: 'Data source',
+      fields: [
+        'provider_url',
+        'column_data',
+        'description',
+        'hide_data_section',
+      ],
     },
   ],
 
@@ -31,9 +36,13 @@ export const CountryHeaderDataBlockSchema = () => ({
       title: 'Country flag',
       choices: [],
     },
+    hide_data_section: {
+      type: 'boolean',
+      title: 'Hide data section',
+    },
   },
 
-  required: ['provider_url', 'column_data'],
+  required: [],
 });
 
 export default CountryHeaderDataBlockSchema;

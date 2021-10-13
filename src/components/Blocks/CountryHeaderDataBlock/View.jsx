@@ -46,7 +46,13 @@ const getContentSiblings = (siblings) => {
 
 const View = (props) => {
   const { data, provider_data, connected_data_parameters, content } = props;
-  const { provider_url, column_data, description, placeholder = '-' } = data;
+  const {
+    provider_url,
+    column_data,
+    description,
+    placeholder = '-',
+    hide_data_section,
+  } = data;
   const filteredData =
     filterDataByParameters(provider_data, connected_data_parameters) || {};
   const column_value = Array.from(new Set(filteredData?.[column_data])).sort();
@@ -92,45 +98,48 @@ const View = (props) => {
             />
 
             <div className="uww-country-wrapper">
-              <div className="uww-country-block">
-                <div className="uww-left">
-                  <div className="uww-data">
-                    <div className={getClassName(column_value)}>
-                      <DataConnectedValue
-                        url={provider_url}
-                        column={column_data}
-                        placeholder={placeholder}
-                      />{' '}
-                      %
+              {hide_data_section ||
+                (provider_url && (
+                  <div className="uww-country-block">
+                    <div className="uww-left">
+                      <div className="uww-data">
+                        <div className={getClassName(column_value)}>
+                          <DataConnectedValue
+                            url={provider_url}
+                            column={column_data}
+                            placeholder={placeholder}
+                          />{' '}
+                          %
+                        </div>
+                      </div>
+                      {description && (
+                        <span className="uww-text">{description}</span>
+                      )}
+                    </div>
+                    <div className="uww-country-legend">
+                      <div className="legend-wrapper">
+                        <span className="legend-box red-bg"></span>
+                        <p className="legend-text">0 - 70%</p>
+                      </div>
+                      <div className="legend-wrapper">
+                        <span className="legend-box orange-bg"></span>
+                        <p className="legend-text">70 - 85%</p>
+                      </div>
+                      <div className="legend-wrapper">
+                        <span className="legend-box yellow-bg"></span>
+                        <p className="legend-text">85 - 95%</p>
+                      </div>
+                      <div className="legend-wrapper">
+                        <span className="legend-box green-bg"></span>
+                        <p className="legend-text">95 - 97%</p>
+                      </div>
+                      <div className="legend-wrapper">
+                        <span className="legend-box blue-bg"></span>
+                        <p className="legend-text">97 - 100%</p>
+                      </div>
                     </div>
                   </div>
-                  {description && (
-                    <span className="uww-text">{description}</span>
-                  )}
-                </div>
-                <div className="uww-country-legend">
-                  <div className="legend-wrapper">
-                    <span className="legend-box red-bg"></span>
-                    <p className="legend-text">0 - 70%</p>
-                  </div>
-                  <div className="legend-wrapper">
-                    <span className="legend-box orange-bg"></span>
-                    <p className="legend-text">70 - 85%</p>
-                  </div>
-                  <div className="legend-wrapper">
-                    <span className="legend-box yellow-bg"></span>
-                    <p className="legend-text">85 - 95%</p>
-                  </div>
-                  <div className="legend-wrapper">
-                    <span className="legend-box green-bg"></span>
-                    <p className="legend-text">95 - 97%</p>
-                  </div>
-                  <div className="legend-wrapper">
-                    <span className="legend-box blue-bg"></span>
-                    <p className="legend-text">97 - 100%</p>
-                  </div>
-                </div>
-              </div>
+                ))}
             </div>
           </div>
         </div>
