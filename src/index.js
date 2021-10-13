@@ -32,6 +32,7 @@ import './block-styles.less';
 const available_colors = [
   '#0099BB',
   'F2F9FB',
+  '#ED763E',
   '#FF4422',
   '#156650',
   '#72933d',
@@ -116,11 +117,13 @@ const applyConfig = (config) => {
   config.settings.slate.styleMenu.inlineStyles = [
     ...(config.settings.slate.styleMenu?.inlineStyles || []),
     { cssClass: 'blue-text', label: 'Blue text' },
-    { cssClass: 'lightblue-chart-text', label: 'Lightblue plot-chart text' },
-    { cssClass: 'lightgreen-chart-text', label: 'Lightgreen plot-chart text' },
+    { cssClass: 'blue-chart-text', label: 'Blue plot-chart text' },
+    { cssClass: 'green-chart-text', label: 'Green plot-chart text' },
     { cssClass: 'yellow-chart-text', label: 'Yellow plot-chart text' },
     { cssClass: 'orange-chart-text', label: 'Orange plot-chart text' },
     { cssClass: 'blue-circle text-circle', label: 'Blue circle' },
+    { cssClass: 'green-circle text-circle', label: 'Green circle' },
+    { cssClass: 'orange-circle text-circle', label: 'Orange circle' },
     { cssClass: 'grey-circle text-circle', label: 'Grey circle' },
     { cssClass: 'grey-text', label: 'Grey text' },
     { cssClass: 'black-text', label: 'Black text' },
