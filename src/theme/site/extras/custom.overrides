@@ -111,10 +111,15 @@ body.has-image.staging-banner #main .breadcrumbs .breadcrumb {
 }
 
 
-.column-blocks-wrapper.bg-right,
-.column-blocks-wrapper.bg-left {
+// Country profiles
+
+.bg-border {
+  border: 10px solid #f5f5f5;
+}
+
+.ui.grid.column-grid > .bg-right,
+.ui.grid.column-grid > .bg-left {
   position: relative;
-  padding: 2em!important;
 
   &:after {
     background-color: #f5f5f5;
@@ -122,29 +127,42 @@ body.has-image.staging-banner #main .breadcrumbs .breadcrumb {
     position: absolute;
     top: 0;
     height: 100%;
-    width: calc(100vw / 2) !important;
+    width: 100vw;
     z-index: -1;
   }
-
 }
 
-.column-blocks-wrapper.bg-right {
+.column-grid > .bg-right {
   &:after {
     left: 0;
   }
 }
 
-.column-blocks-wrapper.bg-left {
+.column-grid > .bg-left {
   &:after {
     right: 0;
   }
 }
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
-  .column-blocks-wrapper.bg-left,
-  .column-blocks-wrapper.bg-right {
+  .column-blocks-wrapper {
+    > div {
+      padding: 1em !important;
+    }
+  }
+
+  .column-grid > .bg-left,
+  .column-grid > .bg-right {
+    margin: 1em;
+
       &:after {
         width: 100% !important;
+        left: 0 !important;
+        right: 0!important;
       }
+  }
+
+  .margin-bottom-5em {
+    margin-bottom: 2em !important;
   }
 }
