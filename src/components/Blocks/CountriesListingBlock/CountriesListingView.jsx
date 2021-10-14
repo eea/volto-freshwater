@@ -3,14 +3,16 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { flattenToAppURL } from '@plone/volto/helpers';
+import { useSelector, useDispatch } from 'react-redux';
+import { searchContent } from '@plone/volto/actions';
 import './style.less';
 
 const CountriesListingView = (props) => {
   const { data, content } = props;
-  const children = content?.items;
-  const country_profiles = children.filter(
-    (item) => item['@type'] === 'country_profile',
-  );
+  const path = content['@id'];
+  const dispatch = useDispatch();
+  const searchSubrequests = useSelector((state) => state.search.subrequests);
+  const country_profiles = searchSubrequests?.countries?.items || [];
 
   const sections = [
     {
@@ -18,6 +20,20 @@ const CountriesListingView = (props) => {
       items: country_profiles || [],
     },
   ];
+
+  React.useEffect(() => {
+    dispatch(
+      searchContent(
+        path,
+        {
+          'path.depth': 1,
+          portal_type: ['country_profile'],
+          b_size: 50,
+        },
+        'countries',
+      ),
+    );
+  }, [path, dispatch]);
 
   return (
     <div className="countries-listing-view full-width">
