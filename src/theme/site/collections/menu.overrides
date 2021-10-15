@@ -27,8 +27,12 @@
       border: 1px solid #f1f1f1 !important;
       box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.08) !important;
 
-      > .item[role='option'] {
+      > .item[role='option']:not(:last-child) {
         border-bottom: 1px solid @lightGreyBorderColor !important;
+      }
+
+      .submenu-wrapper {
+        margin-bottom: 7px;
       }
     }
 
@@ -77,6 +81,16 @@ body.siteroot {
     .tools-search-wrapper {
       margin-bottom: -41px;
     }
+  }
+}
+
+/* Countries submenu */
+.navigation .countries-submenu {
+  column-count: 3;
+  column-gap: 0.5rem;
+
+  > .item.thirdLevel {
+    padding: 0.3rem 1rem !important;
   }
 }
 
