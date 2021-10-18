@@ -104,12 +104,18 @@ const View = (props) => {
                     <div className="uww-left">
                       <div className="uww-data">
                         <div className={getClassName(column_value)}>
-                          <DataConnectedValue
-                            url={provider_url}
-                            column={column_data}
-                            placeholder={placeholder}
-                          />{' '}
-                          %
+                          {column_value[0] === 0 ? (
+                            <span>0%</span>
+                          ) : (
+                            <>
+                              <DataConnectedValue
+                                url={provider_url}
+                                column={column_data}
+                                placeholder={placeholder}
+                              />
+                              %
+                            </>
+                          )}
                         </div>
                       </div>
                       {description && (
