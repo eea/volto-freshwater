@@ -8,8 +8,7 @@ import { searchContent } from '@plone/volto/actions';
 import './style.less';
 
 const CountriesListingView = (props) => {
-  const { data, content } = props;
-  const path = content['@id'];
+  const { data, pathname } = props;
   const dispatch = useDispatch();
   const searchSubrequests = useSelector((state) => state.search.subrequests);
   const country_profiles = searchSubrequests?.countries?.items || [];
@@ -24,7 +23,7 @@ const CountriesListingView = (props) => {
   React.useEffect(() => {
     dispatch(
       searchContent(
-        path,
+        pathname,
         {
           'path.depth': 1,
           portal_type: ['country_profile'],
@@ -33,7 +32,7 @@ const CountriesListingView = (props) => {
         'countries',
       ),
     );
-  }, [path, dispatch]);
+  }, [pathname, dispatch]);
 
   return (
     <div className="countries-listing-view full-width">
@@ -69,5 +68,6 @@ const CountriesListingView = (props) => {
 export default compose(
   connect((state, props) => ({
     content: state.content.data,
+    pathname: state.router.location.pathname,
   })),
 )(CountriesListingView);
