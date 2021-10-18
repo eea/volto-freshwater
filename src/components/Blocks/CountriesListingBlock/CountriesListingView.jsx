@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { flattenToAppURL } from '@plone/volto/helpers';
+import { flattenToAppURL, getBaseUrl } from '@plone/volto/helpers';
 import { useSelector, useDispatch } from 'react-redux';
 import { searchContent } from '@plone/volto/actions';
 import './style.less';
@@ -23,7 +23,7 @@ const CountriesListingView = (props) => {
   React.useEffect(() => {
     dispatch(
       searchContent(
-        pathname,
+        getBaseUrl(pathname),
         {
           'path.depth': 1,
           portal_type: ['country_profile'],
