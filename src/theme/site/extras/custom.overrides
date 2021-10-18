@@ -132,6 +132,34 @@ body.has-image.staging-banner #main .breadcrumbs .breadcrumb {
   }
 }
 
+.map-bg-right,
+.map-bg-left {
+  position: relative;
+  padding: 1.2em 0;
+
+  &:after {
+    background-color: #f5f5f5;
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: calc(100vw / 2) !important;
+    z-index: -1;
+  }
+}
+
+.map-bg-left {
+  &:after {
+    left: 0;
+  }
+}
+
+.map-bg-right {
+  &:after {
+    right: 0;
+  }
+}
+
 .column-grid > .bg-right {
   &:after {
     left: 0;
