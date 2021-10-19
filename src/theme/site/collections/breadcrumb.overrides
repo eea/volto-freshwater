@@ -48,7 +48,7 @@ body.siteroot #main .breadcrumbs {
   display: none !important;
 }
 
-.has-image #main .breadcrumbs .breadcrumb {
+.has-image:not(.country-profile) #main .breadcrumbs .breadcrumb {
   position: absolute;
   top: 86px;
   max-width: 91%;

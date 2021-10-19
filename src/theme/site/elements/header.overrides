@@ -65,6 +65,7 @@ body:not(.view-editview) {
     }
 
     .home-logo {
+      max-width: 235px !important;
       height: 56px;
     }
   }
@@ -163,6 +164,7 @@ body.section-edit .home-nav {
 
     .logo img {
       max-width: none;
+      max-width: 162px;
     }
   }
 

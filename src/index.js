@@ -5,6 +5,7 @@ import {
   MetadataListingView,
   SimpleListingView,
   FavBoardView,
+  CountryProfileView,
 } from './components';
 
 // import { GET_CONTENT } from '@plone/volto/constants/ActionTypes';
@@ -76,6 +77,7 @@ const applyConfig = (config) => {
     indicator: DatabaseItemView,
     briefing: DatabaseItemView,
     map_interactive: DatabaseItemView,
+    country_profile: CountryProfileView,
   };
 
   config.views.layoutViews = {

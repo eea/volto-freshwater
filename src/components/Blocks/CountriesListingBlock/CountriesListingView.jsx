@@ -2,9 +2,11 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Item } from 'semantic-ui-react';
 import { flattenToAppURL, getBaseUrl } from '@plone/volto/helpers';
 import { useSelector, useDispatch } from 'react-redux';
 import { searchContent } from '@plone/volto/actions';
+import config from '@plone/volto/registry';
 import './style.less';
 
 const CountriesListingView = (props) => {
@@ -50,7 +52,19 @@ const CountriesListingView = (props) => {
                 {section?.items
                   .sort((a, b) => (a.title > b.title ? 1 : -1))
                   .map((item, i) => (
-                    <div key={i}>
+                    <div key={i} className="countries-item-wrapper">
+                      {item.lead_image && (
+                        <Item.Image
+                          className="countries-list-flag"
+                          alt={item.title}
+                          src={`${item['@id']
+                            .replace(config.settings.apiPath, '')
+                            .replace(
+                              config.settings.internalApiPath,
+                              '',
+                            )}/@@images/image/thumb`}
+                        />
+                      )}
                       <Link to={flattenToAppURL(item['@id'])}>
                         {item.title}
                       </Link>
