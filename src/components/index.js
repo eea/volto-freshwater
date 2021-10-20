@@ -14,4 +14,3 @@ export MapShare from './theme/Webmap/MapShare';
 export FavBoardComments from './theme/FavBoardListingView/FavBoardComments';
 export FavItemToolbar from './theme/FavBoardListingView/FavItemToolbar';
 export FavBoardView from './theme/FavBoardListingView/FavBoardView';
-export CountryProfileView from './theme/CountryProfileView/CountryProfileView';

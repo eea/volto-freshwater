@@ -81,12 +81,12 @@ body.siteroot.staging-banner {
 }
 
 @media only screen and (max-width: 1480px) {
-  body.has-image.staging-banner:not(.country-profile) #main .breadcrumbs .breadcrumb {
+  body.has-image.staging-banner:not(.contenttype-country_profile) #main .breadcrumbs .breadcrumb {
     top: 161px !important;
   }
 }
 
-body.has-image.staging-banner:not(.country-profile) #main .breadcrumbs .breadcrumb {
+body.has-image.staging-banner:not(.contenttype-country_profile) #main .breadcrumbs .breadcrumb {
   top: 163px;
 }
 
@@ -172,7 +172,7 @@ body.has-image.staging-banner:not(.country-profile) #main .breadcrumbs .breadcru
   }
 }
 
-body.country-profile {
+body.contenttype-country_profile {
   .herosection {
     display: none !important;
   }

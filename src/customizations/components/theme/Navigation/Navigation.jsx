@@ -242,7 +242,9 @@ class Navigation extends Component {
                     const flatSubUrl = flattenToAppURL(subitem.url);
                     return (
                       <>
-                        {subitem.title.includes('country profiles') ? (
+                        {subitem.title
+                          .toLowerCase()
+                          .includes('country profiles') ? (
                           <Dropdown.Item key={flatSubUrl}>
                             <div className="secondLevel-wrapper">
                               <Link
