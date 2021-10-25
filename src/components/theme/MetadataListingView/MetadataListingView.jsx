@@ -49,7 +49,7 @@ const MetadataListingView = ({ items, isEditMode, basket }) => {
               <Button
                 basic
                 className="add-fav-btn"
-                title="Add to favorites board"
+                title="Remove selection"
                 onClick={() => {
                   dispatch(removeItemFromBasket(item));
                 }}
@@ -60,7 +60,7 @@ const MetadataListingView = ({ items, isEditMode, basket }) => {
               <Button
                 basic
                 className="add-fav-btn"
-                title="Add to favorites board"
+                title="Save to Board"
                 onClick={() => {
                   dispatch(addItemToBasket(item));
                 }}

@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Button } from 'semantic-ui-react';
+
+import { Button, Confirm } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
 import { deleteBookmark } from '@eeacms/volto-freshwater/actions/favBoards';
 import clearSVG from '@plone/volto/icons/delete.svg';
 import linkSVG from '@plone/volto/icons/share.svg';
 
 const FavItemToolbar = (props) => {
-  const { item } = props;
+  const { item, groupedItems } = props;
   const link = item['@id'];
   const dispatch = useDispatch();
 
+  const [confirmOpen, setConfirmOpen] = useState(false);
+
   const handleDeleteBookmark = (uid, group, searchquery) => {
-    dispatch(deleteBookmark(uid, group, searchquery));
+    if (groupedItems.length === 1) {
+      setConfirmOpen(true);
+    } else {
+      dispatch(deleteBookmark(uid, group, searchquery));
+    }
   };
 
   return (
@@ -39,6 +46,23 @@ const FavItemToolbar = (props) => {
       >
         <Icon name={linkSVG} size="16px" />
       </Button>
+
+      <Confirm
+        open={confirmOpen}
+        onCancel={() => setConfirmOpen(false)}
+        confirmButton="Delete"
+        content={`${
+          'If you delete the last item, it will delete the board as well, ' +
+          'are you sure you want to delete this item?'
+        }`}
+        onConfirm={() => {
+          dispatch(
+            deleteBookmark(item.uid, item.group, item.queryparams || ''),
+          );
+          props.history.push('/favorites');
+          window.location.reload();
+        }}
+      />
     </div>
   );
 };

@@ -1,26 +1,25 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Portal } from 'react-portal';
 import { Link } from 'react-router-dom';
 import { Icon } from '@plone/volto/components';
 import bookSVG from '@plone/volto/icons/book.svg';
 
-const BasketToolbarButton = (props) => {
-  const items = useSelector((state) => state.favBoards?.items || []);
-
-  return items && items.length > 0 ? (
+const FavoritesToolbarButton = (props) => {
+  return (
     <div>
       <Portal node={__CLIENT__ && document.querySelector('.toolbar-bottom')}>
         <div className="fav-toolbar-menu">
-          <Link className="fav-toolbar-btn" title="Favorites" to="/favorites">
+          <Link
+            className="fav-toolbar-btn"
+            title="Favorite boards"
+            to="/favorites"
+          >
             <Icon name={bookSVG} size="35px" />
           </Link>
         </div>
       </Portal>
     </div>
-  ) : (
-    ''
   );
 };
 
-export default BasketToolbarButton;
+export default FavoritesToolbarButton;

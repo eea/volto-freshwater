@@ -5,7 +5,6 @@
 const initialState = {
   error: null,
   items: [],
-  bookmark: null,
   loaded: false,
   loading: false,
   modify: 'loaded',
@@ -25,7 +24,6 @@ export default function favBoards(state = initialState, action = {}) {
       return {
         ...state,
         error: null,
-        bookmark: action.result,
         loaded: true,
         loading: false,
       };
@@ -33,7 +31,6 @@ export default function favBoards(state = initialState, action = {}) {
       return {
         ...state,
         error: action.error,
-        bookmark: null,
         loading: false,
         loaded: false,
       };
@@ -50,7 +47,6 @@ export default function favBoards(state = initialState, action = {}) {
         ...state,
         error: null,
         items: [...state.items, action.result],
-        bookmark: action.result,
         loaded: true,
         loading: false,
       };
@@ -58,7 +54,6 @@ export default function favBoards(state = initialState, action = {}) {
       return {
         ...state,
         error: action.error,
-        bookmark: null,
         loading: false,
         loaded: false,
       };
@@ -75,7 +70,6 @@ export default function favBoards(state = initialState, action = {}) {
       return {
         ...state,
         error: null,
-        bookmark: action.result,
         loaded: true,
         loading: false,
         modify: 'loaded',

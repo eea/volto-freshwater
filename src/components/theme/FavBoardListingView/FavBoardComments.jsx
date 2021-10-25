@@ -10,6 +10,7 @@ import {
 } from '@eeacms/volto-freshwater/actions/favBoards';
 import queryString from 'query-string';
 import clearSVG from '@plone/volto/icons/delete.svg';
+import moment from 'moment';
 import './style.less';
 
 const CommentForm = (props) => {
@@ -73,11 +74,7 @@ const FavBoardComments = (props) => {
   }, [dispatch, modified, paramOwner]);
 
   const getCommentDate = (d) => {
-    const date = new Date(d);
-    const day = date.toLocaleString('default', { day: 'numeric' });
-    const month = date.toLocaleString('default', { month: 'short' });
-    const year = date.toLocaleString('default', { year: 'numeric' });
-    return month + ' ' + day + ', ' + year;
+    return moment(d).format('ll');
   };
 
   return (

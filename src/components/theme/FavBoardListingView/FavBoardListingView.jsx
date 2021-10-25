@@ -5,10 +5,12 @@ import { groupBy } from 'lodash';
 import jwtDecode from 'jwt-decode';
 import { Link } from 'react-router-dom';
 import { Portal } from 'react-portal';
-import { Toolbar } from '@plone/volto/components';
+import { Toolbar, Icon } from '@plone/volto/components';
 import ToggleButton from './FavToggleStatusButton';
-import { Tab, Menu } from 'semantic-ui-react';
+import { Tab, Menu, Button } from 'semantic-ui-react';
 import { getAllBookmarks } from '@eeacms/volto-freshwater/actions/favBoards';
+import backSVG from '@plone/volto/icons/back.svg';
+import starSVG from '@plone/volto/icons/half-star.svg';
 import './style.less';
 
 const ListingView = (props) => {
@@ -24,8 +26,8 @@ const ListingView = (props) => {
                 <Link
                   className="fav-board-link"
                   to={`${props.location.pathname}/board?user=${username}&group=${group.board}&status=${group.status}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  // target="_blank"
+                  // rel="noopener noreferrer"
                 >
                   <span>
                     {group.board}
@@ -101,12 +103,20 @@ const FavBoardListingView = (props) => {
       ),
       render: () => (
         <Tab.Pane>
-          <ListingView
-            {...props}
-            userID={userID}
-            showToggle={true}
-            groupedItems={myGroupedItems}
-          />
+          {Object.keys(myGroupedItems).length > 0 ? (
+            <ListingView
+              {...props}
+              userID={userID}
+              showToggle={true}
+              groupedItems={myGroupedItems}
+            />
+          ) : (
+            <div className="no-boards-info">
+              <span>You don't have any boards. You find the star button (</span>
+              <Icon name={starSVG} size="20px" />
+              <span>) on every page to create boards.</span>
+            </div>
+          )}
         </Tab.Pane>
       ),
     },
@@ -139,7 +149,19 @@ const FavBoardListingView = (props) => {
 
       {__CLIENT__ && props.token && (
         <Portal node={document.getElementById('toolbar')}>
-          <Toolbar inner={<span />} />
+          <Toolbar
+            inner={
+              <>
+                <Button className="item" onClick={() => props.history.goBack()}>
+                  <Icon
+                    name={backSVG}
+                    size="30px"
+                    className="contents circled"
+                  />
+                </Button>
+              </>
+            }
+          />
         </Portal>
       )}
     </div>
@@ -149,5 +171,6 @@ const FavBoardListingView = (props) => {
 export default compose(
   connect((state) => ({
     token: state.userSession.token,
+    content: state.content,
   })),
 )(FavBoardListingView);

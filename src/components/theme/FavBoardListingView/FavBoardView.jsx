@@ -7,7 +7,7 @@ import { flattenToAppURL } from '@plone/volto/helpers';
 import { List, Modal } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { Portal } from 'react-portal';
-import { Toolbar } from '@plone/volto/components';
+import { Toolbar, Icon } from '@plone/volto/components';
 import jwtDecode from 'jwt-decode';
 import { deStringifySearchquery } from '@eeacms/volto-freshwater/utils';
 import {
@@ -18,6 +18,7 @@ import {
   FavItemToolbar,
 } from '@eeacms/volto-freshwater/components';
 import { getAllBookmarks } from '@eeacms/volto-freshwater/actions/favBoards';
+import backSVG from '@plone/volto/icons/back.svg';
 import './style.less';
 
 const CATALOGUE_CONTENT_TYPES = [
@@ -77,7 +78,11 @@ const ListingView = (props) => {
                           </Link>
                         )}
 
-                        <FavItemToolbar item={item} />
+                        <FavItemToolbar
+                          {...props}
+                          item={item}
+                          groupedItems={groupedItems[username][group]}
+                        />
                       </List.Content>
                     </List.Item>
                   ))}
@@ -183,7 +188,19 @@ const FavBoardView = (props) => {
 
       {__CLIENT__ && props.token && (
         <Portal node={document.getElementById('toolbar')}>
-          <Toolbar inner={<span />} />
+          <Toolbar
+            inner={
+              <>
+                <Link className="item" to="/favorites">
+                  <Icon
+                    name={backSVG}
+                    size="30px"
+                    className="contents circled"
+                  />
+                </Link>
+              </>
+            }
+          />
         </Portal>
       )}
     </div>
