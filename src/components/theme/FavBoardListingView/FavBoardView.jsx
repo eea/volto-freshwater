@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
-import { groupBy } from 'lodash';
-import queryString from 'query-string';
-import { flattenToAppURL } from '@plone/volto/helpers';
-import { List, Modal } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { Portal } from 'react-portal';
+import { List, Modal, Button, Confirm } from 'semantic-ui-react';
+import { BodyClass, flattenToAppURL } from '@plone/volto/helpers';
 import { Toolbar, Icon } from '@plone/volto/components';
+import queryString from 'query-string';
 import jwtDecode from 'jwt-decode';
-import { deStringifySearchquery } from '@eeacms/volto-freshwater/utils';
+import { groupBy } from 'lodash';
 import {
   ItemMetadata,
   ItemTitle,
@@ -17,8 +16,16 @@ import {
   FavBoardComments,
   FavItemToolbar,
 } from '@eeacms/volto-freshwater/components';
-import { getAllBookmarks } from '@eeacms/volto-freshwater/actions/favBoards';
+import {
+  getAllBookmarks,
+  deleteBookmark,
+} from '@eeacms/volto-freshwater/actions/favBoards';
+import { deStringifySearchquery } from '@eeacms/volto-freshwater/utils';
+// import ToggleButton from './FavToggleStatusButton';
+
 import backSVG from '@plone/volto/icons/back.svg';
+import linkSVG from '@plone/volto/icons/share.svg';
+import deleteSVG from '@plone/volto/icons/delete.svg';
 import './style.less';
 
 const CATALOGUE_CONTENT_TYPES = [
@@ -32,7 +39,16 @@ const CATALOGUE_CONTENT_TYPES = [
 ];
 
 const ListingView = (props) => {
-  const { groupedItems, setOpenModal, setSelectedItem, userID } = props;
+  const {
+    groupedItems,
+    setOpenModal,
+    setSelectedItem,
+    userId,
+    paramOwner,
+    dispatch,
+  } = props;
+
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   return Object.keys(groupedItems).map((username, i) => {
     return (
@@ -43,9 +59,40 @@ const ListingView = (props) => {
             return (
               <div className="fav-listing-board" key={index}>
                 <h1 className="board-title">{group}</h1>
-                {username !== userID && (
+
+                {paramOwner === userId && (
+                  <>
+                    <Button
+                      icon
+                      basic
+                      className="delete-fav-btn"
+                      title="Delete board"
+                      onClick={() => {
+                        setConfirmOpen(true);
+                      }}
+                    >
+                      <Icon name={deleteSVG} size="16px" />
+                    </Button>
+                    {/*<ToggleButton groupedItems={group} />*/}
+
+                    <Button
+                      icon
+                      basic
+                      className="delete-fav-btn"
+                      title="Copy link"
+                      onClick={() => {
+                        navigator.clipboard.writeText(window.location.href);
+                      }}
+                    >
+                      <Icon name={linkSVG} size="16px" />
+                    </Button>
+                  </>
+                )}
+
+                {username !== userId && (
                   <span className="createdBy">Created by {username} </span>
                 )}
+
                 <List key={index}>
                   {groupedItems[username][group].map((item, index) => (
                     <List.Item key={index}>
@@ -80,6 +127,8 @@ const ListingView = (props) => {
 
                         <FavItemToolbar
                           {...props}
+                          userId={userId}
+                          paramOwner={paramOwner}
                           item={item}
                           groupedItems={groupedItems[username][group]}
                         />
@@ -93,6 +142,29 @@ const ListingView = (props) => {
                   board={group}
                   groupedItems={groupedItems[username][group]}
                 />
+
+                <Confirm
+                  open={confirmOpen}
+                  onCancel={() => setConfirmOpen(false)}
+                  confirmButton="Delete board"
+                  cancelButton="No, keep the board"
+                  content={
+                    'This operation cannot be undone. Are you sure you want to delete this board?'
+                  }
+                  onConfirm={() => {
+                    for (let item of groupedItems[username][group]) {
+                      dispatch(
+                        deleteBookmark(
+                          item.uid,
+                          item.group,
+                          item.queryparams || '',
+                        ),
+                      );
+                    }
+                    props.history.push('/boards');
+                    window.location.reload();
+                  }}
+                />
               </div>
             );
           })}
@@ -102,26 +174,21 @@ const ListingView = (props) => {
 };
 
 const FavBoardView = (props) => {
-  const userSession = useSelector((state) => state.userSession);
-  const userID = userSession.token ? jwtDecode(userSession.token).sub : '';
-  const items = useSelector((state) => state.favBoards?.items || []);
-  const bookmarkdelete = useSelector((state) => state.favBoards?.delete || {});
+  const { userId, token, items, boardsDelete } = props;
   const dispatch = useDispatch();
-
-  const [isOpenModal, setOpenModal] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [groupedItems, setGroupedItems] = useState({});
-
   const urlParams = queryString.parse(props.location.search);
   const paramOwner = urlParams ? urlParams['user'] : '';
-  const paramGroup = urlParams ? urlParams['group'] : '';
-  const paramStatus = urlParams ? urlParams['status'] : '';
+  const paramGroup = urlParams ? urlParams['board'] : '';
+  const [groupedItems, setGroupedItems] = useState({});
+  const [isOpenModal, setOpenModal] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const status = groupedItems?.[paramOwner]?.[paramGroup][0]?.payload.status;
 
   useEffect(() => {
-    if (bookmarkdelete === 'loaded') {
+    if (boardsDelete === 'loaded') {
       dispatch(getAllBookmarks(paramOwner));
     }
-  }, [paramOwner, bookmarkdelete, dispatch]);
+  }, [paramOwner, boardsDelete, dispatch]);
 
   // filter the bookmarks by parameters from url
   // and group them by group
@@ -139,7 +206,7 @@ const FavBoardView = (props) => {
 
       setGroupedItems({ [item]: byGroups });
     });
-  }, [items, paramOwner, paramGroup, userID]);
+  }, [items, paramOwner, paramGroup, userId]);
 
   const closeModal = (item) => {
     setOpenModal(false);
@@ -147,21 +214,22 @@ const FavBoardView = (props) => {
   };
 
   const showList =
-    paramOwner === userID ||
-    (paramOwner !== userID && paramStatus === 'public');
+    paramOwner === userId || (paramOwner !== userId && status === 'public');
 
   return (
     <div className="favorites-listing ui container">
-      <h3 className="board-upper-title">Board</h3>
+      <BodyClass className="board-view" />
       {showList ? (
         <>
+          <h3 className="board-upper-title">Board</h3>
           <ListingView
             {...props}
-            userID={userID}
+            userId={userId}
             paramOwner={paramOwner}
             groupedItems={groupedItems}
             setOpenModal={setOpenModal}
             setSelectedItem={setSelectedItem}
+            dispatch={dispatch}
           />
 
           <Modal
@@ -186,12 +254,12 @@ const FavBoardView = (props) => {
         <p>This board is private.</p>
       )}
 
-      {__CLIENT__ && props.token && (
+      {__CLIENT__ && token && (
         <Portal node={document.getElementById('toolbar')}>
           <Toolbar
             inner={
               <>
-                <Link className="item" to="/favorites">
+                <Link className="item" to="/boards">
                   <Icon
                     name={backSVG}
                     size="30px"
@@ -210,5 +278,10 @@ const FavBoardView = (props) => {
 export default compose(
   connect((state) => ({
     token: state.userSession.token,
+    userId: state.userSession.token
+      ? jwtDecode(state.userSession.token).sub
+      : '',
+    items: state.favBoards?.items || [],
+    boardsDelete: state.favBoards?.delete || {},
   })),
 )(FavBoardView);

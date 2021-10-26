@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
 import jwtDecode from 'jwt-decode';
 import { Button, Form, Item } from 'semantic-ui-react';
@@ -59,8 +59,7 @@ const CommentForm = (props) => {
 };
 
 const FavBoardComments = (props) => {
-  const { groupedItems = [] } = props;
-  const modified = useSelector((state) => state.favBoards?.modify || {});
+  const { groupedItems = [], userId, boardsModify } = props;
   const dispatch = useDispatch();
   const comments = groupedItems[0]?.payload?.comments;
   const owner = groupedItems[0].owner;
@@ -68,10 +67,10 @@ const FavBoardComments = (props) => {
   const paramOwner = urlParams ? urlParams['user'] : '';
 
   React.useEffect(() => {
-    if (modified === 'loaded') {
+    if (boardsModify === 'loaded') {
       dispatch(getAllBookmarks(paramOwner));
     }
-  }, [dispatch, modified, paramOwner]);
+  }, [dispatch, boardsModify, paramOwner]);
 
   const getCommentDate = (d) => {
     return moment(d).format('ll');
@@ -94,31 +93,33 @@ const FavBoardComments = (props) => {
                       {getCommentDate(c.date)}
                     </span>
                   </div>
-                  <Button
-                    icon
-                    basic
-                    className="delete-comment"
-                    onClick={() => {
-                      for (let item of groupedItems) {
-                        const newComments = [...item.payload.comments];
-                        newComments.splice(i, 1);
-                        dispatch(
-                          modifyBookmark(
-                            item.uid,
-                            item.group,
-                            item.hash || '',
-                            {
-                              data: item.payload.data,
-                              status: item.payload.status,
-                              comments: newComments,
-                            },
-                          ),
-                        );
-                      }
-                    }}
-                  >
-                    <Icon name={clearSVG} size="16px" />
-                  </Button>
+                  {paramOwner === userId && (
+                    <Button
+                      icon
+                      basic
+                      className="delete-comment"
+                      onClick={() => {
+                        for (let item of groupedItems) {
+                          const newComments = [...item.payload.comments];
+                          newComments.splice(i, 1);
+                          dispatch(
+                            modifyBookmark(
+                              item.uid,
+                              item.group,
+                              item.hash || '',
+                              {
+                                data: item.payload.data,
+                                status: item.payload.status,
+                                comments: newComments,
+                              },
+                            ),
+                          );
+                        }
+                      }}
+                    >
+                      <Icon name={clearSVG} size="16px" />
+                    </Button>
+                  )}
                 </Item.Meta>
                 <Item.Description>
                   <p>{c.comment}</p>
@@ -145,5 +146,6 @@ export default compose(
     userId: state.userSession.token
       ? jwtDecode(state.userSession.token).sub
       : '',
+    boardsModify: state.favBoards?.modify || {},
   })),
 )(FavBoardComments);

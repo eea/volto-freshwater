@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-
 import { Button, Confirm } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
 import { deleteBookmark } from '@eeacms/volto-freshwater/actions/favBoards';
+
 import clearSVG from '@plone/volto/icons/delete.svg';
 import linkSVG from '@plone/volto/icons/share.svg';
 
 const FavItemToolbar = (props) => {
-  const { item, groupedItems } = props;
+  const { item, groupedItems, userId, paramOwner } = props;
   const link = item['@id'];
   const dispatch = useDispatch();
 
@@ -24,17 +24,20 @@ const FavItemToolbar = (props) => {
 
   return (
     <div className="fav-item-toolbar">
-      <Button
-        icon
-        basic
-        className="delete-fav-btn"
-        title="Remove"
-        onClick={() => {
-          handleDeleteBookmark(item.uid, item.group, item.queryparams || '');
-        }}
-      >
-        <Icon name={clearSVG} size="16px" />
-      </Button>
+      {paramOwner === userId && (
+        <Button
+          icon
+          basic
+          className="delete-fav-btn"
+          title="Remove item from this board"
+          onClick={() => {
+            handleDeleteBookmark(item.uid, item.group, item.queryparams || '');
+          }}
+        >
+          <Icon name={clearSVG} size="16px" />
+        </Button>
+      )}
+
       <Button
         icon
         basic
@@ -59,7 +62,7 @@ const FavItemToolbar = (props) => {
           dispatch(
             deleteBookmark(item.uid, item.group, item.queryparams || ''),
           );
-          props.history.push('/favorites');
+          props.history.push('/boards');
           window.location.reload();
         }}
       />

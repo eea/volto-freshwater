@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
 import { Grid, Button } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
@@ -13,43 +13,41 @@ import { removeItemFromBasket } from '@eeacms/volto-freshwater/actions/favBasket
 
 import clearSVG from '@plone/volto/icons/clear.svg';
 import starSVG from '@plone/volto/icons/star.svg';
+import halfStarSVG from '@plone/volto/icons/half-star.svg';
 import checkSVG from '@plone/volto/icons/check.svg';
 import cx from 'classnames';
 import './style.less';
 
 const BasketToolbarPopup = (props) => {
-  const { basket } = props;
-  const items = useSelector((state) => state.favBoards?.items || []);
-  const userSession = useSelector((state) => state.userSession);
-  const userID = userSession.token ? jwtDecode(userSession.token).sub : '';
+  const { basket, items, userId } = props;
+  const itemsInBasket = basket && basket.length > 0;
+  const dispatch = useDispatch();
 
   const [activeGroup, setActiveGroup] = useState('');
   const [boardTitle, setBoardTitle] = useState('Default');
   const [boardCreated, setBoardCreated] = useState(false);
   const [groupedItems, setGroupedItems] = useState({});
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllBookmarks(userId));
+  }, [dispatch, userId]);
 
   useEffect(() => {
-    dispatch(getAllBookmarks(userID));
-  }, [dispatch, userID]);
-
-  useEffect(() => {
-    if (basket && basket.length > 0) setActiveGroup('');
-  }, [basket]);
+    if (itemsInBasket) setActiveGroup('');
+  }, [itemsInBasket]);
 
   useEffect(() => {
     const favItems = groupBy(items, (item) => item['owner']);
 
     Object.keys(favItems).forEach((item) => {
-      if (item !== userID) {
+      if (item !== userId) {
         return false;
       }
-      const items = favItems[item].filter((item) => item.owner === userID);
+      const items = favItems[item].filter((item) => item.owner === userId);
       const byGroups = groupBy(items, (item) => item['group']);
       setGroupedItems({ [item]: byGroups });
     });
-  }, [items, userID]);
+  }, [items, userId]);
 
   const handleCreateBoard = () => {
     for (let item of basket) {
@@ -82,12 +80,12 @@ const BasketToolbarPopup = (props) => {
   return (
     <div className="fav-menu pastanaga-menu">
       <header>
-        <h2>Favorite boards</h2>
+        <h2>Boards</h2>
       </header>
       <div className="fav-menu-content">
-        <div className="toolbar-menu-title">Selected items: </div>
-        <>
-          {basket && basket.length > 0 ? (
+        <div class="fav-boards-list">
+          <div className="toolbar-menu-title">Selected items: </div>
+          {itemsInBasket ? (
             <ul className="fav-menu-listing">
               {basket.map((item, i) => (
                 <li
@@ -109,104 +107,105 @@ const BasketToolbarPopup = (props) => {
               ))}
             </ul>
           ) : (
-            <span className="fav-menu-info">
-              No selected items to save in a board.
-            </span>
-          )}
-
-          {groupedItems && Object.keys(groupedItems).length > 0 && (
-            <div className="fav-boards-list">
-              <div className="toolbar-menu-title">
-                Save to an existing board:
-              </div>
-
-              {Object.keys(groupedItems).map((user) => {
-                return (
-                  <ul>
-                    {Object.keys(groupedItems[user])
-                      .sort()
-                      .map((group, index) => {
-                        return (
-                          <li
-                            role="presentation"
-                            key={index}
-                            className={cx('board-item', {
-                              active: activeGroup === group,
-                            })}
-                            onClick={() => {
-                              if (basket && basket.length > 0) {
-                                handleSaveToBoard(group);
-                                setActiveGroup(group);
-                              }
-                            }}
-                            onKeyDown={() => {
-                              if (basket && basket.length > 0) {
-                                handleSaveToBoard(group);
-                                setActiveGroup(group);
-                              }
-                            }}
-                          >
-                            <div className="boards-wrapper">
-                              <Icon name={starSVG} size="16px" />
-                              {group} ({groupedItems[user][group].length})
-                              {activeGroup === group && (
-                                <Icon
-                                  className="check-icon"
-                                  name={checkSVG}
-                                  size="16px"
-                                />
-                              )}
-                            </div>
-                            <div className="add-btn-wrapper">
-                              <div className="add-btn">Save</div>
-                            </div>
-                          </li>
-                        );
-                      })}
-                  </ul>
-                );
-              })}
+            <div className="fav-menu-info">
+              No items selected. Use the
+              <span className="star-icon">
+                <Icon name={halfStarSVG} size="19px" />
+              </span>
+              button to save items in boards.
             </div>
           )}
+        </div>
 
-          <div className="fav-group-title">
-            <div className="toolbar-menu-title">Create a new board:</div>
+        {groupedItems && Object.keys(groupedItems).length > 0 && (
+          <div className="fav-boards-list">
+            <div className="toolbar-menu-title">Save to an existing board:</div>
 
-            <Grid>
-              <Grid.Row>
-                <Grid.Column width={3}>
-                  <label htmlFor="field-title">Board Name</label>
-                </Grid.Column>
-
-                <Grid.Column width={9}>
-                  <div className="ui input">
-                    <input
-                      id="field-title"
-                      name="title"
-                      type="text"
-                      value={boardTitle}
-                      onChange={(e) => setBoardTitle(e.target.value)}
-                    />
-                  </div>
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-
-            {boardCreated && (
-              <p className="board-created-info">Board created.</p>
-            )}
-
-            <Button
-              primary
-              size="mini"
-              className="fav-board-save"
-              disabled={basket.length === 0}
-              onClick={handleCreateBoard}
-            >
-              Create
-            </Button>
+            {Object.keys(groupedItems).map((user) => {
+              return (
+                <ul className="boards-list">
+                  {Object.keys(groupedItems[user])
+                    .sort()
+                    .map((group, index) => {
+                      return (
+                        <li
+                          role="presentation"
+                          key={index}
+                          className={cx('board-item', {
+                            active: activeGroup === group,
+                            boarditems: basket.length > 0,
+                          })}
+                          onClick={() => {
+                            if (itemsInBasket) {
+                              handleSaveToBoard(group);
+                              setActiveGroup(group);
+                            }
+                          }}
+                          onKeyDown={() => {
+                            if (itemsInBasket) {
+                              handleSaveToBoard(group);
+                              setActiveGroup(group);
+                            }
+                          }}
+                        >
+                          <div className="boards-wrapper">
+                            <Icon name={starSVG} size="16px" />
+                            {group} ({groupedItems[user][group].length})
+                            {activeGroup === group && (
+                              <Icon
+                                className="check-icon"
+                                name={checkSVG}
+                                size="16px"
+                              />
+                            )}
+                          </div>
+                          <div className="add-btn-wrapper">
+                            <div className="add-btn">Save</div>
+                          </div>
+                        </li>
+                      );
+                    })}
+                </ul>
+              );
+            })}
           </div>
-        </>
+        )}
+
+        <div className="fav-group-title">
+          <div className="toolbar-menu-title">Create a new board:</div>
+
+          <Grid>
+            <Grid.Row>
+              <Grid.Column width={3}>
+                <label htmlFor="field-title">Board Name</label>
+              </Grid.Column>
+
+              <Grid.Column width={9}>
+                <div className="ui input">
+                  <input
+                    id="field-title"
+                    name="title"
+                    type="text"
+                    value={boardTitle}
+                    onChange={(e) => setBoardTitle(e.target.value)}
+                  />
+                </div>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+
+          {boardCreated && <p className="board-created-info">Board created.</p>}
+
+          <Button
+            primary
+            size="mini"
+            className="fav-board-save"
+            disabled={basket.length === 0}
+            onClick={handleCreateBoard}
+          >
+            Create
+          </Button>
+        </div>
       </div>
     </div>
   );
@@ -215,7 +214,11 @@ const BasketToolbarPopup = (props) => {
 export default compose(
   connect(
     (state) => ({
+      userId: state.userSession.token
+        ? jwtDecode(state.userSession.token).sub
+        : '',
       basket: state.favBasket.basket,
+      items: state.favBoards?.items || [],
     }),
     { removeItemFromBasket },
   ),

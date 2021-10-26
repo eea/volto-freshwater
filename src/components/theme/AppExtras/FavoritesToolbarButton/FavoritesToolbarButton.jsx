@@ -12,7 +12,7 @@ const FavoritesToolbarButton = (props) => {
           <Link
             className="fav-toolbar-btn"
             title="Favorite boards"
-            to="/favorites"
+            to={'/boards'}
           >
             <Icon name={bookSVG} size="35px" />
           </Link>

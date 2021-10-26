@@ -83,7 +83,10 @@
     align-items: center;
     justify-content: space-between;
     padding: 0.6em 0;
-    border-bottom: 1px solid #e7e7e7;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #e7e7e7;
+    }
 
     button {
       margin-bottom: 0 !important;
@@ -122,8 +125,14 @@
 }
 
 .fav-boards-list {
-  padding-bottom: 6px;
+  padding-bottom: 10px;
   border-bottom: 1px solid #b8c6c8;
+  margin-bottom: 2px;
+}
+
+ul.boards-list {
+  padding-left: 0;
+  margin: 0;
 }
 
 .board-item {
@@ -132,19 +141,23 @@
   align-items: center;
   justify-content: space-between;
   padding: 6px 5px;
-  color: #0099bb;
-  cursor: pointer;
+  color: #8cd5e5;
 
   svg {
     margin-right: 5px !important;
   }
 
-  &:hover {
-    background-color: #f9f9f9;
-    color: #004050 !important;
+  &.boarditems {
+    color: #0099bb;
+    cursor: pointer;
 
-    > .add-btn-wrapper {
-      visibility: visible;
+    &:hover {
+      background-color: #f9f9f9;
+      color: #004050 !important;
+
+      > .add-btn-wrapper {
+        visibility: visible;
+      }
     }
   }
 
@@ -175,6 +188,7 @@
 
 .board-created-info {
   margin: 5px 0;
+  font-size: 14px;
   font-weight: 500;
 }
 
@@ -195,7 +209,20 @@
   display: none;
 }
 
-.fav-menu-info {
+.fav-menu-info,
+.no-boards-info {
   display: block;
-  margin: 0.5em 0;
+  // margin: 0.5em 0;
+
+  .star-icon {
+    padding: 2px 4px;
+    margin: 0 8px;
+    background-color: #eee;
+    border-radius: 5px;
+  }
+
+  svg {
+    position: relative;
+    top: 4px;
+  }
 }

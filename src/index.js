@@ -192,19 +192,19 @@ const applyConfig = (config) => {
     ...config.settings,
     nonContentRoutes: [
       ...config.settings.nonContentRoutes,
-      '/favorites/board',
-      '/favorites',
+      '/boards/boardview',
+      '/boards',
     ],
   };
 
   config.addonRoutes = [
     ...config.addonRoutes,
     {
-      path: '/favorites/board',
+      path: '/boards/boardview',
       component: FavBoardView,
     },
     {
-      path: '/favorites',
+      path: '/boards',
       component: FavBoardListingView,
     },
   ];
