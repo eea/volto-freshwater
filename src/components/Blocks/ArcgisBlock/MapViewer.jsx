@@ -13,7 +13,7 @@ import { MapViewerConfig } from '@eeacms/volto-arcgis-block/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 //import "isomorphic-fetch";  <-- Necessary to use fetch?
-var Map, MapView, Zoom, FeatureLayer, Legend, promiseUtils;
+var Map, MapView, Zoom, FeatureLayer, promiseUtils;
 
 const FilterInput = (props) => {
   const treatmentType = props.type;
@@ -73,20 +73,16 @@ class MapViewer extends React.Component {
       'esri/views/MapView',
       'esri/widgets/Zoom',
       'esri/layers/FeatureLayer',
-      'esri/widgets/Legend',
       'esri/core/promiseUtils',
-    ]).then(
-      ([_Map, _MapView, _Zoom, _FeatureLayer, _Legend, _promiseUtils]) => {
-        [Map, MapView, Zoom, FeatureLayer, Legend, promiseUtils] = [
-          _Map,
-          _MapView,
-          _Zoom,
-          _FeatureLayer,
-          _Legend,
-          _promiseUtils,
-        ];
-      },
-    );
+    ]).then(([_Map, _MapView, _Zoom, _FeatureLayer, _promiseUtils]) => {
+      [Map, MapView, Zoom, FeatureLayer, promiseUtils] = [
+        _Map,
+        _MapView,
+        _Zoom,
+        _FeatureLayer,
+        _promiseUtils,
+      ];
+    });
   }
 
   componentDidUpdate() {
@@ -245,16 +241,6 @@ class MapViewer extends React.Component {
 
       getTypes(layer).then(updateTypes);
       // console.log('treatmentTypes', this.state.treatmentTypes);
-
-      // const legend = new Legend({
-      //   view: this.map,
-      //   layerInfos: [
-      //     {
-      //       layer: layer,
-      //     },
-      //   ],
-      // });
-      // this.view.ui.add(legend, 'bottom-left');
 
       // ###############################################################
       // ###############################################################

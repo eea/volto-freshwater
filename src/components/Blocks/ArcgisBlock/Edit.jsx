@@ -9,15 +9,12 @@ import { getClassName } from '@eeacms/volto-arcgis-block/components/utils';
 import config from '@eeacms/volto-arcgis-block/components/MapViewer/config';
 
 const Edit = (props) => {
-  const { block, data, onChangeBlock, selected} = props;
+  const { block, data, onChangeBlock, selected } = props;
   const layerUrl = data.layerUrl || '';
 
-  const MapViewer = loadable(
-    () => import('./MapViewer'),
-    {
-      noSsr: true,
-    },
-  );
+  const MapViewer = loadable(() => import('./MapViewer'), {
+    noSsr: true,
+  });
   // const ExtraComponent = getExtraMenu(data);
   return (
     <>
