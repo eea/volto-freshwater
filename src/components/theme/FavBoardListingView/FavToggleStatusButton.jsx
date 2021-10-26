@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import classNames from 'classnames';
-import { modifyBookmark } from '@eeacms/volto-freshwater/actions';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import cx from 'classnames';
+import {
+  getAllBookmarks,
+  modifyBookmark,
+} from '@eeacms/volto-freshwater/actions';
 import './toggle.less';
 
 const ToggleButton = (props) => {
-  const { className, groupedItems } = props;
+  const { groupedItems, boardsModify } = props;
   const initialState = groupedItems.items[0].payload['status'] || 'public';
   const [toggle, setToggle] = useState(initialState);
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (boardsModify === 'loaded') {
+      dispatch(getAllBookmarks());
+    }
+  }, [dispatch, boardsModify]);
 
   const triggerToggle = () => {
     const newState = toggle === 'public' ? 'private' : 'public';
@@ -16,25 +27,21 @@ const ToggleButton = (props) => {
     for (let item of groupedItems.items) {
       dispatch(
         modifyBookmark(item.uid, item.group, item.hash || '', {
-          data: item,
+          data: item.payload.data,
           status: newState,
+          comments: item.payload.comments,
         }),
       );
     }
 
     setToggle(toggle === 'public' ? 'private' : 'public');
   };
-  const toggleClasses = classNames(
-    'wrg-toggle',
-    {
-      'wrg-toggle--checked': toggle === 'private',
-    },
-    className,
-  );
 
   return (
     <div
-      className={toggleClasses}
+      className={cx('wrg-toggle', {
+        'wrg-toggle--checked': toggle === 'private',
+      })}
       onClick={triggerToggle}
       onKeyDown={triggerToggle}
       role="button"
@@ -58,4 +65,8 @@ const ToggleButton = (props) => {
   );
 };
 
-export default ToggleButton;
+export default compose(
+  connect((state) => ({
+    boardsModify: state.favBoards?.modify || {},
+  })),
+)(ToggleButton);
