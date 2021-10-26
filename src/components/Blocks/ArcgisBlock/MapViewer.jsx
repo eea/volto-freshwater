@@ -93,26 +93,23 @@ class MapViewer extends React.Component {
       condition +
       ` AND treatmenttype_cp in ('${this.state.showTypes.join("','")}')`;
     layer.definitionExpression = condition;
-    console.log('condition', condition);
+    // console.log('condition', condition);
   }
 
   updateFilters = (event) => {
     const checked = event.target.checked;
     const value = event.target.value;
-    console.log('checked', checked);
 
     if (!checked) {
-      console.log('removing ', value);
       this.setState({
         showTypes: this.state.showTypes.filter((type) => {
           return type !== value;
         }),
       });
     } else {
-      console.log('adding ', value);
       this.setState({ showTypes: [...this.state.showTypes, value] });
     }
-    console.log('showTypes', this.state.showTypes);
+    // console.log('showTypes', this.state.showTypes);
   };
 
   componentWillUnmount() {
@@ -150,43 +147,43 @@ class MapViewer extends React.Component {
 
       // ###############################################################
       // ###############################################################
-      const popupTrailheads = {
-        title: '{uwwname}',
-        content: [
-          {
-            type: 'fields',
-            fieldInfos: [
-              {
-                fieldName: 'aggname',
-                label: 'aggname.alias',
-                visible: true,
-              },
-            ],
-          },
-        ],
-      };
-      const trailheadsLabels = {
-        symbol: {
-          type: 'text',
-          color: '#FFFFFF',
-          haloColor: '#5E8D74',
-          haloSize: '2px',
-          font: {
-            size: '12px',
-            family: 'Noto Sans',
-            style: 'italic',
-            weight: 'normal',
-          },
-        },
+      // const popupTrailheads = {
+      //   title: '{uwwname}',
+      //   content: [
+      //     {
+      //       type: 'fields',
+      //       fieldInfos: [
+      //         {
+      //           fieldName: 'aggname',
+      //           label: 'aggname.alias',
+      //           visible: true,
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // };
+      // const trailheadsLabels = {
+      //   symbol: {
+      //     type: 'text',
+      //     color: '#FFFFFF',
+      //     haloColor: '#5E8D74',
+      //     haloSize: '2px',
+      //     font: {
+      //       size: '12px',
+      //       family: 'Noto Sans',
+      //       style: 'italic',
+      //       weight: 'normal',
+      //     },
+      //   },
 
-        labelPlacement: 'above-center',
-        labelExpressionInfo: {
-          expression: 'HELLLOOO',
-        },
-      };
+      //   labelPlacement: 'above-center',
+      //   labelExpressionInfo: {
+      //     expression: 'HELLLOOO',
+      //   },
+      // };
 
-      console.log('layerUrl', this.layerUrl);
-      console.log('connected_data_parameters', this.connected_data_parameters);
+      // console.log('layerUrl', this.layerUrl);
+      // console.log('connected_data_parameters', this.connected_data_parameters);
 
       const layer = new FeatureLayer({
         url: this.layerUrl,
@@ -223,7 +220,7 @@ class MapViewer extends React.Component {
         let types = result[0].value.map((item) => {
           return item.attributes.treatmenttype_cp;
         });
-        console.log('total types', types.length);
+        // console.log('total types', types.length);
         const typesUnique = [...new Set(types)];
 
         // console.log('types', types);
@@ -232,7 +229,7 @@ class MapViewer extends React.Component {
           return { name: t, count: types.filter((i) => i === t).length };
         });
 
-        console.log('typesCount', typesCount);
+        // console.log('typesCount', typesCount);
 
         if (!this.unmounted) {
           this.setState({ treatmentTypes: typesCount, showTypes: typesUnique });
