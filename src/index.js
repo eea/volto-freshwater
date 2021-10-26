@@ -12,6 +12,7 @@ import FavBoardListingView from './components/theme/FavBoardListingView/FavBoard
 import TokenWidget from '@plone/volto/components/manage/Widgets/TokenWidget';
 import CopyrightWidget from './components/Widgets/CopyrightWidget';
 
+import installArcgisBlock from './components/Blocks/ArcgisBlock';
 import installEmbedContentBlock from './components/Blocks/Content';
 import installDashboardTabsBlock from './components/Blocks/DashboardTabsBlock';
 import installCustomCardsBlock from './components/Blocks/CustomCardsBlock';
@@ -232,6 +233,7 @@ const applyConfig = (config) => {
     installCountriesListingBlock,
     installAppExtras,
     installSlatePopup,
+    installArcgisBlock,
   ].reduce((acc, apply) => apply(acc), config);
 };
 
