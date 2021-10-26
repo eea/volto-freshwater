@@ -15,8 +15,8 @@ import { FormattedMessage } from 'react-intl';
 
 import { HeroSection } from '@eeacms/volto-freshwater/components';
 import { getScaleUrl, getPath } from '@eeacms/volto-freshwater/utils';
-
 import clearLogoSVG from '@eeacms/volto-freshwater/static/freshwater_logo_clear.svg';
+import config from '@plone/volto/registry';
 
 /**
  * Header component class.
@@ -82,10 +82,15 @@ class Header extends Component {
     let contentDescription = this.props.content?.description;
     let stagingBanner =
       __CLIENT__ && document.getElementsByClassName('stagingBanner').length > 0;
+    let isNonContentRoute = config._data.settings.nonContentRoutes.includes(
+      this.props.actualPathName,
+    );
 
     return (
       <div className="portal-top">
-        {leadImageUrl && <BodyClass className="has-image" />}
+        {leadImageUrl && !isNonContentRoute && (
+          <BodyClass className="has-image" />
+        )}
         {stagingBanner && <BodyClass className="staging-banner" />}
         <Segment basic className="header-wrapper" role="banner">
           <Container>
@@ -138,25 +143,27 @@ class Header extends Component {
         </Segment>
 
         <React.Fragment>
-          <div
-            className={`header-bg ${
-              this.state.isHomepage ? 'homepage' : 'contentpage'
-            }`}
-          >
-            {!this.state.isHomepage && (
-              <div
-                className={'header-container'}
-                style={{ position: 'relative' }}
-              >
-                <HeroSection
-                  image_url={leadImageUrl}
-                  image_caption={imageCaption}
-                  content_title={contentTitle}
-                  content_description={contentDescription}
-                />
-              </div>
-            )}
-          </div>
+          {!isNonContentRoute && (
+            <div
+              className={`header-bg ${
+                this.state.isHomepage ? 'homepage' : 'contentpage'
+              }`}
+            >
+              {!this.state.isHomepage && (
+                <div
+                  className={'header-container'}
+                  style={{ position: 'relative' }}
+                >
+                  <HeroSection
+                    image_url={leadImageUrl}
+                    image_caption={imageCaption}
+                    content_title={contentTitle}
+                    content_description={contentDescription}
+                  />
+                </div>
+              )}
+            </div>
+          )}
         </React.Fragment>
       </div>
     );
