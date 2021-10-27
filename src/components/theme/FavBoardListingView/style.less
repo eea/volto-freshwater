@@ -184,6 +184,19 @@ body.board-view {
   }
 }
 
+.copy-box {
+  position: fixed;
+  z-index: 999;
+  right: 40px;
+  bottom: 40px;
+  padding: 15px;
+  margin: 0px;
+  background-color: #333;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+}
+
 .fav-listing-board {
   margin: 1em 0;
 
@@ -191,12 +204,12 @@ body.board-view {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 6px;
-    border-bottom: 1px solid #ddd;
+    padding: 8px 14px;
+    border-top: 1px solid #ddd;
 
     &:hover {
-      background-color: #f9f9f9;
-      // color: #0099bb !important;
+      background-color: #fafafa;
+      //  color: #0099bb !important;
     }
   }
 
@@ -214,16 +227,16 @@ body.board-view {
 
   .ui.list {
     .item {
-      padding: 0.7em 0.3em !important;
-      border-bottom: 1px solid #ddd;
+      padding: 12px 14px !important;
+      border-top: 1px solid #ddd;
 
-      // &:hover {
-      //   background-color: #fafafa;
-      //
-      //   .fav-item-toolbar {
-      //     display: block;
-      //   }
-      // }
+      &:hover {
+        background-color: #fafafa;
+
+        // .fav-item-toolbar {
+        //   display: block;
+        // }
+      }
     }
 
     .content {

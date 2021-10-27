@@ -16,9 +16,9 @@ import './style.less';
 const ListingView = (props) => {
   const { groupedItems, userId } = props;
 
-  return Object.keys(groupedItems).map((username) => {
+  return Object.keys(groupedItems).map((username, index) => {
     return (
-      <div className="fav-listing-board">
+      <div className="fav-listing-board" key={index}>
         {groupedItems[username].sort().map((group, index) => {
           return (
             <div key={index}>

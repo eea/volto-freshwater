@@ -20,11 +20,14 @@ import {
   getAllBookmarks,
   deleteBookmark,
 } from '@eeacms/volto-freshwater/actions/favBoards';
-import { deStringifySearchquery } from '@eeacms/volto-freshwater/utils';
+import {
+  useCopyToClipboard,
+  deStringifySearchquery,
+} from '@eeacms/volto-freshwater/utils';
 import ToggleButton from './FavToggleStatusButton';
 
 import backSVG from '@plone/volto/icons/back.svg';
-import linkSVG from '@plone/volto/icons/share.svg';
+import linkSVG from '@plone/volto/icons/link.svg';
 import deleteSVG from '@plone/volto/icons/delete.svg';
 import moreSVG from '@plone/volto/icons/more.svg';
 import './style.less';
@@ -49,10 +52,25 @@ const ListingViewHeader = (props) => {
   } = props;
   const item = groupedItems[paramOwner][paramGroup][0];
 
+  const [copyUrlStatus, copyUrl] = useCopyToClipboard(window.location.href);
+  const [confirmationText, setConfirmationText] = useState(false);
+
+  React.useEffect(() => {
+    if (copyUrlStatus === 'copied') {
+      setConfirmationText('Copied to clipboard');
+    } else if (copyUrlStatus === 'failed') {
+      setConfirmationText('Copy failed. Please try again.');
+    }
+  }, [copyUrlStatus]);
+
   return (
     <div>
       <div className="board-view-header">
         <h1 className="board-title">{item.group}</h1>
+
+        {copyUrlStatus === 'copied' && (
+          <div className="copy-box">{confirmationText}</div>
+        )}
 
         {paramOwner === userId && (
           <div className="header-tools">
@@ -95,12 +113,8 @@ const ListingViewHeader = (props) => {
                     <List.Content>
                       <div
                         role="presentation"
-                        onClick={() => {
-                          navigator.clipboard.writeText(window.location.href);
-                        }}
-                        onKeyDown={() => {
-                          navigator.clipboard.writeText(window.location.href);
-                        }}
+                        onClick={copyUrl}
+                        onKeyDown={copyUrl}
                       >
                         <Icon name={linkSVG} size="16px" />
                         <span>Copy board URL</span>

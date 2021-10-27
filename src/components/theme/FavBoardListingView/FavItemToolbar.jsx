@@ -7,9 +7,37 @@ import {
   deleteBookmark,
   getAllBookmarks,
 } from '@eeacms/volto-freshwater/actions/favBoards';
+import { useCopyToClipboard } from '@eeacms/volto-freshwater/utils';
 
 import clearSVG from '@plone/volto/icons/delete.svg';
-import linkSVG from '@plone/volto/icons/share.svg';
+import linkSVG from '@plone/volto/icons/link.svg';
+
+const CopyUrlButton = ({ url, confirmationText }) => {
+  const [copyUrlStatus, copyUrl] = useCopyToClipboard(url);
+
+  if (copyUrlStatus === 'copied') {
+    confirmationText = 'Copied to clipboard';
+  } else if (copyUrlStatus === 'failed') {
+    confirmationText = 'Copy failed. Please try again.';
+  }
+
+  return (
+    <>
+      <Button
+        icon
+        basic
+        className="delete-fav-btn"
+        title="Copy link to clipboard"
+        onClick={copyUrl}
+      >
+        <Icon name={linkSVG} size="16px" />
+      </Button>
+      {copyUrlStatus === 'copied' && (
+        <div className="copy-box">{confirmationText}</div>
+      )}
+    </>
+  );
+};
 
 const FavItemToolbar = (props) => {
   const { item, groupedItems, userId, paramOwner, boardsModify } = props;
@@ -34,17 +62,7 @@ const FavItemToolbar = (props) => {
 
   return (
     <div className="fav-item-toolbar">
-      <Button
-        icon
-        basic
-        className="delete-fav-btn"
-        title="Copy item URL"
-        onClick={() => {
-          navigator.clipboard.writeText(link);
-        }}
-      >
-        <Icon name={linkSVG} size="16px" />
-      </Button>
+      <CopyUrlButton url={link} confirmationText="Copy URL" />
 
       {paramOwner === userId && (
         <>
