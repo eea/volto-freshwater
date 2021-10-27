@@ -98,8 +98,7 @@ class MapViewer extends React.Component {
       });
 
       mapLayer.definitionExpression = condition;
-      console.log('this.state.layers2', this.state.layers);
-      console.log('condition', condition);
+      // console.log('condition', condition);
     });
   }
 
@@ -229,7 +228,7 @@ class MapViewer extends React.Component {
             let types = result[0].value.map((item) => {
               return item.attributes[filterField];
             });
-            console.log('total types', types.length);
+            // console.log('total types', types.length);
             const typesUnique = [...new Set(types)];
 
             // console.log('types', types);
@@ -244,18 +243,17 @@ class MapViewer extends React.Component {
               };
             });
 
-            console.log('typesCount', typesCount);
+            // console.log('typesCount', typesCount);
 
             if (!this.unmounted) {
               layerData.filterTypes = typesCount;
               layerData.showTypes = typesUnique;
-              console.log('setting state');
               this.setState({ layers: [...this.state.layers, layerData] });
             }
           };
 
           getTypes(layer).then(updateTypes);
-          console.log('this.state.layers', this.state.layers);
+          // console.log('this.state.layers', this.state.layers);
         });
       });
 
@@ -305,7 +303,6 @@ class MapViewer extends React.Component {
    * @returns jsx
    */
   render() {
-    console.log('rendering');
     // we use a reference (ref={this.mapdiv}) in order to reference a
     // DOM element to be mounted (but not yet mounted)
     return (
