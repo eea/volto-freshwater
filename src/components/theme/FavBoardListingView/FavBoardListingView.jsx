@@ -18,10 +18,10 @@ const ListingView = (props) => {
 
   return Object.keys(groupedItems).map((username) => {
     return (
-      <div>
+      <div className="fav-listing-board">
         {groupedItems[username].sort().map((group, index) => {
           return (
-            <div className="fav-listing-board" key={index}>
+            <div key={index}>
               <Link
                 className="fav-board-link"
                 to={`${props.location.pathname}/boardview?user=${username}&board=${group.board}`}

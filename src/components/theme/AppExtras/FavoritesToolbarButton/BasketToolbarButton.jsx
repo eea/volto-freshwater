@@ -35,7 +35,7 @@ const BasketToolbarButton = (props) => {
             onClick={() => {
               setShowMenu(!showMenu);
             }}
-            title="Favorite boards"
+            title="Boards basket"
           >
             {basket && basket.length > 0 && (
               <div className="basket-count">

@@ -80,7 +80,7 @@ const BasketToolbarPopup = (props) => {
   return (
     <div className="fav-menu pastanaga-menu">
       <header>
-        <h2>Boards</h2>
+        <h2>Boards basket</h2>
       </header>
       <div className="fav-menu-content">
         <div class="fav-boards-list">
