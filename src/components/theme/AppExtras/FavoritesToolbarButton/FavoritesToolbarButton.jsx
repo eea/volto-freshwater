@@ -9,11 +9,7 @@ const FavoritesToolbarButton = (props) => {
     <div>
       <Portal node={__CLIENT__ && document.querySelector('.toolbar-bottom')}>
         <div className="fav-toolbar-menu">
-          <Link
-            className="fav-toolbar-btn"
-            title="Favorite boards"
-            to={'/boards'}
-          >
+          <Link className="fav-toolbar-btn" title="Boards" to={'/boards'}>
             <Icon name={bookSVG} size="35px" />
           </Link>
         </div>
