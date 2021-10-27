@@ -200,3 +200,37 @@ body.contenttype-country_profile {
     margin-bottom: 2em !important;
   }
 }
+
+// Table of contents custom view
+.fw-horizontal-menu {
+  background-color: #f2f9fb;
+  padding: 3em 0 2em 0;
+
+  .block-title {
+    font-size: 21px;
+    margin-bottom: 2em;
+    color: #333;
+  }
+
+  .ui.menu {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    display: block;
+
+    .item {
+      background-color: #fff;
+      border-radius: 40px;
+      margin-right: 15px;
+      margin-bottom: 15px;
+      font-weight: 500;
+      padding: 10px 20px;
+      font-size: 15px;
+      display: inline-block;
+
+      &:before {
+        width: 0;
+      }
+    }
+  }
+}

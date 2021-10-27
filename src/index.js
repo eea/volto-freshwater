@@ -5,6 +5,7 @@ import {
   MetadataListingView,
   SimpleListingView,
   FavBoardView,
+  HorizontalTocView,
 } from './components';
 
 // import { GET_CONTENT } from '@plone/volto/constants/ActionTypes';
@@ -155,6 +156,20 @@ const applyConfig = (config) => {
         title: 'Simple Listing',
         template: SimpleListingView,
         isDefault: false,
+      },
+    ],
+  };
+
+  // Table of contents custom view
+  config.blocks.blocksConfig.toc = {
+    ...config.blocks.blocksConfig.toc,
+    extensions: [
+      ...config.blocks.blocksConfig.toc.extensions,
+      {
+        id: 'horizontalTocView',
+        title: 'FW horizontal menu',
+        view: HorizontalTocView,
+        schemaExtender: null,
       },
     ],
   };
