@@ -44,7 +44,7 @@ export const HorizontalMenu = (props) => {
 const View = ({ properties, data, tocEntries }) => {
   return (
     <>
-      {document.body.classList.contains('has-image') ? (
+      {__CLIENT__ && document.body.classList.contains('has-image') ? (
         <Portal node={__CLIENT__ && document.querySelector('.portal-top')}>
           <HorizontalMenu data={data} tocEntries={tocEntries} />
         </Portal>
