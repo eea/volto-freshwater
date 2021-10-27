@@ -3,11 +3,11 @@ import loadable from '@loadable/component';
 import { getClassName } from '@eeacms/volto-arcgis-block/components/utils';
 import config from '@eeacms/volto-arcgis-block/components/MapViewer/config';
 import { compose } from 'redux';
-import { connectToDataParameters } from '@eeacms/volto-datablocks/helpers';
+import { connectToDataParameters } from './helpers';
 
 const View = (props) => {
   const { data, id, connected_data_parameters } = props;
-  const layerUrl = data.layerUrl || '';
+  const { layerUrl } = data;
 
   const MapViewer = loadable(() => import('./MapViewer'), {
     noSsr: true,

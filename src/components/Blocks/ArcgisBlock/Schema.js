@@ -60,6 +60,7 @@ export const Schema = () => {
         default: 'default',
       },
     },
-    required: ['style'],
+    // required: ['style'],
+    required: [],
   };
 };
