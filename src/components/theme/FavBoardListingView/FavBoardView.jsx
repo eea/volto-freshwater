@@ -215,6 +215,7 @@ const ListingView = (props) => {
                 />
 
                 <Confirm
+                  className="delete-item-modal"
                   open={confirmOpen}
                   onCancel={() => setConfirmOpen(false)}
                   confirmButton="Delete board"
