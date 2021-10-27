@@ -9,13 +9,12 @@ import { Toolbar, Icon } from '@plone/volto/components';
 import { BodyClass } from '@plone/volto/helpers';
 import { Tab, Menu, Button } from 'semantic-ui-react';
 import { getAllBookmarks } from '@eeacms/volto-freshwater/actions/favBoards';
-import ToggleButton from './FavToggleStatusButton';
 import backSVG from '@plone/volto/icons/back.svg';
 import starSVG from '@plone/volto/icons/half-star.svg';
 import './style.less';
 
 const ListingView = (props) => {
-  const { showToggle, groupedItems, userId } = props;
+  const { groupedItems, userId } = props;
 
   return Object.keys(groupedItems).map((username) => {
     return (
@@ -23,18 +22,17 @@ const ListingView = (props) => {
         {groupedItems[username].sort().map((group, index) => {
           return (
             <div className="fav-listing-board" key={index}>
-              <div className="fav-listing-board-item" key={index}>
-                <Link
-                  className="fav-board-link"
-                  to={`${props.location.pathname}/boardview?user=${username}&board=${group.board}`}
-                >
+              <Link
+                className="fav-board-link"
+                to={`${props.location.pathname}/boardview?user=${username}&board=${group.board}`}
+              >
+                <div className="fav-listing-board-item" key={index}>
                   <span>
                     {group.board}
                     {username !== userId && <span> by {username} </span>}
                   </span>
-                </Link>
-                {showToggle && <ToggleButton groupedItems={group} />}
-              </div>
+                </div>
+              </Link>
             </div>
           );
         })}
@@ -101,7 +99,6 @@ const FavBoardListingView = (props) => {
             <ListingView
               {...props}
               userId={userId}
-              showToggle={true}
               groupedItems={myGroupedItems}
             />
           ) : (
@@ -128,7 +125,6 @@ const FavBoardListingView = (props) => {
             <ListingView
               {...props}
               userId={userId}
-              showToggle={false}
               groupedItems={otherPublicGroupedItems}
             />
           ) : (
@@ -148,15 +144,9 @@ const FavBoardListingView = (props) => {
         <Portal node={document.getElementById('toolbar')}>
           <Toolbar
             inner={
-              <>
-                <Button className="item" onClick={() => props.history.goBack()}>
-                  <Icon
-                    name={backSVG}
-                    size="30px"
-                    className="contents circled"
-                  />
-                </Button>
-              </>
+              <Button className="item" onClick={() => props.history.goBack()}>
+                <Icon name={backSVG} size="30px" className="contents circled" />
+              </Button>
             }
           />
         </Portal>

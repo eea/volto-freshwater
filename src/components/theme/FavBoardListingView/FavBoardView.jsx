@@ -3,7 +3,7 @@ import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
 import { Portal } from 'react-portal';
-import { List, Modal, Button, Confirm } from 'semantic-ui-react';
+import { List, Modal, Button, Confirm, Popup } from 'semantic-ui-react';
 import { BodyClass, flattenToAppURL } from '@plone/volto/helpers';
 import { Toolbar, Icon } from '@plone/volto/components';
 import queryString from 'query-string';
@@ -21,11 +21,12 @@ import {
   deleteBookmark,
 } from '@eeacms/volto-freshwater/actions/favBoards';
 import { deStringifySearchquery } from '@eeacms/volto-freshwater/utils';
-// import ToggleButton from './FavToggleStatusButton';
+import ToggleButton from './FavToggleStatusButton';
 
 import backSVG from '@plone/volto/icons/back.svg';
 import linkSVG from '@plone/volto/icons/share.svg';
 import deleteSVG from '@plone/volto/icons/delete.svg';
+import moreSVG from '@plone/volto/icons/more.svg';
 import './style.less';
 
 const CATALOGUE_CONTENT_TYPES = [
@@ -38,6 +39,88 @@ const CATALOGUE_CONTENT_TYPES = [
   'map_interactive',
 ];
 
+const ListingViewHeader = (props) => {
+  const {
+    userId,
+    groupedItems,
+    paramOwner,
+    paramGroup,
+    setConfirmOpen,
+  } = props;
+  const item = groupedItems[paramOwner][paramGroup][0];
+
+  return (
+    <div>
+      <div className="board-view-header">
+        <h1 className="board-title">{item.group}</h1>
+
+        {paramOwner === userId && (
+          <div className="header-tools">
+            <ToggleButton
+              groupedItems={groupedItems}
+              paramOwner={paramOwner}
+              paramGroup={paramGroup}
+            />
+
+            <Popup
+              basic
+              className="more-board-popup"
+              position="bottom right"
+              on="click"
+              trigger={
+                <Button icon basic className="delete-fav-btn">
+                  <Icon name={moreSVG} size="25px" />
+                </Button>
+              }
+            >
+              <Popup.Content>
+                <List divided relaxed>
+                  <List.Item>
+                    <List.Content>
+                      <div
+                        role="presentation"
+                        onClick={() => {
+                          setConfirmOpen(true);
+                        }}
+                        onKeyDown={() => {
+                          setConfirmOpen(true);
+                        }}
+                      >
+                        <Icon name={deleteSVG} size="16px" />
+                        <span>Delete board</span>
+                      </div>
+                    </List.Content>
+                  </List.Item>
+                  <List.Item>
+                    <List.Content>
+                      <div
+                        role="presentation"
+                        onClick={() => {
+                          navigator.clipboard.writeText(window.location.href);
+                        }}
+                        onKeyDown={() => {
+                          navigator.clipboard.writeText(window.location.href);
+                        }}
+                      >
+                        <Icon name={linkSVG} size="16px" />
+                        <span>Copy board URL</span>
+                      </div>
+                    </List.Content>
+                  </List.Item>
+                </List>
+              </Popup.Content>
+            </Popup>
+          </div>
+        )}
+      </div>
+
+      {paramOwner !== userId && (
+        <span className="createdBy">Created by {paramOwner} </span>
+      )}
+    </div>
+  );
+};
+
 const ListingView = (props) => {
   const {
     groupedItems,
@@ -45,6 +128,7 @@ const ListingView = (props) => {
     setSelectedItem,
     userId,
     paramOwner,
+    paramGroup,
     dispatch,
   } = props;
 
@@ -53,46 +137,19 @@ const ListingView = (props) => {
   return Object.keys(groupedItems).map((username, i) => {
     return (
       <div key={i}>
+        <ListingViewHeader
+          groupedItems={groupedItems}
+          userId={userId}
+          paramOwner={paramOwner}
+          paramGroup={paramGroup}
+          setConfirmOpen={setConfirmOpen}
+        />
+
         {Object.keys(groupedItems[username])
           .sort()
           .map((group, index) => {
             return (
               <div className="fav-listing-board" key={index}>
-                <h1 className="board-title">{group}</h1>
-
-                {paramOwner === userId && (
-                  <>
-                    <Button
-                      icon
-                      basic
-                      className="delete-fav-btn"
-                      title="Delete board"
-                      onClick={() => {
-                        setConfirmOpen(true);
-                      }}
-                    >
-                      <Icon name={deleteSVG} size="16px" />
-                    </Button>
-                    {/*<ToggleButton groupedItems={group} />*/}
-
-                    <Button
-                      icon
-                      basic
-                      className="delete-fav-btn"
-                      title="Copy link"
-                      onClick={() => {
-                        navigator.clipboard.writeText(window.location.href);
-                      }}
-                    >
-                      <Icon name={linkSVG} size="16px" />
-                    </Button>
-                  </>
-                )}
-
-                {username !== userId && (
-                  <span className="createdBy">Created by {username} </span>
-                )}
-
                 <List key={index}>
                   {groupedItems[username][group].map((item, index) => (
                     <List.Item key={index}>
@@ -182,7 +239,7 @@ const FavBoardView = (props) => {
   const [groupedItems, setGroupedItems] = useState({});
   const [isOpenModal, setOpenModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  const status = groupedItems?.[paramOwner]?.[paramGroup][0]?.payload.status;
+  const status = groupedItems?.[paramOwner]?.[paramGroup]?.[0]?.payload.status;
 
   useEffect(() => {
     if (boardsDelete === 'loaded') {
@@ -226,6 +283,7 @@ const FavBoardView = (props) => {
             {...props}
             userId={userId}
             paramOwner={paramOwner}
+            paramGroup={paramGroup}
             groupedItems={groupedItems}
             setOpenModal={setOpenModal}
             setSelectedItem={setSelectedItem}
@@ -258,15 +316,9 @@ const FavBoardView = (props) => {
         <Portal node={document.getElementById('toolbar')}>
           <Toolbar
             inner={
-              <>
-                <Link className="item" to="/boards">
-                  <Icon
-                    name={backSVG}
-                    size="30px"
-                    className="contents circled"
-                  />
-                </Link>
-              </>
+              <Link className="item" to="/boards">
+                <Icon name={backSVG} size="30px" className="contents circled" />
+              </Link>
             }
           />
         </Portal>

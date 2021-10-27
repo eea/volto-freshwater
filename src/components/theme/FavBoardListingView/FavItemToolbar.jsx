@@ -1,18 +1,28 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
+import { compose } from 'redux';
 import { Button, Confirm } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
-import { deleteBookmark } from '@eeacms/volto-freshwater/actions/favBoards';
+import {
+  deleteBookmark,
+  getAllBookmarks,
+} from '@eeacms/volto-freshwater/actions/favBoards';
 
 import clearSVG from '@plone/volto/icons/delete.svg';
 import linkSVG from '@plone/volto/icons/share.svg';
 
 const FavItemToolbar = (props) => {
-  const { item, groupedItems, userId, paramOwner } = props;
+  const { item, groupedItems, userId, paramOwner, boardsModify } = props;
   const link = item['@id'];
   const dispatch = useDispatch();
 
   const [confirmOpen, setConfirmOpen] = useState(false);
+
+  React.useEffect(() => {
+    if (boardsModify === 'loaded') {
+      dispatch(getAllBookmarks(paramOwner));
+    }
+  }, [dispatch, boardsModify, paramOwner]);
 
   const handleDeleteBookmark = (uid, group, searchquery) => {
     if (groupedItems.length === 1) {
@@ -24,31 +34,37 @@ const FavItemToolbar = (props) => {
 
   return (
     <div className="fav-item-toolbar">
-      {paramOwner === userId && (
-        <Button
-          icon
-          basic
-          className="delete-fav-btn"
-          title="Remove item from this board"
-          onClick={() => {
-            handleDeleteBookmark(item.uid, item.group, item.queryparams || '');
-          }}
-        >
-          <Icon name={clearSVG} size="16px" />
-        </Button>
-      )}
-
       <Button
         icon
         basic
         className="delete-fav-btn"
-        title="Copy link"
+        title="Copy item URL"
         onClick={() => {
           navigator.clipboard.writeText(link);
         }}
       >
         <Icon name={linkSVG} size="16px" />
       </Button>
+
+      {paramOwner === userId && (
+        <>
+          <Button
+            icon
+            basic
+            className="delete-fav-btn"
+            title="Remove item from this board"
+            onClick={() => {
+              handleDeleteBookmark(
+                item.uid,
+                item.group,
+                item.queryparams || '',
+              );
+            }}
+          >
+            <Icon name={clearSVG} size="16px" />
+          </Button>
+        </>
+      )}
 
       <Confirm
         open={confirmOpen}
@@ -70,4 +86,8 @@ const FavItemToolbar = (props) => {
   );
 };
 
-export default FavItemToolbar;
+export default compose(
+  connect((state) => ({
+    boardsModify: state.favBoards?.modify || {},
+  })),
+)(FavItemToolbar);

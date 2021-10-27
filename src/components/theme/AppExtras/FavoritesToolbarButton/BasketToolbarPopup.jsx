@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
-import { Grid, Button } from 'semantic-ui-react';
+import { Grid, Button, Input } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
 import { groupBy } from 'lodash';
 import jwtDecode from 'jwt-decode';
@@ -182,7 +182,7 @@ const BasketToolbarPopup = (props) => {
 
               <Grid.Column width={9}>
                 <div className="ui input">
-                  <input
+                  <Input
                     id="field-title"
                     name="title"
                     type="text"

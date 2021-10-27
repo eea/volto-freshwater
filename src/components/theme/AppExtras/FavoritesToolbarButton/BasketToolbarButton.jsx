@@ -28,7 +28,6 @@ const BasketToolbarButton = (props) => {
 
   return (
     <div>
-      {/*{basket && basket.length > 0 && (*/}
       <Portal node={__CLIENT__ && document.querySelector('.toolbar-bottom')}>
         <div className="fav-toolbar-menu" ref={menuRef}>
           <Button
