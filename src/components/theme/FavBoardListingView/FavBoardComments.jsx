@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
 import jwtDecode from 'jwt-decode';
-import { Button, Form, Item } from 'semantic-ui-react';
+import { Button, Form, Item, Input } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
 import {
   getAllBookmarks,
@@ -22,37 +22,29 @@ const CommentForm = (props) => {
     paramOwner === userId && (
       <Form className="comment-form">
         <Form.Field>
-          {/*<label htmlFor="field-comment">Leave a comment:</label>*/}
-          <textarea
-            id="field-comment"
-            rows="4"
-            cols="50"
-            placeholder="Add a comment..."
+          <Input
+            placeholder="Add comment"
             value={inputComment}
             onChange={(e) => setInputComment(e.target.value)}
-          ></textarea>
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                for (let item of groupedItems) {
+                  dispatch(
+                    modifyBookmark(item.uid, item.group, item.hash || '', {
+                      data: item.payload.data,
+                      status: item.payload.status,
+                      comments: [
+                        ...(comments ? [...comments] : ''),
+                        { comment: inputComment, date: date },
+                      ],
+                    }),
+                  );
+                }
+                setInputComment('');
+              }
+            }}
+          />
         </Form.Field>
-        <Button
-          primary
-          size="mini"
-          onClick={() => {
-            for (let item of groupedItems) {
-              dispatch(
-                modifyBookmark(item.uid, item.group, item.hash || '', {
-                  data: item.payload.data,
-                  status: item.payload.status,
-                  comments: [
-                    ...(comments ? [...comments] : ''),
-                    { comment: inputComment, date: date },
-                  ],
-                }),
-              );
-            }
-            setInputComment('');
-          }}
-        >
-          Comment
-        </Button>
       </Form>
     )
   );
@@ -79,7 +71,7 @@ const FavBoardComments = (props) => {
   return (
     <div className="fav-board-comments-wrapper">
       {comments && comments.length > 0 && (
-        <h4 className="comments-title">COMMENTS:</h4>
+        <h4 className="comments-title">COMMENTS</h4>
       )}
       {groupedItems && groupedItems.length > 0 && (
         <Item.Group className="board-comments">
