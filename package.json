@@ -25,10 +25,12 @@
     "@eeacms/volto-group-block",
     "@eeacms/volto-resize-helper",
     "@eeacms/volto-block-style",
+    "@eeacms/volto-block-toc",
     "@eeacms/volto-arcgis-block"
   ],
   "dependencies": {
     "@eeacms/volto-arcgis-block": "*",
+    "@eeacms/volto-block-toc": "*",
     "react-lazy-load-image-component": "^1.4.0",
     "volto-slate": "^2.6.1",
     "@eeacms/volto-resize-helper": "^0.2.0",
