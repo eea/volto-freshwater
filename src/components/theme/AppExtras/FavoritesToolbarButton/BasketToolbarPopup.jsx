@@ -150,7 +150,8 @@ const BasketToolbarPopup = (props) => {
                         >
                           <div className="boards-wrapper">
                             <Icon name={starSVG} size="16px" />
-                            {group} ({groupedItems[user][group].length})
+                            {group}
+                            {/*({groupedItems[user][group].length})*/}
                             {activeGroup === group && (
                               <Icon
                                 className="check-icon"
