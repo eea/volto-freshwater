@@ -291,7 +291,7 @@ const FavBoardView = (props) => {
   return (
     <div className="favorites-listing ui container">
       <BodyClass className="board-view" />
-      {showList ? (
+      {token && showList ? (
         <>
           <h3 className="board-upper-title">Board</h3>
           <ListingView

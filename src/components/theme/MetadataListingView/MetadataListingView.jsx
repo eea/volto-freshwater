@@ -54,7 +54,7 @@ const MetadataListingView = ({ items, isEditMode, basket }) => {
                   dispatch(removeItemFromBasket(item));
                 }}
               >
-                <Icon name={starFullSVG} size="18px" />
+                <Icon className="selected" name={starFullSVG} size="20px" />
               </Button>
             ) : (
               <Button
@@ -66,9 +66,9 @@ const MetadataListingView = ({ items, isEditMode, basket }) => {
                 }}
               >
                 {basket.includes(item) ? (
-                  <Icon name={starFullSVG} size="18px" />
+                  <Icon className="selected" name={starFullSVG} size="20px" />
                 ) : (
-                  <Icon name={starSVG} size="18px" />
+                  <Icon name={starSVG} size="20px" />
                 )}
               </Button>
             )}

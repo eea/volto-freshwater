@@ -135,7 +135,7 @@ const FavBoardListingView = (props) => {
     },
   ];
 
-  return (
+  return token ? (
     <div className="favorites-listing ui container">
       <BodyClass className="boards-listing-view" />
       <Tab menu={{ secondary: true, fluid: true }} panes={panes} />
@@ -152,6 +152,8 @@ const FavBoardListingView = (props) => {
         </Portal>
       )}
     </div>
+  ) : (
+    ''
   );
 };
 
