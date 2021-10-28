@@ -2,13 +2,7 @@ import React, { createRef } from 'react';
 import '@eeacms/volto-arcgis-block/components/MapViewer/css/ArcgisMap.css';
 import classNames from 'classnames';
 import { loadModules, loadCss } from 'esri-loader';
-import BasemapWidget from '@eeacms/volto-arcgis-block/components/MapViewer/BasemapWidget';
-import MeasurementWidget from '@eeacms/volto-arcgis-block/components/MapViewer/MeasurementWidget';
-import PrintWidget from '@eeacms/volto-arcgis-block/components/MapViewer/PrintWidget';
-import AreaWidget from '@eeacms/volto-arcgis-block/components/MapViewer/AreaWidget';
-import ScaleWidget from '@eeacms/volto-arcgis-block/components/MapViewer/ScaleWidget';
-import LegendWidget from '@eeacms/volto-arcgis-block/components/MapViewer/LegendWidget';
-import MenuWidget from '@eeacms/volto-arcgis-block/components/MapViewer/MenuWidget';
+import LegendWidget from './LegendWidget';
 import { MapViewerConfig } from '@eeacms/volto-arcgis-block/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -17,19 +11,19 @@ var Map, MapView, Zoom, FeatureLayer, promiseUtils;
 
 const FilterInput = (props) => {
   const treatmentType = props.type;
-
+  const filterField = props.filterField;
   return (
     <div>
       <input
         id={treatmentType.name}
         type="checkbox"
-        name="treatmenttype_cp"
+        name={filterField}
         value={treatmentType.name}
         defaultChecked="true"
         onChange={props.onChange}
       />
       <label for={treatmentType.name}>
-        {treatmentType.name} ({treatmentType.count})
+        {treatmentType.label || treatmentType.name} ({treatmentType.count})
       </label>
       <br />
     </div>
@@ -48,12 +42,13 @@ class MapViewer extends React.Component {
     //create here to reference the DOM element from javascript
     //code, for example, to create later a MapView component
     //that will use the map div to show the map
-    this.state = { treatmentTypes: [], showTypes: [] };
-    this.layerUrl = props.layerUrl;
+    this.state = { layers: [], filterTypes: [], showTypes: [] };
+    this.layerUrls = [props.layerUrl];
     this.countryCode = props.connected_data_parameters
       ? props.connected_data_parameters[0].v[0]
       : '';
     this.countryCondition = `country = '${this.countryCode}'`;
+
     this.mapdiv = createRef();
     this.mapCfg = props.cfg.Map;
     this.compCfg = this.props.cfg.Components;
@@ -86,28 +81,52 @@ class MapViewer extends React.Component {
   }
 
   componentDidUpdate() {
-    let condition = this.countryCondition; /* queryParams.where; */
-    let layer = this.map.layers.items[0];
+    let condition = this.countryCondition;
+    const layers = this.state.layers;
 
-    condition =
-      condition +
-      ` AND treatmenttype_cp in ('${this.state.showTypes.join("','")}')`;
-    layer.definitionExpression = condition;
-    // console.log('condition', condition);
+    // debugger;
+
+    layers.forEach((layer) => {
+      if (layer.filterField) {
+        condition =
+          condition +
+          ` AND ${layer.filterField} in ('${layer.showTypes.join("','")}')`;
+      }
+
+      const mapLayer = this.map.layers.items.find((item) => {
+        return item.url + '/' + item.layerId === layer.layerUrl;
+      });
+
+      mapLayer.definitionExpression = condition;
+      // console.log('condition', condition);
+    });
   }
 
   updateFilters = (event) => {
     const checked = event.target.checked;
     const value = event.target.value;
+    const filterField = event.target.name;
 
     if (!checked) {
       this.setState({
-        showTypes: this.state.showTypes.filter((type) => {
-          return type !== value;
+        layers: this.state.layers.map((layer) => {
+          if (layer.filterField === filterField) {
+            layer.showTypes = layer.showTypes.filter((type) => {
+              return type !== value;
+            });
+          }
+          return layer;
         }),
       });
     } else {
-      this.setState({ showTypes: [...this.state.showTypes, value] });
+      this.setState({
+        layers: this.state.layers.map((layer) => {
+          if (layer.filterField === filterField) {
+            layer.showTypes = [...layer.showTypes, value];
+          }
+          return layer;
+        }),
+      });
     }
     // console.log('showTypes', this.state.showTypes);
   };
@@ -115,6 +134,22 @@ class MapViewer extends React.Component {
   componentWillUnmount() {
     this.unmounted = true;
   }
+
+  getLabelForValueInfo = (values, name) => {
+    const label = values.find((val) => {
+      return val.value === name;
+    });
+
+    return label.label;
+  };
+
+  getLabelForField = (fields, name) => {
+    const label = fields.filter((field) => {
+      return field.name === name;
+    });
+
+    return label[0].alias;
+  };
 
   /**
    * Once the component has been mounted in the screen, this method
@@ -126,7 +161,7 @@ class MapViewer extends React.Component {
     // await this.loader();
     this.loader().then(() => {
       this.map = new Map({
-        basemap: 'gray-vector', // topo
+        basemap: 'gray-vector', // topo, gray-vector
       });
 
       this.view = new MapView({
@@ -146,98 +181,81 @@ class MapViewer extends React.Component {
       });
 
       // ###############################################################
+      // Setup layers
       // ###############################################################
-      // const popupTrailheads = {
-      //   title: '{uwwname}',
-      //   content: [
-      //     {
-      //       type: 'fields',
-      //       fieldInfos: [
-      //         {
-      //           fieldName: 'aggname',
-      //           label: 'aggname.alias',
-      //           visible: true,
-      //         },
-      //       ],
-      //     },
-      //   ],
-      // };
-      // const trailheadsLabels = {
-      //   symbol: {
-      //     type: 'text',
-      //     color: '#FFFFFF',
-      //     haloColor: '#5E8D74',
-      //     haloSize: '2px',
-      //     font: {
-      //       size: '12px',
-      //       family: 'Noto Sans',
-      //       style: 'italic',
-      //       weight: 'normal',
-      //     },
-      //   },
 
-      //   labelPlacement: 'above-center',
-      //   labelExpressionInfo: {
-      //     expression: 'HELLLOOO',
-      //   },
-      // };
-
-      // console.log('layerUrl', this.layerUrl);
-      // console.log('connected_data_parameters', this.connected_data_parameters);
-
-      const layer = new FeatureLayer({
-        url: this.layerUrl,
-        outFields: ['*'],
-        // labelingInfo: [trailheadsLabels],
-        // popupTemplate: popupTrailheads,
-        definitionExpression: this.countryCondition,
-      });
-
-      this.map.add(layer);
-      layer.load().then(() => {
-        // Set the view extent to the data extent
-        layer.popupTemplate = layer.createPopupTemplate();
-      });
-
-      const getTypes = promiseUtils.debounce((layer) => {
-        const queryParams = layer.createQuery();
-        queryParams.returnGeometry = false;
-        queryParams.returnExceededLimitFeatures = true;
-        queryParams.maxRecordCountFactor = 5;
-        queryParams.num = 9999;
-        queryParams.outFields = ['treatmenttype_cp'];
-        const x = layer.queryFeatures(queryParams).then(function (results) {
-          // prints the array of result graphics to the console
-          const res = results.features;
-          return res;
-        });
-        return promiseUtils.eachAlways([x]);
-        // queryParams.where = queryParams.where + " AND treatmenttype_cp = 'Biological treatment'";
-        // layer.definitionExpression = queryParams.where;
-      });
-
-      const updateTypes = (result) => {
-        let types = result[0].value.map((item) => {
-          return item.attributes.treatmenttype_cp;
-        });
-        // console.log('total types', types.length);
-        const typesUnique = [...new Set(types)];
-
-        // console.log('types', types);
-
-        const typesCount = typesUnique.map((t) => {
-          return { name: t, count: types.filter((i) => i === t).length };
+      this.layerUrls.forEach((layerUrl) => {
+        const layer = new FeatureLayer({
+          url: layerUrl,
+          outFields: ['*'],
+          // labelingInfo: [trailheadsLabels],
+          // popupTemplate: popupTrailheads,
+          definitionExpression: this.countryCondition,
         });
 
-        // console.log('typesCount', typesCount);
+        this.map.add(layer);
+        layer.load().then(() => {
+          // Set the view extent to the data extent
+          layer.popupTemplate = layer.createPopupTemplate();
 
-        if (!this.unmounted) {
-          this.setState({ treatmentTypes: typesCount, showTypes: typesUnique });
-        }
-      };
+          let layerData = { layerUrl: layerUrl };
+          const filterField = layer.typeIdField;
+          const layerTitle = this.getLabelForField(layer.fields, filterField);
 
-      getTypes(layer).then(updateTypes);
-      // console.log('treatmentTypes', this.state.treatmentTypes);
+          layerData.layerTitle = layerTitle;
+          layerData.filterField = filterField;
+
+          const getTypes = promiseUtils.debounce((layer) => {
+            const queryParams = layer.createQuery();
+            queryParams.returnGeometry = false;
+            queryParams.returnExceededLimitFeatures = true;
+            queryParams.maxRecordCountFactor = 5;
+            queryParams.num = 9999;
+            queryParams.outFields = [filterField];
+            const x = layer.queryFeatures(queryParams).then(function (results) {
+              // prints the array of result graphics to the console
+              const res = results.features;
+              return res;
+            });
+            return promiseUtils.eachAlways([x]);
+          });
+
+          const updateTypes = (result) => {
+            if (!result[0].value) {
+              return;
+            }
+
+            let types = result[0].value.map((item) => {
+              return item.attributes[filterField];
+            });
+            // console.log('total types', types.length);
+            const typesUnique = [...new Set(types)];
+
+            // console.log('types', types);
+            const typesCount = typesUnique.map((t) => {
+              return {
+                name: t,
+                label: this.getLabelForValueInfo(
+                  layer.renderer.uniqueValueInfos,
+                  t,
+                ),
+                count: types.filter((i) => i === t).length,
+              };
+            });
+
+            // console.log('typesCount', typesCount);
+
+            if (!this.unmounted) {
+              layerData.filterTypes = typesCount;
+              layerData.showTypes = typesUnique;
+              this.setState({ layers: [...this.state.layers, layerData] });
+            }
+          };
+
+          getTypes(layer).then(updateTypes);
+          // console.log('this.state.layers', this.state.layers);
+        });
+      });
 
       // ###############################################################
       // ###############################################################
@@ -254,6 +272,7 @@ class MapViewer extends React.Component {
       //react component to render itself again
       // this.setState({});
     });
+
     // this.mapdiv.current is the reference to the current DOM element of
     // this.mapdiv after it was mounted by the render() method
   }
@@ -274,59 +293,8 @@ class MapViewer extends React.Component {
     }
   }
 
-  /**
-   * This method evaluates the ability to render the basemaps widget and
-   * returns the jsx allowing such a render (if conditions are ok)
-   * @returns jsx
-   */
-  renderBasemap() {
-    if (this.props.mapviewer_config.Download) return;
-    if (this.view) return <BasemapWidget view={this.view} mapViewer={this} />;
-  }
-
   renderLegend() {
     if (this.view) return <LegendWidget view={this.view} mapViewer={this} />;
-  }
-
-  renderMeasurement() {
-    if (this.props.mapviewer_config.Download) return;
-    if (this.view)
-      return <MeasurementWidget view={this.view} mapViewer={this} />;
-  }
-
-  renderPrint() {
-    if (this.props.mapviewer_config.Download) return;
-    if (this.view) return <PrintWidget view={this.view} mapViewer={this} />;
-  }
-
-  renderArea() {
-    if (this.props.mapviewer_config.Download) return;
-    if (this.view)
-      return (
-        <AreaWidget
-          view={this.view}
-          map={this.map}
-          mapViewer={this}
-          download={this.props.mapviewer_config.Download}
-        />
-      );
-  }
-
-  renderScale() {
-    if (this.view) return <ScaleWidget view={this.view} mapViewer={this} />;
-  }
-
-  renderMenu() {
-    if (this.view)
-      return (
-        <MenuWidget
-          view={this.view}
-          conf={this.props.mapviewer_config.Components}
-          download={this.props.mapviewer_config.Download}
-          map={this.map}
-          mapViewer={this}
-        />
-      ); //call conf
   }
 
   /**
@@ -340,21 +308,25 @@ class MapViewer extends React.Component {
     return (
       <div className={this.mapClass} style={{ display: 'flex' }}>
         <form id="map-filters">
-          <fieldset>
-            <legend>Treatment Type</legend>
-            {(this.state.treatmentTypes || []).map((type) => {
-              return <FilterInput onChange={this.updateFilters} type={type} />;
-            })}
-          </fieldset>
+          {(this.state.layers || []).map((layer) => {
+            return (
+              <fieldset>
+                <legend>{layer.layerTitle}</legend>
+                {(layer.filterTypes || []).map((type) => {
+                  return (
+                    <FilterInput
+                      onChange={this.updateFilters}
+                      type={type}
+                      filterField={layer.filterField}
+                    />
+                  );
+                })}
+              </fieldset>
+            );
+          })}
         </form>
         <div ref={this.mapdiv} className="map">
-          {this.renderBasemap()}
           {this.renderLegend()}
-          {this.renderMeasurement()}
-          {this.renderPrint()}
-          {this.renderArea()}
-          {this.renderScale()}
-          {this.renderMenu()}
         </div>
       </div>
     );
