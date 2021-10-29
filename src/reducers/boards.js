@@ -11,7 +11,7 @@ const initialState = {
   delete: 'loaded',
 };
 
-export default function favBoards(state = initialState, action = {}) {
+export default function boards(state = initialState, action = {}) {
   switch (action.type) {
     case `GET_BOOKMARK_PENDING`:
       return {

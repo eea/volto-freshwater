@@ -8,7 +8,7 @@ import jwtDecode from 'jwt-decode';
 import {
   addBookmark,
   getAllBookmarks,
-} from '@eeacms/volto-freshwater/actions/favBoards';
+} from '@eeacms/volto-freshwater/actions/boards';
 import { removeItemFromBasket } from '@eeacms/volto-freshwater/actions/basket';
 
 import clearSVG from '@plone/volto/icons/clear.svg';
@@ -221,7 +221,7 @@ export default compose(
         ? jwtDecode(state.userSession.token).sub
         : '',
       basket: state.basket,
-      items: state.favBoards?.items || [],
+      items: state.boards?.items || [],
     }),
     { removeItemFromBasket },
   ),

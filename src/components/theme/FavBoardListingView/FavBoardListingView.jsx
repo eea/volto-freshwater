@@ -8,7 +8,7 @@ import { Portal } from 'react-portal';
 import { Toolbar, Icon } from '@plone/volto/components';
 import { BodyClass } from '@plone/volto/helpers';
 import { Tab, Menu, Button } from 'semantic-ui-react';
-import { getAllBookmarks } from '@eeacms/volto-freshwater/actions/favBoards';
+import { getAllBookmarks } from '@eeacms/volto-freshwater/actions/boards';
 import backSVG from '@plone/volto/icons/back.svg';
 import starSVG from '@plone/volto/icons/half-star.svg';
 import './style.less';
@@ -164,7 +164,7 @@ export default compose(
     userId: state.userSession.token
       ? jwtDecode(state.userSession.token).sub
       : '',
-    items: state.favBoards?.items || [],
-    boardsDelete: state.favBoards?.delete || {},
+    items: state.boards?.items || [],
+    boardsDelete: state.boards?.delete || {},
   })),
 )(FavBoardListingView);

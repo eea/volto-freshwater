@@ -4,14 +4,14 @@ import {
   DatabaseItemView,
   MetadataListingView,
   SimpleListingView,
-  FavBoardView,
   HorizontalTocView,
+  FavBoardView,
+  FavBoardListingView,
 } from './components';
 
-// import { GET_CONTENT } from '@plone/volto/constants/ActionTypes';
-import FavBoardListingView from './components/theme/FavBoardListingView/FavBoardListingView';
-import TokenWidget from '@plone/volto/components/manage/Widgets/TokenWidget';
+import { basket, boards } from './reducers';
 import CopyrightWidget from './components/Widgets/CopyrightWidget';
+import TokenWidget from '@plone/volto/components/manage/Widgets/TokenWidget';
 
 import installArcgisBlock from './components/Blocks/ArcgisBlock';
 import installEmbedContentBlock from './components/Blocks/Content';
@@ -24,9 +24,6 @@ import installConditionalDataBlock from './components/Blocks/ConditionalDataBloc
 import installCountriesListingBlock from './components/Blocks/CountriesListingBlock';
 import installAppExtras from './components/theme/AppExtras';
 import installSlatePopup from './components/Blocks/SlatePopup';
-
-import basket from './reducers/basket/';
-import favBoards from './reducers/favBoards/';
 
 import './slate-styles.less';
 import './block-styles.less';
@@ -66,8 +63,10 @@ const available_colors = [
 ];
 
 const applyConfig = (config) => {
+  // Navigation
   config.settings.navDepth = 3;
 
+  // Content type views
   config.views.contentTypesViews = {
     ...config.views.contentTypesViews,
     Document: HeroSectionView,
@@ -80,12 +79,17 @@ const applyConfig = (config) => {
     map_interactive: DatabaseItemView,
   };
 
+  // Layout views
   config.views.layoutViews = {
     ...config.views.layoutViews,
     document_view: HeroSectionView,
     herosection_view: HeroSectionView,
   };
 
+  // Colors
+  config.settings.available_colors = available_colors;
+
+  // Block chooser
   config.blocks.groupBlocksOrder = [
     ...config.blocks.groupBlocksOrder,
     { id: 'freshwater_addons', title: 'Freshwater' },
@@ -99,14 +103,18 @@ const applyConfig = (config) => {
     },
   };
 
+  // Addons config
   config.blocks.blocksConfig.imagesGrid.restricted = true;
   config.blocks.blocksConfig.teaserGrid.restricted = true;
   config.blocks.blocksConfig.teaser.restricted = false;
   config.blocks.blocksConfig.teaser.mostUsed = false;
   config.blocks.blocksConfig.__grid.title = 'Teasers row';
   config.blocks.blocksConfig.__grid.mostUsed = false;
-  config.settings.available_colors = available_colors;
   config.blocks.blocksConfig.columnsBlock.available_colors = available_colors;
+
+  config.blocks.blocksConfig.plotly_chart =
+    config.blocks.blocksConfig.connected_plotly_chart;
+  config.blocks.blocksConfig.plotly_chart.restricted = false;
 
   // workaround to invalidate render of empty slot blocksConfig with hidden value
   // needed in order to delete the block to get add button to show up on slot edit
@@ -115,6 +123,7 @@ const applyConfig = (config) => {
     return !!value && value !== 'hidden';
   };
 
+  // Slate styles
   config.settings.slate.styleMenu = config.settings.slate.styleMenu || {};
   config.settings.slate.styleMenu.inlineStyles = [
     ...(config.settings.slate.styleMenu?.inlineStyles || []),
@@ -137,8 +146,6 @@ const applyConfig = (config) => {
     { cssClass: 'h4', label: 'H4 18px' },
     { cssClass: 'h5', label: 'H5 14px' },
   ];
-
-  config.settings.persistentReducers = ['basket'];
 
   // Search block metadata listing view
   config.blocks.blocksConfig.listing = {
@@ -174,6 +181,7 @@ const applyConfig = (config) => {
     ],
   };
 
+  // API expanders
   config.settings.apiExpanders = [
     ...config.settings.apiExpanders,
     {
@@ -205,15 +213,6 @@ const applyConfig = (config) => {
   ];
 
   // Routes
-  config.settings = {
-    ...config.settings,
-    nonContentRoutes: [
-      ...config.settings.nonContentRoutes,
-      '/boards/boardview',
-      '/boards',
-    ],
-  };
-
   config.addonRoutes = [
     ...config.addonRoutes,
     {
@@ -226,19 +225,24 @@ const applyConfig = (config) => {
     },
   ];
 
+  config.settings.nonContentRoutes = [
+    ...config.settings.nonContentRoutes,
+    '/boards/boardview',
+    '/boards',
+  ];
+
+  // Persistent reducers
+  config.settings.persistentReducers = ['basket'];
+
   // Widgets
   config.widgets.id.license_copyright = CopyrightWidget;
   config.widgets.id.category = TokenWidget;
 
-  config.blocks.blocksConfig.plotly_chart =
-    config.blocks.blocksConfig.connected_plotly_chart;
-  config.blocks.blocksConfig.plotly_chart.restricted = false;
-
-  // Addon reducers
+  // addonReducers
   config.addonReducers = {
     ...(config.addonReducers || {}),
     basket,
-    favBoards,
+    boards,
   };
 
   return [

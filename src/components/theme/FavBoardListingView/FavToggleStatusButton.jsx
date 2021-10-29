@@ -74,6 +74,6 @@ const ToggleButton = (props) => {
 
 export default compose(
   connect((state) => ({
-    boardsModify: state.favBoards?.modify || {},
+    boardsModify: state.boards?.modify || {},
   })),
 )(ToggleButton);

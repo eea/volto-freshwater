@@ -1,2 +1,2 @@
-export favBoards from './favBoards';
+export boards from './boards';
 export basket from './basket';

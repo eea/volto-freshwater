@@ -19,7 +19,7 @@ import {
 import {
   getAllBookmarks,
   deleteBookmark,
-} from '@eeacms/volto-freshwater/actions/favBoards';
+} from '@eeacms/volto-freshwater/actions/boards';
 import {
   useCopyToClipboard,
   deStringifySearchquery,
@@ -348,7 +348,7 @@ export default compose(
     userId: state.userSession.token
       ? jwtDecode(state.userSession.token).sub
       : '',
-    items: state.favBoards?.items || [],
-    boardsDelete: state.favBoards?.delete || {},
+    items: state.boards?.items || [],
+    boardsDelete: state.boards?.delete || {},
   })),
 )(FavBoardView);

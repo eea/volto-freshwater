@@ -7,7 +7,7 @@ import { Icon } from '@plone/volto/components';
 import {
   getAllBookmarks,
   modifyBookmark,
-} from '@eeacms/volto-freshwater/actions/favBoards';
+} from '@eeacms/volto-freshwater/actions/boards';
 import queryString from 'query-string';
 import clearSVG from '@plone/volto/icons/delete.svg';
 import moment from 'moment';
@@ -138,6 +138,6 @@ export default compose(
     userId: state.userSession.token
       ? jwtDecode(state.userSession.token).sub
       : '',
-    boardsModify: state.favBoards?.modify || {},
+    boardsModify: state.boards?.modify || {},
   })),
 )(FavBoardComments);

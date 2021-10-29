@@ -6,7 +6,7 @@ import { Icon } from '@plone/volto/components';
 import {
   deleteBookmark,
   getAllBookmarks,
-} from '@eeacms/volto-freshwater/actions/favBoards';
+} from '@eeacms/volto-freshwater/actions/boards';
 import { useCopyToClipboard } from '@eeacms/volto-freshwater/utils';
 
 import clearSVG from '@plone/volto/icons/delete.svg';
@@ -107,6 +107,6 @@ const FavItemToolbar = (props) => {
 
 export default compose(
   connect((state) => ({
-    boardsModify: state.favBoards?.modify || {},
+    boardsModify: state.boards?.modify || {},
   })),
 )(FavItemToolbar);
