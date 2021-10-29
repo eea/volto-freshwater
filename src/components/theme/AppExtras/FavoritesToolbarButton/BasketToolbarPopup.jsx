@@ -51,13 +51,14 @@ const BasketToolbarPopup = (props) => {
 
   const handleCreateBoard = () => {
     for (let item of basket) {
+      const { content } = item;
       dispatch(
-        addBookmark(item.UID, boardTitle, item.hash || '', {
+        addBookmark(content.UID, boardTitle, item.hash || '', {
           status: 'private',
-          data: item,
+          data: content,
         }),
       );
-      dispatch(removeItemFromBasket(item));
+      dispatch(removeItemFromBasket(content));
       setBoardCreated(true);
       setBoardTitle('Default');
     }
@@ -65,15 +66,16 @@ const BasketToolbarPopup = (props) => {
 
   const handleSaveToBoard = (group) => {
     for (let item of basket) {
+      const { content } = item;
       dispatch(
-        addBookmark(item.UID, group, item.hash || '', {
+        addBookmark(content.UID, group, item.hash || '', {
           status: 'private',
-          data: item,
+          data: content,
         }),
       );
       setActiveGroup('');
       setTimeout(() => setActiveGroup(''), 2000);
-      dispatch(removeItemFromBasket(item));
+      dispatch(removeItemFromBasket(content));
     }
   };
 
@@ -91,14 +93,14 @@ const BasketToolbarPopup = (props) => {
                 <li
                   className="fav-menu-list-item"
                   key={item['@id']}
-                  title={item.title}
+                  title={item.content.title}
                 >
-                  <span className="fav-item-title">{item.title}</span>
+                  <span className="fav-item-title">{item.content.title}</span>
                   <Button
                     className="remove-pin-btn"
                     title="Remove favorite"
                     onClick={() => {
-                      dispatch(removeItemFromBasket(item));
+                      dispatch(removeItemFromBasket(item.content));
                     }}
                   >
                     <Icon name={clearSVG} size="20px" />

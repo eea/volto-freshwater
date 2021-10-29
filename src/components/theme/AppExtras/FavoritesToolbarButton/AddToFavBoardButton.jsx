@@ -12,46 +12,73 @@ import {
 } from '@eeacms/volto-freshwater/actions/favBasket';
 
 const AddToFavBoardButton = (props) => {
+  const { basket, content, location } = props;
   const dispatch = useDispatch();
+  const isSearchQuerySelected = basket.some(
+    (item) => item.hash === location.hash,
+  );
 
   return (
-    <div>
-      <Portal node={__CLIENT__ && document.querySelector('.toolbar-actions')}>
-        <div className="fav-toolbar-menu">
-          {props.basket.includes(props.content) ? (
-            <Button
-              className="add-to-fav"
-              title="Remove selection"
-              onClick={() => {
-                dispatch(removeItemFromBasket(props.content));
-              }}
-            >
-              <Icon name={starFullSVG} size="33px" />
-            </Button>
-          ) : (
-            <Button
-              className="add-to-fav"
-              title="Save to Board"
-              onClick={() => {
-                if (props.location.hash) {
-                  dispatch(
-                    addItemToBasket({
-                      title: props.content.title,
-                      UID: props.content.UID,
-                      hash: props.location.hash,
-                    }),
-                  );
-                } else {
-                  dispatch(addItemToBasket(props.content));
-                }
-              }}
-            >
-              <Icon name={starSVG} size="33px" />
-            </Button>
-          )}
-        </div>
-      </Portal>
-    </div>
+    <Portal node={__CLIENT__ && document.querySelector('.toolbar-actions')}>
+      <div className="fav-toolbar-menu">
+        {location.hash ? (
+          <>
+            {isSearchQuerySelected ? (
+              <Button
+                className="add-to-fav"
+                title="Remove selection"
+                onClick={() => {
+                  dispatch(removeItemFromBasket(content));
+                }}
+              >
+                <Icon className="selected" name={starFullSVG} size="33px" />
+              </Button>
+            ) : (
+              <Button
+                className="add-to-fav"
+                title="Save to Board"
+                onClick={() => {
+                  if (location.hash && !isSearchQuerySelected) {
+                    dispatch(
+                      addItemToBasket({
+                        content: content,
+                        hash: location.hash,
+                      }),
+                    );
+                  }
+                }}
+              >
+                <Icon name={starSVG} size="33px" />
+              </Button>
+            )}
+          </>
+        ) : (
+          <>
+            {basket.some((item) => item.content === content) ? (
+              <Button
+                className="add-to-fav"
+                title="Remove selection"
+                onClick={() => {
+                  dispatch(removeItemFromBasket(content));
+                }}
+              >
+                <Icon className="selected" name={starFullSVG} size="33px" />
+              </Button>
+            ) : (
+              <Button
+                className="add-to-fav"
+                title="Save to Board"
+                onClick={() => {
+                  dispatch(addItemToBasket({ content: content }));
+                }}
+              >
+                <Icon name={starSVG} size="33px" />
+              </Button>
+            )}
+          </>
+        )}
+      </div>
+    </Portal>
   );
 };
 

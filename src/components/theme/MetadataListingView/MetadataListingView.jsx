@@ -45,7 +45,7 @@ const MetadataListingView = ({ items, isEditMode, basket }) => {
               <h3>{item.title ? item.title : item.id}</h3>
             </div>
 
-            {basket.includes(item) ? (
+            {basket.some((item) => item.content === item) ? (
               <Button
                 basic
                 className="add-fav-btn"
@@ -62,16 +62,13 @@ const MetadataListingView = ({ items, isEditMode, basket }) => {
                 className="add-fav-btn"
                 title="Save to Board"
                 onClick={() => {
-                  dispatch(addItemToBasket(item));
+                  dispatch(addItemToBasket({ content: item }));
                 }}
               >
-                {basket.includes(item) ? (
-                  <Icon className="selected" name={starFullSVG} size="20px" />
-                ) : (
-                  <Icon name={starSVG} size="20px" />
-                )}
+                <Icon name={starSVG} size="20px" />
               </Button>
             )}
+
             <ItemMetadataSnippet item={item} />
             <p>{item.description}</p>
           </div>
