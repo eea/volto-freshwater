@@ -9,7 +9,7 @@ import {
   addBookmark,
   getAllBookmarks,
 } from '@eeacms/volto-freshwater/actions/favBoards';
-import { removeItemFromBasket } from '@eeacms/volto-freshwater/actions/favBasket';
+import { removeItemFromBasket } from '@eeacms/volto-freshwater/actions/basket';
 
 import clearSVG from '@plone/volto/icons/clear.svg';
 import starSVG from '@plone/volto/icons/star.svg';
@@ -20,7 +20,7 @@ import './style.less';
 
 const BasketToolbarPopup = (props) => {
   const { basket, items, userId } = props;
-  const itemsInBasket = basket && basket.length > 0;
+  const itemsInBasket = basket && basket.items.length > 0;
   const dispatch = useDispatch();
 
   const [activeGroup, setActiveGroup] = useState('');
@@ -50,7 +50,7 @@ const BasketToolbarPopup = (props) => {
   }, [items, userId]);
 
   const handleCreateBoard = () => {
-    for (let item of basket) {
+    for (let item of basket.items) {
       const { content } = item;
       dispatch(
         addBookmark(content.UID, boardTitle, item.hash || '', {
@@ -65,7 +65,7 @@ const BasketToolbarPopup = (props) => {
   };
 
   const handleSaveToBoard = (group) => {
-    for (let item of basket) {
+    for (let item of basket.items) {
       const { content } = item;
       dispatch(
         addBookmark(content.UID, group, item.hash || '', {
@@ -89,7 +89,7 @@ const BasketToolbarPopup = (props) => {
           <div className="toolbar-menu-title">Selected items: </div>
           {itemsInBasket ? (
             <ul className="fav-menu-listing">
-              {basket.map((item, i) => (
+              {basket.items.map((item, i) => (
                 <li
                   className="fav-menu-list-item"
                   key={item['@id']}
@@ -135,7 +135,7 @@ const BasketToolbarPopup = (props) => {
                           key={index}
                           className={cx('board-item', {
                             active: activeGroup === group,
-                            boarditems: basket.length > 0,
+                            boarditems: basket.items.length > 0,
                           })}
                           onClick={() => {
                             if (itemsInBasket) {
@@ -203,7 +203,7 @@ const BasketToolbarPopup = (props) => {
             primary
             size="mini"
             className="fav-board-save"
-            disabled={basket.length === 0}
+            disabled={basket.items.length === 0}
             onClick={handleCreateBoard}
           >
             Create
@@ -220,7 +220,7 @@ export default compose(
       userId: state.userSession.token
         ? jwtDecode(state.userSession.token).sub
         : '',
-      basket: state.favBasket.basket,
+      basket: state.basket,
       items: state.favBoards?.items || [],
     }),
     { removeItemFromBasket },

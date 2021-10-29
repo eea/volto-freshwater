@@ -12,7 +12,7 @@ import {
 import {
   addItemToBasket,
   removeItemFromBasket,
-} from '@eeacms/volto-freshwater/actions/favBasket';
+} from '@eeacms/volto-freshwater/actions/basket';
 import starSVG from '@plone/volto/icons/half-star.svg';
 import starFullSVG from '@eeacms/volto-freshwater/icons/star-full.svg';
 import './style.less';
@@ -45,7 +45,7 @@ const MetadataListingView = ({ items, isEditMode, basket }) => {
               <h3>{item.title ? item.title : item.id}</h3>
             </div>
 
-            {basket.some((item) => item.content === item) ? (
+            {basket.items.some((b) => b.content === item) ? (
               <Button
                 basic
                 className="add-fav-btn"
@@ -103,6 +103,6 @@ MetadataListingView.propTypes = {
 
 export default compose(
   connect((state) => ({
-    basket: state.favBasket.basket,
+    basket: state.basket,
   })),
 )(MetadataListingView);

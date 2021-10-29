@@ -37,9 +37,9 @@ const BasketToolbarButton = (props) => {
             }}
             title="Boards basket"
           >
-            {basket && basket.length > 0 && (
+            {basket.items && basket.items.length > 0 && (
               <div className="basket-count">
-                <span>{basket.length}</span>
+                <span>{basket.items.length}</span>
               </div>
             )}
 
@@ -55,6 +55,6 @@ const BasketToolbarButton = (props) => {
 
 export default compose(
   connect((state) => ({
-    basket: state.favBasket.basket,
+    basket: state.basket,
   })),
 )(BasketToolbarButton);

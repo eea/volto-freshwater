@@ -9,12 +9,12 @@ import starFullSVG from '@eeacms/volto-freshwater/icons/star-full.svg';
 import {
   addItemToBasket,
   removeItemFromBasket,
-} from '@eeacms/volto-freshwater/actions/favBasket';
+} from '@eeacms/volto-freshwater/actions/basket';
 
 const AddToFavBoardButton = (props) => {
   const { basket, content, location } = props;
   const dispatch = useDispatch();
-  const isSearchQuerySelected = basket.some(
+  const isSearchQuerySelected = basket.items.some(
     (item) => item.hash === location.hash,
   );
 
@@ -54,7 +54,7 @@ const AddToFavBoardButton = (props) => {
           </>
         ) : (
           <>
-            {basket.some((item) => item.content === content) ? (
+            {basket.items.some((item) => item.content === content) ? (
               <Button
                 className="add-to-fav"
                 title="Remove selection"
@@ -84,6 +84,6 @@ const AddToFavBoardButton = (props) => {
 
 export default compose(
   connect((state) => ({
-    basket: state.favBasket.basket,
+    basket: state.basket,
   })),
 )(AddToFavBoardButton);

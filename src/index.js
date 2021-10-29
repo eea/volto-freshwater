@@ -25,7 +25,7 @@ import installCountriesListingBlock from './components/Blocks/CountriesListingBl
 import installAppExtras from './components/theme/AppExtras';
 import installSlatePopup from './components/Blocks/SlatePopup';
 
-import favBasket from './reducers/favBasket/';
+import basket from './reducers/basket/';
 import favBoards from './reducers/favBoards/';
 
 import './slate-styles.less';
@@ -138,7 +138,7 @@ const applyConfig = (config) => {
     { cssClass: 'h5', label: 'H5 14px' },
   ];
 
-  config.settings.persistentReducers = ['favBasket'];
+  config.settings.persistentReducers = ['basket'];
 
   // Search block metadata listing view
   config.blocks.blocksConfig.listing = {
@@ -204,6 +204,7 @@ const applyConfig = (config) => {
     },
   ];
 
+  // Routes
   config.settings = {
     ...config.settings,
     nonContentRoutes: [
@@ -225,15 +226,18 @@ const applyConfig = (config) => {
     },
   ];
 
+  // Widgets
   config.widgets.id.license_copyright = CopyrightWidget;
   config.widgets.id.category = TokenWidget;
 
   config.blocks.blocksConfig.plotly_chart =
     config.blocks.blocksConfig.connected_plotly_chart;
   config.blocks.blocksConfig.plotly_chart.restricted = false;
+
+  // Addon reducers
   config.addonReducers = {
     ...(config.addonReducers || {}),
-    favBasket,
+    basket,
     favBoards,
   };
 

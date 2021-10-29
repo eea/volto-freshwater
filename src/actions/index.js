@@ -1,2 +1,2 @@
-export * from './favBasket';
+export * from './basket';
 export * from './favBoards';
