@@ -56,12 +56,31 @@ class LegendWidget extends React.Component {
   /**
    * This method is executed after the rener method is executed
    */
-  async componentDidMount() {
-    await this.loader();
-    this.props.view.ui.add(this.container.current, 'top-right');
-    this.LegendWidget = new Legend({
-      view: this.props.view,
-      container: document.getElementById(`${this.mapViewerId}`),
+  componentDidMount() {
+    this.loader().then(() => {
+      this.props.view.ui.add(this.container.current, 'top-right');
+      this.LegendWidget = new Legend({
+        view: this.props.view,
+        // container: document.getElementById(`${this.mapViewerId}`),
+        container: document.getElementById('map-filters'),
+      });
+
+      // this.setState({ showMapMenu: true });
+      // this.container.current
+      //   .querySelector('.esri-widget--button')
+      //   .classList.replace('esri-icon-legend', 'esri-icon-right-arrow');
+      // this.container.current.querySelector('.legend-panel').style.display =
+      //   'block';
+      // const inputs = document.getElementsByClassName('filterInput');
+      // // debugger;
+      // console.log("input lengts", inputs.length);
+
+      // for (var i = 0; i < inputs.length; i++) {
+      //   const input = inputs[i];
+      //   const label = input.attributes.label;
+      //   const legends = document.getElementsByClassName('esri-legend__layer-row');
+      //   debugger;
+      // }
     });
   }
   /**
@@ -72,7 +91,7 @@ class LegendWidget extends React.Component {
     return (
       <>
         <div ref={this.container} className="legend-container">
-          <div
+          {/* <div
             className={this.menuClass}
             id="legend_button"
             title="Legend"
@@ -80,7 +99,7 @@ class LegendWidget extends React.Component {
             onKeyDown={this.openMenu.bind(this)}
             tabIndex="0"
             role="button"
-          ></div>
+          ></div> */}
           <div id={this.mapViewerId} className="legend-panel"></div>
         </div>
       </>

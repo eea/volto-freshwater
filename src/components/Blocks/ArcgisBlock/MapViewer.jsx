@@ -7,24 +7,65 @@ import { MapViewerConfig } from '@eeacms/volto-arcgis-block/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 //import "isomorphic-fetch";  <-- Necessary to use fetch?
-var Map, MapView, Zoom, FeatureLayer, promiseUtils;
+var Map, MapView, Zoom, FeatureLayer, Legend, promiseUtils;
+
+var layersDef = [
+  // {
+  //   layerId: '0',
+  //   layerUrl:
+  //     // 'https://water.discomap.eea.europa.eu/arcgis/rest/services/UWWTD_CP/UWWTD_CP_WM_map3_2021_withoutCountryBoundaries/MapServer/0',
+  //     'https://marine.discomap.eea.europa.eu/arcgis/rest/services/Marine/Marine_waters_EU/MapServer/0',
+  //   layerTitle: 'Discharge of treated waste water on land by country',
+  //   // filterField: '',
+  //   filterField: 'Type',
+  //   countryField: 'Country',
+  //   // countryField: 'country',
+  // },
+  {
+    layerId: '1',
+    layerUrl:
+      // 'https://water.discomap.eea.europa.eu/arcgis/rest/services/UWWTD_CP/UWWTD_CP_WM_map3_2021_withoutCountryBoundaries/MapServer/1',
+      'https://nest.discomap.eea.europa.eu/arcgis/rest/services/Hosted/Map3UWWTDDCP_2021/FeatureServer/0',
+    layerTitle: 'Discharge of treated waste water on land - Discharge points',
+    // filterField: 'DischargeOnLand',
+    filterField: 'dischargeonland',
+    // filterField: '',
+    // countryField: 'Country',
+    countryField: 'country',
+  },
+  {
+    layerId: '2',
+    layerUrl:
+      // 'https://water.discomap.eea.europa.eu/arcgis/rest/services/UWWTD_CP/UWWTD_CP_WM_map3_2021_withoutCountryBoundaries/MapServer/2',
+      'https://nest.discomap.eea.europa.eu/arcgis/rest/services/Hosted/Map3UWWTDPlants_2021/FeatureServer/0',
+    layerTitle: 'Discharge of treated waste water on land - UWWTPs',
+    // filterField: 'DischargeOnLand',
+    filterField: 'dischargeonland',
+    // filterField: '',
+    // countryField: 'Country',
+    countryField: 'country',
+  },
+];
 
 const FilterInput = (props) => {
-  const treatmentType = props.type;
-  const filterField = props.filterField;
+  const { type, layerId } = props;
+
   return (
     <div>
       <input
-        id={treatmentType.name}
+        id={type.name + layerId}
+        className="filterInput"
         type="checkbox"
-        name={filterField}
-        value={treatmentType.name}
+        name={layerId}
+        value={type.name}
         defaultChecked="true"
         onChange={props.onChange}
+        label={type.label}
       />
-      <label for={treatmentType.name}>
-        {treatmentType.label || treatmentType.name} ({treatmentType.count})
-      </label>
+      {/* <label for={type.name + layerId}>
+        {type.label || type.name} 
+        ({type.count})
+      </label> */}
       <br />
     </div>
   );
@@ -43,11 +84,10 @@ class MapViewer extends React.Component {
     //code, for example, to create later a MapView component
     //that will use the map div to show the map
     this.state = { layers: [], filterTypes: [], showTypes: [] };
-    this.layerUrls = [props.layerUrl];
+    this.layerUrls = layersDef; //props.layerUrl.split(',');
     this.countryCode = props.connected_data_parameters
       ? props.connected_data_parameters[0].v[0]
       : '';
-    this.countryCondition = `country = '${this.countryCode}'`;
 
     this.mapdiv = createRef();
     this.mapCfg = props.cfg.Map;
@@ -69,28 +109,34 @@ class MapViewer extends React.Component {
       'esri/widgets/Zoom',
       'esri/layers/FeatureLayer',
       'esri/core/promiseUtils',
-    ]).then(([_Map, _MapView, _Zoom, _FeatureLayer, _promiseUtils]) => {
-      [Map, MapView, Zoom, FeatureLayer, promiseUtils] = [
-        _Map,
-        _MapView,
-        _Zoom,
-        _FeatureLayer,
-        _promiseUtils,
-      ];
-    });
+      'esri/widgets/Legend',
+    ]).then(
+      ([_Map, _MapView, _Zoom, _FeatureLayer, _promiseUtils, _Legend]) => {
+        [Map, MapView, Zoom, FeatureLayer, promiseUtils, Legend] = [
+          _Map,
+          _MapView,
+          _Zoom,
+          _FeatureLayer,
+          _promiseUtils,
+          _Legend,
+        ];
+      },
+    );
   }
 
   componentDidUpdate() {
-    let condition = this.countryCondition;
     const layers = this.state.layers;
 
     // debugger;
 
     layers.forEach((layer) => {
+      let condition = `${layer.countryField} = '${this.countryCode}'`;
+      // console.log('layer.filterField', layer.filterField);
       if (layer.filterField) {
         condition =
           condition +
           ` AND ${layer.filterField} in ('${layer.showTypes.join("','")}')`;
+        // console.log('showTypes', layer.showTypes);
       }
 
       const mapLayer = this.map.layers.items.find((item) => {
@@ -98,19 +144,20 @@ class MapViewer extends React.Component {
       });
 
       mapLayer.definitionExpression = condition;
-      // console.log('condition', condition);
+      console.log('condition', condition);
     });
   }
 
   updateFilters = (event) => {
     const checked = event.target.checked;
     const value = event.target.value;
-    const filterField = event.target.name;
+    const layerId = event.target.name;
 
     if (!checked) {
+      console.log('removing ', value, 'from layer ', layerId);
       this.setState({
         layers: this.state.layers.map((layer) => {
-          if (layer.filterField === filterField) {
+          if (layer.layerId === layerId) {
             layer.showTypes = layer.showTypes.filter((type) => {
               return type !== value;
             });
@@ -119,16 +166,16 @@ class MapViewer extends React.Component {
         }),
       });
     } else {
+      console.log('adding ', value, 'to layer ', layerId);
       this.setState({
         layers: this.state.layers.map((layer) => {
-          if (layer.filterField === filterField) {
+          if (layer.layerId === layerId) {
             layer.showTypes = [...layer.showTypes, value];
           }
           return layer;
         }),
       });
     }
-    // console.log('showTypes', this.state.showTypes);
   };
 
   componentWillUnmount() {
@@ -136,9 +183,16 @@ class MapViewer extends React.Component {
   }
 
   getLabelForValueInfo = (values, name) => {
+    if (!values) {
+      return name;
+    }
     const label = values.find((val) => {
       return val.value === name;
     });
+
+    if (!label) {
+      return name;
+    }
 
     return label.label;
   };
@@ -158,7 +212,7 @@ class MapViewer extends React.Component {
    */
   componentDidMount() {
     loadCss();
-    // await this.loader();
+
     this.loader().then(() => {
       this.map = new Map({
         basemap: 'gray-vector', // topo, gray-vector
@@ -169,28 +223,36 @@ class MapViewer extends React.Component {
         map: this.map,
         center: this.mapCfg.center,
         zoom: this.mapCfg.zoom,
-        ui: {
-          components: ['attribution'],
-        },
+        // ui: {
+        //   components: ['attribution'],
+        // },
       });
-      this.zoom = new Zoom({
-        view: this.view,
-      });
-      this.view.ui.add(this.zoom, {
-        position: 'top-right',
-      });
+      // const LegendWidget = new Legend({
+      //   view: this.view,
+      // container: document.getElementById(`${this.mapViewerId}`),
+      // container: document.getElementById('map-filters'),
+      // });
+      // this.view.ui.add(LegendWidget, "bottom-left")
+      // this.zoom = new Zoom({
+      //   view: this.view,
+      // });
+      // this.view.ui.add(this.zoom, {
+      //   position: 'top-left',
+      // });
 
       // ###############################################################
       // Setup layers
       // ###############################################################
 
-      this.layerUrls.forEach((layerUrl) => {
+      this.layerUrls.forEach((layerDef) => {
         const layer = new FeatureLayer({
-          url: layerUrl,
-          outFields: ['*'],
+          url: layerDef.layerUrl,
+          // outFields: ['*'],
           // labelingInfo: [trailheadsLabels],
           // popupTemplate: popupTrailheads,
-          definitionExpression: this.countryCondition,
+          definitionExpression: `${layerDef.countryField} = '${this.countryCode}'`,
+          // geometryType: 'point',
+          // typeIdField: 'DischargeOnLand'
         });
 
         this.map.add(layer);
@@ -198,12 +260,12 @@ class MapViewer extends React.Component {
           // Set the view extent to the data extent
           layer.popupTemplate = layer.createPopupTemplate();
 
-          let layerData = { layerUrl: layerUrl };
-          const filterField = layer.typeIdField;
-          const layerTitle = this.getLabelForField(layer.fields, filterField);
+          let layerData = { layerUrl: layerDef.layerUrl };
 
-          layerData.layerTitle = layerTitle;
-          layerData.filterField = filterField;
+          layerData.layerTitle = layerDef.layerTitle;
+          layerData.filterField = layerDef.filterField;
+          layerData.layerId = layerDef.layerId;
+          layerData.countryField = layerDef.countryField;
 
           const getTypes = promiseUtils.debounce((layer) => {
             const queryParams = layer.createQuery();
@@ -211,10 +273,10 @@ class MapViewer extends React.Component {
             queryParams.returnExceededLimitFeatures = true;
             queryParams.maxRecordCountFactor = 5;
             queryParams.num = 9999;
-            queryParams.outFields = [filterField];
+            queryParams.outFields = [layerData.filterField];
             const x = layer.queryFeatures(queryParams).then(function (results) {
-              // prints the array of result graphics to the console
               const res = results.features;
+              // console.log("res", res);
               return res;
             });
             return promiseUtils.eachAlways([x]);
@@ -226,7 +288,7 @@ class MapViewer extends React.Component {
             }
 
             let types = result[0].value.map((item) => {
-              return item.attributes[filterField];
+              return item.attributes[layerData.filterField];
             });
             // console.log('total types', types.length);
             const typesUnique = [...new Set(types)];
@@ -307,26 +369,28 @@ class MapViewer extends React.Component {
     // DOM element to be mounted (but not yet mounted)
     return (
       <div className={this.mapClass} style={{ display: 'flex' }}>
-        <form id="map-filters">
+        <div id="map-filters"></div>
+        <div ref={this.mapdiv} className="map">
+          {this.renderLegend()}
+        </div>
+        <div>
           {(this.state.layers || []).map((layer) => {
             return (
               <fieldset>
-                <legend>{layer.layerTitle}</legend>
+                {/* <legend>{layer.layerTitle}</legend> */}
                 {(layer.filterTypes || []).map((type) => {
                   return (
                     <FilterInput
                       onChange={this.updateFilters}
                       type={type}
                       filterField={layer.filterField}
+                      layerId={layer.layerId}
                     />
                   );
                 })}
               </fieldset>
             );
           })}
-        </form>
-        <div ref={this.mapdiv} className="map">
-          {this.renderLegend()}
         </div>
       </div>
     );
