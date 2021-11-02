@@ -27,7 +27,7 @@
 @emSize   : 16px;
 
 /* The size of page text  */
-@fontSize : 16px;
+@fontSize : 19px;
 
 @h1 : unit((36 / 16), rem);
 @h2 : unit((30 / 16), rem);
@@ -45,8 +45,8 @@
 /*-------------------
     Brand Colors
 --------------------*/
-@wiseSecondaryColor      : #004050;
-@wisePrimaryColor      : #0099BB;
+@wiseSecondaryColor  : #004050;
+@wisePrimaryColor    : #0099BB;
 @lightSecondaryColor : @lightGrey;
 @lightBlueColor      : #00b4d5;
 

@@ -14,7 +14,8 @@
 .context-navigation {
   overflow: hidden;
   padding: 0;
-  margin: 1rem 0;
+  padding-left: 1em;
+  margin-bottom: 1.5rem;
   background: white;
   border-radius: 4px;
   list-style-type: none;
@@ -30,17 +31,17 @@
 
   .active.item > .content > a {
     background-color: #f2f9fb;
-    color: #0099bb;
+    color: @wisePrimaryColor;
     font-weight: 500 !important;
   }
 
   .item a {
     position: relative;
     display: block;
-    padding: 0.8rem 1rem;
+    padding: 0.7rem 1rem;
     color: #333;
     font-size: 16px !important;
-    font-weight: 400 !important;
+    font-weight: 300 !important;
 
     > img {
       display: none !important;
@@ -53,14 +54,18 @@
   }
 
   .level-1 a {
+    padding-right: 0;
     padding-left: 1rem;
+    font-weight: 400 !important;
   }
 
   .level-2 a {
-    padding-left: 1.5rem;
+    padding: 0.6rem 0 0.6rem 2rem;
+    font-size: 15px !important;
   }
 
   .level-3 a {
+    padding-right: 0;
     padding-left: 2rem;
   }
 
@@ -77,7 +82,6 @@
 .context-navigation-header {
   padding: 1rem 0;
   border-bottom: 3px solid @wiseSecondaryColor;
-  box-shadow: 0 4px 19px rgba(0, 0, 1, 0.07);
   color: @wiseSecondaryColor;
   font-size: 20px;
   font-weight: 500;

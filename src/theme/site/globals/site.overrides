@@ -53,13 +53,18 @@ a {
   color: @wisePrimaryColor;
 }
 
+b,
+strong {
+  font-weight: 500;
+}
+
 .p-text {
   font-size: @fontSize !important;
 }
 
 .content-area .container {
-  font-size: 18px;
-  font-weight: 400;
+  font-size: @fontSize !important;
+  font-weight: 300;
   line-height: 28px !important;
 }
 

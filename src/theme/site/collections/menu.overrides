@@ -25,7 +25,7 @@
 
     .item.firstLevel > .menu {
       border: 1px solid #f1f1f1 !important;
-      box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.05) !important;
 
       > .item[role='option']:not(:last-child) {
         border-bottom: 1px solid @lightGreyBorderColor !important;
