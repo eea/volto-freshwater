@@ -7,7 +7,7 @@ import { MapViewerConfig } from '@eeacms/volto-arcgis-block/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 //import "isomorphic-fetch";  <-- Necessary to use fetch?
-var Map, MapView, Zoom, FeatureLayer, Legend, promiseUtils;
+var Map, MapView, FeatureLayer, promiseUtils; // Zoom, Legend
 
 var layersDef = [
   // {
@@ -21,29 +21,38 @@ var layersDef = [
   //   countryField: 'Country',
   //   // countryField: 'country',
   // },
+  // {
+  //   layerId: '1',
+  //   layerUrl:
+  //     'https://water.discomap.eea.europa.eu/arcgis/rest/services/UWWTD_CP/UWWTD_CP_WM_map3_2021_withoutCountryBoundaries/MapServer/1',
+  //     // 'https://nest.discomap.eea.europa.eu/arcgis/rest/services/Hosted/Map3UWWTDDCP_2021/FeatureServer/0',
+  //   layerTitle: 'Discharge of treated waste water on land - Discharge points',
+  //   filterField: 'DischargeOnLand',
+  //   // filterField: 'dischargeonland',
+  //   // filterField: '',
+  //   countryField: 'Country',
+  //   // countryField: 'country',
+  // },
+  // {
+  //   layerId: '2',
+  //   layerUrl:
+  //     // 'https://water.discomap.eea.europa.eu/arcgis/rest/services/UWWTD_CP/UWWTD_CP_WM_map3_2021_withoutCountryBoundaries/MapServer/2',
+  //     'https://nest.discomap.eea.europa.eu/arcgis/rest/services/Hosted/Map3UWWTDPlants_2021/FeatureServer/0',
+  //   layerTitle: 'Discharge of treated waste water on land - UWWTPs',
+  //   // filterField: 'DischargeOnLand',
+  //   filterField: 'dischargeonland',
+  //   // filterField: '',
+  //   // countryField: 'Country',
+  //   countryField: 'country',
+  // }, 
+  
   {
-    layerId: '1',
+    layerId: '3',
     layerUrl:
-      // 'https://water.discomap.eea.europa.eu/arcgis/rest/services/UWWTD_CP/UWWTD_CP_WM_map3_2021_withoutCountryBoundaries/MapServer/1',
-      'https://nest.discomap.eea.europa.eu/arcgis/rest/services/Hosted/Map3UWWTDDCP_2021/FeatureServer/0',
-    layerTitle: 'Discharge of treated waste water on land - Discharge points',
-    // filterField: 'DischargeOnLand',
-    filterField: 'dischargeonland',
-    // filterField: '',
-    // countryField: 'Country',
-    countryField: 'country',
-  },
-  {
-    layerId: '2',
-    layerUrl:
-      // 'https://water.discomap.eea.europa.eu/arcgis/rest/services/UWWTD_CP/UWWTD_CP_WM_map3_2021_withoutCountryBoundaries/MapServer/2',
-      'https://nest.discomap.eea.europa.eu/arcgis/rest/services/Hosted/Map3UWWTDPlants_2021/FeatureServer/0',
-    layerTitle: 'Discharge of treated waste water on land - UWWTPs',
-    // filterField: 'DischargeOnLand',
-    filterField: 'dischargeonland',
-    // filterField: '',
-    // countryField: 'Country',
-    countryField: 'country',
+      'https://water.discomap.eea.europa.eu/arcgis/rest/services/UWWTD_CP/UWWTD_CP_WM_map4_2021_withoutCountryBoundaries/MapServer/1',
+    layerTitle: 'Discharge points - type of receiving area',
+    filterField: 'dcpTypeOfReceivingArea_CP',
+    countryField: 'Country',
   },
 ];
 
@@ -144,7 +153,7 @@ class MapViewer extends React.Component {
       });
 
       mapLayer.definitionExpression = condition;
-      console.log('condition', condition);
+      // console.log('condition', condition);
     });
   }
 
@@ -154,7 +163,7 @@ class MapViewer extends React.Component {
     const layerId = event.target.name;
 
     if (!checked) {
-      console.log('removing ', value, 'from layer ', layerId);
+      // console.log('removing ', value, 'from layer ', layerId);
       this.setState({
         layers: this.state.layers.map((layer) => {
           if (layer.layerId === layerId) {
@@ -166,7 +175,7 @@ class MapViewer extends React.Component {
         }),
       });
     } else {
-      console.log('adding ', value, 'to layer ', layerId);
+      // console.log('adding ', value, 'to layer ', layerId);
       this.setState({
         layers: this.state.layers.map((layer) => {
           if (layer.layerId === layerId) {
