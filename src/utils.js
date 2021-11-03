@@ -32,6 +32,16 @@ export const useCopyToClipboard = (text) => {
   return [copyStatus, copy];
 };
 
+export const formatItemType = (item) => {
+  const type =
+    item
+      .replace('_', ' / ')
+      .split(' ')
+      .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+      .join(' ') || '';
+  return type;
+};
+
 export const doStringifySearchquery = (querystring) => {
   const params = new URLSearchParams(querystring);
   let obj = {};
