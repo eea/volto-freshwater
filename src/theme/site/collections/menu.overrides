@@ -37,7 +37,7 @@
     }
 
     .secondLevel:hover {
-      color: @wiseSecondaryColor !important;
+      color: @wiseSecondaryColor;
     }
 
     .thirdLevel {
@@ -52,6 +52,10 @@
         color: @secondaryPointingHoverTextColor;
       }
     }
+  }
+
+  a.disabled {
+    cursor: default !important;
   }
 }
 
