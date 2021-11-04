@@ -115,19 +115,17 @@ class MapViewer extends React.Component {
     return loadModules([
       'esri/WebMap',
       'esri/views/MapView',
-      'esri/widgets/Zoom',
+      // 'esri/widgets/Zoom',
       'esri/layers/FeatureLayer',
       'esri/core/promiseUtils',
-      'esri/widgets/Legend',
+      // 'esri/widgets/Legend',
     ]).then(
-      ([_Map, _MapView, _Zoom, _FeatureLayer, _promiseUtils, _Legend]) => {
-        [Map, MapView, Zoom, FeatureLayer, promiseUtils, Legend] = [
+      ([_Map, _MapView, _FeatureLayer, _promiseUtils]) => {
+        [Map, MapView, FeatureLayer, promiseUtils] = [
           _Map,
           _MapView,
-          _Zoom,
           _FeatureLayer,
           _promiseUtils,
-          _Legend,
         ];
       },
     );
