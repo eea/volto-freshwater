@@ -27,29 +27,27 @@ const BasketToolbarButton = (props) => {
   }, [showMenu]);
 
   return (
-    <div>
-      <Portal node={__CLIENT__ && document.querySelector('.toolbar-bottom')}>
-        <div className="fav-toolbar-menu" ref={menuRef}>
-          <Button
-            className="basket-toolbar-btn"
-            onClick={() => {
-              setShowMenu(!showMenu);
-            }}
-            title="Boards basket"
-          >
-            {basket.items && basket.items.length > 0 && (
-              <div className="basket-count">
-                <span>{basket.items.length}</span>
-              </div>
-            )}
+    <Portal node={__CLIENT__ && document.querySelector('.toolbar-bottom')}>
+      <div className="fav-toolbar-menu" ref={menuRef}>
+        <Button
+          className="basket-toolbar-btn"
+          onClick={() => {
+            setShowMenu(!showMenu);
+          }}
+          title="Boards basket"
+        >
+          {basket.items && basket.items.length > 0 && (
+            <div className="basket-count">
+              <span>{basket.items.length}</span>
+            </div>
+          )}
 
-            <Icon name={basketSVG} size="36px" />
-          </Button>
+          <Icon name={basketSVG} size="36px" />
+        </Button>
 
-          {showMenu ? <BasketToolbarPopup /> : null}
-        </div>
-      </Portal>
-    </div>
+        {showMenu ? <BasketToolbarPopup /> : null}
+      </div>
+    </Portal>
   );
 };
 

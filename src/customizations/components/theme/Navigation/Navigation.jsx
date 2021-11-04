@@ -253,11 +253,11 @@ class Navigation extends Component {
                     const flatSubUrl = flattenToAppURL(subitem.url);
                     const subitemIsDraft = subitem.review_state === 'draft';
                     return (
-                      <>
+                      <Dropdown.Item key={flatSubUrl}>
                         {subitem.title
                           .toLowerCase()
                           .includes('country profiles') ? (
-                          <Dropdown.Item key={flatSubUrl}>
+                          <>
                             <div className="secondLevel-wrapper">
                               <Link
                                 to={flatSubUrl === '' ? '/' : flatSubUrl}
@@ -307,9 +307,9 @@ class Navigation extends Component {
                                 </div>
                               </div>
                             )}
-                          </Dropdown.Item>
+                          </>
                         ) : (
-                          <Dropdown.Item key={flatSubUrl}>
+                          <>
                             <div className="secondLevel-wrapper">
                               <Link
                                 to={flatSubUrl === '' ? '/' : flatSubUrl}
@@ -359,9 +359,9 @@ class Navigation extends Component {
                                 </div>
                               </div>
                             )}
-                          </Dropdown.Item>
+                          </>
                         )}
-                      </>
+                      </Dropdown.Item>
                     );
                   })}
                 </Dropdown.Menu>
