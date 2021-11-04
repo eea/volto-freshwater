@@ -1,14 +1,9 @@
 import React from 'react';
-// import config from '@plone/volto/registry';
 import { Table, Icon } from 'semantic-ui-react';
-import {
-  // flattenToAppURL,
-  BodyClass,
-} from '@plone/volto/helpers';
+import { BodyClass } from '@plone/volto/helpers';
 import { formatItemType } from '@eeacms/volto-freshwater/utils';
 import { Link } from 'react-router-dom';
-// import { Icon } from '@plone/volto/components';
-// import backSVG from '@plone/volto/icons/open.svg';
+import { MapPreview } from '@eeacms/volto-freshwater/components';
 
 import './style.less';
 
@@ -22,15 +17,8 @@ const EEA_LICENSE =
 
 const DatabaseItemView = (props) => {
   const { content } = props;
-  // const tableau_url = content?.embed_url;
-  // const map_url = content?.webmap_url;
-  // const lead_image = content?.image;
-  // const {
-  //   blocks: { blocksConfig },
-  // } = config;
-
-  // const TableauBlockView = blocksConfig.tableau_block.view;
-  // const MapBlockView = blocksConfig.maps.view;
+  const tableau_url = content?.embed_url;
+  const map_url = content?.webmap_url;
 
   const copyright =
     content.license_copyright === 'EEA'
@@ -55,10 +43,10 @@ const DatabaseItemView = (props) => {
           </div>*/}
 
           <Link to="/data-maps-and-tools/metadata" className="resources-link">
-            {/*<Icon name={backSVG} size="20px" />*/}
             <Icon name="folder open outline" size="20px" />
             Resource catalogue
           </Link>
+
           <div className="metadata-header">
             {content['@type'] && (
               <h3 className="item-type">{formatItemType(content['@type'])}</h3>
@@ -124,6 +112,14 @@ const DatabaseItemView = (props) => {
                 )}
             </div>
           </div>
+        </div>
+
+        <div className="map-preview-wrapper">
+          {(tableau_url || map_url) && (
+            <div className="map-preview">
+              <MapPreview tableau_url={tableau_url} map_url={map_url} />
+            </div>
+          )}
         </div>
 
         <div className="item-table item-metadata-table">
@@ -247,18 +243,6 @@ const DatabaseItemView = (props) => {
             </Table.Body>
           </Table>
         </div>
-
-        {/*{tableau_url && (
-          <div style={{ margin: '1em 0' }}>
-            <TableauBlockView {...props} data={{ url: tableau_url }} />
-          </div>
-        )}
-
-        {map_url && (
-          <div style={{ margin: '1em 0' }}>
-            <MapBlockView {...props} data={{ url: map_url }} />
-          </div>
-        )}*/}
       </div>
     </>
   );

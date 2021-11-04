@@ -5,6 +5,7 @@ export MetadataListingView from './theme/MetadataListingView/MetadataListingView
 export SimpleListingView from './theme/SimpleListingView/SimpleListingView';
 export ItemMetadata from './theme/ItemMetadata/ItemMetadata';
 export ItemTitle from './theme/ItemMetadata/ItemTitle';
+export MapPreview from './theme/ItemMetadata/MapPreview';
 export ItemMetadataSnippet from './theme/ItemMetadata/ItemMetadataSnippet';
 export TableauDownload from './theme/Tableau/TableauDownload';
 export TableauShare from './theme/Tableau/TableauShare';
