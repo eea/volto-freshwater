@@ -10,42 +10,6 @@ import { connect } from 'react-redux';
 var Map, MapView, FeatureLayer, promiseUtils; // Zoom, Legend
 
 var layersDef = [
-  // {
-  //   layerId: '0',
-  //   layerUrl:
-  //     // 'https://water.discomap.eea.europa.eu/arcgis/rest/services/UWWTD_CP/UWWTD_CP_WM_map3_2021_withoutCountryBoundaries/MapServer/0',
-  //     'https://marine.discomap.eea.europa.eu/arcgis/rest/services/Marine/Marine_waters_EU/MapServer/0',
-  //   layerTitle: 'Discharge of treated waste water on land by country',
-  //   // filterField: '',
-  //   filterField: 'Type',
-  //   countryField: 'Country',
-  //   // countryField: 'country',
-  // },
-  // {
-  //   layerId: '1',
-  //   layerUrl:
-  //     'https://water.discomap.eea.europa.eu/arcgis/rest/services/UWWTD_CP/UWWTD_CP_WM_map3_2021_withoutCountryBoundaries/MapServer/1',
-  //     // 'https://nest.discomap.eea.europa.eu/arcgis/rest/services/Hosted/Map3UWWTDDCP_2021/FeatureServer/0',
-  //   layerTitle: 'Discharge of treated waste water on land - Discharge points',
-  //   filterField: 'DischargeOnLand',
-  //   // filterField: 'dischargeonland',
-  //   // filterField: '',
-  //   countryField: 'Country',
-  //   // countryField: 'country',
-  // },
-  // {
-  //   layerId: '2',
-  //   layerUrl:
-  //     // 'https://water.discomap.eea.europa.eu/arcgis/rest/services/UWWTD_CP/UWWTD_CP_WM_map3_2021_withoutCountryBoundaries/MapServer/2',
-  //     'https://nest.discomap.eea.europa.eu/arcgis/rest/services/Hosted/Map3UWWTDPlants_2021/FeatureServer/0',
-  //   layerTitle: 'Discharge of treated waste water on land - UWWTPs',
-  //   // filterField: 'DischargeOnLand',
-  //   filterField: 'dischargeonland',
-  //   // filterField: '',
-  //   // countryField: 'Country',
-  //   countryField: 'country',
-  // }, 
-  
   {
     layerId: '3',
     layerUrl:
@@ -115,22 +79,16 @@ class MapViewer extends React.Component {
     return loadModules([
       'esri/WebMap',
       'esri/views/MapView',
-      'esri/widgets/Zoom',
       'esri/layers/FeatureLayer',
       'esri/core/promiseUtils',
-      'esri/widgets/Legend',
-    ]).then(
-      ([_Map, _MapView, _Zoom, _FeatureLayer, _promiseUtils, _Legend]) => {
-        [Map, MapView, Zoom, FeatureLayer, promiseUtils, Legend] = [
-          _Map,
-          _MapView,
-          _Zoom,
-          _FeatureLayer,
-          _promiseUtils,
-          _Legend,
-        ];
-      },
-    );
+    ]).then(([_Map, _MapView, _FeatureLayer, _promiseUtils]) => {
+      [Map, MapView, FeatureLayer, promiseUtils] = [
+        _Map,
+        _MapView,
+        _FeatureLayer,
+        _promiseUtils,
+      ];
+    });
   }
 
   componentDidUpdate() {
