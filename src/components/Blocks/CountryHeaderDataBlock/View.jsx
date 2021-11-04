@@ -87,7 +87,7 @@ const View = (props) => {
               )}
             </div>
           </div>
-          <div>
+          <div className="uww-country-mainwrapper">
             <Dropdown
               selection
               className="countries-dd"
@@ -101,9 +101,9 @@ const View = (props) => {
               {hide_data_section ||
                 (provider_url && (
                   <div className="uww-country-block">
-                    <div className="uww-left">
+                    <div className={'uww-left ' + getClassName(column_value)}>
                       <div className="uww-data">
-                        <div className={getClassName(column_value)}>
+                        <div>
                           {column_value[0] === 0 ? (
                             <span>0%</span>
                           ) : (
@@ -124,24 +124,24 @@ const View = (props) => {
                     </div>
                     <div className="uww-country-legend">
                       <div className="legend-wrapper">
-                        <span className="legend-box red-bg"></span>
-                        <p className="legend-text">0 - 70%</p>
-                      </div>
-                      <div className="legend-wrapper">
-                        <span className="legend-box orange-bg"></span>
-                        <p className="legend-text">70 - 85%</p>
-                      </div>
-                      <div className="legend-wrapper">
-                        <span className="legend-box yellow-bg"></span>
-                        <p className="legend-text">85 - 95%</p>
+                        <span className="legend-box blue-bg"></span>
+                        <p className="legend-text">97 - 100%</p>
                       </div>
                       <div className="legend-wrapper">
                         <span className="legend-box green-bg"></span>
                         <p className="legend-text">95 - 97%</p>
                       </div>
                       <div className="legend-wrapper">
-                        <span className="legend-box blue-bg"></span>
-                        <p className="legend-text">97 - 100%</p>
+                        <span className="legend-box yellow-bg"></span>
+                        <p className="legend-text">85 - 95%</p>
+                      </div>
+                      <div className="legend-wrapper">
+                        <span className="legend-box orange-bg"></span>
+                        <p className="legend-text">70 - 85%</p>
+                      </div>
+                      <div className="legend-wrapper">
+                        <span className="legend-box red-bg"></span>
+                        <p className="legend-text">0 - 70%</p>
                       </div>
                     </div>
                   </div>
