@@ -82,13 +82,16 @@ class Header extends Component {
     let contentDescription = this.props.content?.description;
     let stagingBanner =
       __CLIENT__ && document.getElementsByClassName('stagingBanner').length > 0;
+    let isDatabaseItemView =
+      __CLIENT__ &&
+      document.getElementsByClassName('database-item-view').length > 0;
     let isNonContentRoute = config._data.settings.nonContentRoutes.includes(
       this.props.actualPathName,
     );
 
     return (
       <div className="portal-top">
-        {leadImageUrl && !isNonContentRoute && (
+        {leadImageUrl && !isNonContentRoute && !isDatabaseItemView && (
           <BodyClass className="has-image" />
         )}
         {stagingBanner && <BodyClass className="staging-banner" />}
@@ -143,7 +146,7 @@ class Header extends Component {
         </Segment>
 
         <React.Fragment>
-          {!isNonContentRoute && (
+          {!isNonContentRoute && !isDatabaseItemView && (
             <div
               className={`header-bg ${
                 this.state.isHomepage ? 'homepage' : 'contentpage'
