@@ -1,8 +1,20 @@
+/**
+ * Boards action.
+ * @module actions/boards
+ */
+
+import {
+  GET_BOOKMARK,
+  ADD_BOOKMARK,
+  PUT_BOOKMARK,
+  DELETE_BOOKMARK,
+  GET_ALL_BOOKMARKS,
+} from '@eeacms/volto-freshwater/constants/ActionTypes';
 import { doStringifySearchquery } from '@eeacms/volto-freshwater/utils';
 
 export function getBookmark(uid, group, querystring = '') {
   return {
-    type: 'GET_BOOKMARK',
+    type: GET_BOOKMARK,
     request: {
       op: 'get',
       path: `/@bookmark?uid=${uid}&group=${group}&queryparams=${doStringifySearchquery(
@@ -14,7 +26,7 @@ export function getBookmark(uid, group, querystring = '') {
 
 export function addBookmark(uid, group, querystring = '', payload = {}) {
   return {
-    type: 'ADD_BOOKMARK',
+    type: ADD_BOOKMARK,
     request: {
       op: 'post',
       path: `/@bookmark`,
@@ -30,7 +42,7 @@ export function addBookmark(uid, group, querystring = '', payload = {}) {
 
 export function modifyBookmark(uid, group, querystring = '', payload = {}) {
   return {
-    type: 'PUT_BOOKMARK',
+    type: PUT_BOOKMARK,
     request: {
       op: 'put',
       path: `/@bookmark-update`,
@@ -46,7 +58,7 @@ export function modifyBookmark(uid, group, querystring = '', payload = {}) {
 
 export function deleteBookmark(uid, group, querystring = '') {
   return {
-    type: 'DEL_BOOKMARK',
+    type: DELETE_BOOKMARK,
     request: {
       op: 'del',
       path: `/@bookmark`,
@@ -61,7 +73,7 @@ export function deleteBookmark(uid, group, querystring = '') {
 
 export function getAllBookmarks(owner) {
   return {
-    type: 'GET_BOOKMARKS',
+    type: GET_ALL_BOOKMARKS,
     request: {
       op: 'get',
       path: `/@bookmarks-all` + (owner ? `?owner=${owner}` : ``),
