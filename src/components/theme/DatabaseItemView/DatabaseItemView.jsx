@@ -31,17 +31,6 @@ const DatabaseItemView = (props) => {
 
       <div id="page-document" className="ui container">
         <div>
-          {/*<div>
-            {content?.image?.download && (
-              <a href={flattenToAppURL(content.image.download)}>
-                <img
-                  alt={content.title}
-                  src={flattenToAppURL(content.image.scales.mini.download)}
-                />
-              </a>
-            )}
-          </div>*/}
-
           <Link to="/data-maps-and-tools/metadata" className="resources-link">
             <Icon name="folder open outline" size="20px" />
             Resource catalogue
@@ -53,13 +42,6 @@ const DatabaseItemView = (props) => {
             )}
             <h1>{content.title}</h1>
             <div className="metadata-info">
-              {/*{content['@type'] && (
-                <div className="metadata-section">
-                  <span className="metadata-tab-title">Item: </span>
-                  <span>{formatItemType(content['@type'])}</span>
-                </div>
-              )}*/}
-
               {content.category && content.category.length > 0 && (
                 <div className="metadata-section">
                   <span className="metadata-tab-title">Topics: </span>

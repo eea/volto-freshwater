@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { Portal } from 'react-portal';
 import { Button } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
+import { FavButton } from '@eeacms/volto-freshwater/components';
 import starSVG from '@plone/volto/icons/half-star.svg';
 import starFullSVG from '@eeacms/volto-freshwater/icons/star-full.svg';
 import {
@@ -53,29 +54,7 @@ const AddToFavBoardButton = (props) => {
             )}
           </>
         ) : (
-          <>
-            {basket.items.some((item) => item.content === content) ? (
-              <Button
-                className="add-to-fav"
-                title="Remove selection"
-                onClick={() => {
-                  dispatch(removeItemFromBasket(content));
-                }}
-              >
-                <Icon className="selected" name={starFullSVG} size="33px" />
-              </Button>
-            ) : (
-              <Button
-                className="add-to-fav"
-                title="Save to Board"
-                onClick={() => {
-                  dispatch(addItemToBasket({ content: content }));
-                }}
-              >
-                <Icon name={starSVG} size="33px" />
-              </Button>
-            )}
-          </>
+          <FavButton item={content} iconSize="33" />
         )}
       </div>
     </Portal>
