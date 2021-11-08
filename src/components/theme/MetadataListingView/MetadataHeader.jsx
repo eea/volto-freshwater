@@ -15,7 +15,7 @@ const MetadataHeader = (props) => {
   const location = useLocation();
 
   React.useEffect(() => {
-    if (!location.hash.includes(item?.id)) {
+    if (!location.hash.includes(item.id)) {
       setOpenModal(false);
     }
   }, [location, item.id]);
