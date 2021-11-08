@@ -18,7 +18,7 @@ const MetadataHeader = (props) => {
     if (!location.hash.includes(item?.id)) {
       setOpenModal(false);
     }
-  }, [location, item]);
+  }, [location, item.id]);
 
   const closeModal = (item) => {
     history.replace({}, document.title, window.location.pathname);
