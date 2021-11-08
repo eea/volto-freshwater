@@ -25,7 +25,11 @@ const ItemMetadata = (props) => {
       <div className="map-preview-wrapper">
         {(tableau_url || map_url) && (
           <div className="map-preview">
-            <MapPreview tableau_url={tableau_url} map_url={map_url} />
+            <MapPreview
+              item={item}
+              tableau_url={tableau_url}
+              map_url={map_url}
+            />
           </div>
         )}
       </div>

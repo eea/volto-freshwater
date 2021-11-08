@@ -1,9 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Table, Icon } from 'semantic-ui-react';
 import { BodyClass } from '@plone/volto/helpers';
-import { formatItemType } from '@eeacms/volto-freshwater/utils';
-import { Link } from 'react-router-dom';
 import { MapPreview } from '@eeacms/volto-freshwater/components';
+import { formatItemType } from '@eeacms/volto-freshwater/utils';
 
 import './style.less';
 

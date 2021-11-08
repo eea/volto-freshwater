@@ -2,6 +2,7 @@ export HeroSection from './theme/Header/HeroSection';
 export HeroSectionView from './theme/Header/HeroSectionView';
 export DatabaseItemView from './theme/DatabaseItemView/DatabaseItemView';
 export MetadataListingView from './theme/MetadataListingView/MetadataListingView';
+export MetadataHeader from './theme/MetadataListingView/MetadataHeader';
 export SimpleListingView from './theme/SimpleListingView/SimpleListingView';
 export ItemMetadata from './theme/ItemMetadata/ItemMetadata';
 export ItemTitle from './theme/ItemMetadata/ItemTitle';
