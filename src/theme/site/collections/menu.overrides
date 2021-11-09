@@ -18,6 +18,13 @@
       line-height: 1.2;
     }
 
+    .item.firstLevel:nth-last-child(-n + 2) {
+      > .menu {
+        right: 0 !important;
+        left: auto !important;
+      }
+    }
+
     .item.firstLevel:hover {
       background-color: #ecf4fa;
       color: @wiseSecondaryColor;

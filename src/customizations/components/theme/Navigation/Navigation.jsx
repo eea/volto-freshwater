@@ -270,7 +270,7 @@ class Navigation extends Component {
                                   if (subitemIsDraft) e.preventDefault();
                                 }}
                               >
-                                {subitem.title} {subitem.review_state}
+                                {subitem.title}
                               </Link>
                             </div>
                             {subitem.items && subitem.items.length > 0 && (
