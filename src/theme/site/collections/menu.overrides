@@ -99,18 +99,8 @@ body.siteroot {
   }
 }
 
-/* Countries submenu */
-.navigation .countries-submenu {
-  column-count: 3;
-  column-gap: 0.5rem;
-
-  > .item.thirdLevel {
-    padding: 0.3rem 1rem !important;
-  }
-}
-
 .hamburger-wrapper {
-  position: absolute;
+  position: absolute !important;
   top: -30px;
   right: 0;
   float: right;
@@ -192,6 +182,16 @@ body.has-toolbar.has-sidebar.siteroot {
   .firstLevel > a,
   .firstLevel:hover {
     color: @wiseSecondaryColor !important;
+  }
+}
+
+/* Countries submenu */
+.navigation .countries-submenu {
+  column-count: 3;
+  column-gap: 0.5rem;
+
+  > .item.thirdLevel {
+    padding: 0.3rem 1rem !important;
   }
 }
 
