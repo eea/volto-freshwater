@@ -63,7 +63,7 @@ class Header extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.actualPathName !== this.props.actualPathName) {
       this.setState({
-        isHomepage: this.props.content?.['@type'] === 'Plone Site';
+        isHomepage: this.props.content?.['@type'] === 'Plone Site',
       });
     }
   }
