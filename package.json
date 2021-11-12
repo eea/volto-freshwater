@@ -17,7 +17,6 @@
     "url": "git@github.com:eea/volto-freshwater.git"
   },
   "addons": [
-    "volto-slate:asDefault",
     "@kitconcept/volto-blocks-grid",
     "@eeacms/volto-plotlycharts",
     "@eeacms/volto-columns-block",
@@ -26,20 +25,21 @@
     "@eeacms/volto-resize-helper",
     "@eeacms/volto-block-style",
     "@eeacms/volto-block-toc",
-    "@eeacms/volto-arcgis-block"
+    "@eeacms/volto-arcgis-block",
+    "volto-slate"
   ],
   "dependencies": {
     "@eeacms/volto-arcgis-block": "*",
     "@eeacms/volto-block-toc": "*",
     "react-lazy-load-image-component": "^1.4.0",
-    "volto-slate": "^2.6.1",
     "@eeacms/volto-resize-helper": "^0.2.0",
     "@eeacms/volto-block-style": "^3.3.0",
     "@eeacms/volto-columns-block": "4.4.5",
     "@eeacms/volto-datablocks": "2.0.11",
     "@eeacms/volto-group-block": "*",
     "@eeacms/volto-plotlycharts": "*",
-    "@kitconcept/volto-blocks-grid": "*"
+    "@kitconcept/volto-blocks-grid": "*",
+    "volto-slate": "*"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.9.5",
