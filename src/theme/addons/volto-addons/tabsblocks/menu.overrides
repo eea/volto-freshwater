@@ -92,7 +92,7 @@
   margin-left: 0;
 }
 
-body.siteroot {
+body.homepage-view {
   .default.tabs.inline {
     .active.item {
       &:after {

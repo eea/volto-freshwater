@@ -92,6 +92,7 @@ class Header extends Component {
         {leadImageUrl && !isNonContentRoute && !isDatabaseItemView && (
           <BodyClass className="has-image" />
         )}
+        {this.state.isHomepage && <BodyClass className="homepage-view" />}
         <Segment basic className="header-wrapper" role="banner">
           <Container>
             <div className="header">

@@ -68,7 +68,7 @@ body.has-image {
   }
 }
 
-body.siteroot #main .breadcrumbs {
+body.homepage-view #main .breadcrumbs {
   display: none !important;
 }
 

@@ -70,7 +70,7 @@
   }
 }
 
-body.siteroot {
+body.homepage-view {
   .navigation {
     .ui.secondary.pointing.menu {
       .firstLevel,
@@ -112,7 +112,7 @@ body.siteroot {
   }
 }
 
-body.siteroot {
+body.homepage-view {
   .hamburger-inner,
   .hamburger-inner:before,
   .hamburger-inner:after {
@@ -133,7 +133,7 @@ body.is-anonymous {
   }
 }
 
-body.is-anonymous.siteroot {
+body.is-anonymous.homepage-view {
   @media only screen and (max-width: 1495px) {
     .firstLevel,
     .firstLevel > a,
@@ -156,7 +156,7 @@ body:not(.is-anonymous) {
   }
 }
 
-body:not(.is-anonymous).siteroot {
+body:not(.is-anonymous).homepage-view {
   @media only screen and (max-width: 1595px) {
     .firstLevel,
     .firstLevel > a,
@@ -177,7 +177,7 @@ body.has-toolbar.has-sidebar {
   }
 }
 
-body.has-toolbar.has-sidebar.siteroot {
+body.has-toolbar.has-sidebar.homepage-view {
   .firstLevel,
   .firstLevel > a,
   .firstLevel:hover {
