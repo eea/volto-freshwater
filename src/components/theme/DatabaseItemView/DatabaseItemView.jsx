@@ -166,16 +166,16 @@ const DatabaseItemView = (props) => {
                     </Table.Row>
                   )}
 
-                  {content.original_content && (
+                  {content.original_source && (
                     <Table.Row>
-                      <Table.Cell>content</Table.Cell>
+                      <Table.Cell>Source</Table.Cell>
                       <Table.Cell>
                         <a
-                          href={content.original_content}
+                          href={content.original_source}
                           target="_blank"
                           rel="noreferrer"
                         >
-                          {content.original_content}
+                          {content.original_source}
                         </a>
                       </Table.Cell>
                     </Table.Row>
