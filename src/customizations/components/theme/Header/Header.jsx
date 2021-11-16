@@ -27,7 +27,7 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isHomepage: this.props.actualPathName === '/',
+      isHomepage: this.props.content?.['@type'] === 'Plone Site',
     };
   }
   /**
@@ -55,7 +55,7 @@ class Header extends Component {
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.actualPathName !== this.props.actualPathName) {
       this.setState({
-        isHomepage: nextProps.actualPathName === '/',
+        isHomepage: this.props.content?.['@type'] === 'Plone Site',
       });
     }
   }
