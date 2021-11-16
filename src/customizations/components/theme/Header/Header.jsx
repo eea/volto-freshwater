@@ -27,7 +27,7 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isHomepage: this.props.actualPathName === '/',
+      isHomepage: this.props.content?.['@type'] === 'Plone Site',
     };
   }
   /**
