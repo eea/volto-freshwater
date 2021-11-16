@@ -3,6 +3,9 @@
 *******************************/
 
 .ui.basic.segment.header-wrapper {
+  display: flex;
+  height: 100px;
+  align-items: center;
   padding: 0;
   margin-bottom: 0;
 }
@@ -52,7 +55,7 @@ body:not(.view-editview) {
     align-items: center;
 
     .logo {
-      margin: 0.7rem 0;
+      margin: 10px 0;
     }
   }
 

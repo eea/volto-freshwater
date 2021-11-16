@@ -74,7 +74,7 @@ body.siteroot #main .breadcrumbs {
 
 .has-image:not(.contenttype-country_profile) #main .breadcrumbs .breadcrumb {
   position: absolute;
-  top: 86px;
+  top: 100px;
   max-width: 91%;
 }
 
@@ -89,5 +89,11 @@ body.siteroot #main .breadcrumbs {
     #main .breadcrumbs .ui.breadcrumb {
       top: 106px;
     }
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .breadcrumbs .breadcrumb {
+    display: none !important;
   }
 }

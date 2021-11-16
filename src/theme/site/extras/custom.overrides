@@ -74,20 +74,19 @@
   padding-bottom: 0.5em !important;
 }
 
-body.siteroot.staging-banner {
+body.siteroot.has-banner {
   .portal-top {
     top: 110px;
   }
 }
 
-@media only screen and (max-width: 1480px) {
-  body.has-image.staging-banner:not(.contenttype-country_profile) #main .breadcrumbs .breadcrumb {
-    top: 170px !important;
-  }
-}
 
-body.has-image.staging-banner:not(.contenttype-country_profile) #main .breadcrumbs .breadcrumb {
-  top: 177px;
+body.has-image.has-banner:not(.contenttype-country_profile) #main .breadcrumbs .breadcrumb {
+  top: 183px;
+
+  @media only screen and (max-width: 768px) {
+    top: 283px;
+  }
 }
 
 @media only screen and (max-width: 1400px) and (min-width: 768px) {
