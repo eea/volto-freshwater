@@ -39,6 +39,8 @@
     "@eeacms/volto-group-block": "*",
     "@eeacms/volto-plotlycharts": "*",
     "@kitconcept/volto-blocks-grid": "*",
+    "react-slick": "^0.24.0",
+    "slick-carousel": "^1.8.1",
     "volto-slate": "*"
   },
   "devDependencies": {

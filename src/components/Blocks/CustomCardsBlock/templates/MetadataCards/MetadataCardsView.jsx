@@ -139,7 +139,6 @@ const MetadataCardsView = ({ data, isEditMode }) => {
     text,
     cards,
     border_color,
-    image_bg_size,
     image_height,
     image_scale,
     cards_per_row,
@@ -174,8 +173,6 @@ const MetadataCardsView = ({ data, isEditMode }) => {
                       key={index}
                       {...card}
                       border_color={border_color}
-                      border_top_width={data.border_top_width}
-                      image_bg_size={image_bg_size}
                       image_height={image_height}
                       image_scale={image_scale}
                       isEditMode={isEditMode}
