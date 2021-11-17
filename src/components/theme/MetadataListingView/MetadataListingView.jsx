@@ -7,7 +7,7 @@ import {
 } from '@eeacms/volto-freshwater/components';
 import './style.less';
 
-const MetadataListingView = ({ items, isEditMode, basket }) => {
+const MetadataListingView = ({ items, isEditMode }) => {
   return (
     <div className="items">
       {items.map((item, index) => (

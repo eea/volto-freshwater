@@ -6,17 +6,8 @@ import {
   ItemTitle,
   ItemMetadataSnippet,
 } from '@eeacms/volto-freshwater/components';
+import { formatItemType } from '@eeacms/volto-freshwater/utils';
 import './style.less';
-
-const formatItemType = (item) => {
-  const type =
-    item
-      .replace('_', ' / ')
-      .split(' ')
-      .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-      .join(' ') || '';
-  return type;
-};
 
 const SimpleListingView = ({ items, isEditMode }) => {
   const [isOpenModal, setOpenModal] = React.useState(false);
