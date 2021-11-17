@@ -3,14 +3,14 @@ const Schema = {
     {
       id: 'default',
       title: 'Default',
-      fields: ['block_title', 'columns'],
+      fields: ['block_title', 'columnsCount'],
     },
   ],
   properties: {
     block_title: {
       title: 'Title',
     },
-    columns: {
+    columnsCount: {
       title: 'Number of columns',
       widget: 'number',
     },

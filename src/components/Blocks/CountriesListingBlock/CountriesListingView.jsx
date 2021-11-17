@@ -47,7 +47,7 @@ const CountriesListingView = (props) => {
               )}
               <div
                 className="countries-listing-section"
-                style={{ columns: data.columns || 3 }}
+                style={{ columns: data.columnsCount || 3 }}
               >
                 {section?.items
                   .sort((a, b) => (a.title > b.title ? 1 : -1))
