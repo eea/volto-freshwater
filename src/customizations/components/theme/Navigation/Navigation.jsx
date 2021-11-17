@@ -223,7 +223,7 @@ class Navigation extends Component {
 
           {this.props.items.map((item) => {
             const flatUrl = flattenToAppURL(item.url);
-            const itemIsDraft = item.review_state === 'draft';
+            const draftItem = item.review_state === 'draft';
             return item.items && item.items.length ? (
               <Dropdown
                 item
@@ -237,11 +237,11 @@ class Navigation extends Component {
                 closeOnBlur={this.state.isMobileMenuOpen ? false : true}
                 trigger={
                   <Link
-                    className={itemIsDraft ? 'disabled' : ''}
+                    className={draftItem ? 'disabled' : ''}
                     to={flatUrl === '' ? '/' : flatUrl}
                     key={flatUrl}
                     onClick={(e) => {
-                      if (itemIsDraft) e.preventDefault();
+                      if (draftItem) e.preventDefault();
                     }}
                   >
                     {item.title}
@@ -251,7 +251,7 @@ class Navigation extends Component {
                 <Dropdown.Menu>
                   {item.items.map((subitem) => {
                     const flatSubUrl = flattenToAppURL(subitem.url);
-                    const subitemIsDraft = subitem.review_state === 'draft';
+                    const subDraftItem = subitem.review_state === 'draft';
                     return (
                       <Dropdown.Item key={flatSubUrl}>
                         {subitem.title
@@ -264,10 +264,10 @@ class Navigation extends Component {
                                 key={flatSubUrl}
                                 className={cx('item secondLevel', {
                                   menuActive: this.isActive(flatSubUrl),
-                                  disabled: subitemIsDraft,
+                                  disabled: subDraftItem,
                                 })}
                                 onClick={(e) => {
-                                  if (subitemIsDraft) e.preventDefault();
+                                  if (subDraftItem) e.preventDefault();
                                 }}
                               >
                                 {subitem.title}
@@ -280,7 +280,7 @@ class Navigation extends Component {
                                     const flatSubSubUrl = flattenToAppURL(
                                       subsubitem.url,
                                     );
-                                    const subSubitemIsDraft =
+                                    const subSubDraftItem =
                                       subsubitem.review_state === 'draft';
                                     return (
                                       <Link
@@ -293,10 +293,10 @@ class Navigation extends Component {
                                         key={flatSubSubUrl}
                                         className={cx('item thirdLevel', {
                                           menuActive: this.isActive(flatSubUrl),
-                                          disabled: subSubitemIsDraft,
+                                          disabled: subSubDraftItem,
                                         })}
                                         onClick={(e) => {
-                                          if (subSubitemIsDraft)
+                                          if (subSubDraftItem)
                                             e.preventDefault();
                                         }}
                                       >
@@ -316,10 +316,10 @@ class Navigation extends Component {
                                 key={flatSubUrl}
                                 className={cx('item secondLevel', {
                                   menuActive: this.isActive(flatSubUrl),
-                                  disabled: subitemIsDraft,
+                                  disabled: subDraftItem,
                                 })}
                                 onClick={(e) => {
-                                  if (subitemIsDraft) e.preventDefault();
+                                  if (subDraftItem) e.preventDefault();
                                 }}
                               >
                                 {subitem.title}
@@ -332,7 +332,7 @@ class Navigation extends Component {
                                     const flatSubSubUrl = flattenToAppURL(
                                       subsubitem.url,
                                     );
-                                    const subSubitemIsDraft =
+                                    const subSubDraftItem =
                                       subsubitem.review_state === 'draft';
                                     return (
                                       <Link
@@ -345,10 +345,10 @@ class Navigation extends Component {
                                         key={flatSubSubUrl}
                                         className={cx('item thirdLevel', {
                                           menuActive: this.isActive(flatSubUrl),
-                                          disabled: subSubitemIsDraft,
+                                          disabled: subSubDraftItem,
                                         })}
                                         onClick={(e) => {
-                                          if (subSubitemIsDraft)
+                                          if (subSubDraftItem)
                                             e.preventDefault();
                                         }}
                                       >
