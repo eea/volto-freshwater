@@ -190,6 +190,25 @@ const applyConfig = (config) => {
     },
   ];
 
+  config.settings.externalRoutes = [
+    ...(config.settings.externalRoutes || []),
+    ...(config.settings.prefixPath
+      ? [
+          {
+            match: {
+              path: /\/$/,
+              exact: true,
+              strict: true,
+            },
+
+            url(payload) {
+              return payload.location.pathname;
+            },
+          },
+        ]
+      : []),
+  ];
+
   // Custom block styles
   config.settings.pluggableStyles = [
     ...(config.settings.pluggableStyles || []),
@@ -246,7 +265,7 @@ const applyConfig = (config) => {
     localnavigation,
   };
 
-  return [
+  const final = [
     installEmbedContentBlock,
     installDashboardTabsBlock,
     installCustomCardsBlock,
@@ -259,6 +278,9 @@ const applyConfig = (config) => {
     installSlatePopup,
     installArcgisBlock,
   ].reduce((acc, apply) => apply(acc), config);
+
+  console.log('final config', final);
+  return final;
 };
 
 export default applyConfig;
