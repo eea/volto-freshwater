@@ -30,7 +30,7 @@
   ],
   "dependencies": {
     "@eeacms/volto-arcgis-block": "*",
-    "@eeacms/volto-block-toc": "*",
+    "@eeacms/volto-block-toc": "2.2.2",
     "react-lazy-load-image-component": "^1.4.0",
     "@eeacms/volto-resize-helper": "^0.2.0",
     "@eeacms/volto-block-style": "^3.3.0",
@@ -41,7 +41,7 @@
     "@kitconcept/volto-blocks-grid": "*",
     "react-slick": "^0.24.0",
     "slick-carousel": "^1.8.1",
-    "volto-slate": "*"
+    "volto-slate": "4.2.1"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.9.5",
