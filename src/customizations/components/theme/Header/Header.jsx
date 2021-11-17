@@ -24,12 +24,12 @@ import config from '@plone/volto/registry';
  * @extends Component
  */
 class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isHomepage: this.props.content?.['@type'] === 'Plone Site',
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     isHomePage: this.props.content?.['@type'] === 'Plone Site',
+  //   };
+  // }
   /**
    * Property types.
    * @property {Object} propTypes Property types.
@@ -52,21 +52,21 @@ class Header extends Component {
     token: null,
   };
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.actualPathName !== this.props.actualPathName) {
-      this.setState({
-        isHomepage: this.props.content?.['@type'] === 'Plone Site',
-      });
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.actualPathName !== this.props.actualPathName) {
-      this.setState({
-        isHomepage: this.props.content?.['@type'] === 'Plone Site',
-      });
-    }
-  }
+  // UNSAFE_componentWillReceiveProps(nextProps) {
+  //   if (nextProps.actualPathName !== this.props.actualPathName) {
+  //     this.setState({
+  //       isHomePage: this.props.content?.['@type'] === 'Plone Site',
+  //     });
+  //   }
+  // }
+  //
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.actualPathName !== this.props.actualPathName) {
+  //     this.setState({
+  //       isHomePage: this.props.content?.['@type'] === 'Plone Site',
+  //     });
+  //   }
+  // }
 
   /**
    * Render method.
@@ -74,6 +74,7 @@ class Header extends Component {
    * @returns {string} Markup for the component.
    */
   render() {
+    const isHomePage = this.props.content?.['@type'] === 'Plone Site';
     let leadImageUrl = this.props?.leadImage
       ? getScaleUrl(getPath(this.props.pathname), 'panoramic')
       : null;
@@ -88,85 +89,92 @@ class Header extends Component {
     );
 
     return (
-      <div className="portal-top">
-        {leadImageUrl && !isNonContentRoute && !isDatabaseItemView && (
-          <BodyClass className="has-image" />
-        )}
-        {this.state.isHomepage && <BodyClass className="homepage-view" />}
-        <Segment basic className="header-wrapper" role="banner">
-          <Container>
-            <div className="header">
-              <div
-                className={`logo-nav-wrapper ${
-                  this.state.isHomepage ? 'home-nav' : 'page-nav'
-                }`}
-              >
-                <div className="logo">
-                  {this.state.isHomepage ? (
-                    <img
-                      className="home-logo"
-                      src={clearLogoSVG}
-                      alt="Freshwater logo"
-                    />
-                  ) : (
-                    <Logo />
-                  )}
-                </div>
-                <div className="header-right-section">
-                  <div className="right-section-wrapper">
-                    <ul className="top-nav">
-                      <li>
-                        <a className="item" href={`mailto:WISE@eea.europa.eu`}>
-                          Contact
-                        </a>
-                      </li>
-                      <li>
-                        <Link className="item" to="/sitemap">
-                          <FormattedMessage
-                            id="sitemap"
-                            defaultMessage="Sitemap"
-                          />
-                        </Link>
-                      </li>
-                    </ul>
-                    <div className="search">
-                      <SearchWidget pathname={this.props.pathname} />
-                    </div>
+      <>
+        <div className="portal-top">
+          {isHomePage && !isNonContentRoute && (
+            <BodyClass className="homepage-view" />
+          )}
+          {leadImageUrl && !isNonContentRoute && !isDatabaseItemView && (
+            <BodyClass className="has-image" />
+          )}
+          <Segment basic className="header-wrapper" role="banner">
+            <Container>
+              <div className="header">
+                <div
+                  className={`logo-nav-wrapper ${
+                    isHomePage && !isNonContentRoute ? 'home-nav' : 'page-nav'
+                  }`}
+                >
+                  <div className="logo">
+                    {isHomePage && !isNonContentRoute ? (
+                      <img
+                        className="home-logo"
+                        src={clearLogoSVG}
+                        alt="Freshwater logo"
+                      />
+                    ) : (
+                      <Logo />
+                    )}
                   </div>
-                  <Navigation
-                    pathname={this.props.pathname}
-                    navigation={this.props.navigationItems}
-                  />
+                  <div className="header-right-section">
+                    <div className="right-section-wrapper">
+                      <ul className="top-nav">
+                        <li>
+                          <a
+                            className="item"
+                            href={`mailto:WISE@eea.europa.eu`}
+                          >
+                            Contact
+                          </a>
+                        </li>
+                        <li>
+                          <Link className="item" to="/sitemap">
+                            <FormattedMessage
+                              id="sitemap"
+                              defaultMessage="Sitemap"
+                            />
+                          </Link>
+                        </li>
+                      </ul>
+                      <div className="search">
+                        <SearchWidget pathname={this.props.pathname} />
+                      </div>
+                    </div>
+                    <Navigation
+                      pathname={this.props.pathname}
+                      navigation={this.props.navigationItems}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          </Container>
-        </Segment>
+            </Container>
+          </Segment>
 
-        <React.Fragment>
-          {!isNonContentRoute && !isDatabaseItemView && (
-            <div
-              className={`header-bg ${
-                this.state.isHomepage ? 'homepage' : 'contentpage'
-              }`}
-            >
-              {!this.state.isHomepage && (
-                <div
-                  className={'header-container'}
-                  style={{ position: 'relative' }}
-                >
-                  <HeroSection
-                    image_url={leadImageUrl}
-                    image_caption={imageCaption}
-                    content_title={contentTitle}
-                    content_description={contentDescription}
-                  />
-                </div>
-              )}
-            </div>
-          )}
-        </React.Fragment>
-      </div>
+          <React.Fragment>
+            {!isNonContentRoute && !isDatabaseItemView && (
+              <div
+                className={`header-bg ${
+                  isHomePage ? 'homepage' : 'contentpage'
+                }`}
+              >
+                {!isHomePage && (
+                  <div
+                    className={'header-container'}
+                    style={{ position: 'relative' }}
+                  >
+                    <HeroSection
+                      image_url={leadImageUrl}
+                      image_caption={imageCaption}
+                      content_title={contentTitle}
+                      content_description={contentDescription}
+                    />
+                  </div>
+                )}
+              </div>
+            )}
+          </React.Fragment>
+        </div>
+      </>
     );
   }
 }
