@@ -279,7 +279,7 @@ const applyConfig = (config) => {
     installArcgisBlock,
   ].reduce((acc, apply) => apply(acc), config);
 
-  console.log('final config', final);
+  // console.log('final config', final);
   return final;
 };
 
