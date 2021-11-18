@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import {
   ItemMetadataSnippet,
   MetadataHeader,
@@ -7,14 +9,14 @@ import {
 } from '@eeacms/volto-freshwater/components';
 import './style.less';
 
-const MetadataListingView = ({ items, isEditMode }) => {
+const MetadataListingView = ({ items, isEditMode, token }) => {
   return (
     <div className="items">
       {items.map((item, index) => (
         <div className="listing-item" key={item['@id']}>
           <div className="listing-body">
             <MetadataHeader item={item} />
-            <FavButton item={item} iconSize="20" />
+            {token && <FavButton item={item} iconSize="20" />}
             <ItemMetadataSnippet item={item} />
             <p>{item.description}</p>
           </div>
@@ -29,4 +31,8 @@ MetadataListingView.propTypes = {
   isEditMode: PropTypes.bool,
 };
 
-export default MetadataListingView;
+export default compose(
+  connect((state) => ({
+    token: state.userSession.token,
+  })),
+)(MetadataListingView);
