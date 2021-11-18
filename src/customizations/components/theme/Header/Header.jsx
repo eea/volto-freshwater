@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
 import { HeroSection } from '@eeacms/volto-freshwater/components';
-import { getScaleUrl, getPath } from '@eeacms/volto-freshwater/utils';
+// import { getScaleUrl, getPath } from '@eeacms/volto-freshwater/utils';
 import clearLogoSVG from '@eeacms/volto-freshwater/static/freshwater_logo_clear.svg';
 import config from '@plone/volto/registry';
 
@@ -75,9 +75,7 @@ class Header extends Component {
    */
   render() {
     const isHomePage = this.props.content?.['@type'] === 'Plone Site';
-    let leadImageUrl = this.props?.leadImage
-      ? getScaleUrl(getPath(this.props.pathname), 'panoramic')
-      : null;
+    let leadImageUrl = this.props.leadImage?.scales?.panoramic?.download;
     let imageCaption = this.props.content?.image_caption;
     let contentTitle = this.props.content?.title;
     let contentDescription = this.props.content?.description;
