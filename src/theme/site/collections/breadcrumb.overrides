@@ -47,6 +47,10 @@ body.has-image {
   }
 }
 
+.ui.breadcrumb .section.disabled {
+  cursor: default !important;
+}
+
 #main {
   .ui.vertical.segment.breadcrumbs {
     border-bottom: 0;

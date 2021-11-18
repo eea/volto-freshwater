@@ -9,7 +9,7 @@ import {
   FavBoardListingView,
 } from './components';
 
-import { basket, boards, localnavigation } from './reducers';
+import { basket, boards, localnavigation, breadcrumb } from './reducers';
 import CopyrightWidget from './components/Widgets/CopyrightWidget';
 import TokenWidget from '@plone/volto/components/manage/Widgets/TokenWidget';
 
@@ -263,6 +263,7 @@ const applyConfig = (config) => {
     basket,
     boards,
     localnavigation,
+    breadcrumb,
   };
 
   const final = [
