@@ -108,6 +108,14 @@
   padding-left: 0 !important;
 }
 
+.grid .nine.wide.content-body {
+  .full-width {
+    @media only screen and (min-width: 767px) {
+      left: 67% !important;
+    }
+  }
+}
+
 body.has-toolbar:not(.has-sidebar):not(.has-sidebar-collapsed) {
   .full-width {
     .ui.container {
