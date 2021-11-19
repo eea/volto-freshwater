@@ -97,8 +97,8 @@ body.homepage-view #main .breadcrumbs {
   }
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 768px) {
   .breadcrumbs .breadcrumb {
-    display: none !important;
+    visibility: hidden !important;
   }
 }

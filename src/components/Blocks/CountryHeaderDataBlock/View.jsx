@@ -80,14 +80,12 @@ const View = (props) => {
             'no-flag': !data.country_flag,
           })}
         >
-          <div>
+          <div className="country-profile-wrapper">
             <div className="country-profile-flag">
               {data.country_flag && (
                 <img alt={countryNames[data.country_flag]} src={flag} />
               )}
             </div>
-          </div>
-          <div className="uww-country-mainwrapper">
             <Dropdown
               selection
               className="countries-dd"
@@ -96,7 +94,8 @@ const View = (props) => {
               defaultValue={content.title.toLowerCase()}
               icon="angle down"
             />
-
+          </div>
+          <div className="country-data-wrapper">
             <div className="uww-country-wrapper">
               {hide_data_section ||
                 (provider_url && (

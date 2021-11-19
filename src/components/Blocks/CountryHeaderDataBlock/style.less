@@ -8,7 +8,12 @@
 
 @import (multiple, reference, optional) '../../theme.config';
 
-.uww-country-mainwrapper {
+.country-data-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.country-profile-wrapper {
   display: flex;
   align-items: center;
 }
@@ -18,7 +23,6 @@
   min-height: 60px;
   flex-direction: column;
   justify-content: center;
-  margin-left: 30rem;
 
   .blue-bg {
     background-color: @blue-bg;
@@ -43,33 +47,28 @@
 
 .uww-left {
   display: flex;
+  width: 195px;
+  height: 130px;
   flex-direction: column;
   align-items: center;
-  padding: 1.2em 0.5em;
+  padding: 1em;
 }
 
 .uww-country-block {
   display: flex;
   flex-direction: row;
   align-items: center;
-  // margin-top: 20px;
 
   .uww-data {
-    // margin-right: 15px;
     font-family: 'Poppins', serif;
     font-size: 3.4rem;
     font-weight: 500;
     line-height: 3.4rem;
-    // padding: 1rem;
   }
 
   .uww-text {
-    max-width: 160px;
-    margin-top: 0.5em;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    color: @wiseSecondaryColor;
-    font-size: 14px;
+    padding-top: 7px;
+    font-size: 15px;
     line-height: 16px;
     text-align: center;
   }
@@ -79,13 +78,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-left: 1rem;
+  padding-left: 25px;
 
   .legend-wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0 12px;
+    // padding: 0 12px;
 
     .legend-box {
       width: 20px;
@@ -133,28 +132,13 @@
       right: 0;
       left: 0;
       width: 100%;
-      height: 202px;
+      height: 191px;
       border-bottom: 1px solid #d8d8d8;
       background-color: #f5f5f5;
       content: '';
     }
 
-    // &:after {
-    //   position: absolute;
-    //   z-index: -1;
-    //   top: 97px;
-    //   right: 0;
-    //   left: 0;
-    //   width: 100%;
-    //   height: 1px;
-    //   background-color: #d8d8d8;
-    //   content: '';
-    // }
-
     .country-header-wrapper {
-      position: absolute;
-      top: 10px;
-
       &.no-flag {
         top: 45px;
       }
@@ -167,8 +151,10 @@
 
   .country-header-wrapper {
     display: flex;
+    width: 100%;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
   }
 
   .country-profile-flag {
@@ -176,7 +162,7 @@
 
     img {
       height: 130px;
-      padding-right: 40px;
+      padding-right: 30px;
     }
   }
 }
@@ -220,84 +206,61 @@
   }
 }
 
-@media only screen and (max-width: 1600px) {
-  .uww-country-wrapper {
-    margin-left: 25rem;
-  }
-}
-
-@media only screen and (max-width: 1400px) {
-  .uww-country-wrapper {
-    margin-left: 20rem;
-  }
-}
-
-@media only screen and (max-width: 1300px) {
-  .uww-country-wrapper {
-    margin-left: 15rem;
-  }
-}
-
-@media only screen and (max-width: 1200px) {
-  .uww-country-wrapper {
-    margin-left: 10rem;
-  }
-}
-
-@media only screen and (max-width: 1100px) {
-  .uww-country-wrapper {
-    margin-left: 5rem;
-  }
-}
-@media only screen and (max-width: 1050px) {
-  .uww-country-wrapper {
-    margin-left: 0rem;
-  }
-}
-@media only screen and (max-width: 950px) {
-  .country-header-block .country-profile-flag img {
-    margin-top: -24px;
-  }
-
-  .uww-country-legend {
-    flex-direction: row;
-    margin-left: -26rem;
-  }
-
+@media only screen and (min-width: 795px) and (max-width: 945px) {
   .uww-country-block {
+    position: relative;
     flex-direction: column;
   }
-}
-@media only screen and (max-width: 810px) {
-  .country-header-block .country-profile-flag img {
-    height: 100px;
-  }
 
   .uww-country-legend {
-    margin-top: 1.3rem;
-    margin-left: -25rem;
-  }
-
-  .uww-left {
-    padding: 1rem 0rem;
+    position: absolute;
+    right: 0;
+    bottom: -60px;
+    min-width: 520px;
+    flex-direction: row;
   }
 }
 
-@media only screen and (max-width: 650px) {
-  .uww-country-mainwrapper {
+@media only screen and (max-width: 794px) {
+  .country-header-block .country-header-wrapper {
     flex-direction: column;
     align-items: flex-start;
   }
 
   .uww-country-block {
-    margin-top: 1em;
+    position: relative;
+    flex-direction: row;
   }
 
-  .uww-country-legend {
-    margin-left: -13.6rem;
+  .country-data-wrapper {
+    padding-top: 1em;
   }
 
-  .uww-left {
-    margin-left: -8rem;
+  #view .country-header-block {
+    position: relative;
+    height: 300px;
+  }
+}
+
+@media only screen and (max-width: 790px) and (min-width: 650px) {
+  .country-data-wrapper {
+    align-self: flex-end;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .contenttype-country_profile {
+    .content-area {
+      padding-top: 0 !important;
+      margin-top: 0 !important;
+    }
+  }
+
+  .country-header-block {
+    &:before {
+      top: -1px !important;
+      height: 131px !important;
+      border-top: 1px solid #d8d8d8;
+    }
   }
 }

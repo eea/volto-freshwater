@@ -104,6 +104,10 @@ body.homepage-view {
   top: -30px;
   right: 0;
   float: right;
+
+  .hamburger {
+    padding-right: 0 !important;
+  }
 }
 
 @media only screen and (max-width: 991px) {
