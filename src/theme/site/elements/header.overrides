@@ -68,7 +68,8 @@ body:not(.view-editview) {
     }
 
     .home-logo {
-      max-width: 235px !important;
+      width: 234px !important;
+      max-width: 234px !important;
       height: 56px;
     }
   }
