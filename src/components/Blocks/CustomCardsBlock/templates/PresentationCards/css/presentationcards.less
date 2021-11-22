@@ -151,17 +151,29 @@
 
     .icon {
       color: #0099bb;
+
+      @media only screen and (max-width: 600px) {
+        height: 30px !important;
+      }
     }
   }
 
   .prev-arrow {
     right: auto;
     left: -40px;
+
+    @media only screen and (max-width: 600px) {
+      left: -28px;
+    }
   }
 
   .next-arrow {
     right: -40px;
     left: auto;
+
+    @media only screen and (max-width: 600px) {
+      right: -28px;
+    }
   }
 
   .slick-prev,

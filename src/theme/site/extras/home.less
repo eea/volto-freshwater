@@ -73,7 +73,14 @@ body.homepage-view.has-toolbar-collapsed:not(.has-toolbar) {
   background-position: center left;
 }
 
-@media (max-width: 600px) {
+@media only screen and (max-width: 768px) {
+  .slider-wrapper .slider-slide .slide-body .slide-description,
+  .slider-wrapper .slider-slide .slide-body .slide-description > p {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
   .slider-wrapper .slider-slide .slide-body {
     top: 140px;
   }

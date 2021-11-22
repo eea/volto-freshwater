@@ -1,5 +1,6 @@
 import React from 'react';
 import loadable from '@loadable/component';
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
 import { Icon } from '@plone/volto/components';
 import rightArrowSVG from '@plone/volto/icons/right-key.svg';
 import leftArrowSVG from '@plone/volto/icons/left-key.svg';
@@ -80,19 +81,21 @@ const CarouselCardsView = (props) => {
 
   return (
     <div className="cards-slider">
-      <Slider {...settings} ref={slider} className="carousel">
-        {(cards || []).map((card, index) => (
-          <Card
-            key={index}
-            card={card}
-            border_color={border_color}
-            image_height={image_height}
-            image_scale={image_scale}
-            isEditMode={isEditMode}
-          />
-        ))}
-      </Slider>
-      <Arrows slider={slider} />
+      <LazyLoadComponent>
+        <Slider {...settings} ref={slider} className="carousel">
+          {(cards || []).map((card, index) => (
+            <Card
+              key={index}
+              card={card}
+              border_color={border_color}
+              image_height={image_height}
+              image_scale={image_scale}
+              isEditMode={isEditMode}
+            />
+          ))}
+        </Slider>
+        <Arrows slider={slider} />
+      </LazyLoadComponent>
     </div>
   );
 };

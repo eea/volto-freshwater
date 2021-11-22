@@ -1,5 +1,4 @@
 import React from 'react';
-import { LazyLoadComponent } from 'react-lazy-load-image-component';
 import { UniversalLink } from '@plone/volto/components';
 import { getScaleUrl, getPath } from '@eeacms/volto-freshwater/utils';
 import config from '@plone/volto/registry';
@@ -31,38 +30,34 @@ const Card = (props) => {
           <div className="content presentation-card-content">
             <UniversalLink className="presentation-card-link" href={card.link}>
               <>
-                {leadImage && !card.attachedimage ? (
-                  <LazyLoadComponent>
-                    <div
-                      className="presentation-card-image hello"
-                      style={{
-                        backgroundImage: `url(${card.source?.[0]['@id']
-                          .replace(config.settings.apiPath, '')
-                          .replace(
-                            config.settings.internalApiPath,
-                            '',
-                          )}/@@images/image/${image_scale || 'large'})`,
-                        minHeight: `${image_height}`,
-                      }}
-                    ></div>
-                  </LazyLoadComponent>
+                {leadImage && !card?.attachedimage ? (
+                  <div
+                    className="presentation-card-image hello"
+                    style={{
+                      backgroundImage: `url(${card.source?.[0]['@id']
+                        .replace(config.settings.apiPath, '')
+                        .replace(
+                          config.settings.internalApiPath,
+                          '',
+                        )}/@@images/image/${image_scale || 'large'})`,
+                      minHeight: `${image_height}`,
+                    }}
+                  ></div>
                 ) : (
-                  <LazyLoadComponent>
-                    <div
-                      className="presentation-card-image"
-                      style={
-                        card.attachedimage
-                          ? {
-                              backgroundImage: `url(${getScaleUrl(
-                                getPath(card.attachedimage),
-                                image_scale || 'large',
-                              )})`,
-                              minHeight: `${image_height}`,
-                            }
-                          : {}
-                      }
-                    ></div>
-                  </LazyLoadComponent>
+                  <div
+                    className="presentation-card-image"
+                    style={
+                      card?.attachedimage
+                        ? {
+                            backgroundImage: `url(${getScaleUrl(
+                              getPath(card.attachedimage),
+                              image_scale || 'large',
+                            )})`,
+                            minHeight: `${image_height}`,
+                          }
+                        : {}
+                    }
+                  ></div>
                 )}
 
                 <div className="presentation-cards-content-wrapper">
@@ -102,38 +97,34 @@ const Card = (props) => {
           <div className="content presentation-card-content">
             <div className="presentation-card-link">
               <>
-                {leadImage && !card.attachedimage ? (
-                  <LazyLoadComponent>
-                    <div
-                      className="presentation-card-image"
-                      style={{
-                        backgroundImage: `url(${card.source?.[0]['@id']
-                          .replace(config.settings.apiPath, '')
-                          .replace(
-                            config.settings.internalApiPath,
-                            '',
-                          )}/@@images/image/${image_scale || 'large'})`,
-                        minHeight: `${image_height}`,
-                      }}
-                    ></div>
-                  </LazyLoadComponent>
+                {leadImage && !card?.attachedimage ? (
+                  <div
+                    className="presentation-card-image"
+                    style={{
+                      backgroundImage: `url(${card.source?.[0]['@id']
+                        .replace(config.settings.apiPath, '')
+                        .replace(
+                          config.settings.internalApiPath,
+                          '',
+                        )}/@@images/image/${image_scale || 'large'})`,
+                      minHeight: `${image_height}`,
+                    }}
+                  ></div>
                 ) : (
-                  <LazyLoadComponent>
-                    <div
-                      className="presentation-card-image"
-                      style={
-                        card.attachedimage
-                          ? {
-                              backgroundImage: `url(${getScaleUrl(
-                                getPath(card.attachedimage),
-                                image_scale || 'large',
-                              )})`,
-                              minHeight: `${image_height}`,
-                            }
-                          : {}
-                      }
-                    ></div>
-                  </LazyLoadComponent>
+                  <div
+                    className="presentation-card-image"
+                    style={
+                      card?.attachedimage
+                        ? {
+                            backgroundImage: `url(${getScaleUrl(
+                              getPath(card.attachedimage),
+                              image_scale || 'large',
+                            )})`,
+                            minHeight: `${image_height}`,
+                          }
+                        : {}
+                    }
+                  ></div>
                 )}
 
                 <div className="presentation-cards-content-wrapper">
