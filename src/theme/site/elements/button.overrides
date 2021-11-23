@@ -1,0 +1,14 @@
+#main .ui.loading.button,
+.ui.loading.button {
+  top: auto !important;
+  left: auto !important;
+
+  &:hover,
+  &:focus {
+    box-shadow: none !important;
+
+    svg.icon {
+      box-shadow: none !important;
+    }
+  }
+}
