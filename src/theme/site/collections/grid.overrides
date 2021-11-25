@@ -4,3 +4,16 @@
     padding: 1rem 0 !important;
   }
 }
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  .ui.grid.column-grid {
+    margin: auto !important;
+  }
+
+  .ui.grid > .row > [class*='twelve wide mobile'].column,
+  .ui.grid > .column.row > [class*='twelve wide mobile'].column,
+  .ui.grid > [class*='twelve wide mobile'].column,
+  .ui.column.grid > [class*='twelve wide mobile'].column {
+    padding: 0 !important;
+  }
+}

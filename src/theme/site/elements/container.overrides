@@ -20,9 +20,9 @@
     padding: 0 !important;
   }
 
-  @media only screen and (max-width: 480px) {
-    padding-right: 28px !important;
-    padding-left: 28px !important;
+  @media only screen and (max-width: 600px) {
+    padding-right: 20px !important;
+    padding-left: 20px !important;
   }
 }
 
@@ -113,6 +113,11 @@
 
   .ui.container {
     padding: 0 40px;
+  }
+
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    padding-right: 10px !important;
+    padding-left: 10px !important;
   }
 }
 

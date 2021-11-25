@@ -137,6 +137,18 @@ body.has-image.has-banner:not(.contenttype-country_profile) #main .breadcrumbs .
   }
 }
 
+.column-grid > .bg-right {
+  &:after {
+    left: 0;
+  }
+}
+
+.column-grid > .bg-left {
+  &:after {
+    right: 0;
+  }
+}
+
 .map-bg-right,
 .map-bg-left {
   position: relative;
@@ -165,17 +177,6 @@ body.has-image.has-banner:not(.contenttype-country_profile) #main .breadcrumbs .
   }
 }
 
-.column-grid > .bg-right {
-  &:after {
-    left: 0;
-  }
-}
-
-.column-grid > .bg-left {
-  &:after {
-    right: 0;
-  }
-}
 
 body.contenttype-country_profile {
   .herosection {

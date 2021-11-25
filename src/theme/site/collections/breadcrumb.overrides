@@ -1,15 +1,12 @@
 body.has-image {
   #main {
+    .breadcrumbs {
+      padding: 0 !important;
+    }
+
     .ui.vertical.segment.breadcrumbs {
       border-bottom: 0;
       background: none;
-    }
-
-    @media only screen and (max-width: 480px) {
-      .ui.breadcrumbs {
-        right: 0;
-        left: 0;
-      }
     }
 
     .ui.breadcrumb {
@@ -41,8 +38,11 @@ body.has-image {
       color: #fff !important;
     }
 
-    .breadcrumbs {
-      padding: 0 !important;
+    @media only screen and (max-width: 480px) {
+      .ui.breadcrumbs {
+        right: 0;
+        left: 0;
+      }
     }
   }
 }

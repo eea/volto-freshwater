@@ -32,6 +32,7 @@ const Header = (props) => {
 
   const leadImageUrl = leadImage?.scales?.panoramic?.download;
   const isEditView = location.pathname.endsWith('/edit');
+  const isLoginView = location.pathname.endsWith('/login');
   const isControlPanel = location.pathname.includes('/controlpanel/');
   const isDatabaseItemView =
     __CLIENT__ &&
@@ -40,7 +41,11 @@ const Header = (props) => {
     actualPathName,
   );
   const homePageView =
-    isHomePage && !isControlPanel && !isEditView && !isNonContentRoute;
+    isHomePage &&
+    !isControlPanel &&
+    !isEditView &&
+    !isLoginView &&
+    !isNonContentRoute;
 
   return (
     <div className="portal-top">
