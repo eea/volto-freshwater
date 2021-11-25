@@ -93,6 +93,7 @@ const DashboardTabsBlockView = (props) => {
                           {...props}
                           viz={viz}
                           data={{ url: tableau_url }}
+                          item={source}
                         />
                       </div>
                     );

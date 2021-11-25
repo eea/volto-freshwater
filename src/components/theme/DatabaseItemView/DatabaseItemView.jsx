@@ -99,7 +99,12 @@ const DatabaseItemView = (props) => {
         <div className="map-preview-wrapper">
           {(tableau_url || map_url) && (
             <div className="map-preview">
-              <MapPreview tableau_url={tableau_url} map_url={map_url} />
+              <MapPreview
+                item={content}
+                item_view={true}
+                tableau_url={tableau_url}
+                map_url={map_url}
+              />
             </div>
           )}
         </div>

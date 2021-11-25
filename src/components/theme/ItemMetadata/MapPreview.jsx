@@ -10,7 +10,7 @@ import {
 } from '@eeacms/volto-freshwater/components';
 
 const MapPreview = (props) => {
-  const { item, map_url, tableau_url } = props;
+  const { item, map_url, tableau_url, item_view } = props;
   const modalHash = item?.id + '_preview';
   const [open, setOpen] = React.useState(false);
   const {
@@ -22,13 +22,17 @@ const MapPreview = (props) => {
   const location = useLocation();
 
   React.useEffect(() => {
-    if (!location.hash.includes(modalHash)) {
+    if (location.hash.includes(modalHash)) {
+      setOpen(true);
+    } else {
       setOpen(false);
     }
   }, [location, modalHash]);
 
   const closeModal = () => {
-    if (item) window.location = window.location.pathname + '#' + item?.id;
+    history.push({
+      hash: item_view ? '' : item?.id,
+    });
     setOpen(false);
   };
 
