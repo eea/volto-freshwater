@@ -101,6 +101,7 @@ body.homepage-view {
 
 .hamburger-wrapper {
   position: absolute !important;
+  z-index: 999 !important;
   top: -30px;
   right: 0;
   float: right;

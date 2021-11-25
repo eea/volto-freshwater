@@ -109,11 +109,11 @@ body.has-image.has-banner:not(.contenttype-country_profile) #main .breadcrumbs .
   }
 }
 
-.ui.grid > .row > .column {
-  @media only screen and (max-width: 768px) {
-    padding: 1rem 0 !important;
-  }
-}
+  // .ui.grid > .row > .column {
+  //   @media only screen and (max-width: 768px) {
+  //     padding: 1rem 0 !important;
+  //   }
+  // }
 
 
 // Country profiles

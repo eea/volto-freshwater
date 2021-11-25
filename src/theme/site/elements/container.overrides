@@ -115,10 +115,10 @@
     padding: 0 40px;
   }
 
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
-    padding-right: 10px !important;
-    padding-left: 10px !important;
-  }
+  // @media only screen and (min-width: 320px) and (max-width: 767px) {
+  //   padding-right: 10px !important;
+  //   padding-left: 10px !important;
+  // }
 }
 
 .grid .nine.wide.content-body {
