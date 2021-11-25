@@ -56,7 +56,7 @@ const MetadataHeader = (props) => {
         </Modal.Header>
 
         <Modal.Content>
-          <ItemMetadata item={item} />
+          <ItemMetadata item={item} mapPreview={true} />
         </Modal.Content>
       </Modal>
     </>

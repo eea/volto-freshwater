@@ -60,7 +60,7 @@ const SimpleListingView = ({ items, isEditMode }) => {
         </Modal.Header>
 
         <Modal.Content>
-          <ItemMetadata item={selectedItem} />
+          <ItemMetadata item={selectedItem} mapPreview={true} />
         </Modal.Content>
       </Modal>
     </>

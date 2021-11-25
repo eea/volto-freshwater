@@ -11,7 +11,7 @@ const EEA_LICENSE =
   'Copyright holder: European Commission.';
 
 const ItemMetadata = (props) => {
-  const { item } = props;
+  const { item, mapPreview } = props;
   const source = item?.source?.[0] || item;
   const description = item.description || source?.description;
   const subject = source.subject || source.subjects;
@@ -23,7 +23,7 @@ const ItemMetadata = (props) => {
   return (
     <>
       <div className="map-preview-wrapper">
-        {(tableau_url || map_url) && (
+        {mapPreview && (tableau_url || map_url) && (
           <div className="map-preview">
             <MapPreview
               item={item}

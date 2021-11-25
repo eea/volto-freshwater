@@ -3,6 +3,7 @@ import { Modal, Menu, Tab, Button } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
 import arrowSVG from '@plone/volto/icons/backspace.svg';
 import config from '@plone/volto/registry';
+import { useHistory, useLocation } from 'react-router-dom';
 import {
   ItemMetadata,
   ItemTitle,
@@ -17,20 +18,34 @@ import {
 import './style.less';
 
 const DashboardTabsBlockView = (props) => {
-  const [activeTab, setActiveTab] = React.useState(0);
-  const [isOpenModal, setOpenModal] = React.useState(false);
-  const [selectedItem, setSelectedItem] = React.useState(null);
   const { tabs = [] } = props.data;
+  const history = useHistory();
+  const location = useLocation();
+  const [activeTab, setActiveTab] = React.useState(0);
+  const [open, setOpen] = React.useState(false);
+  const [selectedItem, setSelectedItem] = React.useState(null);
   const {
     blocks: { blocksConfig },
   } = config;
+  const modalHash = selectedItem?.source[0].getId;
 
   const TableauBlockView = blocksConfig.tableau_block.view;
   const MapBlockView = blocksConfig.maps.view;
 
+  React.useEffect(() => {
+    if (location.hash.includes(modalHash)) {
+      setOpen(true);
+    } else {
+      setOpen(false);
+    }
+  }, [location, modalHash]);
+
   const close = (item) => {
-    setOpenModal(false);
+    setOpen(false);
     setSelectedItem(null);
+    history.push({
+      hash: '',
+    });
   };
 
   const MenuItem = (props) => {
@@ -118,8 +133,11 @@ const DashboardTabsBlockView = (props) => {
                   <Button
                     className="read-more"
                     onClick={() => {
-                      setOpenModal(true);
+                      setOpen(true);
                       setSelectedItem(tab);
+                      history.push({
+                        hash: tab?.source[0].getId,
+                      });
                     }}
                   >
                     <span>Read more</span>
@@ -129,7 +147,7 @@ const DashboardTabsBlockView = (props) => {
 
                 <Modal
                   className="item-metadata-modal"
-                  open={isOpenModal}
+                  open={open}
                   onClose={close}
                   size="large"
                   closeIcon
