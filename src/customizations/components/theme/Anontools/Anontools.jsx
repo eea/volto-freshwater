@@ -44,6 +44,8 @@ class Anontools extends Component {
    * @returns {string} Markup for the component.
    */
   render() {
+    const { settings } = config;
+
     return (
       !this.props.token && (
         <li className="item footer-login">
@@ -51,11 +53,12 @@ class Anontools extends Component {
           <Icon name={user} size="15px" />
           <Link
             style={{ margin: '0 .5rem' }}
-            to={`/login${
+            to={`${this.props.root}/login${
               this.props.content
-                ? `?return_url=${getBaseUrl(this.props.content['@id'])
-                    .replace(config.settings.apiPath, '')
-                    .replace(config.settings.internalApiPath, '')}`
+                ? `?return_url=${getBaseUrl(this.props.content['@id']).replace(
+                    this.props.root || settings.apiPath,
+                    '',
+                  )}`
                 : ''
             }`}
           >
@@ -71,6 +74,7 @@ export default connect((state, props) => {
   const path = state.router.location?.pathname;
   return {
     token: state.userSession.token,
+    root: state.breadcrumbs.root,
     content: state.prefetch?.[path] || state.content.data,
   };
 })(Anontools);
