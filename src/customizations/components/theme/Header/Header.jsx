@@ -48,8 +48,9 @@ const Header = (props) => {
     !isLoginView &&
     !isNonContentRoute;
 
+  const innerWidth = __CLIENT__ && window && window.innerWidth;
   const [isSticky, setIsSticky] = React.useState(false);
-  const [width, setWidth] = React.useState('');
+  const [width, setWidth] = React.useState(innerWidth);
   const breakpoint = 1024;
 
   React.useEffect(() => {
