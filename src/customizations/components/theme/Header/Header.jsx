@@ -14,6 +14,7 @@ import { FormattedMessage } from 'react-intl';
 import { HeroSection } from '@eeacms/volto-freshwater/components';
 import clearLogoSVG from '@eeacms/volto-freshwater/static/freshwater_logo_clear.svg';
 import config from '@plone/volto/registry';
+import cx from 'classnames';
 
 const Header = (props) => {
   const {
@@ -47,6 +48,31 @@ const Header = (props) => {
     !isLoginView &&
     !isNonContentRoute;
 
+  const [isSticky, setIsSticky] = React.useState(false);
+  const [width, setWidth] = React.useState('');
+  const breakpoint = 1024;
+
+  React.useEffect(() => {
+    window.addEventListener('resize', handleWindowResize);
+    window.addEventListener('scroll', toggleSticky);
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+      window.removeEventListener('scroll', toggleSticky);
+    };
+  }, []);
+
+  const toggleSticky = () => {
+    if (window.pageYOffset > 100) {
+      setIsSticky(true);
+    } else {
+      setIsSticky(false);
+    }
+  };
+
+  const handleWindowResize = () => {
+    setWidth(window.innerWidth);
+  };
+
   return (
     <div className="portal-top">
       {homePageView && <BodyClass className="homepage-view" />}
@@ -54,9 +80,17 @@ const Header = (props) => {
         !isNonContentRoute &&
         !isControlPanel &&
         !isDatabaseItemView && <BodyClass className="has-image" />}
-      <Segment basic className="header-wrapper" role="banner">
-        <Container>
-          <div className="header">
+      <Segment
+        basic
+        className={`header-wrapper ${isHomePage ? 'homepage' : 'contentpage'}`}
+        role="banner"
+      >
+        <div
+          className={cx('header', {
+            'sticky-header': isSticky && width < breakpoint,
+          })}
+        >
+          <Container>
             <div
               className={`logo-nav-wrapper ${
                 homePageView ? 'home-nav' : 'page-nav'
@@ -97,15 +131,13 @@ const Header = (props) => {
                 <Navigation pathname={pathname} navigation={navigationItems} />
               </div>
             </div>
-          </div>
-        </Container>
+          </Container>
+        </div>
       </Segment>
 
       <React.Fragment>
         {!isNonContentRoute && !isControlPanel && !isDatabaseItemView && (
-          <div
-            className={`header-bg ${isHomePage ? 'homepage' : 'contentpage'}`}
-          >
+          <div className="header-bg">
             {!isHomePage && (
               <div
                 className={'header-container'}

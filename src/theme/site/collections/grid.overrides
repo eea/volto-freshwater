@@ -13,7 +13,10 @@
   .ui.grid > .row > [class*='twelve wide mobile'].column,
   .ui.grid > .column.row > [class*='twelve wide mobile'].column,
   .ui.grid > [class*='twelve wide mobile'].column,
-  .ui.column.grid > [class*='twelve wide mobile'].column {
-    padding: 0 !important;
+  .ui.column.grid > [class*='twelve wide mobile'].column,
+  .ui.stackable.grid > .row > .column,
+  .ui.grid > .row > .column {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
   }
 }

@@ -228,6 +228,15 @@
       color: @wisePrimaryColor;
     }
   }
+
+  .pagination-wrapper {
+    @media only screen and (max-width: 480px) {
+      .ui.pagination.menu .item {
+        min-width: auto;
+        padding: 10px 15px !important;
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 767px) {
