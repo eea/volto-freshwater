@@ -283,6 +283,7 @@ body.has-toolbar.has-sidebar.homepage-view {
 
   .secondLevel {
     color: #166578;
+    white-space: break-spaces;
   }
 
   .secondLevel,
