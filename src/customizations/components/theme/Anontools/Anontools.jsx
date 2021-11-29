@@ -55,7 +55,9 @@ class Anontools extends Component {
             style={{ margin: '0 .5rem' }}
             to={`${this.props.root}/login${
               this.props.content
-                ? `?return_url=${getBaseUrl(this.props.content['@id']).replace(
+                ? `?return_url=${
+                    this.props.root ? '/freshwater' : ''
+                  }${window.location.href.replace(
                     this.props.root || settings.apiPath,
                     '',
                   )}`
