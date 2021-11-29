@@ -100,20 +100,11 @@ body.homepage-view {
 }
 
 .hamburger-wrapper {
-  position: absolute !important;
   z-index: 999 !important;
-  top: -30px;
-  right: 0;
   float: right;
 
   .hamburger {
-    padding-right: 0 !important;
-  }
-}
-
-@media only screen and (max-width: 991px) {
-  .hamburger-wrapper {
-    top: -70px;
+    padding: 0 !important;
   }
 }
 
