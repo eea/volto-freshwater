@@ -52,7 +52,7 @@ export const CardItem = (props) => {
         </Modal.Header>
 
         <Modal.Content>
-          <ItemMetadata {...props} item={selectedItem} />
+          <ItemMetadata {...props} item={selectedItem} mapPreview={true} />
         </Modal.Content>
       </Modal>
 

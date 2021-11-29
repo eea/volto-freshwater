@@ -1,6 +1,10 @@
 import React from 'react';
-import { Table } from 'semantic-ui-react';
+import { Table, Button } from 'semantic-ui-react';
+import { Icon } from '@plone/volto/components';
 import MapPreview from './MapPreview';
+import { useSelector } from 'react-redux';
+import { useCopyToClipboard } from '@eeacms/volto-freshwater/utils';
+import shareSVG from '@plone/volto/icons/share.svg';
 
 const EEA_LICENSE =
   'EEA standard re-use policy: unless otherwise indicated,' +
@@ -19,10 +23,31 @@ const ItemMetadata = (props) => {
   const map_url = source?.webmap_url;
   const copyright =
     source.license_copyright === 'EEA' ? EEA_LICENSE : source.license_copyright;
+  const id = item.source ? item.source[0]['@id'] : item['@id'];
+  const root = useSelector((state) => state.breadcrumbs.root);
+  const url = (root || window.location.origin) + id;
+
+  const [copyUrlStatus, copyUrl] = useCopyToClipboard(url);
+  const [confirmationText, setConfirmationText] = React.useState(false);
+
+  React.useEffect(() => {
+    if (copyUrlStatus === 'copied') {
+      setConfirmationText('Share URL is copied to clipboard.');
+    } else if (copyUrlStatus === 'failed') {
+      setConfirmationText('Copy failed. Please try again.');
+    }
+  }, [copyUrlStatus]);
 
   return (
     <>
       <div className="map-preview-wrapper">
+        <div className="toolbar-button-wrapper">
+          <Button className="toolbar-button" title="Share" onClick={copyUrl}>
+            <Icon name={shareSVG} size="26px" />
+          </Button>
+          <span className="btn-text">Share</span>
+        </div>
+
         {mapPreview && (tableau_url || map_url) && (
           <div className="map-preview">
             <MapPreview
@@ -151,6 +176,10 @@ const ItemMetadata = (props) => {
           </Table.Body>
         </Table>
       </div>
+
+      {copyUrlStatus === 'copied' && (
+        <div className="copy-box">{confirmationText}</div>
+      )}
     </>
   );
 };

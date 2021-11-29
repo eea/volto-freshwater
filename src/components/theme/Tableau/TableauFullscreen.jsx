@@ -34,20 +34,24 @@ const TableauFullscreen = (props) => {
 
   return (
     <>
-      <Button
-        className="toolbar-button"
-        title="Full Screen"
-        onClick={() => {
-          setOpen(true);
-          if (props.item) {
-            history.push({
-              hash: props.item.getId + '_preview',
-            });
-          }
-        }}
-      >
-        <Icon name={fullscreenSVG} size="22px" />
-      </Button>
+      <div className="toolbar-button-wrapper">
+        <Button
+          className="toolbar-button"
+          title="Full Screen"
+          onClick={() => {
+            setOpen(true);
+            if (props.item) {
+              history.push({
+                hash: props.item.getId + '_preview',
+              });
+            }
+          }}
+        >
+          <Icon name={fullscreenSVG} size="23px" />
+        </Button>
+        <span className="btn-text">Enlarge</span>
+      </div>
+
       <Modal
         className="tableau-fullscreen"
         onClose={closeModal}

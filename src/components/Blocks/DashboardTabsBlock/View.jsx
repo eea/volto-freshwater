@@ -40,7 +40,7 @@ const DashboardTabsBlockView = (props) => {
     }
   }, [location, modalHash]);
 
-  const close = (item) => {
+  const closeModal = (item) => {
     setOpen(false);
     setSelectedItem(null);
     history.push({
@@ -148,7 +148,7 @@ const DashboardTabsBlockView = (props) => {
                 <Modal
                   className="item-metadata-modal"
                   open={open}
-                  onClose={close}
+                  onClose={closeModal}
                   size="large"
                   closeIcon
                   centered

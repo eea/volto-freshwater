@@ -105,9 +105,12 @@ const TableauShare = (props) => {
       position="top center"
       on="click"
       trigger={
-        <Button className="toolbar-button" title="Share">
-          <Icon name={shareSVG} size="26px" />
-        </Button>
+        <div className="toolbar-button-wrapper">
+          <Button className="toolbar-button" title="Share">
+            <Icon name={shareSVG} size="26px" />
+          </Button>
+          <span className="btn-text">Share</span>
+        </div>
       }
     >
       <Popup.Header>Share Dashboard</Popup.Header>

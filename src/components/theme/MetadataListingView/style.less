@@ -53,6 +53,11 @@
     }
   }
 
+  .copy-box {
+    right: 15px;
+    bottom: 15px;
+  }
+
   .content {
     overflow: auto;
     max-height: 600px;
@@ -155,6 +160,10 @@ svg.selected {
   justify-content: flex-end;
   margin-top: 10px;
   margin-bottom: 10px;
+
+  .ui.button.toolbar-button {
+    margin: 0 7px !important;
+  }
 }
 
 .metadata-tab-section {
@@ -164,7 +173,7 @@ svg.selected {
 }
 
 .metadata-tableau {
-  position: relative;
+  // position: relative !important;
   top: 0 !important;
   width: 100% !important;
   height: 100% !important;
@@ -174,10 +183,16 @@ svg.selected {
     position: relative;
   }
 
+  .toolbar-button-wrapper .ui.button.toolbar-button {
+    margin: 0 7px !important;
+  }
+
   .tableau-icons {
     position: absolute;
-    right: -2px !important;
-    bottom: -30px;
+    top: -10px;
+    right: -18px !important;
+    display: flex;
+    flex-direction: row;
   }
 }
 
@@ -189,6 +204,10 @@ svg.selected {
   background-color: #ff421b !important;
   border-radius: 3px !important;
   color: #fff !important;
+
+  &:hover {
+    opacity: 0.6;
+  }
 }
 
 .toolbar-button svg {

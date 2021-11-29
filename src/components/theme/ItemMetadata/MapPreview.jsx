@@ -38,21 +38,24 @@ const MapPreview = (props) => {
 
   return (
     <>
-      <Button
-        size="mini"
-        className="viz-btn toolbar-button"
-        title="Preview"
-        onClick={() => {
-          setOpen(true);
-          if (item) {
-            history.push({
-              hash: item.id + '_preview',
-            });
-          }
-        }}
-      >
-        <Icon name={fullscreenSVG} size="28px" />
-      </Button>
+      <div className="toolbar-button-wrapper">
+        <Button
+          size="mini"
+          className="viz-btn toolbar-button"
+          title="Preview"
+          onClick={() => {
+            setOpen(true);
+            if (item) {
+              history.push({
+                hash: item.id + '_preview',
+              });
+            }
+          }}
+        >
+          <Icon name={fullscreenSVG} size="28px" />
+        </Button>
+        <span className="btn-text">Preview</span>
+      </div>
 
       <Modal
         className="metadata-tableau"
