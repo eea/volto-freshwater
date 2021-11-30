@@ -32,7 +32,7 @@ const DatabaseItemView = (props) => {
       <div id="page-document" className="ui container">
         <div>
           <Link to="/data-maps-and-tools/metadata" className="resources-link">
-            <Icon name="folder open outline" size="20px" />
+            <Icon name="folder open outline" size="small" />
             Resource catalogue
           </Link>
 

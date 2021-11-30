@@ -7,46 +7,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Logo, Navigation, SearchWidget } from '@plone/volto/components';
-import { BodyClass } from '@plone/volto/helpers';
+import { BodyClass, isCmsUi } from '@plone/volto/helpers';
 import { Container, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { HeroSection } from '@eeacms/volto-freshwater/components';
 import clearLogoSVG from '@eeacms/volto-freshwater/static/freshwater_logo_clear.svg';
-import config from '@plone/volto/registry';
 import cx from 'classnames';
 
 const Header = (props) => {
   const {
     content,
     leadImage,
-    location,
     actualPathName,
     pathname,
     navigationItems,
   } = props;
 
+  const leadImageUrl = leadImage?.scales?.panoramic?.download;
   const contentTitle = content?.title;
   const contentImageCaption = content?.image_caption;
   const contentDescription = content?.description;
   const isHomePage = content?.['@type'] === 'Plone Site';
-
-  const leadImageUrl = leadImage?.scales?.panoramic?.download;
-  const isEditView = location.pathname.endsWith('/edit');
-  const isLoginView = location.pathname.endsWith('/login');
-  const isControlPanel = location.pathname.includes('/controlpanel/');
-  const isDatabaseItemView =
-    __CLIENT__ &&
-    document.getElementsByClassName('database-item-view').length > 0;
-  const isNonContentRoute = config._data.settings.nonContentRoutes.includes(
-    actualPathName,
-  );
-  const homePageView =
-    isHomePage &&
-    !isControlPanel &&
-    !isEditView &&
-    !isLoginView &&
-    !isNonContentRoute;
+  const cmsView = isCmsUi(actualPathName);
+  const homePageView = isHomePage && !cmsView;
 
   const innerWidth = __CLIENT__ && window && window.innerWidth;
   const [isSticky, setIsSticky] = React.useState(false);
@@ -77,13 +61,12 @@ const Header = (props) => {
   return (
     <div className="portal-top">
       {homePageView && <BodyClass className="homepage-view" />}
-      {leadImageUrl &&
-        !isNonContentRoute &&
-        !isControlPanel &&
-        !isDatabaseItemView && <BodyClass className="has-image" />}
+      {leadImageUrl && !cmsView && <BodyClass className="has-image" />}
       <Segment
         basic
-        className={`header-wrapper ${isHomePage ? 'homepage' : 'contentpage'}`}
+        className={`header-wrapper ${
+          homePageView ? 'homepage' : 'contentpage'
+        }`}
         role="banner"
       >
         <div
@@ -137,21 +120,19 @@ const Header = (props) => {
       </Segment>
 
       <React.Fragment>
-        {!isNonContentRoute && !isControlPanel && !isDatabaseItemView && (
+        {!cmsView && !isHomePage && (
           <div className="header-bg">
-            {!isHomePage && (
-              <div
-                className={'header-container'}
-                style={{ position: 'relative' }}
-              >
-                <HeroSection
-                  image_url={leadImageUrl}
-                  image_caption={contentImageCaption}
-                  content_title={contentTitle}
-                  content_description={contentDescription}
-                />
-              </div>
-            )}
+            <div
+              className={'header-container'}
+              style={{ position: 'relative' }}
+            >
+              <HeroSection
+                image_url={leadImageUrl}
+                image_caption={contentImageCaption}
+                content_title={contentTitle}
+                content_description={contentDescription}
+              />
+            </div>
           </div>
         )}
       </React.Fragment>
