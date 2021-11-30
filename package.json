@@ -1,6 +1,6 @@
 {
   "name": "@eeacms/volto-freshwater",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Volto theme and integration for Freshwater",
   "main": "src/index.js",
   "author": "European Environment Agency: IDM2 A-Team",
