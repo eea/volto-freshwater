@@ -79,12 +79,10 @@ class Breadcrumbs extends Component {
    */
   render() {
     return (
-      <Segment
+      <div
         role="navigation"
         aria-label={this.props.intl.formatMessage(messages.breadcrumbs)}
         className="breadcrumbs"
-        secondary
-        vertical
       >
         <Container>
           <Breadcrumb>
@@ -118,7 +116,7 @@ class Breadcrumbs extends Component {
             ])}
           </Breadcrumb>
         </Container>
-      </Segment>
+      </div>
     );
   }
 }

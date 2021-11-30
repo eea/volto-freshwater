@@ -66,41 +66,47 @@ body.homepage-view.has-toolbar-collapsed:not(.has-toolbar) {
   }
 }
 
-.slider-wrapper,
-.slider-wrapper .slide-img {
-  height: 648px;
-}
+.homepage-view {
+  .slider-wrapper,
+  .slider-wrapper .slide-img {
+    height: 648px;
+  }
 
-.slider-wrapper .slide-description,
-.slider-wrapper .slide-description > p {
-  font-family: 'Poppins', serif;
-  font-size: 22px;
-  text-shadow: -4px 4px 5px rgba(0, 0, 0, 0.49);
-}
+  .slider-wrapper .slide-description,
+  .slider-wrapper .slide-description > p {
+    font-family: 'Poppins', serif;
+    font-size: 22px;
+    text-shadow: -4px 4px 5px rgba(0, 0, 0, 0.49);
+  }
 
-.slider-wrapper .slide-title {
-  font-family: 'Poppins', serif;
-  text-shadow: -4px 4px 5px rgba(0, 0, 0, 0.49);
-}
+  .slider-wrapper .slide-title {
+    font-family: 'Poppins', serif;
+    text-shadow: -4px 4px 5px rgba(0, 0, 0, 0.49);
+  }
 
-.slider-wrapper .slider-slide .slide-img {
-  background-position: center left;
+  .slider-wrapper .slider-slide .slide-img {
+    background-position: center left;
+  }
 }
 
 @media only screen and (max-width: 768px) {
-  .slider-wrapper .slider-slide .slide-body .slide-description,
-  .slider-wrapper .slider-slide .slide-body .slide-description > p {
-    font-size: 18px;
+  .homepage-view {
+    .slider-wrapper .slider-slide .slide-body .slide-description,
+    .slider-wrapper .slider-slide .slide-body .slide-description > p {
+      font-size: 18px;
+    }
   }
 }
 
 @media only screen and (max-width: 600px) {
-  .slider-wrapper .slider-slide .slide-body {
-    top: 140px;
-  }
+  .homepage-view {
+    .slider-wrapper .slider-slide .slide-body {
+      top: 140px;
+    }
 
-  .slider-wrapper,
-  .slider-wrapper .slide-img {
-    height: 450px;
+    .slider-wrapper,
+    .slider-wrapper .slide-img {
+      height: 450px;
+    }
   }
 }
