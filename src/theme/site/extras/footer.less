@@ -35,6 +35,21 @@ body.homepage-view {
   }
 }
 
+.login-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: @textColor;
+
+  a {
+    margin: 0 0.5rem;
+  }
+
+  .divider {
+    margin-right: 1em;
+  }
+}
+
 .footerWrapper {
   padding-top: 0 !important;
 }
@@ -97,14 +112,8 @@ body.homepage-view {
 }
 
 .footer-login a,
-.footer-login svg.icon,
-.footer-login span {
-  color: @textColor;
-}
-
 .footer-login svg.icon {
-  position: relative;
-  top: 3px;
+  color: @textColor;
 }
 
 .site-info {
