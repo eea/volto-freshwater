@@ -28,11 +28,11 @@ body.homepage-view {
 
 body.homepage-view.has-toolbar {
   .portal-top {
-    width: calc(100% - 80px);
+    width: calc(100% - @toolbarWidth);
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: @largestMobileScreen) {
   body.homepage-view.has-toolbar-collapsed:not(.has-toolbar) {
     .portal-top {
       top: 40px;
@@ -58,11 +58,18 @@ body.homepage-view.has-toolbar {
       top: 120px;
     }
   }
+
+  .homepage-view {
+    .slider-wrapper .slider-slide .slide-body .slide-description,
+    .slider-wrapper .slider-slide .slide-body .slide-description > p {
+      font-size: 18px;
+    }
+  }
 }
 
 body.homepage-view.has-toolbar-collapsed:not(.has-toolbar) {
   .portal-top {
-    width: calc(100% - 20px);
+    width: calc(100% - @collapsedToolbarWidth);
   }
 }
 
@@ -74,27 +81,18 @@ body.homepage-view.has-toolbar-collapsed:not(.has-toolbar) {
 
   .slider-wrapper .slide-description,
   .slider-wrapper .slide-description > p {
-    font-family: 'Poppins', serif;
-    font-size: 22px;
+    font-family: @headerFont;
+    font-size: 22px !important;
     text-shadow: -4px 4px 5px rgba(0, 0, 0, 0.49);
   }
 
   .slider-wrapper .slide-title {
-    font-family: 'Poppins', serif;
+    font-family: @headerFont;
     text-shadow: -4px 4px 5px rgba(0, 0, 0, 0.49);
   }
 
   .slider-wrapper .slider-slide .slide-img {
     background-position: center left;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .homepage-view {
-    .slider-wrapper .slider-slide .slide-body .slide-description,
-    .slider-wrapper .slider-slide .slide-body .slide-description > p {
-      font-size: 18px;
-    }
   }
 }
 

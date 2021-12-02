@@ -44,11 +44,12 @@ class Anontools extends Component {
   render() {
     return (
       !this.props.token && (
-        <li className="item footer-login">
+        <li className="footer-login">
           <span className="login-wrapper">
             <span className="divider"> | </span>
             <Icon name={user} size="15px" />
             <Link
+              className="item"
               to={`${this.props.root}/login${
                 __CLIENT__ && this.props.content
                   ? `?return_url=${window.location.pathname}`

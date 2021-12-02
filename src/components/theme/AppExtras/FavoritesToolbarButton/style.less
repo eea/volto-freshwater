@@ -1,3 +1,8 @@
+@type: 'extra';
+@element: 'custom';
+
+@import (multiple, reference, optional) '../../theme.config';
+
 #toolbar {
   .fav-toolbar-menu {
     position: relative;
@@ -5,17 +10,18 @@
   }
 }
 
-// .section-favorites .add-to-fav {
-//   display: none !important;
-// }
-
 .ui.basic.button.add-fav-btn {
   box-shadow: none !important;
+}
+
+#toolbar .toolbar.expanded .basket-toolbar-btn {
+  opacity: 1;
 }
 
 .basket-toolbar-btn {
   position: relative;
   z-index: 1;
+  opacity: 0;
 
   .basket-count {
     position: relative;
@@ -27,7 +33,7 @@
     height: 18px;
     animation: count-pulse 2s;
     animation-iteration-count: 10;
-    background: #0099bb;
+    background: @wisePrimaryColor;
     border-radius: 50%;
     box-shadow: 0 0 0 0 rgb(52 172 224);
     color: #fff;
@@ -115,7 +121,7 @@
   margin-bottom: 0.3em !important;
 
   label {
-    font-family: 'Poppins';
+    font-family: @headerFont;
     font-size: 14px;
     font-weight: 500;
   }
@@ -123,7 +129,7 @@
 
 .toolbar-menu-title {
   padding: 0.8em 0;
-  font-family: 'Poppins';
+  font-family: @headerFont;
   font-size: 14px;
   font-weight: 500;
   text-transform: uppercase;
@@ -153,12 +159,12 @@ ul.boards-list {
   }
 
   &.boarditems {
-    color: #0099bb;
+    color: @wisePrimaryColor;
     cursor: pointer;
 
     &:hover {
       background-color: #f9f9f9;
-      color: #004050 !important;
+      color: @wiseSecondaryColor !important;
 
       > .add-btn-wrapper {
         visibility: visible;

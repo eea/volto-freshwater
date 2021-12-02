@@ -1,6 +1,6 @@
 .ui.grid > .row > .column,
 .ui.stackable.grid > .row > .wide.column {
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: @largestMobileScreen) {
     padding: 1rem 0 !important;
   }
 }

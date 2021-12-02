@@ -236,13 +236,17 @@ body:not(.view-editview) {
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: @largestMobileScreen) {
   body.has-toolbar:not(.has-toolbar-collapsed) .sticky-header {
     top: 100px;
+    left: 0 !important;
+    width: 100% !important;
   }
 
   body.has-toolbar-collapsed .sticky-header {
     top: 20px;
+    left: 0 !important;
+    width: 100% !important;
   }
 }
 
@@ -255,7 +259,7 @@ body:not(.view-editview) {
 }
 
 .ui.basic.segment.homepage .sticky-header {
-  background-color: #0099bb;
+  background-color: @wisePrimaryColor;
 
   .home-nav {
     top: auto !important;
@@ -269,42 +273,42 @@ body:not(.view-editview) {
 
 body.has-toolbar.has-sidebar {
   .sticky-header {
-    left: 80px;
+    left: @toolbarWidth;
     width: calc(100% - 455px);
   }
 }
 
 body.has-toolbar.has-sidebar-collapsed {
   .sticky-header {
-    left: 80px;
+    left: @toolbarWidth;
     width: calc(100% - 100px);
   }
 }
 
 body.has-toolbar:not(.has-sidebar):not(.has-sidebar-collapsed) {
   .sticky-header {
-    left: 80px;
-    width: calc(100% - 80px);
+    left: @toolbarWidth;
+    width: calc(100% - @toolbarWidth);
   }
 }
 
 body.has-toolbar-collapsed.has-sidebar {
   .sticky-header {
-    left: 20px;
+    left: @collapsedToolbarWidth;
     width: calc(100% - 395px);
   }
 }
 
 body.has-toolbar-collapsed.has-sidebar-collapsed {
   .sticky-header {
-    left: 20px;
+    left: @collapsedToolbarWidth;
     width: calc(100% - 40px);
   }
 }
 
 body.has-toolbar-collapsed:not(.has-sidebar):not(.has-sidebar-collapsed) {
   .sticky-header {
-    left: 20px;
-    width: calc(100% - 20px);
+    left: @collapsedToolbarWidth;
+    width: calc(100% - @collapsedToolbarWidth);
   }
 }

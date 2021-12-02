@@ -52,7 +52,7 @@
     .toolbar-handler button:before,
     .expanded .toolbar-handler button:before {
       left: 0;
-      width: 80px !important;
+      width: @toolbarWidth !important;
       height: 6px;
       border-radius: 0 0 4px 4px !important;
     }

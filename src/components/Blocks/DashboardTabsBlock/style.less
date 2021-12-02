@@ -7,14 +7,14 @@
   z-index: 2000 !important;
 }
 
+#main .dashboard-tabs-block-container.ui.container {
+  max-width: 100% !important;
+  padding: 0 !important;
+  background-color: #d6eff4;
+}
+
 .dashboard-tabs-block {
   margin: 1em 0;
-
-  .dashboard-tabs-block-container.ui.container {
-    max-width: 100% !important;
-    padding: 0 !important;
-    background-color: #d6eff4;
-  }
 
   .default.tabs {
     display: flex;
@@ -86,8 +86,8 @@
 
   .menu-item-title {
     margin-bottom: 0;
-    color: #004050;
-    font-family: 'POPPINS', serif;
+    color: @wiseSecondaryColor;
+    font-family: @headerFont;
     font-size: 16px;
     font-weight: 500;
 
@@ -157,7 +157,7 @@
   padding: 1.4em;
   padding-top: 90px;
   background-color: #d6eff4;
-  color: #004050;
+  color: @wiseSecondaryColor;
 
   .metadata-list {
     padding: 0;
@@ -317,7 +317,7 @@
 
   span {
     color: @wiseSecondaryColor;
-    font-family: 'POPPINS';
+    font-family: @headerFont;
     font-weight: 500;
   }
 

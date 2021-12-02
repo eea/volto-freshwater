@@ -12,7 +12,7 @@
 
     a {
       color: @wiseSecondaryColor;
-      font-family: 'Poppins', serif;
+      font-family: @headerFont;
       font-size: 16px;
       font-weight: 500;
       line-height: 1.2;

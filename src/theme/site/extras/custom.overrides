@@ -16,6 +16,7 @@
 @import 'search';
 @import 'header';
 @import 'menu';
+@import 'toolbar';
 //}
 
 // @kitconcept volto-grid-block style override
@@ -92,12 +93,12 @@ body.homepage-view.has-banner {
 body.has-image.has-banner:not(.contenttype-country_profile) #main .breadcrumbs .breadcrumb {
   top: 184px;
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: @largestMobileScreen) {
     top: 283px;
   }
 }
 
-@media only screen and (max-width: 1400px) and (min-width: 768px) {
+@media only screen and (max-width: 1400px) and (min-width: @largestMobileScreen) {
   body:not(.has-toolbar):not(.has-sidebar):not(.has-toolbar-collapsed):not(.has-sidebar-collapsed)
     #main
     .ui.container {

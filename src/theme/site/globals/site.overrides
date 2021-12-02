@@ -97,7 +97,7 @@ strong {
 }
 
 .ui.button {
-  font-family: 'POPPINS' !important;
+  font-family: @headerFont !important;
   font-weight: 500 !important;
 }
 

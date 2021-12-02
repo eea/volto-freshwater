@@ -1,3 +1,8 @@
+@type: 'extra';
+@element: 'custom';
+
+@import (multiple, reference, optional) '../../theme.config';
+
 body.boards-listing-view,
 body.board-view {
   .ui.breadcrumb {
@@ -19,7 +24,7 @@ body.board-view {
     white-space: nowrap;
 
     &:hover {
-      color: #0099bb !important;
+      color: @wisePrimaryColor !important;
     }
   }
 
@@ -53,7 +58,7 @@ body.board-view {
 
 .ui.popup.edit-item-popup {
   .header {
-    font-family: 'Roboto';
+    font-family: @pageFont;
     font-size: 16px;
     font-weight: 500;
   }
@@ -139,7 +144,7 @@ body.board-view {
 
 .createdBy {
   color: #9a9a9a;
-  font-family: 'Roboto';
+  font-family: @pageFont;
   font-size: 14px;
   font-weight: 500;
 }
@@ -191,7 +196,7 @@ body.board-view {
   bottom: 40px;
   padding: 15px;
   margin: 0px;
-  background-color: #004050;
+  background-color: @wiseSecondaryColor;
   border-radius: 4px;
   color: #fff;
   font-size: 16px;
@@ -214,7 +219,6 @@ body.board-view {
 
     &:hover {
       background-color: #fafafa;
-      //  color: #0099bb !important;
     }
   }
 
@@ -237,10 +241,6 @@ body.board-view {
 
       &:hover {
         background-color: #fafafa;
-
-        // .fav-item-toolbar {
-        //   display: block;
-        // }
       }
     }
 
@@ -249,13 +249,11 @@ body.board-view {
     }
 
     .fav-item-toolbar {
-      // display: none;
-
       .button {
         margin: 0 5px;
 
         &:hover svg {
-          color: #004050;
+          color: @wiseSecondaryColor;
         }
       }
     }
