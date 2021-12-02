@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, Container, Segment } from 'semantic-ui-react';
+import { Breadcrumb, Container } from 'semantic-ui-react';
 import { defineMessages, injectIntl } from 'react-intl';
 
 import { Icon } from '@plone/volto/components';
