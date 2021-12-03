@@ -24,56 +24,8 @@ body.homepage-view {
       margin-bottom: 200px;
     }
   }
-}
 
-body.homepage-view.has-toolbar {
-  .portal-top {
-    width: calc(100% - @toolbarWidth);
-  }
-}
-
-@media only screen and (max-width: @largestMobileScreen) {
-  body.homepage-view.has-toolbar-collapsed:not(.has-toolbar) {
-    .portal-top {
-      top: 40px;
-    }
-  }
-
-  body.homepage-view.has-toolbar.has-banner {
-    .portal-top {
-      top: 210px;
-      width: 100% !important;
-    }
-  }
-
-  body.homepage-view.has-toolbar-collapsed:not(.has-toolbar).has-banner {
-    .portal-top {
-      top: 130px;
-      width: 100% !important;
-    }
-  }
-
-  body.homepage-view.has-toolbar {
-    .portal-top {
-      top: 120px;
-    }
-  }
-
-  .homepage-view {
-    .slider-wrapper .slider-slide .slide-body .slide-description,
-    .slider-wrapper .slider-slide .slide-body .slide-description > p {
-      font-size: 18px;
-    }
-  }
-}
-
-body.homepage-view.has-toolbar-collapsed:not(.has-toolbar) {
-  .portal-top {
-    width: calc(100% - @collapsedToolbarWidth);
-  }
-}
-
-.homepage-view {
+  // slider
   .slider-wrapper,
   .slider-wrapper .slide-img {
     height: 648px;
@@ -96,10 +48,61 @@ body.homepage-view.has-toolbar-collapsed:not(.has-toolbar) {
   }
 }
 
+@media only screen and (min-width: @largestMobileScreen) {
+  body.homepage-view {
+    &.has-toolbar-collapsed:not(.has-toolbar) {
+      .portal-top {
+        width: calc(100% - @collapsedToolbarWidth);
+      }
+    }
+
+    &.has-toolbar {
+      .portal-top {
+        width: calc(100% - @toolbarWidth);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: @largestMobileScreen) {
+  body.homepage-view {
+    &.has-toolbar-collapsed:not(.has-toolbar) {
+      .portal-top {
+        top: 40px !important;
+      }
+    }
+
+    &.has-toolbar.has-banner {
+      .portal-top {
+        top: 210px !important;
+        width: 100% !important;
+      }
+    }
+
+    &.has-toolbar-collapsed:not(.has-toolbar).has-banner {
+      .portal-top {
+        top: 130px;
+        width: 100% !important;
+      }
+    }
+
+    &.has-toolbar {
+      .portal-top {
+        top: 120px !important;
+      }
+    }
+
+    .slider-wrapper .slider-slide .slide-body .slide-description,
+    .slider-wrapper .slider-slide .slide-body .slide-description > p {
+      font-size: 18px !important;
+    }
+  }
+}
+
 @media only screen and (max-width: 600px) {
-  .homepage-view {
-    .slider-wrapper .slider-slide .slide-body {
-      top: 140px;
+  body.homepage-view {
+    .slider-wrapper .slider-slide .slider-caption {
+      bottom: 15% !important;
     }
 
     .slider-wrapper,

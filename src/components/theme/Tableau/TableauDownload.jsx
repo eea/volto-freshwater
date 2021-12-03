@@ -42,6 +42,7 @@ const TableauDownload = (props) => {
   return (
     <>
       <Popup
+        basic
         className="tableau-download-dialog"
         position="top center"
         on="click"
