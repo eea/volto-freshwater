@@ -46,6 +46,10 @@ body.homepage-view {
   .slider-wrapper .slider-slide .slide-img {
     background-position: center left;
   }
+
+  .slider-wrapper .slider-slide .slide-copyright {
+    text-align: right;
+  }
 }
 
 @media only screen and (min-width: @largestMobileScreen) {
@@ -75,14 +79,12 @@ body.homepage-view {
     &.has-toolbar.has-banner {
       .portal-top {
         top: 210px !important;
-        width: 100% !important;
       }
     }
 
     &.has-toolbar-collapsed:not(.has-toolbar).has-banner {
       .portal-top {
-        top: 130px;
-        width: 100% !important;
+        top: 110px !important;
       }
     }
 
@@ -103,6 +105,10 @@ body.homepage-view {
   body.homepage-view {
     .slider-wrapper .slider-slide .slider-caption {
       bottom: 15% !important;
+    }
+
+    .slider-wrapper .slider-slide .slide-copyright {
+      bottom: 10px;
     }
 
     .slider-wrapper,

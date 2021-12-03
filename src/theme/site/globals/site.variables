@@ -15,11 +15,6 @@
 @googleFontSizes   : '300,400,500,700,400italic,700italic';
 @importGoogleFonts : false;
 
-@fullSizeIcon: 36px;
-@toolbarWidth: 80px;
-@collapsedToolbarWidth: 20px;
-@sidebarWidth: 375px;
-
 
 /*-------------------
       Base Sizes
@@ -37,6 +32,15 @@
 @h4 : unit((18 / 16), rem);
 @h5 : unit((14 / 16), rem);
 
+@fullSizeIcon                  : 36px;
+
+@toolbarWidth                  : 80px;
+@collapsedToolbarWidth         : 20px;
+@mobileToolbarHeight           : 100px;
+@mobileCollapsedToolbarHeight  : 20px;
+@sidebarWidth                  : 375px;
+
+@mobileMenuBreakpoint          : 1300px;
 
 
 /*-------------------

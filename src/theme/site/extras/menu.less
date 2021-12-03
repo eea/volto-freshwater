@@ -161,49 +161,14 @@ body.homepage-view {
   }
 }
 
-body.is-anonymous {
-  @media only screen and (max-width: 1495px) {
-    #main .navigation .ui.menu.large.screen.only {
-      display: none !important;
-      transform: translateX(100%);
-    }
-
-    #main .navigation .hamburger-wrapper.mobile.only {
-      display: block !important;
-    }
+@media only screen and (max-width: @mobileMenuBreakpoint) {
+  #main .navigation .ui.menu.large.screen.only {
+    display: none !important;
+    transform: translateX(100%);
   }
-}
 
-body.is-anonymous.homepage-view {
-  @media only screen and (max-width: 1495px) {
-    .firstLevel,
-    .firstLevel > a,
-    .firstLevel:hover {
-      color: @wiseSecondaryColor !important;
-    }
-  }
-}
-
-body:not(.is-anonymous) {
-  @media only screen and (max-width: 1595px) {
-    #main .navigation .ui.menu.large.screen.only {
-      display: none !important;
-      transform: translateX(100%);
-    }
-
-    #main .navigation .hamburger-wrapper.mobile.only {
-      display: block !important;
-    }
-  }
-}
-
-body:not(.is-anonymous).homepage-view {
-  @media only screen and (max-width: 1595px) {
-    .firstLevel,
-    .firstLevel > a,
-    .firstLevel:hover {
-      color: @wiseSecondaryColor !important;
-    }
+  #main .navigation .hamburger-wrapper.mobile.only {
+    display: block !important;
   }
 }
 
@@ -218,11 +183,17 @@ body.has-toolbar.has-sidebar {
   }
 }
 
-body.has-toolbar.has-sidebar.homepage-view {
-  .firstLevel,
-  .firstLevel > a,
-  .firstLevel:hover {
-    color: @wiseSecondaryColor !important;
+@media only screen and (max-width: @largestMobileScreen) {
+  body.has-toolbar:not(.has-toolbar-collapsed) {
+    .navigation .ui.pointing.secondary.stackable.open.menu {
+      top: @mobileToolbarHeight;
+    }
+  }
+
+  body.has-toolbar-collapsed {
+    .navigation .ui.pointing.secondary.stackable.open.menu {
+      top: @mobileCollapsedToolbarHeight;
+    }
   }
 }
 
