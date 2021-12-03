@@ -2,7 +2,7 @@ import React from 'react';
 import { Icon } from '@plone/volto/components';
 import { Table, Button } from 'semantic-ui-react';
 import MapPreview from './MapPreview';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { useCopyToClipboard } from '@eeacms/volto-freshwater/utils';
 import config from '@plone/volto/registry';
 
