@@ -129,7 +129,6 @@ const ColoredCards = ({ data, isEditMode }) => {
                     {...card}
                     background_color={data.background_color}
                     border_color={data.border_color}
-                    border_top_width={data.border_top_width}
                     text_color={data.text_color}
                     font_size={data.font_size}
                     image_scale={image_scale}

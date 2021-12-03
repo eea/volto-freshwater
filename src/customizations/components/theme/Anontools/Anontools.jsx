@@ -9,8 +9,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { Icon } from '@plone/volto/components';
-import { getBaseUrl } from '@plone/volto/helpers';
-import config from '@plone/volto/registry';
 import user from '@plone/volto/icons/user.svg';
 
 /**
@@ -46,21 +44,21 @@ class Anontools extends Component {
   render() {
     return (
       !this.props.token && (
-        <li className="item footer-login">
-          <span style={{ marginRight: '.5rem' }}> | </span>
-          <Icon name={user} size="15px" />
-          <Link
-            style={{ margin: '0 .5rem' }}
-            to={`/login${
-              this.props.content
-                ? `?return_url=${getBaseUrl(this.props.content['@id'])
-                    .replace(config.settings.apiPath, '')
-                    .replace(config.settings.internalApiPath, '')}`
-                : ''
-            }`}
-          >
-            <FormattedMessage id="Log in" defaultMessage="Log in" />
-          </Link>
+        <li className="footer-login">
+          <span className="login-wrapper">
+            <span className="divider"> | </span>
+            <Icon name={user} size="15px" />
+            <Link
+              className="item"
+              to={`${this.props.root}/login${
+                __CLIENT__ && this.props.content
+                  ? `?return_url=${window.location.pathname}`
+                  : ''
+              }`}
+            >
+              <FormattedMessage id="Log in" defaultMessage="Log in" />
+            </Link>
+          </span>
         </li>
       )
     );
@@ -71,6 +69,7 @@ export default connect((state, props) => {
   const path = state.router.location?.pathname;
   return {
     token: state.userSession.token,
+    root: state.breadcrumbs.root,
     content: state.prefetch?.[path] || state.content.data,
   };
 })(Anontools);

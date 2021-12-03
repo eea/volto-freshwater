@@ -1,106 +1,121 @@
 @type: 'extra';
 @element: 'custom';
+@blue-bg: lighten(#0099bb, 15%); //#8dcdf4;
+@green-bg: lighten(#88c24f, 15%); //#a3deaa;
+@yellow-bg: lighten(#f4cf01, 15%); //#f6f6bc;
+@orange-bg: lighten(#ff7f0e, 15%); //#fdae61;
+@red-bg: lighten(#ff0a00, 15%); //#ff5a5d;
 
 @import (multiple, reference, optional) '../../theme.config';
 
+.country-data-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.country-profile-wrapper {
+  display: flex;
+  align-items: center;
+}
+
 .uww-country-wrapper {
   display: flex;
+  min-height: 60px;
   flex-direction: column;
+  justify-content: center;
 
   .blue-bg {
-    color: #8dcdf4;
+    background-color: @blue-bg;
   }
 
   .green-bg {
-    color: #a3deaa;
+    background-color: @green-bg;
   }
 
   .yellow-bg {
-    color: #f6f6bc;
+    background-color: @yellow-bg;
   }
 
   .orange-bg {
-    color: #fdae61;
+    background-color: @orange-bg;
   }
 
   .red-bg {
-    color: #ff5a5d;
+    background-color: @red-bg;
   }
 }
 
 .uww-left {
   display: flex;
-  flex-direction: row;
+  width: 195px;
+  height: 130px;
+  flex-direction: column;
   align-items: center;
+  padding: 1em;
 }
 
 .uww-country-block {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 20px;
 
   .uww-data {
-    margin-right: 15px;
-    font-family: 'Poppins', serif;
-    font-size: 33px;
+    font-family: @headerFont;
+    font-size: 3.4rem;
     font-weight: 500;
-    line-height: 33px;
+    line-height: 3.4rem;
   }
 
   .uww-text {
-    max-width: 160px;
-    margin-top: 0.5em;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    color: @wiseSecondaryColor;
-    font-size: 14px;
+    padding-top: 7px;
+    font-size: 15px;
     line-height: 16px;
+    text-align: center;
   }
 }
 
 .uww-country-legend {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
-  margin-left: 20px;
+  padding-left: 25px;
 
   .legend-wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0 12px;
 
     .legend-box {
-      width: 26px;
-      height: 26px;
+      width: 20px;
+      height: 20px;
       margin-right: 6px;
     }
 
     .legend-text {
-      font-family: 'Poppins', serif;
-      font-size: 13px;
+      font-family: @headerFont;
+      font-size: 12px;
+      line-height: 26px;
     }
   }
 
   .blue-bg {
-    background-color: #8dcdf4;
+    background-color: @blue-bg;
   }
 
   .green-bg {
-    background-color: #a3deaa;
+    background-color: @green-bg;
   }
 
   .yellow-bg {
-    background-color: #f6f6bc;
+    background-color: @yellow-bg;
   }
 
   .orange-bg {
-    background-color: #fdae61;
+    background-color: @orange-bg;
   }
 
   .red-bg {
-    background-color: #ff5a5d;
+    background-color: @red-bg;
   }
 }
 
@@ -112,31 +127,17 @@
     &:before {
       position: absolute;
       z-index: -1;
-      top: -63px;
+      top: -60px;
       right: 0;
       left: 0;
       width: 100%;
-      height: 160px;
+      height: 191px;
+      border-bottom: 1px solid #d8d8d8;
       background-color: #f5f5f5;
       content: '';
     }
 
-    &:after {
-      position: absolute;
-      z-index: -1;
-      top: 97px;
-      right: 0;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background-color: #d8d8d8;
-      content: '';
-    }
-
     .country-header-wrapper {
-      position: absolute;
-      top: 28px;
-
       &.no-flag {
         top: 45px;
       }
@@ -149,14 +150,22 @@
 
   .country-header-wrapper {
     display: flex;
+    width: 100%;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
   }
 
   .country-profile-flag {
+    line-height: 12px !important;
+
     img {
       height: 130px;
-      padding-right: 40px;
+      padding-right: 30px;
+
+      @media only screen and (max-width: 480px) {
+        padding-right: 10px !important;
+      }
     }
   }
 }
@@ -194,27 +203,73 @@
   border: none;
   background-color: transparent;
 
+  @media only screen and (max-width: 480px) {
+    display: flex !important;
+    min-width: auto !important;
+    align-items: self-end !important;
+  }
+
   i.icon {
     color: @wiseSecondaryColor !important;
     font-size: 30px;
   }
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (min-width: 795px) and (max-width: 945px) {
   .uww-country-block {
     position: relative;
-    top: 15px;
+    flex-direction: column;
+  }
+
+  .uww-country-legend {
+    position: absolute;
+    right: 0;
+    bottom: -60px;
+    min-width: 520px;
+    flex-direction: row;
+  }
+}
+
+@media only screen and (max-width: 794px) {
+  .country-header-block .country-header-wrapper {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .uww-country-legend {
+  .uww-country-block {
     position: relative;
-    top: 10px;
-    margin-left: 0;
+    flex-direction: row;
   }
 
-  .legend-wrapper:first-child {
-    padding-left: 0;
+  .country-data-wrapper {
+    padding-top: 1em;
+  }
+
+  #view .country-header-block {
+    position: relative;
+    height: 300px;
+  }
+}
+
+@media only screen and (max-width: 790px) and (min-width: 650px) {
+  .country-data-wrapper {
+    align-self: flex-end;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .contenttype-country_profile {
+    .content-area {
+      padding-top: 0 !important;
+      margin-top: 0 !important;
+    }
+  }
+
+  .country-header-block {
+    &:before {
+      top: -1px !important;
+      height: 131px !important;
+      border-top: 1px solid #d8d8d8;
+    }
   }
 }

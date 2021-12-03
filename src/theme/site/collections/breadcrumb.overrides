@@ -1,69 +1,90 @@
+body.has-image {
+  #main {
+    .breadcrumbs {
+      padding: 0 !important;
+    }
+
+    .ui.vertical.segment.breadcrumbs {
+      border-bottom: 0;
+      background: none;
+    }
+
+    .ui.breadcrumb {
+      display: inline-block;
+      padding: 2px 10px 5px 10px;
+      background: #000;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      font-size: 15px;
+
+      .divider {
+        color: @wisePrimaryColor;
+      }
+
+      svg {
+        position: relative;
+        top: 3px;
+        fill: @wisePrimaryColor !important;
+      }
+    }
+
+    .ui.breadcrumb a:hover,
+    .ui.breadcrumb .section {
+      color: @wisePrimaryColor !important;
+    }
+
+    .ui.breadcrumb .active:hover,
+    .ui.breadcrumb .active.section {
+      color: #fff !important;
+    }
+
+    @media only screen and (max-width: 480px) {
+      .ui.breadcrumbs {
+        right: 0;
+        left: 0;
+      }
+    }
+  }
+}
+
+.ui.breadcrumb .section.disabled {
+  cursor: default !important;
+}
+
 #main {
   .ui.vertical.segment.breadcrumbs {
     border-bottom: 0;
     background: none;
   }
 
-  @media only screen and (max-width: 480px) {
-    .ui.breadcrumbs {
-      right: 0;
-      left: 0;
-    }
-  }
-
   .ui.breadcrumb {
-    display: inline-block;
-    padding: 5px 10px;
-    background: #000;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    padding: 5px 0;
+    font-size: 15px;
 
-    .divider {
-      color: @wisePrimaryColor;
+    a {
+      color: #4e7372;
     }
 
-    svg {
-      position: relative;
-      top: 3px;
-      fill: @wisePrimaryColor !important;
+    .active {
+      color: @wiseSecondaryColor;
+      font-weight: 500;
     }
-  }
-
-  .ui.breadcrumb a:hover,
-  .ui.breadcrumb .section {
-    color: @wisePrimaryColor !important;
-  }
-
-  .ui.breadcrumb .active:hover,
-  .ui.breadcrumb .active.section {
-    color: #fff !important;
-  }
-
-  .breadcrumbs {
-    padding: 0 !important;
   }
 }
 
-body.siteroot #main .breadcrumbs {
+body.contenttype-plone-site.section-edit .breadcrumbs,
+body.homepage-view #main .breadcrumbs {
   display: none !important;
 }
 
-.has-image #main .breadcrumbs .breadcrumb {
+.has-image:not(.contenttype-country_profile) #main .breadcrumbs .breadcrumb {
   position: absolute;
-  top: 86px;
+  top: 100px;
   max-width: 91%;
 }
 
-@media only screen and (max-width: 768px) {
-  body.has-toolbar {
-    #main .breadcrumbs .ui.breadcrumb {
-      top: 186px;
-    }
-  }
-
-  body.has-toolbar-collapsed {
-    #main .breadcrumbs .ui.breadcrumb {
-      top: 106px;
-    }
+@media only screen and (max-width: @largestMobileScreen) {
+  .breadcrumbs .breadcrumb {
+    visibility: hidden !important;
   }
 }

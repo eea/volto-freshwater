@@ -3,171 +3,163 @@
  * @module components/theme/Header/Header
  */
 
-import React, { Component } from 'react';
-import { Container, Segment } from 'semantic-ui-react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 import { Logo, Navigation, SearchWidget } from '@plone/volto/components';
-import { BodyClass } from '@plone/volto/helpers';
+import { BodyClass, isCmsUi } from '@plone/volto/helpers';
+import { Container, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-
 import { HeroSection } from '@eeacms/volto-freshwater/components';
-import { getScaleUrl, getPath } from '@eeacms/volto-freshwater/utils';
-
 import clearLogoSVG from '@eeacms/volto-freshwater/static/freshwater_logo_clear.svg';
+import cx from 'classnames';
 
-/**
- * Header component class.
- * @class Header
- * @extends Component
- */
-class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isHomepage: this.props.actualPathName === '/',
+const Header = (props) => {
+  const {
+    content,
+    leadImage,
+    actualPathName,
+    pathname,
+    navigationItems,
+  } = props;
+
+  const leadImageUrl = leadImage?.scales?.panoramic?.download;
+  const contentTitle = content?.title;
+  const contentImageCaption = content?.image_caption;
+  const contentDescription = content?.description;
+  const isHomePage = content?.['@type'] === 'Plone Site';
+  const cmsView = isCmsUi(actualPathName);
+  const homePageView = isHomePage && !cmsView;
+
+  const innerWidth = __CLIENT__ && window && window.innerWidth;
+  const [isSticky, setIsSticky] = React.useState(false);
+  const [width, setWidth] = React.useState(innerWidth);
+  const breakpoint = 1024;
+
+  React.useEffect(() => {
+    window.addEventListener('resize', handleWindowResize);
+    window.addEventListener('scroll', toggleSticky);
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+      window.removeEventListener('scroll', toggleSticky);
     };
-  }
-  /**
-   * Property types.
-   * @property {Object} propTypes Property types.
-   * @static
-   */
-  static propTypes = {
-    token: PropTypes.string,
-    pathname: PropTypes.string.isRequired,
-    actualPathName: PropTypes.string.isRequired,
-    leadImage: PropTypes.object,
-    content: PropTypes.object,
+  }, []);
+
+  const toggleSticky = () => {
+    if (window.pageYOffset > 100) {
+      setIsSticky(true);
+    } else {
+      setIsSticky(false);
+    }
   };
 
-  /**
-   * Default properties.
-   * @property {Object} defaultProps Default properties.
-   * @static
-   */
-  static defaultProps = {
-    token: null,
+  const handleWindowResize = () => {
+    setWidth(window.innerWidth);
   };
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.actualPathName !== this.props.actualPathName) {
-      this.setState({
-        isHomepage: nextProps.actualPathName === '/',
-      });
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.actualPathName !== this.props.actualPathName) {
-      this.setState({
-        isHomepage: this.props.actualPathName === '/',
-      });
-    }
-  }
-
-  /**
-   * Render method.
-   * @method render
-   * @returns {string} Markup for the component.
-   */
-  render() {
-    let leadImageUrl = this.props?.leadImage
-      ? getScaleUrl(getPath(this.props.pathname), 'panoramic')
-      : null;
-    let imageCaption = this.props.content?.image_caption;
-    let contentTitle = this.props.content?.title;
-    let contentDescription = this.props.content?.description;
-    let stagingBanner =
-      __CLIENT__ && document.getElementsByClassName('stagingBanner').length > 0;
-
-    return (
-      <div className="portal-top">
-        {leadImageUrl && <BodyClass className="has-image" />}
-        {stagingBanner && <BodyClass className="staging-banner" />}
-        <Segment basic className="header-wrapper" role="banner">
+  return (
+    <div className="portal-top">
+      {homePageView && <BodyClass className="homepage-view" />}
+      {leadImageUrl && !cmsView && <BodyClass className="has-image" />}
+      <Segment
+        basic
+        className={`header-wrapper ${
+          homePageView ? 'homepage' : 'contentpage'
+        }`}
+        role="banner"
+      >
+        <div
+          className={cx('header', {
+            'sticky-header': isSticky && width < breakpoint,
+          })}
+        >
           <Container>
-            <div className="header">
-              <div
-                className={`logo-nav-wrapper ${
-                  this.state.isHomepage ? 'home-nav' : 'page-nav'
-                }`}
-              >
-                <div className="logo">
-                  {this.state.isHomepage ? (
-                    <img
-                      className="home-logo"
-                      src={clearLogoSVG}
-                      alt="Freshwater logo"
-                    />
-                  ) : (
-                    <Logo />
-                  )}
-                </div>
-                <div className="header-right-section">
-                  <div className="right-section-wrapper">
-                    <ul className="top-nav">
-                      <li>
-                        <a className="item" href={`mailto:WISE@eea.europa.eu`}>
-                          Contact
-                        </a>
-                      </li>
-                      <li>
-                        <Link className="item" to="/sitemap">
-                          <FormattedMessage
-                            id="sitemap"
-                            defaultMessage="Sitemap"
-                          />
-                        </Link>
-                      </li>
-                    </ul>
-                    <div className="search">
-                      <SearchWidget pathname={this.props.pathname} />
-                    </div>
-                  </div>
-                  <Navigation
-                    pathname={this.props.pathname}
-                    navigation={this.props.navigationItems}
+            <div
+              className={`logo-nav-wrapper ${
+                homePageView ? 'home-nav' : 'page-nav'
+              }`}
+            >
+              <div className="logo">
+                {homePageView ? (
+                  <img
+                    className="home-logo"
+                    src={clearLogoSVG}
+                    alt="Freshwater logo"
                   />
+                ) : (
+                  <Logo />
+                )}
+              </div>
+              <div className="header-right-section">
+                <div className="right-section-wrapper">
+                  <ul className="top-nav">
+                    <li>
+                      <a className="item" href={`mailto:WISE@eea.europa.eu`}>
+                        Contact
+                      </a>
+                    </li>
+                    <li>
+                      <Link className="item" to="/sitemap">
+                        <FormattedMessage
+                          id="sitemap"
+                          defaultMessage="Sitemap"
+                        />
+                      </Link>
+                    </li>
+                  </ul>
+                  <div className="search">
+                    <SearchWidget pathname={pathname} />
+                  </div>
                 </div>
+                <Navigation pathname={pathname} navigation={navigationItems} />
               </div>
             </div>
           </Container>
-        </Segment>
+        </div>
+      </Segment>
 
-        <React.Fragment>
-          <div
-            className={`header-bg ${
-              this.state.isHomepage ? 'homepage' : 'contentpage'
-            }`}
-          >
-            {!this.state.isHomepage && (
-              <div
-                className={'header-container'}
-                style={{ position: 'relative' }}
-              >
-                <HeroSection
-                  image_url={leadImageUrl}
-                  image_caption={imageCaption}
-                  content_title={contentTitle}
-                  content_description={contentDescription}
-                />
-              </div>
-            )}
+      <React.Fragment>
+        {!cmsView && !isHomePage && (
+          <div className="header-bg">
+            <div
+              className={'header-container'}
+              style={{ position: 'relative' }}
+            >
+              <HeroSection
+                image_url={leadImageUrl}
+                image_caption={contentImageCaption}
+                content_title={contentTitle}
+                content_description={contentDescription}
+              />
+            </div>
           </div>
-        </React.Fragment>
-      </div>
-    );
-  }
-}
+        )}
+      </React.Fragment>
+    </div>
+  );
+};
+
+/**
+ * Property types.
+ * @property {Object} propTypes Property types.
+ * @static
+ */
+Header.propTypes = {
+  token: PropTypes.string,
+  pathname: PropTypes.string.isRequired,
+  actualPathName: PropTypes.string.isRequired,
+  leadImage: PropTypes.object,
+  content: PropTypes.object,
+  location: PropTypes.object,
+};
 
 export default connect(
   (state) => ({
     token: state.userSession.token,
     leadImage: state?.content?.data?.image,
     content: state.content.data,
+    location: state.router.location,
   }),
   {},
 )(Header);

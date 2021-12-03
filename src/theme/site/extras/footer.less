@@ -1,127 +1,124 @@
 /*-------------------
         Footer
 --------------------*/
-#main .footerWrapper {
-  position: relative !important;
-}
 
-body.siteroot {
+.footerWrapper {
+  position: relative;
+  margin-top: 2em;
+
   .footer-top-wave {
-    position: absolute;
-    top: -46px;
-    right: 0;
-    left: 0;
     width: 100%;
     height: 15px;
-  }
 
-  .footer-top-wrapper > .grid .row {
-    padding-top: 0 !important;
-  }
-
-  .wave-shape {
-    height: 100%;
-    background-image: url('@{themeImagePath}/white_wave.svg');
-    background-repeat: repeat;
+    .wave-shape {
+      height: 100%;
+      background-image: url('@{themeImagePath}/blue_wave.svg');
+      background-repeat: repeat;
+    }
   }
 
   .footer-nav {
-    margin: 0 !important;
+    padding-left: 0;
+    margin-top: 1.5rem;
+
+    li {
+      display: inline-block;
+      padding: 0.8em 2em 0.8em 0;
+
+      @media only screen and (max-width: @largestMobileScreen) {
+        padding-right: 1em;
+      }
+    }
+
+    .item {
+      font-size: 16px;
+      font-weight: 500;
+    }
   }
-}
 
-.footerWrapper {
-  padding-top: 0 !important;
-}
+  .footer-login {
+    .login-wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      color: @textColor;
 
-.footer-top-wave {
-  width: 100%;
-  height: 15px;
-}
+      a,
+      svg.icon {
+        color: @textColor;
+      }
 
-.wave-shape {
-  height: 100%;
-  background-image: url('@{themeImagePath}/blue_wave.svg');
-  background-repeat: repeat;
-}
+      a {
+        margin: 0 0.5rem;
+      }
 
-.footer-nav {
-  padding-left: 0;
-  margin-top: 1.5rem;
-  margin-bottom: 0;
-}
-
-.footer-nav li {
-  display: inline-block;
-  padding: 0.8em 2em 0.8em 0;
-}
-
-.footer-nav .item {
-  font-weight: 500;
-}
-
-.site-info-logos {
-  margin-top: 10px;
-}
-
-.footerLogos {
-  margin-top: 5px;
-}
-
-.site-info-logos,
-.footerLogos {
-  a {
-    display: inline-block;
-    padding: 0.5rem 1rem;
+      .divider {
+        margin-right: 1em;
+      }
+    }
   }
-}
-
-.site-info-logos a:first-child,
-.footerLogos a:first-child {
-  padding-left: 0;
-}
-
-.footerLogo {
-  width: auto;
-  height: 38px;
-}
-
-.footer-login a,
-.footer-login svg.icon,
-.footer-login span {
-  color: @textColor;
-}
-
-.footer-login svg.icon {
-  position: relative;
-  top: 3px;
 }
 
 .site-info {
   position: relative;
   font-size: 14px;
+
+  .site-info-logos {
+    margin: 25px 0;
+  }
+
+  .footerLogos {
+    margin-top: 5px;
+  }
+
+  .site-info-logos,
+  .footerLogos {
+    a {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+    }
+  }
+
+  .site-info-logos a:first-child,
+  .footerLogos a:first-child {
+    padding-left: 0;
+  }
+
+  .footerLogo {
+    width: auto;
+    height: 38px;
+  }
 }
 
-.footer-backdrop {
-  position: absolute;
-  z-index: -1;
-  right: 0;
-  bottom: 0.5em;
-}
+body.homepage-view {
+  .footerWrapper {
+    margin-top: 0;
 
-.footer-backdrop img {
-  width: 139px;
-  height: 105px;
+    .footer-top-wave {
+      position: absolute;
+      top: -46px;
+      right: 0;
+      left: 0;
+      width: 100%;
+      height: 15px;
+    }
+
+    .wave-shape {
+      height: 100%;
+      background-image: url('@{themeImagePath}/white_wave.svg');
+      background-repeat: repeat;
+    }
+  }
+
+  .footer-top-wrapper > .grid .row {
+    padding-top: 0 !important;
+  }
 }
 
 @media screen and (max-width: 992px) {
   .footer-nav,
   .site-info {
     text-align: center;
-  }
-
-  .site-info-logos {
-    margin-bottom: 2rem;
   }
 
   .footer-logos {

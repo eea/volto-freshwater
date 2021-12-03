@@ -4,14 +4,16 @@ import {
   DatabaseItemView,
   MetadataListingView,
   SimpleListingView,
+  HorizontalTocView,
   FavBoardView,
+  FavBoardListingView,
 } from './components';
 
-// import { GET_CONTENT } from '@plone/volto/constants/ActionTypes';
-import FavBoardListingView from './components/theme/FavBoardListingView/FavBoardListingView';
-import TokenWidget from '@plone/volto/components/manage/Widgets/TokenWidget';
+import { basket, boards, localnavigation, breadcrumb } from './reducers';
 import CopyrightWidget from './components/Widgets/CopyrightWidget';
+import TokenWidget from '@plone/volto/components/manage/Widgets/TokenWidget';
 
+import installArcgisBlock from './components/Blocks/ArcgisBlock';
 import installEmbedContentBlock from './components/Blocks/Content';
 import installDashboardTabsBlock from './components/Blocks/DashboardTabsBlock';
 import installCustomCardsBlock from './components/Blocks/CustomCardsBlock';
@@ -23,15 +25,13 @@ import installCountriesListingBlock from './components/Blocks/CountriesListingBl
 import installAppExtras from './components/theme/AppExtras';
 import installSlatePopup from './components/Blocks/SlatePopup';
 
-import favBasket from './reducers/favBasket/';
-import favBoards from './reducers/favBoards/';
-
 import './slate-styles.less';
 import './block-styles.less';
 
 const available_colors = [
   '#0099BB',
   'F2F9FB',
+  '#ED763E',
   '#FF4422',
   '#156650',
   '#72933d',
@@ -63,8 +63,10 @@ const available_colors = [
 ];
 
 const applyConfig = (config) => {
+  // Navigation
   config.settings.navDepth = 3;
 
+  // Content type views
   config.views.contentTypesViews = {
     ...config.views.contentTypesViews,
     Document: HeroSectionView,
@@ -77,12 +79,17 @@ const applyConfig = (config) => {
     map_interactive: DatabaseItemView,
   };
 
+  // Layout views
   config.views.layoutViews = {
     ...config.views.layoutViews,
     document_view: HeroSectionView,
     herosection_view: HeroSectionView,
   };
 
+  // Colors
+  config.settings.available_colors = available_colors;
+
+  // Block chooser
   config.blocks.groupBlocksOrder = [
     ...config.blocks.groupBlocksOrder,
     { id: 'freshwater_addons', title: 'Freshwater' },
@@ -96,14 +103,18 @@ const applyConfig = (config) => {
     },
   };
 
+  // Addons config
   config.blocks.blocksConfig.imagesGrid.restricted = true;
   config.blocks.blocksConfig.teaserGrid.restricted = true;
   config.blocks.blocksConfig.teaser.restricted = false;
   config.blocks.blocksConfig.teaser.mostUsed = false;
   config.blocks.blocksConfig.__grid.title = 'Teasers row';
   config.blocks.blocksConfig.__grid.mostUsed = false;
-  config.settings.available_colors = available_colors;
   config.blocks.blocksConfig.columnsBlock.available_colors = available_colors;
+
+  config.blocks.blocksConfig.plotly_chart =
+    config.blocks.blocksConfig.connected_plotly_chart;
+  config.blocks.blocksConfig.plotly_chart.restricted = false;
 
   // workaround to invalidate render of empty slot blocksConfig with hidden value
   // needed in order to delete the block to get add button to show up on slot edit
@@ -112,15 +123,19 @@ const applyConfig = (config) => {
     return !!value && value !== 'hidden';
   };
 
+  // Slate styles
   config.settings.slate.styleMenu = config.settings.slate.styleMenu || {};
   config.settings.slate.styleMenu.inlineStyles = [
     ...(config.settings.slate.styleMenu?.inlineStyles || []),
     { cssClass: 'blue-text', label: 'Blue text' },
-    { cssClass: 'lightblue-chart-text', label: 'Lightblue plot-chart text' },
-    { cssClass: 'lightgreen-chart-text', label: 'Lightgreen plot-chart text' },
+    { cssClass: 'blue-chart-text', label: 'Blue plot-chart text' },
+    { cssClass: 'green-chart-text', label: 'Green plot-chart text' },
     { cssClass: 'yellow-chart-text', label: 'Yellow plot-chart text' },
     { cssClass: 'orange-chart-text', label: 'Orange plot-chart text' },
     { cssClass: 'blue-circle text-circle', label: 'Blue circle' },
+    { cssClass: 'green-circle text-circle', label: 'Green circle' },
+    { cssClass: 'orange-circle text-circle', label: 'Orange circle' },
+    { cssClass: 'yellow-circle text-circle', label: 'Yellow circle' },
     { cssClass: 'grey-circle text-circle', label: 'Grey circle' },
     { cssClass: 'grey-text', label: 'Grey text' },
     { cssClass: 'black-text', label: 'Black text' },
@@ -131,8 +146,6 @@ const applyConfig = (config) => {
     { cssClass: 'h4', label: 'H4 18px' },
     { cssClass: 'h5', label: 'H5 14px' },
   ];
-
-  config.settings.persistentReducers = ['favBasket'];
 
   // Search block metadata listing view
   config.blocks.blocksConfig.listing = {
@@ -154,12 +167,46 @@ const applyConfig = (config) => {
     ],
   };
 
+  // Table of contents custom view
+  config.blocks.blocksConfig.toc = {
+    ...config.blocks.blocksConfig.toc,
+    extensions: [
+      ...config.blocks.blocksConfig.toc.extensions,
+      {
+        id: 'horizontalTocView',
+        title: 'FW horizontal menu',
+        view: HorizontalTocView,
+        schemaExtender: null,
+      },
+    ],
+  };
+
+  // API expanders
   config.settings.apiExpanders = [
     ...config.settings.apiExpanders,
     {
       match: '/',
       GET_CONTENT: ['siblings'],
     },
+  ];
+
+  config.settings.externalRoutes = [
+    ...(config.settings.externalRoutes || []),
+    ...(config.settings.prefixPath
+      ? [
+          {
+            match: {
+              path: /\/$/,
+              exact: true,
+              strict: true,
+            },
+
+            url(payload) {
+              return payload.location.pathname;
+            },
+          },
+        ]
+      : []),
   ];
 
   // Custom block styles
@@ -184,40 +231,42 @@ const applyConfig = (config) => {
     },
   ];
 
-  config.settings = {
-    ...config.settings,
-    nonContentRoutes: [
-      ...config.settings.nonContentRoutes,
-      '/favorites/board',
-      '/favorites',
-    ],
-  };
-
+  // Routes
   config.addonRoutes = [
     ...config.addonRoutes,
     {
-      path: '/favorites/board',
+      path: '/boards/boardview',
       component: FavBoardView,
     },
     {
-      path: '/favorites',
+      path: '/boards',
       component: FavBoardListingView,
     },
   ];
 
+  config.settings.nonContentRoutes = [
+    ...config.settings.nonContentRoutes,
+    '/boards/boardview',
+    '/boards',
+  ];
+
+  // Persistent reducers
+  config.settings.persistentReducers = ['basket'];
+
+  // Widgets
   config.widgets.id.license_copyright = CopyrightWidget;
   config.widgets.id.category = TokenWidget;
 
-  config.blocks.blocksConfig.plotly_chart =
-    config.blocks.blocksConfig.connected_plotly_chart;
-  config.blocks.blocksConfig.plotly_chart.restricted = false;
+  // addonReducers
   config.addonReducers = {
     ...(config.addonReducers || {}),
-    favBasket,
-    favBoards,
+    basket,
+    boards,
+    localnavigation,
+    breadcrumb,
   };
 
-  return [
+  const final = [
     installEmbedContentBlock,
     installDashboardTabsBlock,
     installCustomCardsBlock,
@@ -228,7 +277,11 @@ const applyConfig = (config) => {
     installCountriesListingBlock,
     installAppExtras,
     installSlatePopup,
+    installArcgisBlock,
   ].reduce((acc, apply) => apply(acc), config);
+
+  // console.log('final config', final);
+  return final;
 };
 
 export default applyConfig;

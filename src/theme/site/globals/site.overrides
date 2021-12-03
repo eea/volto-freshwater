@@ -53,13 +53,18 @@ a {
   color: @wisePrimaryColor;
 }
 
+b,
+strong {
+  font-weight: 500;
+}
+
 .p-text {
   font-size: @fontSize !important;
 }
 
 .content-area .container {
-  font-size: 18px;
-  font-weight: 400;
+  font-size: @fontSize !important;
+  font-weight: 300;
   line-height: 28px !important;
 }
 
@@ -73,8 +78,8 @@ a {
 }
 
 .nine.wide.column.content-body > #page-document.ui.container {
-  padding-right: 0;
-  padding-left: 0;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
 }
 
 #page-document {
@@ -92,7 +97,7 @@ a {
 }
 
 .ui.button {
-  font-family: 'POPPINS' !important;
+  font-family: @headerFont !important;
   font-weight: 500 !important;
 }
 
@@ -103,4 +108,10 @@ a {
 .field.inline .add-item-button-wrapper {
   padding-bottom: 1rem !important;
   padding-left: 0 !important;
+}
+
+.ui.label {
+  border: 1px solid #ddd !important;
+  background-color: transparent !important;
+  font-weight: 500 !important;
 }

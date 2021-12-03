@@ -14,9 +14,9 @@
 .context-navigation {
   overflow: hidden;
   padding: 0;
-  margin: 1rem 0;
-  background: white;
-  border-radius: 4px;
+  border-left: 2px solid @wiseSecondaryColor;
+  margin-bottom: 1.5rem;
+  margin-left: 0.3em;
   list-style-type: none;
 
   .item {
@@ -26,21 +26,28 @@
       background: #ffe9e3;
       color: #ff421b;
     }
+
+    .disabled,
+    .disabled:hover {
+      background: transparent;
+      color: rgba(40, 40, 40, 0.3) !important;
+      cursor: default !important;
+    }
   }
 
-  .active.item a {
+  .active.item > .content > a {
     background-color: #f2f9fb;
-    color: #0099bb;
+    color: @wisePrimaryColor;
     font-weight: 500 !important;
   }
 
   .item a {
     position: relative;
     display: block;
-    padding: 0.8rem 1rem;
+    padding: 0.7rem 1rem;
     color: #333;
     font-size: 16px !important;
-    font-weight: 400 !important;
+    font-weight: 300 !important;
 
     > img {
       display: none !important;
@@ -48,19 +55,22 @@
   }
 
   > .list {
-    border-bottom: 1px solid @wiseSecondaryColor;
     margin: 0;
   }
 
   .level-1 a {
-    padding-left: 1rem;
+    padding-right: 0;
+    padding-left: 1.3rem;
+    font-weight: 400 !important;
   }
 
   .level-2 a {
-    padding-left: 1.5rem;
+    padding: 0.6rem 0 0.6rem 2rem;
+    font-size: 15px !important;
   }
 
   .level-3 a {
+    padding-right: 0;
     padding-left: 2rem;
   }
 
@@ -69,10 +79,14 @@
   }
 }
 
+.context-navigation-header > a {
+  font-size: 20px !important;
+  font-weight: 500 !important;
+}
+
 .context-navigation-header {
-  padding: 1rem 0;
-  border-bottom: 3px solid @wiseSecondaryColor;
-  box-shadow: 0 4px 19px rgba(0, 0, 1, 0.07);
+  padding-left: 1.3rem;
+  margin-bottom: 1rem;
   color: @wiseSecondaryColor;
   font-size: 20px;
   font-weight: 500;

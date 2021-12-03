@@ -6,25 +6,31 @@ import {
   ItemTitle,
   ItemMetadataSnippet,
 } from '@eeacms/volto-freshwater/components';
+import { formatItemType } from '@eeacms/volto-freshwater/utils';
+import { useLocation, useHistory } from 'react-router-dom';
 import './style.less';
-
-const formatItemType = (item) => {
-  const type =
-    item
-      .replace('_', ' / ')
-      .split(' ')
-      .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-      .join(' ') || '';
-  return type;
-};
 
 const SimpleListingView = ({ items, isEditMode }) => {
   const [isOpenModal, setOpenModal] = React.useState(false);
   const [selectedItem, setSelectedItem] = React.useState(null);
+  const modalHash = selectedItem?.getId;
+  const history = useHistory();
+  const location = useLocation();
 
-  const close = (item) => {
+  React.useEffect(() => {
+    if (location.hash.includes(modalHash)) {
+      setOpenModal(true);
+    } else {
+      setOpenModal(false);
+    }
+  }, [location, modalHash]);
+
+  const closeModal = (item) => {
     setOpenModal(false);
     setSelectedItem(null);
+    history.push({
+      hash: '',
+    });
   };
 
   return (
@@ -37,6 +43,9 @@ const SimpleListingView = ({ items, isEditMode }) => {
               onClick={() => {
                 setOpenModal(true);
                 setSelectedItem(item);
+                history.push({
+                  hash: item?.getId,
+                });
               }}
               onKeyDown={() => setSelectedItem(item)}
               role="button"
@@ -58,7 +67,7 @@ const SimpleListingView = ({ items, isEditMode }) => {
       <Modal
         className="item-metadata-modal"
         open={isOpenModal}
-        onClose={close}
+        onClose={closeModal}
         size="large"
         closeIcon
         centered
@@ -69,7 +78,7 @@ const SimpleListingView = ({ items, isEditMode }) => {
         </Modal.Header>
 
         <Modal.Content>
-          <ItemMetadata item={selectedItem} />
+          <ItemMetadata item={selectedItem} mapPreview={true} />
         </Modal.Content>
       </Modal>
     </>

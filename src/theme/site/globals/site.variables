@@ -14,9 +14,11 @@
 
 @googleFontSizes   : '300,400,500,700,400italic,700italic';
 @importGoogleFonts : false;
-@toolbalWidth: 80px;
-@toolbalWidthMin: 20px;
+
 @fullSizeIcon: 36px;
+@toolbarWidth: 80px;
+@collapsedToolbarWidth: 20px;
+@sidebarWidth: 375px;
 
 
 /*-------------------
@@ -27,9 +29,9 @@
 @emSize   : 16px;
 
 /* The size of page text  */
-@fontSize : 16px;
+@fontSize : 19px;
 
-@h1 : unit((36 / 16), rem);
+@h1 : unit((34 / 16), rem);
 @h2 : unit((30 / 16), rem);
 @h3 : unit((24 / 16), rem);
 @h4 : unit((18 / 16), rem);
@@ -45,8 +47,8 @@
 /*-------------------
     Brand Colors
 --------------------*/
-@wiseSecondaryColor      : #004050;
-@wisePrimaryColor      : #0099BB;
+@wisePrimaryColor    : #0099BB;
+@wiseSecondaryColor  : #004050;
 @lightSecondaryColor : @lightGrey;
 @lightBlueColor      : #00b4d5;
 

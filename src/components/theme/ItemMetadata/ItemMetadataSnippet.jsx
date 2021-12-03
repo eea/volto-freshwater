@@ -1,14 +1,5 @@
 import React from 'react';
-
-const formatItemType = (item) => {
-  const type =
-    item
-      .replace('_', ' / ')
-      .split(' ')
-      .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-      .join(' ') || '';
-  return type;
-};
+import { formatItemType } from '@eeacms/volto-freshwater/utils';
 
 const ItemMetadataSnippet = (props) => {
   const { item } = props;

@@ -1,69 +1,73 @@
 /**
- * Bookmark reducers
+ * Boards reducer.
+ * @module reducers/boards
  */
+
+import {
+  GET_BOOKMARK,
+  ADD_BOOKMARK,
+  PUT_BOOKMARK,
+  DELETE_BOOKMARK,
+  GET_ALL_BOOKMARKS,
+} from '@eeacms/volto-freshwater/constants/ActionTypes';
 
 const initialState = {
   error: null,
   items: [],
-  bookmark: null,
   loaded: false,
   loading: false,
   modify: 'loaded',
   delete: 'loaded',
 };
 
-export default function favBoards(state = initialState, action = {}) {
+export default function boards(state = initialState, action = {}) {
   switch (action.type) {
-    case `GET_BOOKMARK_PENDING`:
+    case `${GET_BOOKMARK}_PENDING`:
       return {
         ...state,
         error: null,
         loading: true,
         loaded: false,
       };
-    case `GET_BOOKMARK_SUCCESS`:
+    case `${GET_BOOKMARK}_SUCCESS`:
       return {
         ...state,
         error: null,
-        bookmark: action.result,
         loaded: true,
         loading: false,
       };
-    case `GET_BOOKMARK_FAIL`:
+    case `${GET_BOOKMARK}_FAIL`:
       return {
         ...state,
         error: action.error,
-        bookmark: null,
         loading: false,
         loaded: false,
       };
 
-    case `ADD_BOOKMARK_PENDING`:
+    case `${ADD_BOOKMARK}_PENDING`:
       return {
         ...state,
         error: null,
         loading: true,
         loaded: false,
       };
-    case `ADD_BOOKMARK_SUCCESS`:
+    case `${ADD_BOOKMARK}_SUCCESS`:
       return {
         ...state,
         error: null,
         items: [...state.items, action.result],
-        bookmark: action.result,
         loaded: true,
         loading: false,
       };
-    case `ADD_BOOKMARK_FAIL`:
+    case `${ADD_BOOKMARK}_FAIL`:
       return {
         ...state,
         error: action.error,
-        bookmark: null,
         loading: false,
         loaded: false,
       };
 
-    case `PUT_BOOKMARK_PENDING`:
+    case `${PUT_BOOKMARK}_PENDING`:
       return {
         ...state,
         error: null,
@@ -71,16 +75,15 @@ export default function favBoards(state = initialState, action = {}) {
         loaded: false,
         modify: 'loading',
       };
-    case `PUT_BOOKMARK_SUCCESS`:
+    case `${PUT_BOOKMARK}_SUCCESS`:
       return {
         ...state,
         error: null,
-        bookmark: action.result,
         loaded: true,
         loading: false,
         modify: 'loaded',
       };
-    case `PUT_BOOKMARK_FAIL`:
+    case `${PUT_BOOKMARK}_FAIL`:
       return {
         ...state,
         error: action.error,
@@ -89,7 +92,7 @@ export default function favBoards(state = initialState, action = {}) {
         modify: 'loading',
       };
 
-    case `DEL_BOOKMARK_PENDING`:
+    case `${DELETE_BOOKMARK}_PENDING`:
       return {
         ...state,
         error: null,
@@ -97,7 +100,7 @@ export default function favBoards(state = initialState, action = {}) {
         loaded: false,
         delete: 'failed',
       };
-    case `DEL_BOOKMARK_SUCCESS`:
+    case `${DELETE_BOOKMARK}_SUCCESS`:
       return {
         ...state,
         error: null,
@@ -105,7 +108,7 @@ export default function favBoards(state = initialState, action = {}) {
         loading: false,
         delete: 'loaded',
       };
-    case `DEL_BOOKMARK_FAIL`:
+    case `${DELETE_BOOKMARK}_FAIL`:
       return {
         ...state,
         error: action.error,
@@ -114,14 +117,14 @@ export default function favBoards(state = initialState, action = {}) {
         delete: 'failed',
       };
 
-    case `GET_BOOKMARKS_PENDING`:
+    case `${GET_ALL_BOOKMARKS}_PENDING`:
       return {
         ...state,
         error: null,
         loading: true,
         loaded: false,
       };
-    case `GET_BOOKMARKS_SUCCESS`:
+    case `${GET_ALL_BOOKMARKS}_SUCCESS`:
       return {
         ...state,
         error: null,
@@ -129,7 +132,7 @@ export default function favBoards(state = initialState, action = {}) {
         loaded: true,
         loading: false,
       };
-    case `GET_BOOKMARKS_FAIL`:
+    case `${GET_ALL_BOOKMARKS}_FAIL`:
       return {
         ...state,
         error: action.error,

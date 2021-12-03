@@ -2,15 +2,18 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { flattenToAppURL } from '@plone/volto/helpers';
+import { Item } from 'semantic-ui-react';
+import { flattenToAppURL, getBaseUrl } from '@plone/volto/helpers';
+import { useSelector, useDispatch } from 'react-redux';
+import { searchContent } from '@plone/volto/actions';
+import config from '@plone/volto/registry';
 import './style.less';
 
 const CountriesListingView = (props) => {
-  const { data, content } = props;
-  const children = content?.items;
-  const country_profiles = children.filter(
-    (item) => item['@type'] === 'country_profile',
-  );
+  const { data, pathname } = props;
+  const dispatch = useDispatch();
+  const searchSubrequests = useSelector((state) => state.search.subrequests);
+  const country_profiles = searchSubrequests?.countries?.items || [];
 
   const sections = [
     {
@@ -18,6 +21,20 @@ const CountriesListingView = (props) => {
       items: country_profiles || [],
     },
   ];
+
+  React.useEffect(() => {
+    dispatch(
+      searchContent(
+        getBaseUrl(pathname),
+        {
+          'path.depth': 1,
+          portal_type: ['country_profile'],
+          b_size: 50,
+        },
+        'countries',
+      ),
+    );
+  }, [pathname, dispatch]);
 
   return (
     <div className="countries-listing-view full-width">
@@ -30,12 +47,24 @@ const CountriesListingView = (props) => {
               )}
               <div
                 className="countries-listing-section"
-                style={{ columns: data.columns || 3 }}
+                style={{ columns: data.columnsCount || 3 }}
               >
                 {section?.items
                   .sort((a, b) => (a.title > b.title ? 1 : -1))
                   .map((item, i) => (
-                    <div key={i}>
+                    <div key={i} className="countries-item-wrapper">
+                      {item.lead_image && (
+                        <Item.Image
+                          className="countries-list-flag"
+                          alt={item.title}
+                          src={`${item['@id']
+                            .replace(config.settings.apiPath, '')
+                            .replace(
+                              config.settings.internalApiPath,
+                              '',
+                            )}/@@images/image/thumb`}
+                        />
+                      )}
                       <Link to={flattenToAppURL(item['@id'])}>
                         {item.title}
                       </Link>
@@ -53,5 +82,6 @@ const CountriesListingView = (props) => {
 export default compose(
   connect((state, props) => ({
     content: state.content.data,
+    pathname: state.router.location.pathname,
   })),
 )(CountriesListingView);

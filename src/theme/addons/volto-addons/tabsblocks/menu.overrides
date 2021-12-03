@@ -1,3 +1,23 @@
+.full-width .tabs-block .container {
+  max-width: 100% !important;
+}
+
+.full-width .tabs-block {
+  margin: 0 0.5rem;
+}
+
+.default .item {
+  margin-right: 1rem;
+}
+
+.tabs-block .ui.menu .ui.fluid.input {
+  margin: 0 0 0 1.7rem;
+}
+
+.tabs-block .ui.fluid.input > input {
+  width: 100% !important;
+}
+
 #main .tabs-block {
   margin: 2.5rem 0 1rem 0;
 
@@ -22,6 +42,13 @@
   .default.tabs.inline {
     .ui.menu {
       border-bottom: 1px solid @menuBorderColor;
+
+      @media only screen and (max-width: 800px) {
+        border-bottom: none;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+      }
     }
   }
 
@@ -50,28 +77,8 @@
   }
 }
 
-.default .item {
-  margin-right: 1rem;
-}
-
-.tabs-block .ui.menu .ui.fluid.input {
-  margin: 0 0 0 1.7rem;
-}
-
-.tabs-block .ui.fluid.input > input {
-  width: 100% !important;
-}
-
 .tabs-block .side.tabs {
   padding: 0;
-}
-
-.full-width .tabs-block .container {
-  max-width: 100% !important;
-}
-
-.full-width .tabs-block {
-  margin: 0 0.5rem;
 }
 
 @media screen and (max-width: 1023px) {
@@ -92,7 +99,7 @@
   margin-left: 0;
 }
 
-body.siteroot {
+body.homepage-view {
   .default.tabs.inline {
     .active.item {
       &:after {

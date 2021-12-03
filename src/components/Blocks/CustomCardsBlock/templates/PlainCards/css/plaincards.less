@@ -35,7 +35,7 @@
 
 .plain-card-header {
   color: #002d54;
-  font-family: 'Poppins', serif;
+  font-family: @headerFont;
   font-size: 22px;
   line-height: 28px;
 }
@@ -49,10 +49,21 @@
   margin-top: 1em;
 }
 
+.home-plain-cards {
+  .plain-card {
+    padding: 1rem !important;
+  }
+
+  .plain-card-image {
+    min-height: 100px;
+    background-size: 100px;
+  }
+}
+
 @media only screen and (min-width: 1280px) {
   #view .home-plain-cards {
     position: absolute !important;
-    top: 460px;
+    top: 440px;
 
     .plain-cards-grid-title {
       color: #fff;

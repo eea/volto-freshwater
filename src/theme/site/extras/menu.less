@@ -1,0 +1,237 @@
+// Mobile menu
+.navigation .ui.pointing.secondary.stackable.open.menu {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  background-color: #f1fdff;
+  box-shadow: -5px 5px 17px -7px rgba(0, 0, 0, 0.3);
+  overflow-x: auto;
+  overflow-y: auto;
+  transform: translateX(0);
+  transition: all 0.5s ease;
+  visibility: visible;
+
+  > .active.item.firstLevel {
+    background-color: #e4f9fc !important;
+
+    &:hover {
+      background-color: #e4f9fc !important;
+    }
+  }
+
+  > .item.firstLevel {
+    position: relative;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 20px 15px 20px !important;
+    float: none;
+    text-align: left;
+
+    &:before {
+      background-color: transparent !important;
+    }
+
+    > .menu {
+      display: none !important;
+      box-shadow: none !important;
+
+      > .item {
+        padding: 0 !important;
+
+        .submenu-wrapper {
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+    .item {
+      border: none !important;
+    }
+
+    &.active > .menu,
+    &.active:hover > .menu {
+      display: block !important;
+    }
+
+    &:hover {
+      border-color: transparent !important;
+      background-color: transparent !important;
+
+      > .menu {
+        display: none !important;
+      }
+    }
+
+    .menu {
+      position: relative;
+      top: 10px !important;
+      border: none !important;
+      background-color: transparent !important;
+    }
+
+    > i.dropdown.icon {
+      position: absolute;
+      z-index: 999;
+      top: 10px;
+      right: 20px;
+      font-size: 20px;
+
+      &:hover {
+        color: @wiseSecondaryColor;
+      }
+    }
+  }
+
+  .secondLevel {
+    color: #166578;
+    white-space: break-spaces;
+  }
+
+  .secondLevel,
+  .thirdLevel {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+}
+
+.navigation .menu .close-button {
+  display: none;
+  margin: 1em 8px 1em 8px !important;
+  background-color: transparent !important;
+  float: right;
+
+  &:hover {
+    background-color: transparent !important;
+  }
+}
+
+.navigation .open.menu .close-button {
+  display: inline-block;
+}
+
+.hamburger-wrapper {
+  z-index: 999 !important;
+  float: right;
+
+  .hamburger {
+    padding: 0 !important;
+  }
+}
+
+body.homepage-view {
+  .navigation {
+    .ui.secondary.pointing.menu {
+      .firstLevel,
+      .firstLevel > a {
+        color: #fff !important;
+      }
+
+      .firstLevel:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+        color: #fff !important;
+      }
+    }
+
+    .ui.pointing.secondary.stackable.open.menu {
+      > .item.firstLevel > a,
+      .dropdown.icon {
+        color: @wiseSecondaryColor !important;
+      }
+    }
+  }
+
+  #main {
+    .tools-search-wrapper {
+      margin-bottom: -41px;
+    }
+  }
+}
+
+body.homepage-view {
+  .hamburger-inner,
+  .hamburger-inner:before,
+  .hamburger-inner:after {
+    background-color: #fff;
+  }
+}
+
+body.is-anonymous {
+  @media only screen and (max-width: 1495px) {
+    #main .navigation .ui.menu.large.screen.only {
+      display: none !important;
+      transform: translateX(100%);
+    }
+
+    #main .navigation .hamburger-wrapper.mobile.only {
+      display: block !important;
+    }
+  }
+}
+
+body.is-anonymous.homepage-view {
+  @media only screen and (max-width: 1495px) {
+    .firstLevel,
+    .firstLevel > a,
+    .firstLevel:hover {
+      color: @wiseSecondaryColor !important;
+    }
+  }
+}
+
+body:not(.is-anonymous) {
+  @media only screen and (max-width: 1595px) {
+    #main .navigation .ui.menu.large.screen.only {
+      display: none !important;
+      transform: translateX(100%);
+    }
+
+    #main .navigation .hamburger-wrapper.mobile.only {
+      display: block !important;
+    }
+  }
+}
+
+body:not(.is-anonymous).homepage-view {
+  @media only screen and (max-width: 1595px) {
+    .firstLevel,
+    .firstLevel > a,
+    .firstLevel:hover {
+      color: @wiseSecondaryColor !important;
+    }
+  }
+}
+
+body.has-toolbar.has-sidebar {
+  #main .navigation .ui.menu.large.screen.only {
+    display: none !important;
+    transform: translateX(100%);
+  }
+
+  #main .navigation .hamburger-wrapper.mobile.only {
+    display: block !important;
+  }
+}
+
+body.has-toolbar.has-sidebar.homepage-view {
+  .firstLevel,
+  .firstLevel > a,
+  .firstLevel:hover {
+    color: @wiseSecondaryColor !important;
+  }
+}
+
+/* Countries submenu */
+.navigation .countries-submenu {
+  column-count: 3;
+  column-gap: 0.5rem;
+
+  > .item.thirdLevel {
+    padding: 0.3rem 1rem !important;
+  }
+}

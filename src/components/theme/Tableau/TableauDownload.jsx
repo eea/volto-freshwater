@@ -46,9 +46,12 @@ const TableauDownload = (props) => {
         position="top center"
         on="click"
         trigger={
-          <Button className="toolbar-button" title="Download">
-            <Icon name={downloadSVG} size="26px" />
-          </Button>
+          <div className="toolbar-button-wrapper">
+            <Button className="toolbar-button" title="Download">
+              <Icon name={downloadSVG} size="26px" />
+            </Button>
+            <span className="btn-text">Save</span>
+          </div>
         }
       >
         <Popup.Header>Download</Popup.Header>

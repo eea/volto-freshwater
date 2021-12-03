@@ -3,13 +3,21 @@
 
 @import (multiple, reference, optional) '../../theme.config';
 
-.block.listing {
+.block.listing.simple {
   font-size: 15px;
+
+  .items {
+    padding-left: 25px;
+    margin: 0;
+  }
+
+  .simple-listing-item {
+    padding-bottom: 10px;
+  }
 }
 
 .simple-listing-title {
   cursor: pointer;
-  font-family: 'POPPINS';
   font-size: inherit;
   font-weight: 500;
   line-height: 22px;
@@ -22,9 +30,4 @@
 .simple-listing {
   display: inline-block;
   vertical-align: text-top;
-
-  .metadata-tab-section {
-    position: relative;
-    top: -8px;
-  }
 }

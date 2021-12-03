@@ -1,6 +1,6 @@
 {
   "name": "@eeacms/volto-freshwater",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Volto theme and integration for Freshwater",
   "main": "src/index.js",
   "author": "European Environment Agency: IDM2 A-Team",
@@ -17,25 +17,31 @@
     "url": "git@github.com:eea/volto-freshwater.git"
   },
   "addons": [
-    "volto-slate:asDefault",
     "@kitconcept/volto-blocks-grid",
     "@eeacms/volto-plotlycharts",
     "@eeacms/volto-columns-block",
     "@eeacms/volto-datablocks",
     "@eeacms/volto-group-block",
     "@eeacms/volto-resize-helper",
-    "@eeacms/volto-block-style"
+    "@eeacms/volto-block-style",
+    "@eeacms/volto-block-toc",
+    "@eeacms/volto-arcgis-block",
+    "volto-slate"
   ],
   "dependencies": {
+    "@eeacms/volto-arcgis-block": "*",
+    "@eeacms/volto-block-toc": "2.2.2",
     "react-lazy-load-image-component": "^1.4.0",
-    "volto-slate": "^2.6.1",
     "@eeacms/volto-resize-helper": "^0.2.0",
     "@eeacms/volto-block-style": "^3.3.0",
-    "@eeacms/volto-columns-block": "4.4.5",
-    "@eeacms/volto-datablocks": "2.0.11",
+    "@eeacms/volto-columns-block": "4.4.6",
+    "@eeacms/volto-datablocks": "*",
     "@eeacms/volto-group-block": "*",
     "@eeacms/volto-plotlycharts": "*",
-    "@kitconcept/volto-blocks-grid": "*"
+    "@kitconcept/volto-blocks-grid": "*",
+    "react-slick": "^0.24.0",
+    "slick-carousel": "^1.8.1",
+    "volto-slate": "4.2.1"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.9.5",

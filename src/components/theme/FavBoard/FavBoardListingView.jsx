@@ -1,39 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
 import { groupBy } from 'lodash';
 import jwtDecode from 'jwt-decode';
 import { Link } from 'react-router-dom';
 import { Portal } from 'react-portal';
-import { Toolbar } from '@plone/volto/components';
-import ToggleButton from './FavToggleStatusButton';
-import { Tab, Menu } from 'semantic-ui-react';
-import { getAllBookmarks } from '@eeacms/volto-freshwater/actions/favBoards';
+import { Toolbar, Icon } from '@plone/volto/components';
+import { BodyClass } from '@plone/volto/helpers';
+import { Tab, Menu, Button } from 'semantic-ui-react';
+import { getAllBookmarks } from '@eeacms/volto-freshwater/actions/boards';
+import backSVG from '@plone/volto/icons/back.svg';
+import starSVG from '@plone/volto/icons/half-star.svg';
 import './style.less';
 
 const ListingView = (props) => {
-  const { showToggle, groupedItems, userID } = props;
+  const { groupedItems, userId } = props;
 
-  return Object.keys(groupedItems).map((username) => {
+  return Object.keys(groupedItems).map((username, index) => {
     return (
-      <div>
+      <div className="fav-listing-board" key={index}>
         {groupedItems[username].sort().map((group, index) => {
           return (
-            <div className="fav-listing-board" key={index}>
-              <div className="fav-listing-board-item" key={index}>
-                <Link
-                  className="fav-board-link"
-                  to={`${props.location.pathname}/board?user=${username}&group=${group.board}&status=${group.status}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+            <div key={index}>
+              <Link
+                className="fav-board-link"
+                to={`${props.location.pathname}/boardview?user=${username}&board=${group.board}`}
+              >
+                <div className="fav-listing-board-item" key={index}>
                   <span>
                     {group.board}
-                    {username !== userID && <span> by {username} </span>}
+                    {username !== userId && <span> by {username} </span>}
                   </span>
-                </Link>
-                {showToggle && <ToggleButton groupedItems={group} />}
-              </div>
+                </div>
+              </Link>
             </div>
           );
         })}
@@ -43,29 +42,24 @@ const ListingView = (props) => {
 };
 
 const FavBoardListingView = (props) => {
-  const userSession = useSelector((state) => state.userSession);
-  const userID = userSession.token ? jwtDecode(userSession.token).sub : '';
-
-  const items = useSelector((state) => state.favBoards?.items || []);
-  const bookmarkdelete = useSelector((state) => state.favBoards?.delete || {});
+  const { userId, token, items, boardsDelete } = props;
+  const dispatch = useDispatch();
 
   const [myGroupedItems, setMyGroupedItems] = useState({});
   const [otherPublicGroupedItems, setOtherPublicGroupedItems] = useState({});
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    if (bookmarkdelete === 'loaded') {
+    if (boardsDelete === 'loaded') {
       dispatch(getAllBookmarks());
     }
-  }, [bookmarkdelete, dispatch]);
+  }, [boardsDelete, dispatch]);
 
   useEffect(() => {
     const groupedItems = groupBy(items, (item) => item['owner']);
 
     Object.keys(groupedItems).forEach((username) => {
       const items = groupedItems[username].filter((item) => {
-        if (username !== userID && item.payload?.status === 'private') {
+        if (username !== userId && item.payload?.status === 'private') {
           return false;
         }
         return true;
@@ -83,14 +77,14 @@ const FavBoardListingView = (props) => {
         byBoards.push(board);
       });
 
-      if (username === userID) {
+      if (username === userId) {
         setMyGroupedItems({ [username]: byBoards });
       } else {
         if (byBoards.length > 0)
           setOtherPublicGroupedItems({ [username]: byBoards });
       }
     });
-  }, [dispatch, items, userID]);
+  }, [dispatch, items, userId]);
 
   const panes = [
     {
@@ -101,19 +95,28 @@ const FavBoardListingView = (props) => {
       ),
       render: () => (
         <Tab.Pane>
-          <ListingView
-            {...props}
-            userID={userID}
-            showToggle={true}
-            groupedItems={myGroupedItems}
-          />
+          {Object.keys(myGroupedItems).length > 0 ? (
+            <ListingView
+              {...props}
+              userId={userId}
+              groupedItems={myGroupedItems}
+            />
+          ) : (
+            <div className="no-boards-info">
+              You don't have any boards. You find the
+              <span className="star-icon">
+                <Icon name={starSVG} size="20px" />
+              </span>
+              button on every page to create boards.
+            </div>
+          )}
         </Tab.Pane>
       ),
     },
     {
       menuItem: (
         <Menu.Item key="other-boards">
-          <h4>Other public boards</h4>
+          <h4>All public boards</h4>
         </Menu.Item>
       ),
       render: () => (
@@ -121,8 +124,7 @@ const FavBoardListingView = (props) => {
           {Object.keys(otherPublicGroupedItems).length > 0 ? (
             <ListingView
               {...props}
-              userID={userID}
-              showToggle={false}
+              userId={userId}
               groupedItems={otherPublicGroupedItems}
             />
           ) : (
@@ -133,21 +135,36 @@ const FavBoardListingView = (props) => {
     },
   ];
 
-  return (
+  return token ? (
     <div className="favorites-listing ui container">
+      <BodyClass className="boards-listing-view" />
       <Tab menu={{ secondary: true, fluid: true }} panes={panes} />
 
-      {__CLIENT__ && props.token && (
+      {__CLIENT__ && token && (
         <Portal node={document.getElementById('toolbar')}>
-          <Toolbar inner={<span />} />
+          <Toolbar
+            inner={
+              <Button className="item" onClick={() => props.history.goBack()}>
+                <Icon name={backSVG} size="30px" className="contents circled" />
+              </Button>
+            }
+          />
         </Portal>
       )}
     </div>
+  ) : (
+    ''
   );
 };
 
 export default compose(
   connect((state) => ({
     token: state.userSession.token,
+    content: state.content,
+    userId: state.userSession.token
+      ? jwtDecode(state.userSession.token).sub
+      : '',
+    items: state.boards?.items || [],
+    boardsDelete: state.boards?.delete || {},
   })),
 )(FavBoardListingView);

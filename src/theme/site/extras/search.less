@@ -10,7 +10,7 @@
   }
 
   .tileFooter a {
-    color: #004050;
+    color: @wiseSecondaryColor;
     font-size: 16px;
   }
 }
@@ -103,21 +103,22 @@
 }
 
 // FW customizations
-.block.searchBlock {
+.block.searchBlock,
+.block.search {
   .ui.accordion.filter-listing {
     padding: 0;
     background-color: transparent;
 
     .filter-list-group .ui.label {
       background-color: #f3f3f3;
-      font-family: 'Roboto';
+      font-family: @pageFont;
       font-size: 12px;
       font-weight: 500;
     }
 
     .filter-list-header {
       padding: 0.5rem 1rem 0.5rem 0.5rem;
-      background-color: #0099bb;
+      background-color: @wisePrimaryColor;
       border-radius: 0.3rem;
 
       .ui.button {
@@ -144,8 +145,14 @@
         padding: 12px 18px !important;
         border: none;
         background-color: #e7f2f5;
-        border-radius: 18px;
+        border-radius: 30px;
         color: #5e5e5e;
+      }
+    }
+
+    .ui.basic.button {
+      &:hover {
+        background-color: transparent !important;
       }
     }
 
@@ -183,7 +190,7 @@
   }
 
   .facet .ui.header {
-    color: #0099bb;
+    color: @wisePrimaryColor;
     font-size: 16px;
     font-weight: 500;
     text-transform: uppercase;
@@ -192,6 +199,7 @@
   .ui.checkbox label,
   .ui.checkbox + label {
     font-size: 14px;
+    font-weight: 400;
   }
 
   .items > .listing-item:first-child h3 {
@@ -200,10 +208,10 @@
 
   .listing-item {
     margin-bottom: 0 !important;
-    font-size: 16px;
+    font-size: 17px;
 
     p {
-      line-height: 20px;
+      line-height: 22px;
     }
 
     img {
@@ -218,6 +226,15 @@
 
     &:hover {
       color: @wisePrimaryColor;
+    }
+  }
+
+  .pagination-wrapper {
+    @media only screen and (max-width: 480px) {
+      .ui.pagination.menu .item {
+        min-width: auto;
+        padding: 10px 15px !important;
+      }
     }
   }
 }
