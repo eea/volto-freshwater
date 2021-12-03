@@ -1,9 +1,11 @@
 import React from 'react';
-import { Table, Button } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
+import { Table, Button } from 'semantic-ui-react';
 import MapPreview from './MapPreview';
 import { useSelector } from 'react-redux';
 import { useCopyToClipboard } from '@eeacms/volto-freshwater/utils';
+import config from '@plone/volto/registry';
+
 import shareSVG from '@plone/volto/icons/share.svg';
 
 const EEA_LICENSE =
@@ -15,7 +17,9 @@ const EEA_LICENSE =
   'Copyright holder: European Commission.';
 
 const ItemMetadata = (props) => {
+  const { settings } = config;
   const { item, mapPreview } = props;
+  // const root = useSelector((state) => state.breadcrumbs.root);
   const source = item?.source?.[0] || item;
   const description = item.description || source?.description;
   const subject = source.subject || source.subjects;
@@ -23,9 +27,8 @@ const ItemMetadata = (props) => {
   const map_url = source?.webmap_url;
   const copyright =
     source.license_copyright === 'EEA' ? EEA_LICENSE : source.license_copyright;
-  const id = item.source ? item.source[0]['@id'] : item['@id'];
-  const root = useSelector((state) => state.breadcrumbs.root);
-  const url = (root || window.location.origin) + id;
+  const item_id = item.source ? item.source[0]['@id'] : item['@id'];
+  const url = settings.apiPath + item_id;
 
   const [copyUrlStatus, copyUrl] = useCopyToClipboard(url);
   const [confirmationText, setConfirmationText] = React.useState(false);
