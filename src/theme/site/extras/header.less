@@ -19,12 +19,6 @@
     .navigation {
       position: relative;
     }
-
-    .home-logo {
-      width: 234px !important;
-      max-width: 234px !important;
-      height: 56px;
-    }
   }
 
   .page-nav,
@@ -109,11 +103,6 @@
       @media only screen and (max-width: @largestTabletScreen) {
         overflow-x: initial;
       }
-    }
-
-    .logo img {
-      max-width: none;
-      max-width: 162px;
     }
   }
 
@@ -232,6 +221,11 @@ body:not(.view-editview) {
   .logo-nav-wrapper {
     height: 100%;
   }
+
+  .logo img {
+    width: auto !important;
+    height: 43px !important;
+  }
 }
 
 @media only screen and (max-width: @largestMobileScreen) {
@@ -250,10 +244,6 @@ body:not(.view-editview) {
 
 .contentpage .sticky-header {
   background-color: #fff;
-
-  .page-nav .logo img {
-    max-width: 112px !important;
-  }
 }
 
 .ui.basic.segment.homepage .sticky-header {

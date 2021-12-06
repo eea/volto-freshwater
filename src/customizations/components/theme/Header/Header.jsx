@@ -86,6 +86,8 @@ const Header = (props) => {
                     className="home-logo"
                     src={clearLogoSVG}
                     alt="Freshwater logo"
+                    width="234"
+                    height="56"
                   />
                 ) : (
                   <Logo />

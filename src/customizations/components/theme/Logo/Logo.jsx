@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { Image } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 
-import LogoImage from './Logo.svg';
+import LogoImage from './freshwater_logo.svg';
 
 /**
  * Logo component class.
@@ -25,6 +25,8 @@ const Logo = (props) => {
         src={LogoImage}
         alt="WISE Freshwater Logo"
         title="WISE Freshwater"
+        width="234"
+        height="56"
       />
     </Link>
   );
