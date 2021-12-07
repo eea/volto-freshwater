@@ -14,7 +14,6 @@ body.has-image {
       background: #000;
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
-      font-size: 15px;
 
       .divider {
         color: @wisePrimaryColor;
@@ -57,6 +56,7 @@ body.has-image {
   }
 
   .ui.breadcrumb {
+    display: inline-block;
     padding: 5px 0;
     font-size: 15px;
 

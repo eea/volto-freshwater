@@ -83,6 +83,8 @@ const Footer = ({ intl }) => {
                       src={ecLogo}
                       title="European Commission"
                       alt="European Commission"
+                      width="152"
+                      height="38"
                     />
                   </a>
                   <a href="https://www.eea.europa.eu/">
@@ -91,6 +93,8 @@ const Footer = ({ intl }) => {
                       src={eeaLogo}
                       title="European Environment Agency"
                       alt="European Environment Agency"
+                      width="109"
+                      height="38"
                     />
                   </a>
                 </div>
@@ -107,6 +111,8 @@ const Footer = ({ intl }) => {
                       src={marineLogo}
                       title="Marine Information System for Europe"
                       alt="Marine Information System for Europe"
+                      width="80"
+                      height="38"
                     />
                   </a>
                   <a href="https://biodiversity.europa.eu/">
@@ -115,6 +121,8 @@ const Footer = ({ intl }) => {
                       src={biseLogo}
                       title="Biodiversity Information System for Europe"
                       alt="Biodiversity Information System for Europe"
+                      width="114"
+                      height="38"
                     />
                   </a>
                   <a href="https://climate-adapt.eea.europa.eu/">
@@ -123,6 +131,8 @@ const Footer = ({ intl }) => {
                       src={ccaLogo}
                       title="Sharing adaptation information across Europe"
                       alt="Climate-Adapt"
+                      width="117"
+                      height="38"
                     />
                   </a>
                   <a href="https://forest.eea.europa.eu/">
@@ -131,6 +141,8 @@ const Footer = ({ intl }) => {
                       src={fiseLogo}
                       title="Forest Information System for Europe"
                       alt="Forest Information System for Europe"
+                      width="140"
+                      height="38"
                     />
                   </a>
                 </div>

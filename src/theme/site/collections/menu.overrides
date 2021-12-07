@@ -8,6 +8,7 @@
       margin: 0;
       line-height: 1.2;
       text-transform: none;
+      transition: none;
     }
 
     a {
@@ -16,6 +17,7 @@
       font-size: 16px;
       font-weight: 500;
       line-height: 1.2;
+      transition: none !important;
     }
 
     .item.firstLevel:nth-last-child(-n + 2) {

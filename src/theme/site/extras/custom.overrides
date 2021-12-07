@@ -182,7 +182,8 @@ body.has-image.has-banner:not(.contenttype-country_profile) #main .breadcrumbs .
 
 
 body.contenttype-country_profile {
-  .herosection {
+  .herosection,
+  #page-document > h1.documentFirstHeading {
     display: none !important;
   }
 }

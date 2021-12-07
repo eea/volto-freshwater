@@ -10,7 +10,7 @@
   font-family: @fontName;
   font-style: normal;
   font-weight: @normal;
-  .setFontSrc(@fontName);
+  .setFontSrc(@fontName, @fontWeight: 'Regular');
 }
 
 @font-face {
@@ -34,7 +34,7 @@
   font-family: @headerFontName;
   font-style: normal;
   font-weight: @normal;
-  .setFontSrc(@headerFontName);
+  .setFontSrc(@headerFontName, @fontWeight: 'Regular');
 }
 
 @font-face {

@@ -23,7 +23,7 @@ const ItemMetadata = (props) => {
   const tableau_url = source?.embed_url;
   const map_url = source?.webmap_url;
   const item_path = getPath(source.getURL).replace('/api', '');
-  const share_url = settings.publicURL + '/freshwater' + item_path;
+  const share_url = settings.publicURL + item_path;
   const copyright =
     source.license_copyright === 'EEA' ? EEA_LICENSE : source.license_copyright;
 
