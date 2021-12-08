@@ -11,8 +11,7 @@ const EEA_LICENSE =
   're-use of content on the EEA website for commercial or ' +
   'non-commercial purposes is permitted free of charge, ' +
   'provided that the source is acknowledged ' +
-  '(https://www.eea.europa.eu/legal/copyright). ' +
-  'Copyright holder: European Commission.';
+  '(https://www.eea.europa.eu/legal/copyright). ';
 
 const ItemMetadata = (props) => {
   const { settings } = config;
