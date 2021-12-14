@@ -166,7 +166,7 @@ export class UnconnectedAttachedImageWidget extends Component {
 
         <UrlWidget {...this.props} wrapped={false} />
 
-        {this.state.errorMessage && this.state.errorMessage && (
+        {this.state.errorMessage && (
           <Label basic color="red" pointing>
             {this.state.errorMessage}
           </Label>
