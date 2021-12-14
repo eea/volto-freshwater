@@ -12,7 +12,7 @@ import { Container, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { HeroSection } from '@eeacms/volto-freshwater/components';
-import clearLogoSVG from '@eeacms/volto-freshwater/static/freshwater_logo_clear.svg';
+import clearLogoSVG from '@eeacms/volto-freshwater/static/freshwater_logo_white.svg';
 import cx from 'classnames';
 
 const Header = (props) => {

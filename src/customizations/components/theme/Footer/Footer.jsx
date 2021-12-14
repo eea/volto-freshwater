@@ -17,7 +17,7 @@ import eeaLogo from '@eeacms/volto-freshwater/static/EEA-logo.png';
 import fiseLogo from '@eeacms/volto-freshwater/static/forest.svg';
 import ccaLogo from '@eeacms/volto-freshwater/static/cca-logo.svg';
 import biseLogo from '@eeacms/volto-freshwater/static/bise-logo.svg';
-import marineLogo from '@eeacms/volto-freshwater/static/marine-logo.png';
+import marineLogo from '@eeacms/volto-freshwater/static/marine_logo.svg';
 
 /**
  * Component to display the footer.
@@ -55,15 +55,12 @@ const Footer = ({ intl }) => {
                     </Link>
                   </li>
                   <li>
-                    <a
-                      className="item"
-                      href="https://water.europa.eu/legal-notice"
-                    >
+                    <Link className="item" to={`${root}/legal-notice`}>
                       <FormattedMessage
                         id="legal_notice"
                         defaultMessage="Privacy and Legal Notice"
                       />
-                    </a>
+                    </Link>
                   </li>
                   <Anontools />
                 </ul>
