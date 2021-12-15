@@ -28,11 +28,14 @@ const Card = (props) => {
           }
         >
           <div className="content presentation-card-content">
-            <UniversalLink className="presentation-card-link" href={card.link}>
+            <UniversalLink
+              className="presentation-card-wrapper"
+              href={card.link}
+            >
               <>
                 {leadImage && !card?.attachedimage ? (
                   <div
-                    className="presentation-card-image hello"
+                    className="presentation-card-image"
                     style={{
                       backgroundImage: `url(${card.source?.[0]['@id']
                         .replace(config.settings.apiPath, '')
@@ -76,11 +79,7 @@ const Card = (props) => {
           </div>
 
           {card.item_type && (
-            <div className="extra content">
-              <div className="left floated card_item_type">
-                {card.item_type}
-              </div>
-            </div>
+            <div className="extra content">{card.item_type}</div>
           )}
         </div>
       ) : (
@@ -95,7 +94,7 @@ const Card = (props) => {
           }
         >
           <div className="content presentation-card-content">
-            <div className="presentation-card-link">
+            <div className="presentation-card-wrapper">
               <>
                 {leadImage && !card?.attachedimage ? (
                   <div
@@ -143,11 +142,7 @@ const Card = (props) => {
           </div>
 
           {card.item_type && (
-            <div className="extra content">
-              <div className="left floated card_item_type">
-                {card.item_type}
-              </div>
-            </div>
+            <div className="extra content">{card.item_type}</div>
           )}
         </div>
       )}

@@ -1,9 +1,9 @@
 import React from 'react';
-import { Table, Button } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
+import { Table, Button } from 'semantic-ui-react';
+import { getPath, useCopyToClipboard } from '@eeacms/volto-freshwater/utils';
 import MapPreview from './MapPreview';
-import { useSelector } from 'react-redux';
-import { useCopyToClipboard } from '@eeacms/volto-freshwater/utils';
+import config from '@plone/volto/registry';
 import shareSVG from '@plone/volto/icons/share.svg';
 
 const EEA_LICENSE =
@@ -11,23 +11,22 @@ const EEA_LICENSE =
   're-use of content on the EEA website for commercial or ' +
   'non-commercial purposes is permitted free of charge, ' +
   'provided that the source is acknowledged ' +
-  '(https://www.eea.europa.eu/legal/copyright). ' +
-  'Copyright holder: European Commission.';
+  '(https://www.eea.europa.eu/legal/copyright). ';
 
 const ItemMetadata = (props) => {
+  const { settings } = config;
   const { item, mapPreview } = props;
   const source = item?.source?.[0] || item;
   const description = item.description || source?.description;
   const subject = source.subject || source.subjects;
   const tableau_url = source?.embed_url;
   const map_url = source?.webmap_url;
+  const item_path = getPath(source.getURL).replace('/api', '');
+  const share_url = settings.publicURL + item_path;
   const copyright =
     source.license_copyright === 'EEA' ? EEA_LICENSE : source.license_copyright;
-  const id = item.source ? item.source[0]['@id'] : item['@id'];
-  const root = useSelector((state) => state.breadcrumbs.root);
-  const url = (root || window.location.origin) + id;
 
-  const [copyUrlStatus, copyUrl] = useCopyToClipboard(url);
+  const [copyUrlStatus, copyUrl] = useCopyToClipboard(share_url);
   const [confirmationText, setConfirmationText] = React.useState(false);
 
   React.useEffect(() => {

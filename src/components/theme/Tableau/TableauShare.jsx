@@ -101,6 +101,7 @@ const TableauShare = (props) => {
 
   return (
     <Popup
+      basic
       className="tableau-share-dialog"
       position="top center"
       on="click"

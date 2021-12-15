@@ -8,15 +8,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, Container } from 'semantic-ui-react';
+import { Breadcrumb, Container, Icon } from 'semantic-ui-react';
 import { defineMessages, injectIntl } from 'react-intl';
-
-import { Icon } from '@plone/volto/components';
 import { getBreadcrumbs } from '@plone/volto/actions';
 import { getBaseUrl, hasApiExpander } from '@plone/volto/helpers';
 import cx from 'classnames';
-
-import homeSVG from '@plone/volto/icons/home.svg';
 
 const messages = defineMessages({
   home: {
@@ -91,7 +87,7 @@ class Breadcrumbs extends Component {
               className="section"
               title={this.props.intl.formatMessage(messages.home)}
             >
-              <Icon name={homeSVG} size="18px" />
+              <Icon name="home" size="small" />
             </Link>
             {this.props.items.map((item, index, items) => [
               <Breadcrumb.Divider key={`divider-${item.url}`} />,

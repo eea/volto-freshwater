@@ -10,15 +10,7 @@ import arrowSVG from '@plone/volto/icons/backspace.svg';
 import './css/coloredcards.less';
 
 export const CardItem = (props) => {
-  const {
-    title,
-    text,
-    link,
-    border_color,
-    text_color,
-    font_size,
-    isEditMode,
-  } = props;
+  const { title, text, link, border_color, text_color, isEditMode } = props;
 
   return (
     <>
@@ -46,7 +38,7 @@ export const CardItem = (props) => {
 
                   {text && (
                     <>
-                      <div className={`colored-card-description ${font_size}`}>
+                      <div className="colored-card-description">
                         {serializeNodes(text)}
                       </div>
                       <div className="link-button">
@@ -86,7 +78,7 @@ export const CardItem = (props) => {
                   {title && <div className="ui sub header">{title}</div>}
 
                   {text && (
-                    <div className={`colored-card-description ${font_size}`}>
+                    <div className="colored-card-description">
                       {serializeNodes(text)}
                     </div>
                   )}
@@ -130,7 +122,6 @@ const ColoredCards = ({ data, isEditMode }) => {
                     background_color={data.background_color}
                     border_color={data.border_color}
                     text_color={data.text_color}
-                    font_size={data.font_size}
                     image_scale={image_scale}
                     isEditMode={isEditMode}
                   />

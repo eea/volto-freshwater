@@ -17,7 +17,7 @@ import eeaLogo from '@eeacms/volto-freshwater/static/EEA-logo.png';
 import fiseLogo from '@eeacms/volto-freshwater/static/forest.svg';
 import ccaLogo from '@eeacms/volto-freshwater/static/cca-logo.svg';
 import biseLogo from '@eeacms/volto-freshwater/static/bise-logo.svg';
-import marineLogo from '@eeacms/volto-freshwater/static/marine-logo.png';
+import marineLogo from '@eeacms/volto-freshwater/static/marine_logo.svg';
 
 /**
  * Component to display the footer.
@@ -55,15 +55,12 @@ const Footer = ({ intl }) => {
                     </Link>
                   </li>
                   <li>
-                    <a
-                      className="item"
-                      href="https://water.europa.eu/legal-notice"
-                    >
+                    <Link className="item" to={`${root}/legal-notice`}>
                       <FormattedMessage
                         id="legal_notice"
                         defaultMessage="Privacy and Legal Notice"
                       />
-                    </a>
+                    </Link>
                   </li>
                   <Anontools />
                 </ul>
@@ -83,6 +80,8 @@ const Footer = ({ intl }) => {
                       src={ecLogo}
                       title="European Commission"
                       alt="European Commission"
+                      width="152"
+                      height="38"
                     />
                   </a>
                   <a href="https://www.eea.europa.eu/">
@@ -91,6 +90,8 @@ const Footer = ({ intl }) => {
                       src={eeaLogo}
                       title="European Environment Agency"
                       alt="European Environment Agency"
+                      width="109"
+                      height="38"
                     />
                   </a>
                 </div>
@@ -107,6 +108,8 @@ const Footer = ({ intl }) => {
                       src={marineLogo}
                       title="Marine Information System for Europe"
                       alt="Marine Information System for Europe"
+                      width="80"
+                      height="38"
                     />
                   </a>
                   <a href="https://biodiversity.europa.eu/">
@@ -115,6 +118,8 @@ const Footer = ({ intl }) => {
                       src={biseLogo}
                       title="Biodiversity Information System for Europe"
                       alt="Biodiversity Information System for Europe"
+                      width="114"
+                      height="38"
                     />
                   </a>
                   <a href="https://climate-adapt.eea.europa.eu/">
@@ -123,6 +128,8 @@ const Footer = ({ intl }) => {
                       src={ccaLogo}
                       title="Sharing adaptation information across Europe"
                       alt="Climate-Adapt"
+                      width="117"
+                      height="38"
                     />
                   </a>
                   <a href="https://forest.eea.europa.eu/">
@@ -131,6 +138,8 @@ const Footer = ({ intl }) => {
                       src={fiseLogo}
                       title="Forest Information System for Europe"
                       alt="Forest Information System for Europe"
+                      width="140"
+                      height="38"
                     />
                   </a>
                 </div>

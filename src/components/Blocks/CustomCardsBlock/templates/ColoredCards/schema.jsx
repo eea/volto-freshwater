@@ -48,7 +48,7 @@ export const ColoredCardsSchemaExtender = (schema, data) => {
       {
         id: 'style',
         title: 'Cards styling',
-        fields: ['text_color', 'border_color', 'font_size', 'cards_per_row'],
+        fields: ['text_color', 'border_color', 'cards_per_row'],
       },
       { ...restOfFieldsets },
     ],
@@ -71,14 +71,6 @@ export const ColoredCardsSchemaExtender = (schema, data) => {
         type: 'color',
         default: '#FFF',
         available_colors: config.settings.available_colors,
-      },
-      font_size: {
-        title: 'Card Font size',
-        description: 'Relative to normal size of text in the block',
-        choices: [
-          ['p_size', 'Normal text'],
-          ['h_size', 'Headers text'],
-        ],
       },
       cards_per_row: {
         title: 'Cards per row',

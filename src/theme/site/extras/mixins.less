@@ -1,6 +1,10 @@
-.setFontSrc(@fontName, @fontWeight: 'Regular', @fontType: 'ttf', @fontFormat: 'truetype') {
-  src: url('@{themeFontPath}/@{fontName}/@{fontName}-@{fontWeight}.@{fontType}')
-    format('@{fontFormat}');
+.setFontSrc(@fontName, @fontWeight) {
+  src: url('@{themeFontPath}/@{fontName}/@{fontName}-@{fontWeight}.woff2')
+      format('woff2'),
+    url('@{themeFontPath}/@{fontName}/@{fontName}-@{fontWeight}.woff')
+      format('woff'),
+    url('@{themeFontPath}/@{fontName}/@{fontName}-@{fontWeight}.ttf')
+      format('ttf');
 }
 
 .centeredArrow(@color: red, @position: left, @position-amount: 38%) {

@@ -81,6 +81,10 @@
 .stagingBanner .ui.warning.message {
   padding: 1em 1.5em !important;
   padding-bottom: 0.5em !important;
+
+  .content p {
+    line-height: 19px;
+  }
 }
 
 body.homepage-view.has-banner {
@@ -182,7 +186,8 @@ body.has-image.has-banner:not(.contenttype-country_profile) #main .breadcrumbs .
 
 
 body.contenttype-country_profile {
-  .herosection {
+  .herosection,
+  #page-document > h1.documentFirstHeading {
     display: none !important;
   }
 }

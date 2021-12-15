@@ -57,7 +57,7 @@ export const CardItem = (props) => {
       </Modal>
 
       <div
-        className="ui card metadata-card has-link"
+        className="ui card presentation-card has-link"
         style={
           border_color
             ? {
@@ -73,13 +73,13 @@ export const CardItem = (props) => {
         role="button"
         tabIndex="0"
       >
-        <div className="content metadata-card-content">
-          <div className="metadata-card-wrapper">
+        <div className="content presentation-card-content">
+          <div className="presentation-card-wrapper">
             <>
               {leadImage && !attachedimage ? (
                 <LazyLoadComponent>
                   <div
-                    className="metadata-card-image"
+                    className="presentation-card-image"
                     style={{
                       backgroundImage: `url(${props.source?.[0]['@id']
                         .replace(config.settings.apiPath, '')
@@ -110,11 +110,13 @@ export const CardItem = (props) => {
                 </LazyLoadComponent>
               )}
 
-              <div className="metadata-cards-content-wrapper">
-                {title && <div className="metadata-card-header">{title}</div>}
+              <div className="presentation-cards-content-wrapper">
+                {title && (
+                  <div className="presentation-card-header">{title}</div>
+                )}
 
                 {!hide_description && description && (
-                  <div className="metadata-card-description">
+                  <div className="presentation-card-description">
                     <p>{description}</p>
                   </div>
                 )}
@@ -123,11 +125,7 @@ export const CardItem = (props) => {
           </div>
         </div>
 
-        {item_type && (
-          <div className="extra content">
-            <div className="left floated card_item_type">{item_type}</div>
-          </div>
-        )}
+        {item_type && <div className="extra content">{item_type}</div>}
       </div>
     </>
   );
@@ -149,21 +147,28 @@ const MetadataCardsView = ({ data, isEditMode }) => {
   return (
     <>
       {cards && cards.length > 0 ? (
-        <div className={cx('block align metadata-cards-block', custom_class)}>
+        <div
+          className={cx(
+            'block align metadata-cards-block presentation-cards-block',
+            custom_class,
+          )}
+        >
           <BodyClass className="has-card-tiles" />
           <div className="metadata-cards-grid-wrapper">
             <div className="metadata-cards-grid">
-              {title && <h2 className="metadata-cards-grid-title">{title}</h2>}
+              {title && (
+                <h2 className="presentation-cards-grid-title">{title}</h2>
+              )}
 
               {text && (
-                <div className="metadata-cards-grid-description">
+                <div className="presentation-cards-grid-description">
                   {serializeNodes(text)}
                 </div>
               )}
 
               <div style={{ textAlign: `${text_align}` }}>
                 <Card.Group
-                  className="metadata-cards-group"
+                  className="presentation-cards-group"
                   {...(cards_per_row && cards_per_row > 0
                     ? { itemsPerRow: cards_per_row }
                     : {})}
