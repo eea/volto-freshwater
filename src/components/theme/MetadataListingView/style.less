@@ -46,7 +46,7 @@
   margin: 3.5rem auto !important;
 
   .header {
-    border-bottom: 1px solid #ccc !important;
+    border-bottom: 1px solid @lightGrey !important;
 
     h3 {
       margin-top: 0;
@@ -64,7 +64,7 @@
     padding-top: 0 !important;
   }
 
-  @media only screen and (max-width: 480px) {
+  @media only screen and (max-width: @largeMobileBreakpoint) {
     top: 0;
     bottom: 0;
     width: 100% !important;
@@ -109,7 +109,7 @@
       margin: 0 !important;
     }
 
-    @media only screen and (max-width: 480px) {
+    @media only screen and (max-width: @largeMobileBreakpoint) {
       left: -19px;
 
       svg {
@@ -200,9 +200,9 @@ svg.selected {
   width: 32px;
   height: 32px;
   padding: 2px !important;
-  background-color: #ff421b !important;
+  background-color: @orangeColor !important;
   border-radius: 3px !important;
-  color: #fff !important;
+  color: @white !important;
 
   &:hover {
     opacity: 0.6;

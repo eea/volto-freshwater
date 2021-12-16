@@ -36,7 +36,7 @@
     background: @wisePrimaryColor;
     border-radius: 50%;
     box-shadow: 0 0 0 0 rgb(52 172 224);
-    color: #fff;
+    color: @white;
     font-size: 10px;
     line-height: 18px;
 
@@ -66,7 +66,7 @@
   position: absolute;
   bottom: 0;
   left: 57px;
-  background-color: #fff;
+  background-color: @white;
   box-shadow: 0 1px 2px 0 #c7d5d8;
 
   .fav-menu-content {
@@ -185,7 +185,7 @@ ul.boards-list {
   .add-btn {
     padding: 0 5px;
     border: 1px solid #0b960b;
-    border-radius: 4px;
+    border-radius: @borderRadius;
     color: #0b960b;
     font-size: 11px;
     text-transform: uppercase;
@@ -212,8 +212,8 @@ ul.boards-list {
   padding: 10px !important;
   margin: 1em 0 !important;
   margin-bottom: 0 !important;
-  background-color: #064c7f !important;
-  color: #fff !important;
+  background-color: @blue !important;
+  color: @white !important;
 }
 
 .fav-toolbar-menu {
@@ -223,13 +223,12 @@ ul.boards-list {
 .fav-menu-info,
 .no-boards-info {
   display: block;
-  // margin: 0.5em 0;
 
   .star-icon {
     padding: 2px 4px;
     margin: 0 8px;
     background-color: #eee;
-    border-radius: 5px;
+    border-radius: @borderRadius;
   }
 
   svg {

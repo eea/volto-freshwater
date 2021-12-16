@@ -1,3 +1,8 @@
+@type: 'extra';
+@element: 'custom';
+
+@import (multiple, reference, optional) '../../theme.config';
+
 .database-item-view {
   .breadcrumbs,
   .herosection {
@@ -33,8 +38,17 @@
     }
   }
 
-  .item-table {
+  .item-table.item-metadata-table {
     margin: 2.5em 0;
+
+    .ui.table {
+      td {
+        @media only screen and (max-width: @tabletBreakpoint) {
+          padding-right: 0 !important;
+          padding-left: 0 !important;
+        }
+      }
+    }
   }
 
   .item-type {
@@ -52,7 +66,6 @@
 
   .resources-link {
     display: inline-block;
-    margin-bottom: 1em;
     color: #747474;
     font-size: 15px;
     font-weight: 400;

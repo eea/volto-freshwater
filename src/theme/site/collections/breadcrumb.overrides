@@ -28,15 +28,15 @@ body.has-image {
 
     .ui.breadcrumb a:hover,
     .ui.breadcrumb .section {
-      color: #fff !important;
+      color: @white !important;
     }
 
     .ui.breadcrumb .active:hover,
     .ui.breadcrumb .active.section {
-      color: #fff !important;
+      color: @white !important;
     }
 
-    @media only screen and (max-width: 480px) {
+    @media only screen and (max-width: @largeMobileBreakpoint) {
       .ui.breadcrumbs {
         right: 0;
         left: 0;
