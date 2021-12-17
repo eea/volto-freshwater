@@ -185,7 +185,7 @@ body.has-image.has-banner:not(.contenttype-country_profile) #main .breadcrumbs .
 }
 
 #page-login form .ui.grid .column {
-  padding: 1rem !important;
+  padding: 0 1rem !important;
 }
 
 
