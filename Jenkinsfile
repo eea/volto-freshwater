@@ -4,7 +4,7 @@ pipeline {
   environment {
         GIT_NAME = "volto-freshwater"
         NAMESPACE = "@eeacms"
-        SONARQUBE_TAGS = "volto.eea.europa.eu"
+        SONARQUBE_TAGS = "volto.eea.europa.eu,water.europa.eu-freshwater"
         DEPENDENCIES = "volto-slate @eeacms/volto-corsproxy @eeacms/volto-datablocks @eeacms/volto-embed"
     }
 
