@@ -95,7 +95,7 @@ body.homepage-view.has-banner {
 
 
 body.has-image.has-banner:not(.contenttype-country_profile) #main .breadcrumbs .breadcrumb {
-  top: 184px;
+  top: 175px;
 
   @media only screen and (max-width: @largestMobileScreen) {
     top: 283px;

@@ -15,7 +15,7 @@ const EEA_LICENSE =
 
 const ItemMetadata = (props) => {
   const { settings } = config;
-  const { item, mapPreview, shareItem } = props;
+  const { item, map_preview, shareItem, item_view } = props;
   const source = item?.source?.[0] || item;
 
   const {
@@ -62,12 +62,13 @@ const ItemMetadata = (props) => {
           </div>
         )}
 
-        {mapPreview && (embed_url || webmap_url) && (
+        {map_preview && (embed_url || webmap_url) && (
           <div className="map-preview">
             <MapPreview
               item={item}
               tableau_url={embed_url}
               map_url={webmap_url}
+              item_view={item_view}
             />
           </div>
         )}

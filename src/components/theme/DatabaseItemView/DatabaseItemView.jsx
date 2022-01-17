@@ -34,7 +34,12 @@ const DatabaseItemView = (props) => {
           </div>
         </div>
 
-        <ItemMetadata {...props} item={content} mapPreview={true} />
+        <ItemMetadata
+          {...props}
+          item={content}
+          map_preview={true}
+          item_view={true}
+        />
       </div>
     </>
   );
