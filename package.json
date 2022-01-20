@@ -34,7 +34,7 @@
     "react-lazy-load-image-component": "^1.4.0",
     "@eeacms/volto-resize-helper": "^0.2.0",
     "@eeacms/volto-block-style": "^3.3.0",
-    "@eeacms/volto-columns-block": "4.4.6",
+    "@eeacms/volto-columns-block": "*",
     "@eeacms/volto-datablocks": "*",
     "@eeacms/volto-group-block": "*",
     "@eeacms/volto-plotlycharts": "*",
