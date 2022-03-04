@@ -37,7 +37,7 @@
     "@eeacms/volto-columns-block": "*",
     "@eeacms/volto-datablocks": "*",
     "@eeacms/volto-group-block": "*",
-    "@eeacms/volto-plotlycharts": "*",
+    "@eeacms/volto-plotlycharts": "github:eea/volto-plotlycharts#2.0.9.beta.1",
     "@kitconcept/volto-blocks-grid": "*",
     "react-slick": "^0.24.0",
     "slick-carousel": "^1.8.1",
