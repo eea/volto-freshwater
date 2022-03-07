@@ -16,6 +16,9 @@
     "type": "git",
     "url": "git@github.com:eea/volto-freshwater.git"
   },
+  "resolutions": {
+    "@eeacms/volto-datablocks": "^2.0.13"
+  },
   "addons": [
     "@kitconcept/volto-blocks-grid",
     "@eeacms/volto-plotlycharts",
