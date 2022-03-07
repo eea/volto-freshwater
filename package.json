@@ -44,7 +44,8 @@
     "@kitconcept/volto-blocks-grid": "*",
     "react-slick": "^0.24.0",
     "slick-carousel": "^1.8.1",
-    "volto-slate": "*"
+    "volto-slate": "*",
+    "stream-browserify": "^3.0.0"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.9.5",
