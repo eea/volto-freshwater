@@ -16,7 +16,7 @@ export const ConditionalDataBlockSchema = () => ({
       type: 'string',
     },
     provider_url: {
-      widget: 'pick_provider',
+      widget: 'object_by_path',
       title: 'Data provider',
     },
     column_data: {
@@ -40,7 +40,7 @@ export const ConditionalDataBlockSchema = () => ({
     },
   },
 
-  required: [], // 'provider_url', 'column_data', 'condition'
+  required: ['provider_url', 'column_data', 'operator'], // 'condition'
 });
 
 export default ConditionalDataBlockSchema;

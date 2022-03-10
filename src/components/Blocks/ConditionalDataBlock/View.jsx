@@ -1,12 +1,8 @@
 import React from 'react';
 import { compose } from 'redux';
-import {
-  connectToDataParameters,
-  filterDataByParameters,
-} from '@eeacms/volto-datablocks/helpers';
-import { connectBlockToProviderData } from '@eeacms/volto-datablocks/hocs';
-import './style.less';
 import { RenderBlocks } from '@plone/volto/components';
+import { connectToProviderData } from '@eeacms/volto-datablocks/hocs';
+import './style.less';
 
 const isNumber = (n) => {
   return /^-?[\d.]+(?:e-?\d+)?$/.test(n);
@@ -49,17 +45,10 @@ const evaluateCondition = (value1, operator, value2) => {
 };
 
 const View = (props) => {
-  const { data, provider_data, connected_data_parameters } = props;
-  const {
-    // provider_url,,
-    column_data,
-    operator,
-    condition,
-    // placeholder = '-',
-  } = data;
-  const filteredData =
-    filterDataByParameters(provider_data, connected_data_parameters) || {};
-  const columnValue = Array.from(new Set(filteredData?.[column_data])).sort();
+  const { data, provider_data } = props;
+  const { column_data, operator, condition } = data;
+
+  const columnValue = Array.from(new Set(provider_data?.[column_data])).sort();
   const evalResult = evaluateCondition(columnValue, operator, condition);
 
   const metadata = props.metadata || props.properties;
@@ -83,6 +72,9 @@ const View = (props) => {
 };
 
 export default compose(
-  connectBlockToProviderData,
-  connectToDataParameters,
-)(React.memo(View));
+  connectToProviderData((props) => {
+    return {
+      provider_url: props.data?.provider_url,
+    };
+  }),
+)(View);

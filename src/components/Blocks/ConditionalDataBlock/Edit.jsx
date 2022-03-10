@@ -1,12 +1,12 @@
-import { connectBlockToProviderData } from '@eeacms/volto-datablocks/hocs';
-import { ConditionalDataBlockSchema } from './schema';
-
 import React, { useState } from 'react';
-import { isEmpty } from 'lodash';
-import { BlocksForm, SidebarPortal, InlineForm } from '@plone/volto/components';
-import { emptyBlocksForm } from '@plone/volto/helpers';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { isEmpty } from 'lodash';
+import { emptyBlocksForm } from '@plone/volto/helpers';
+import { BlocksForm, SidebarPortal, InlineForm } from '@plone/volto/components';
+import { connectToProviderData } from '@eeacms/volto-datablocks/hocs';
 import EditBlockWrapper from '@eeacms/volto-group-block/components/manage/Blocks/Group/EditBlockWrapper';
+import { ConditionalDataBlockSchema } from './schema';
 import '@eeacms/volto-group-block/components/manage/Blocks/Group/editor.less';
 
 const tweakSchema = (schema, provider_data) => {
@@ -31,19 +31,16 @@ const Edit = (props) => {
   } = props;
 
   const schema = tweakSchema(ConditionalDataBlockSchema(), provider_data);
-
+  const blocks = data?.data?.blocks;
   const metadata = props.metadata || props.properties;
-  const properties = isEmpty(data?.data?.blocks)
-    ? emptyBlocksForm()
-    : data.data;
-
+  const properties = isEmpty(blocks) ? emptyBlocksForm() : data.data;
   const [selectedBlock, setSelectedBlock] = useState(
     properties.blocks_layout.items[0],
   );
 
   React.useEffect(() => {
     if (
-      isEmpty(data?.data?.blocks) &&
+      isEmpty(blocks) &&
       properties.blocks_layout.items[0] !== selectedBlock
     ) {
       setSelectedBlock(properties.blocks_layout.items[0]);
@@ -52,18 +49,9 @@ const Edit = (props) => {
         data: properties,
       });
     }
-  }, [
-    onChangeBlock,
-    properties,
-    selectedBlock,
-    block,
-    data,
-    data?.data?.blocks,
-  ]);
+  }, [onChangeBlock, properties, selectedBlock, block, data, blocks]);
 
   const blockState = React.useRef({});
-
-  // console.log('props', properties); // props.data,
 
   return (
     <fieldset className="section-block">
@@ -85,14 +73,12 @@ const Edit = (props) => {
         title={data.placeholder}
         onSelectBlock={setSelectedBlock}
         onChangeFormData={(newFormData) => {
-          // console.log('onchangeformdata', newFormData);
           onChangeBlock(block, {
             ...data,
             data: newFormData,
           });
         }}
         onChangeField={(id, value) => {
-          // console.log('onchangefield', data);
           if (['blocks', 'blocks_layout'].indexOf(id) > -1) {
             blockState.current[id] = value;
             onChangeBlock(block, {
@@ -147,4 +133,10 @@ Edit.propTypes = {
   manage: PropTypes.bool.isRequired,
 };
 
-export default connectBlockToProviderData(Edit);
+export default compose(
+  connectToProviderData((props) => {
+    return {
+      provider_url: props.data?.provider_url,
+    };
+  }),
+)(Edit);
