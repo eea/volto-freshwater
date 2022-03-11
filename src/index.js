@@ -15,7 +15,7 @@ import TokenWidget from '@plone/volto/components/manage/Widgets/TokenWidget';
 
 import installArcgisBlock from './components/Blocks/ArcgisBlock';
 import installCountryHeaderDataBlock from './components/Blocks/CountryHeaderDataBlock';
-import installFilteredConnectedPlotlyChart from './components/Blocks/ConnectedPlotlyChart';
+// import installFilteredConnectedPlotlyChart from './components/Blocks/ConnectedPlotlyChart';
 import installCountriesListingBlock from './components/Blocks/CountriesListingBlock';
 import installEmbedContentBlock from './components/Blocks/Content';
 import installDashboardTabsBlock from './components/Blocks/DashboardTabsBlock';
@@ -111,9 +111,9 @@ const applyConfig = (config) => {
   config.blocks.blocksConfig.__grid.mostUsed = false;
   config.blocks.blocksConfig.columnsBlock.available_colors = available_colors;
 
-  config.blocks.blocksConfig.plotly_chart =
-    config.blocks.blocksConfig.connected_plotly_chart;
-  config.blocks.blocksConfig.plotly_chart.restricted = false;
+  // config.blocks.blocksConfig.plotly_chart =
+  //   config.blocks.blocksConfig.connected_plotly_chart;
+  // config.blocks.blocksConfig.plotly_chart.restricted = false;
 
   // workaround to invalidate render of empty slot blocksConfig with hidden value
   // needed in order to delete the block to get add button to show up on slot edit
@@ -271,7 +271,7 @@ const applyConfig = (config) => {
     installCustomCardsBlock,
     installSearchBlock,
     installCountryHeaderDataBlock,
-    installFilteredConnectedPlotlyChart,
+    // installFilteredConnectedPlotlyChart,
     installCountriesListingBlock,
     installArcgisBlock,
     installAppExtras,
