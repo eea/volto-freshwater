@@ -14,14 +14,13 @@ import CopyrightWidget from './components/Widgets/CopyrightWidget';
 import TokenWidget from '@plone/volto/components/manage/Widgets/TokenWidget';
 
 import installArcgisBlock from './components/Blocks/ArcgisBlock';
+import installCountryHeaderDataBlock from './components/Blocks/CountryHeaderDataBlock';
+import installFilteredConnectedPlotlyChart from './components/Blocks/ConnectedPlotlyChart';
+import installCountriesListingBlock from './components/Blocks/CountriesListingBlock';
 import installEmbedContentBlock from './components/Blocks/Content';
 import installDashboardTabsBlock from './components/Blocks/DashboardTabsBlock';
 import installCustomCardsBlock from './components/Blocks/CustomCardsBlock';
 import installSearchBlock from './components/Blocks/SearchBlock';
-import installCountryHeaderDataBlock from './components/Blocks/CountryHeaderDataBlock';
-import installFilteredConnectedPlotlyChart from './components/Blocks/ConnectedPlotlyChart';
-import installConditionalDataBlock from './components/Blocks/ConditionalDataBlock';
-import installCountriesListingBlock from './components/Blocks/CountriesListingBlock';
 import installAppExtras from './components/theme/AppExtras';
 import installSlatePopup from './components/Blocks/SlatePopup';
 
@@ -272,12 +271,11 @@ const applyConfig = (config) => {
     installCustomCardsBlock,
     installSearchBlock,
     installCountryHeaderDataBlock,
-    installConditionalDataBlock,
     installFilteredConnectedPlotlyChart,
     installCountriesListingBlock,
+    installArcgisBlock,
     installAppExtras,
     installSlatePopup,
-    installArcgisBlock,
   ].reduce((acc, apply) => apply(acc), config);
 
   // console.log('final config', final);
