@@ -15,7 +15,6 @@ import TokenWidget from '@plone/volto/components/manage/Widgets/TokenWidget';
 
 import installArcgisBlock from './components/Blocks/ArcgisBlock';
 import installCountryHeaderDataBlock from './components/Blocks/CountryHeaderDataBlock';
-// import installFilteredConnectedPlotlyChart from './components/Blocks/ConnectedPlotlyChart';
 import installCountriesListingBlock from './components/Blocks/CountriesListingBlock';
 import installEmbedContentBlock from './components/Blocks/Content';
 import installDashboardTabsBlock from './components/Blocks/DashboardTabsBlock';
@@ -271,7 +270,6 @@ const applyConfig = (config) => {
     installCustomCardsBlock,
     installSearchBlock,
     installCountryHeaderDataBlock,
-    // installFilteredConnectedPlotlyChart,
     installCountriesListingBlock,
     installArcgisBlock,
     installAppExtras,
