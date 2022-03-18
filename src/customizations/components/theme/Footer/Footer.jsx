@@ -55,12 +55,15 @@ const Footer = ({ intl }) => {
                     </Link>
                   </li>
                   <li>
-                    <Link className="item" to={`${root}/legal-notice`}>
+                    <a
+                      className="item"
+                      href="https://water.europa.eu/#legal-notice"
+                    >
                       <FormattedMessage
                         id="legal_notice"
                         defaultMessage="Privacy and Legal Notice"
                       />
-                    </Link>
+                    </a>
                   </li>
                   <Anontools />
                 </ul>

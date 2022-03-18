@@ -319,7 +319,11 @@ const FavBoardView = (props) => {
             </Modal.Header>
 
             <Modal.Content>
-              <ItemMetadata item={selectedItem} mapPreview={true} />
+              <ItemMetadata
+                item={selectedItem}
+                map_preview={true}
+                shareItem={true}
+              />
             </Modal.Content>
           </Modal>
         </>

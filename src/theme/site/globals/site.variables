@@ -55,6 +55,7 @@
 @wiseSecondaryColor  : #004050;
 @lightSecondaryColor : @lightGrey;
 @lightBlueColor      : #00b4d5;
+@orangeColor         : #ff421b;
 
 
 /*--------------
@@ -148,7 +149,13 @@
 @sidebarToggleButtonAnimationsDuration: 0.5s;
 @sidebarToggleButtonIterations: 4;
 
+
+/*------------------
+     Breakpoints
+--------------------*/
+
 @mobileBreakpoint            : 320px;
+@largeMobileBreakpoint       : 480px;
 @tabletBreakpoint            : 768px;
 @computerBreakpoint          : 992px;
 @largeMonitorBreakpoint      : 1200px;
@@ -182,14 +189,14 @@
 @lightGrey        : #ccc;
 
 /*---  Dark Tones  ---*/
-@darkGrey: #4d4d4d;
-@darkBlue: #064c7f;
+@darkGrey         : #4d4d4d;
+@darkBlue         : #064c7f;
 
 /*---   Neutrals  ---*/
 @fullBlack        : #000000;
 @offWhite         : #F9FAFB;
 @darkWhite        : #F3F4F5;
-@midGrey         : #cdd6dd;
+@midGrey          : #cdd6dd;
 @white            : #FFFFFF;
 
 /*--- Colored Backgrounds ---*/
@@ -205,8 +212,8 @@
 /*--- Colored Headers ---*/
 
 /*--- Colored Text ---*/
-@tealTextColor   : @teal;
-@darkBlueTextColor: #003159;
+@tealTextColor     : @teal;
+@darkBlueTextColor : #003159;
 
 /*--- Colored Border ---*/
 // Pastanaga custom borders colors

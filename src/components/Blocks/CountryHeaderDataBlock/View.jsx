@@ -5,11 +5,7 @@ import { Link } from 'react-router-dom';
 import { Dropdown } from 'semantic-ui-react';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import { DataConnectedValue } from '@eeacms/volto-datablocks/Utils';
-import {
-  connectToDataParameters,
-  filterDataByParameters,
-} from '@eeacms/volto-datablocks/helpers';
-import { connectBlockToProviderData } from '@eeacms/volto-datablocks/hocs';
+import { connectToProviderData } from '@eeacms/volto-datablocks/hocs';
 import cx from 'classnames';
 import countryNames from './data/countries';
 import './style.less';
@@ -45,7 +41,7 @@ const getContentSiblings = (siblings) => {
 };
 
 const View = (props) => {
-  const { data, provider_data, connected_data_parameters, content } = props;
+  const { data, provider_data, content } = props;
   const {
     provider_url,
     column_data,
@@ -53,9 +49,8 @@ const View = (props) => {
     placeholder = '-',
     hide_data_section,
   } = data;
-  const filteredData =
-    filterDataByParameters(provider_data, connected_data_parameters) || {};
-  const column_value = Array.from(new Set(filteredData?.[column_data])).sort();
+
+  const column_value = Array.from(new Set(provider_data?.[column_data])).sort();
   const siblings = getContentSiblings(content?.['@components']?.siblings);
   const country_profiles = siblings.filter(
     (item) => item.key !== 'discodata' && item.key !== 'queries',
@@ -157,6 +152,9 @@ export default compose(
   connect((state, props) => ({
     content: state.content.data,
   })),
-  connectBlockToProviderData,
-  connectToDataParameters,
-)(React.memo(View));
+  connectToProviderData((props) => {
+    return {
+      provider_url: props.data?.provider_url,
+    };
+  }),
+)(View);

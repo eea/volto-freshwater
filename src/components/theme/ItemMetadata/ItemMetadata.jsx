@@ -1,30 +1,43 @@
 import React from 'react';
 import { Icon } from '@plone/volto/components';
 import { Table, Button } from 'semantic-ui-react';
-import { getPath, useCopyToClipboard } from '@eeacms/volto-freshwater/utils';
 import MapPreview from './MapPreview';
+import { getPath, useCopyToClipboard } from '@eeacms/volto-freshwater/utils';
 import config from '@plone/volto/registry';
 import shareSVG from '@plone/volto/icons/share.svg';
 
 const EEA_LICENSE =
-  'EEA standard re-use policy: unless otherwise indicated,' +
+  'EEA standard re-use policy: unless otherwise indicated, ' +
   're-use of content on the EEA website for commercial or ' +
   'non-commercial purposes is permitted free of charge, ' +
   'provided that the source is acknowledged ' +
-  '(https://www.eea.europa.eu/legal/copyright). ';
+  '(https://www.eea.europa.eu/legal/copyright)';
 
 const ItemMetadata = (props) => {
   const { settings } = config;
-  const { item, mapPreview } = props;
+  const { item, map_preview, shareItem, item_view } = props;
   const source = item?.source?.[0] || item;
-  const description = item.description || source?.description;
-  const subject = source.subject || source.subjects;
-  const tableau_url = source?.embed_url;
-  const map_url = source?.webmap_url;
-  const item_path = getPath(source.getURL).replace('/api', '');
+
+  const {
+    description,
+    lineage,
+    embed_url,
+    webmap_url,
+    license_copyright,
+    publisher,
+    dpsir_type,
+    report_type,
+    original_source,
+    temporal_coverage,
+    geo_coverage,
+  } = source;
+
+  const subject = source.Subject || source.subjects;
+
+  const item_path = shareItem ? getPath(source.getURL).replace('/api', '') : '';
   const share_url = settings.publicURL + item_path;
   const copyright =
-    source.license_copyright === 'EEA' ? EEA_LICENSE : source.license_copyright;
+    license_copyright === 'EEA' ? EEA_LICENSE : license_copyright;
 
   const [copyUrlStatus, copyUrl] = useCopyToClipboard(share_url);
   const [confirmationText, setConfirmationText] = React.useState(false);
@@ -39,20 +52,23 @@ const ItemMetadata = (props) => {
 
   return (
     <>
-      <div className="map-preview-wrapper">
-        <div className="toolbar-button-wrapper">
-          <Button className="toolbar-button" title="Share" onClick={copyUrl}>
-            <Icon name={shareSVG} size="26px" />
-          </Button>
-          <span className="btn-text">Share</span>
-        </div>
+      <div className="metadata-icons">
+        {shareItem && (
+          <div className="toolbar-button-wrapper">
+            <Button className="toolbar-button" title="Share" onClick={copyUrl}>
+              <Icon name={shareSVG} size="26px" />
+            </Button>
+            <span className="btn-text">Share</span>
+          </div>
+        )}
 
-        {mapPreview && (tableau_url || map_url) && (
+        {map_preview && (embed_url || webmap_url) && (
           <div className="map-preview">
             <MapPreview
               item={item}
-              tableau_url={tableau_url}
-              map_url={map_url}
+              tableau_url={embed_url}
+              map_url={webmap_url}
+              item_view={item_view}
             />
           </div>
         )}
@@ -68,20 +84,20 @@ const ItemMetadata = (props) => {
                     <Table.Cell>Description</Table.Cell>
                     <Table.Cell>
                       {description}
-                      {source.lineage && (
-                        <p style={{ paddingTop: '1rem' }}>{source.lineage}</p>
+                      {lineage && (
+                        <p style={{ paddingTop: '1rem' }}>{lineage}</p>
                       )}
                     </Table.Cell>
                   </Table.Row>
                 )}
 
-                {source.temporal_coverage &&
-                  Object.keys(source.temporal_coverage).length > 0 && (
+                {temporal_coverage &&
+                  Object.keys(temporal_coverage).length > 0 && (
                     <Table.Row>
                       <Table.Cell>Temporal coverage</Table.Cell>
                       <Table.Cell>
                         <div className="tag-types">
-                          {source.temporal_coverage.temporal.map((temp, i) => (
+                          {temporal_coverage.temporal.map((temp, i) => (
                             <div key={i}>
                               <p>{temp.label}</p>
                             </div>
@@ -91,47 +107,46 @@ const ItemMetadata = (props) => {
                     </Table.Row>
                   )}
 
-                {source.geo_coverage &&
-                  Object.keys(source.geo_coverage).length > 0 && (
-                    <Table.Row>
-                      <Table.Cell>Spatial coverage</Table.Cell>
-                      <Table.Cell>
-                        <div className="geo-tags tag-types">
-                          {source.geo_coverage.geolocation.map((geo, i) => (
-                            <div key={i}>
-                              <p>{geo.label}</p>
-                            </div>
-                          ))}
-                        </div>
-                      </Table.Cell>
-                    </Table.Row>
-                  )}
-
-                {source.publisher && (
+                {geo_coverage && Object.keys(geo_coverage).length > 0 && (
                   <Table.Row>
-                    <Table.Cell>Organisation</Table.Cell>
+                    <Table.Cell>Spatial coverage</Table.Cell>
                     <Table.Cell>
-                      {source.publisher.title || source.publisher}
+                      <div className="geo-tags tag-types">
+                        {geo_coverage.geolocation.map((geo, i) => (
+                          <div key={i}>
+                            <p>{geo.label}</p>
+                          </div>
+                        ))}
+                      </div>
                     </Table.Cell>
                   </Table.Row>
                 )}
 
-                {source.original_source && (
+                {publisher && (
+                  <Table.Row>
+                    <Table.Cell>Organisation</Table.Cell>
+                    <Table.Cell>
+                      {publisher.title || source.publisher}
+                    </Table.Cell>
+                  </Table.Row>
+                )}
+
+                {original_source && (
                   <Table.Row>
                     <Table.Cell>Source</Table.Cell>
                     <Table.Cell>
                       <a
-                        href={source.original_source}
+                        href={original_source}
                         target="_blank"
                         rel="noreferrer"
                       >
-                        {source.original_source}
+                        {original_source}
                       </a>
                     </Table.Cell>
                   </Table.Row>
                 )}
 
-                {source.license_copyright && (
+                {license_copyright && (
                   <Table.Row>
                     <Table.Cell>Rights</Table.Cell>
                     <Table.Cell>{copyright}</Table.Cell>
@@ -153,20 +168,18 @@ const ItemMetadata = (props) => {
                   </Table.Row>
                 )}
 
-                {source.dpsir_type && (
+                {dpsir_type && (
                   <Table.Row>
                     <Table.Cell>DPSIR</Table.Cell>
-                    <Table.Cell>
-                      {source.dpsir_type.title || source.dpsir_type}
-                    </Table.Cell>
+                    <Table.Cell>{dpsir_type.title || dpsir_type}</Table.Cell>
                   </Table.Row>
                 )}
 
-                {source.report_type && (
+                {report_type && (
                   <Table.Row>
                     <Table.Cell>Report type</Table.Cell>
                     <Table.Cell>
-                      {source.report_type.title || source.report_type}
+                      {report_type.title || source.report_type}
                     </Table.Cell>
                   </Table.Row>
                 )}

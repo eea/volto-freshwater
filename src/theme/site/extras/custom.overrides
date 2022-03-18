@@ -55,7 +55,7 @@
 
   .ui.card {
     font-size: 14px;
-    border: 1px solid #eee;
+    border: 1px solid @lightGreyBorderColor;
 
     .content .ui.tiny {
       font-size: 12px !important;
@@ -78,13 +78,11 @@
   }
 }
 
-.stagingBanner .ui.warning.message {
-  padding: 1em 1.5em !important;
-  padding-bottom: 0.5em !important;
-
-  .content p {
-    line-height: 19px;
-  }
+.stagingBanner {
+  height: 75px;
+  padding: 0 !important;
+  background-color: #fffaf3 !important;
+  color: #573a08 !important;
 }
 
 body.homepage-view.has-banner {
@@ -95,7 +93,7 @@ body.homepage-view.has-banner {
 
 
 body.has-image.has-banner:not(.contenttype-country_profile) #main .breadcrumbs .breadcrumb {
-  top: 184px;
+  top: 175px;
 
   @media only screen and (max-width: @largestMobileScreen) {
     top: 283px;
@@ -184,11 +182,21 @@ body.has-image.has-banner:not(.contenttype-country_profile) #main .breadcrumbs .
   }
 }
 
+#page-login form .ui.grid .column {
+  padding: 0 1rem !important;
+}
+
 
 body.contenttype-country_profile {
   .herosection,
   #page-document > h1.documentFirstHeading {
     display: none !important;
+  }
+
+  @media only screen and (max-width: @largeMobileBreakpoint) {
+    .ui.breadcrumb {
+      display: none !important;
+    }
   }
 }
 
@@ -229,7 +237,7 @@ body.contenttype-country_profile {
   .block-title {
     font-size: 21px;
     margin-bottom: 2em;
-    color: #333;
+    color: @textColor;
   }
 
   .ui.menu {
@@ -239,7 +247,7 @@ body.contenttype-country_profile {
     display: block;
 
     .item {
-      background-color: #fff;
+      background-color: @white;
       border-radius: 40px;
       margin-right: 15px;
       margin-bottom: 15px;
@@ -253,4 +261,8 @@ body.contenttype-country_profile {
       }
     }
   }
+}
+
+.sidebar-container-enter-done {
+  z-index: 9999 !important;
 }

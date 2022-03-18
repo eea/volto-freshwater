@@ -64,7 +64,7 @@
         border-radius: 0 !important;
 
         .menu-item-title {
-          color: #fff;
+          color: @white;
         }
 
         .menu-item-description {
@@ -77,7 +77,7 @@
 
         &:hover {
           .menu-item-title {
-            color: #fff !important;
+            color: @white !important;
           }
         }
       }
@@ -130,9 +130,9 @@
     width: 32px;
     height: 32px;
     padding: 2px !important;
-    background-color: #ff421b !important;
+    background-color: @orangeColor !important;
     border-radius: 3px !important;
-    color: #fff !important;
+    color: @white !important;
 
     &:hover {
       opacity: 0.6;
@@ -274,9 +274,9 @@
       width: 100%;
       height: 100px;
       padding: 6px 12px;
-      border: 1px solid #ccc;
+      border: 1px solid @lightGrey;
       margin-bottom: 1.5em;
-      border-radius: 4px;
+      border-radius: @borderRadius;
       color: #696969;
       font-family: 'Lucida Console', Monaco, monospace;
       font-size: 13px;
@@ -331,14 +331,14 @@
   &:hover,
   &:active,
   &:focus {
-    border: 1px solid #ff421b !important;
+    border: 1px solid @orangeColor !important;
 
     span {
-      color: #ff421b;
+      color: @orangeColor;
     }
 
     .icon {
-      fill: #ff421b !important;
+      fill: @orangeColor !important;
     }
   }
 }

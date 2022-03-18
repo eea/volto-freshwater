@@ -64,7 +64,9 @@
   font-size: 14px;
 
   .site-info-logos {
-    margin: 25px 0;
+    @media screen and (min-width: @computerBreakpoint) {
+      margin: 25px 0;
+    }
   }
 
   .footerLogos {

@@ -1,7 +1,8 @@
 import React from 'react';
+import { compose } from 'redux';
 import { SidebarPortal } from '@plone/volto/components';
 import InlineForm from '@plone/volto/components/manage/Form/InlineForm';
-import { connectBlockToProviderData } from '@eeacms/volto-datablocks/hocs';
+import { connectToProviderData } from '@eeacms/volto-datablocks/hocs';
 import View from './View';
 import countryNames from './data/countries';
 import { CountryHeaderDataBlockSchema } from './schema';
@@ -51,4 +52,10 @@ class Edit extends React.Component {
   }
 }
 
-export default connectBlockToProviderData(Edit);
+export default compose(
+  connectToProviderData((props) => {
+    return {
+      provider_url: props.data?.provider_url,
+    };
+  }),
+)(Edit);

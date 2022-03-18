@@ -17,7 +17,7 @@ body.board-view {
     width: 170px;
     flex: 1;
     align-items: center;
-    color: #333 !important;
+    color: @textColor !important;
     cursor: pointer;
     font-size: 16px;
     font-weight: 500;
@@ -84,7 +84,7 @@ body.board-view {
   .item {
     padding: 0.7em 1.2em;
     background-color: #f9f9f9;
-    border-radius: 5px;
+    border-radius: @borderRadius;
 
     &:hover {
       .delete-comment {
@@ -136,9 +136,9 @@ body.board-view {
 
   input {
     padding: 1em !important;
-    border: 1px solid #eee !important;
-    border-radius: 5px !important;
-    color: #333 !important;
+    border: 1px solid @lightGreyBorderColor !important;
+    border-radius: @borderRadius !important;
+    color: @textColor !important;
   }
 }
 
@@ -197,8 +197,8 @@ body.board-view {
   padding: 15px;
   margin: 0px;
   background-color: @wiseSecondaryColor;
-  border-radius: 4px;
-  color: #fff;
+  border-radius: @borderRadius;
+  color: @white;
   font-size: 16px;
   opacity: 0.8;
 }
@@ -223,7 +223,7 @@ body.board-view {
   }
 
   .fav-board-link {
-    color: #333 !important;
+    color: @textColor !important;
     cursor: pointer;
     font-size: 16px;
     font-weight: 500;

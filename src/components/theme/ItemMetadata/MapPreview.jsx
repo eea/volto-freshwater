@@ -11,7 +11,8 @@ import {
 
 const MapPreview = (props) => {
   const { item, map_url, tableau_url, item_view } = props;
-  const modalHash = item?.id + '_preview';
+  const itemID = item?.source?.[0].getId || item?.id;
+  const modalHash = itemID + '_preview';
   const [open, setOpen] = React.useState(false);
   const {
     blocks: { blocksConfig },
@@ -31,7 +32,7 @@ const MapPreview = (props) => {
 
   const closeModal = () => {
     history.push({
-      hash: item_view ? '' : item?.id,
+      hash: item_view ? '' : itemID,
     });
     setOpen(false);
   };
@@ -47,7 +48,7 @@ const MapPreview = (props) => {
             setOpen(true);
             if (item) {
               history.push({
-                hash: item.id + '_preview',
+                hash: itemID + '_preview',
               });
             }
           }}

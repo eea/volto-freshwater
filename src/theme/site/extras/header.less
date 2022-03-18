@@ -9,6 +9,13 @@
     .logo {
       display: flex;
       margin: 10px 0;
+
+      @media only screen and (max-width: @largeMobileBreakpoint) {
+        img {
+          width: auto;
+          height: 43px;
+        }
+      }
     }
   }
 
@@ -201,7 +208,7 @@ body:not(.view-editview) {
 
     .top-nav li > a,
     .search button {
-      color: #fff !important;
+      color: @white !important;
     }
   }
 }
@@ -247,7 +254,7 @@ body:not(.view-editview) {
 }
 
 .contentpage .sticky-header {
-  background-color: #fff;
+  background-color: @white;
 }
 
 .ui.basic.segment.homepage .sticky-header {

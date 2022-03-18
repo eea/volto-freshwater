@@ -3,7 +3,7 @@
  * @module components/theme/Header/Header
  */
 
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Logo, Navigation, SearchWidget } from '@plone/volto/components';
@@ -33,30 +33,37 @@ const Header = (props) => {
   const homePageView = isHomePage && !cmsView;
 
   const innerWidth = __CLIENT__ && window && window.innerWidth;
-  const [isSticky, setIsSticky] = React.useState(false);
-  const [width, setWidth] = React.useState(innerWidth);
-  const breakpoint = 1024;
+  const scrollY = __CLIENT__ && window && window.scrollY;
+  const [width, setWidth] = useState(innerWidth);
+  const [y, setY] = useState(scrollY);
+  const [scrollingUp, setScrollingUp] = useState(false);
 
-  React.useEffect(() => {
-    window.addEventListener('resize', handleWindowResize);
-    window.addEventListener('scroll', toggleSticky);
-    return () => {
-      window.removeEventListener('resize', handleWindowResize);
-      window.removeEventListener('scroll', toggleSticky);
-    };
-  }, []);
-
-  const toggleSticky = () => {
-    if (window.pageYOffset > 100) {
-      setIsSticky(true);
-    } else {
-      setIsSticky(false);
-    }
-  };
+  const handleScroll = useCallback(
+    (e) => {
+      const window = e.currentTarget;
+      if (y > window.scrollY && window.pageYOffset > 100) {
+        setScrollingUp(true);
+      } else {
+        setScrollingUp(false);
+      }
+      setY(window.scrollY);
+    },
+    [y],
+  );
 
   const handleWindowResize = () => {
     setWidth(window.innerWidth);
   };
+
+  useEffect(() => {
+    setY(window.scrollY);
+    window.addEventListener('resize', handleWindowResize);
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [handleScroll]);
 
   return (
     <div className="portal-top">
@@ -71,7 +78,7 @@ const Header = (props) => {
       >
         <div
           className={cx('header', {
-            'sticky-header': isSticky && width < breakpoint,
+            'sticky-header': scrollingUp && width < 1024,
           })}
         >
           <Container>
