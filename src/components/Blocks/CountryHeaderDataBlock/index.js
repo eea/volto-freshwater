@@ -1,5 +1,6 @@
 import View from './View';
 import Edit from './Edit';
+import { PickObjectWidget } from '@eeacms/volto-datablocks/components';
 import headerSVG from '@plone/volto/icons/hero.svg';
 
 export default (config) => {
@@ -18,5 +19,7 @@ export default (config) => {
       view: [],
     },
   };
+
+  config.widgets.widget.pick_object = PickObjectWidget;
   return config;
 };

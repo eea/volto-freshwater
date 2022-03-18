@@ -21,7 +21,7 @@ export const CountryHeaderDataBlockSchema = () => ({
 
   properties: {
     provider_url: {
-      widget: 'object_by_path',
+      widget: 'pick_object',
       title: 'Data provider',
     },
     column_data: {
