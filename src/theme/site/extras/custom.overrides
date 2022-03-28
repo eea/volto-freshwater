@@ -270,3 +270,7 @@ body.contenttype-country_profile {
 .sidebar-container-enter-done {
   z-index: 9999 !important;
 }
+
+.fold__top {
+  height: initial !important;
+}
