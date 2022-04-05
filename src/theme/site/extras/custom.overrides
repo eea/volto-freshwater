@@ -204,6 +204,10 @@ body.contenttype-country_profile {
   }
 }
 
+body:not(.view-editview):not(.document_wide_view):not(.is-anonymous) main {
+  overflow: unset !important;
+}
+
 @media only screen and (max-width: 1000px) {
   .contenttype-country_profile #view .column-grid .column {
     width: 100% !important;
@@ -273,4 +277,9 @@ body.contenttype-country_profile {
 
 .fold__top {
   height: initial !important;
+}
+
+.pastanagalogo,
+.minipastanaga {
+  display: none !important;
 }
