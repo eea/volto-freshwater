@@ -3,13 +3,11 @@
 *******************************/
 
 .ui.basic.segment.header-wrapper {
-  display: flex;
-  height: 100px;
-  align-items: center;
   padding: 0;
   margin-bottom: 0;
 }
 
 .ui.basic.segment .header {
   width: 100%;
+  height: 100%;
 }

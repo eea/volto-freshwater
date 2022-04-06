@@ -1,5 +1,6 @@
 export HeroSection from './theme/Header/HeroSection';
 export HeroSectionView from './theme/Header/HeroSectionView';
+export StickyHeader from './theme/Header/StickyHeader';
 export DatabaseItemView from './theme/DatabaseItemView/DatabaseItemView';
 export MetadataListingView from './theme/MetadataListingView/MetadataListingView';
 export MetadataHeader from './theme/MetadataListingView/MetadataHeader';
