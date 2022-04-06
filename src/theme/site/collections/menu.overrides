@@ -27,6 +27,11 @@
       }
     }
 
+    .item.firstLevel.menuActive > a,
+    a.firstLevel.menuActive {
+      color: @wisePrimaryColor;
+    }
+
     .item.firstLevel:hover {
       background-color: #ecf4fa;
       color: @wiseSecondaryColor;

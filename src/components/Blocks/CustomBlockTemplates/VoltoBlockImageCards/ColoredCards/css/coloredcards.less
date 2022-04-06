@@ -1,0 +1,111 @@
+@type: 'extra';
+@element: 'custom';
+
+@import (multiple, reference, optional) '../../theme.config';
+
+.simple-color-picker-widget .button {
+  border: 1px solid #ececec !important;
+}
+
+.github-picker {
+  position: absolute;
+  z-index: 10;
+}
+
+.colored-cards-block {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  background-color: inherit;
+}
+
+.colored-cards-grid {
+  text-align: left;
+}
+
+.colored-card-content {
+  position: relative;
+  padding: 1em 0;
+  color: #555;
+  font-family: @pageFont;
+  font-size: 20px;
+  font-weight: 400;
+
+  .link-button {
+    position: absolute;
+    top: 1em;
+    right: 0px;
+  }
+}
+
+.colored-card-content .header,
+.colored-card-title {
+  margin-bottom: 1em !important;
+  color: inherit !important;
+}
+
+.colored-card-link {
+  .colored-card-content {
+    padding-right: 3em;
+  }
+
+  &:hover {
+    background-color: transparent;
+    color: @fullBlack !important;
+
+    > .colored-card {
+      border-top-color: #ff4422 !important;
+    }
+
+    .colored-card-content {
+      color: @fullBlack;
+    }
+
+    .next-icon {
+      color: #ff4422;
+    }
+  }
+}
+
+.colored-cards-grid-title {
+  padding-top: 3rem;
+  color: @wiseSecondaryColor;
+  font-size: 22px;
+}
+
+.colored-cards-grid-title,
+.colored-cards-grid-description {
+  margin-bottom: 1rem;
+}
+
+.center .colored-card-title {
+  text-align: center;
+}
+
+.left .colored-card-title {
+  text-align: left;
+}
+
+.right .colored-card-title {
+  text-align: right;
+}
+
+.ui.cards.colored-card-group {
+  padding-top: 1.5rem;
+}
+
+.next-icon {
+  transform: rotate(180deg);
+}
+
+@media only screen and (min-width: @tabletBreakpoint) and (max-width: @largestTabletScreen) {
+  .ui.cards > .card {
+    width: calc(50% - 2em) !important;
+  }
+}
+
+@media only screen and (max-width: @tabletBreakpoint) {
+  .ui.cards > .card {
+    width: 100% !important;
+  }
+}

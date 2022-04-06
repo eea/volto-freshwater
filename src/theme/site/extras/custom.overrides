@@ -85,14 +85,14 @@
   color: #573a08 !important;
 }
 
-body.homepage-view.has-banner {
+body.homepage-view.staging-banner {
   .portal-top {
     top: 110px;
   }
 }
 
 
-body.has-image.has-banner:not(.contenttype-country_profile) #main .breadcrumbs .breadcrumb {
+body.has-image.staging-banner:not(.contenttype-country_profile) #main .breadcrumbs .breadcrumb {
   top: 175px;
 
   @media only screen and (max-width: @largestMobileScreen) {
@@ -198,6 +198,14 @@ body.contenttype-country_profile {
       display: none !important;
     }
   }
+
+  main {
+    overflow: unset !important;
+  }
+}
+
+body:not(.view-editview):not(.document_wide_view):not(.is-anonymous) main {
+  overflow: unset !important;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -265,4 +273,13 @@ body.contenttype-country_profile {
 
 .sidebar-container-enter-done {
   z-index: 9999 !important;
+}
+
+.fold__top {
+  height: initial !important;
+}
+
+.pastanagalogo,
+.minipastanaga {
+  display: none !important;
 }

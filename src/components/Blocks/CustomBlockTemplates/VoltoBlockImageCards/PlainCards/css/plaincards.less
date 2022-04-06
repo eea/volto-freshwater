@@ -1,0 +1,72 @@
+@type: 'extra';
+@element: 'custom';
+
+@import (multiple, reference, optional) '../../theme.config';
+
+.plain-card {
+  width: 310px !important;
+  padding: 1.5rem !important;
+  border: 6px solid #dbf2f9 !important;
+  background-color: @white !important;
+
+  &:hover {
+    background-color: #f2f9fb !important;
+  }
+}
+
+.plain-cards-block {
+  padding: 2rem 0;
+  background-color: inherit;
+}
+
+.plain-card-link,
+.plain-card-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.plain-card-image {
+  height: 100%;
+  min-height: 75px;
+  margin-bottom: 1rem;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.plain-card-header {
+  color: #002d54;
+  font-family: @headerFont;
+  font-size: 22px;
+  line-height: 28px;
+}
+
+.plain-cards-grid-title,
+.plain-cards-grid-description {
+  margin-bottom: 1rem;
+}
+
+#view .home-plain-cards {
+  margin-top: 1em;
+}
+
+.home-plain-cards {
+  .plain-card {
+    padding: 1rem !important;
+  }
+
+  .plain-card-image {
+    min-height: 100px;
+    background-size: 100px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  #view .home-plain-cards {
+    position: absolute !important;
+    top: 440px;
+
+    .plain-cards-grid-title {
+      color: @white;
+    }
+  }
+}

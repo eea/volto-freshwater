@@ -1,0 +1,207 @@
+@type: 'extra';
+@element: 'custom';
+
+@import (multiple, reference, optional) '../../theme.config';
+
+.presentation-cards-block {
+  padding: 1rem 0;
+  background-color: inherit;
+}
+
+.presentation-card {
+  background-color: white !important;
+  box-shadow: 1px 1px 9px 0 #d3d3d3 !important;
+}
+
+.presentation-card .extra {
+  font-size: 14px !important;
+  font-weight: 400;
+}
+
+.presentation-card:hover,
+.presentation-card:focus {
+  box-shadow: 0 0 3px 1px rgb(55 146 218) !important;
+}
+
+.presentation-card-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.presentation-card-image {
+  height: 100%;
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.presentation-card-header {
+  padding: 0 15px;
+  color: @wisePrimaryColor;
+  font-family: @headerFont;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.presentation-card-description {
+  p {
+    padding: 0 15px !important;
+    margin-top: 15px !important;
+    color: @textColor;
+    font-size: 15px;
+    line-height: 20px;
+  }
+}
+
+.presentation-cards-content-wrapper {
+  min-height: 90px;
+  margin: 15px 0;
+}
+
+.presentation-card-content {
+  padding: 0 !important;
+}
+
+.ui.cards.presentation-cards-group {
+  margin-right: -0.75em;
+  margin-left: -0.75em;
+
+  > .ui.card {
+    margin: 0.75em;
+  }
+}
+
+.presentation-cards-grid-title,
+.presentation-cards-grid-description {
+  margin-bottom: 1rem;
+}
+
+// Custom home style
+.home-presentation-cards {
+  position: relative;
+  padding: 7rem 0;
+
+  background-image: url('../blue-pattern.png');
+  background-repeat: repeat;
+
+  .presentation-cards-grid-title {
+    margin-bottom: 3rem;
+    color: @white;
+  }
+
+  .presentation-cards-block {
+    padding: 3.5em 0;
+  }
+
+  .presentation-card {
+    box-shadow: 4px 4px 3px 0 #00738b !important;
+  }
+
+  .presentation-card.has-link:hover {
+    box-shadow: 4px 4px 11px 0 #00738b !important;
+    cursor: pointer;
+  }
+
+  .slider-arrow {
+    .icon {
+      color: @white !important;
+    }
+  }
+}
+
+// Cards slider view
+.cards-slider {
+  position: relative;
+  width: 0;
+  min-width: 100%;
+
+  .slick-arrow {
+    display: block !important;
+  }
+
+  .slick-list {
+    margin: 0 -0.75em !important;
+  }
+
+  .slick-track {
+    display: flex;
+  }
+
+  .slick-slide {
+    display: flex;
+    height: auto;
+    flex: 1;
+    flex-direction: column;
+    padding: 15px 0.75em !important;
+
+    > div {
+      height: 100%;
+    }
+
+    .ui.card {
+      width: 100%;
+      height: 100% !important;
+    }
+  }
+
+  .slider-arrow {
+    position: absolute;
+    top: 50%;
+    bottom: auto;
+    display: block;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+    transform: translate(0, -50%);
+
+    .icon {
+      color: @wisePrimaryColor;
+
+      @media only screen and (max-width: 600px) {
+        height: 30px !important;
+      }
+    }
+  }
+
+  .prev-arrow {
+    right: auto;
+    left: -40px;
+
+    @media only screen and (max-width: 600px) {
+      left: -28px;
+    }
+  }
+
+  .next-arrow {
+    right: -40px;
+    left: auto;
+
+    @media only screen and (max-width: 600px) {
+      right: -28px;
+    }
+  }
+
+  .slick-prev,
+  .slick-next {
+    display: none !important;
+  }
+}
+
+.metadata-card {
+  cursor: pointer;
+}
+
+@media only screen and (min-width: @tabletBreakpoint) and (max-width: @largestTabletScreen) {
+  .ui.cards > .card.presentation-card {
+    width: calc(50% - 2rem) !important;
+  }
+}
+
+@media only screen and (max-width: @tabletBreakpoint) {
+  .ui.cards > .card.presentation-card {
+    width: 100% !important;
+  }
+}

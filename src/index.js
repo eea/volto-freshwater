@@ -23,6 +23,8 @@ import installSearchBlock from './components/Blocks/SearchBlock';
 import installAppExtras from './components/theme/AppExtras';
 import installSlatePopup from './components/Blocks/SlatePopup';
 
+import customBlockTemplates from '@eeacms/volto-freshwater/components/Blocks/CustomBlockTemplates/customBlockTemplates';
+
 import './slate-styles.less';
 import './block-styles.less';
 
@@ -82,6 +84,11 @@ const applyConfig = (config) => {
     ...config.views.layoutViews,
     document_view: HeroSectionView,
     herosection_view: HeroSectionView,
+  };
+
+  config.blocks = {
+    ...config.blocks,
+    blocksConfig: { ...customBlockTemplates(config) },
   };
 
   // Colors
