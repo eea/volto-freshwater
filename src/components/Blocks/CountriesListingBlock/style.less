@@ -4,21 +4,36 @@
   background-color: #f2f9fb;
 
   .section-wrapper {
-    max-width: 900px !important;
     padding: 2em 0;
+
+    .ui.grid > .row {
+      padding-right: 1rem;
+      padding-left: 1rem;
+    }
+
+    @media only screen and (max-width: 900px) {
+      .ui.grid > .row > [class*='eight wide'].column,
+      .ui.grid > .row > [class*='four wide'].column {
+        width: 100% !important;
+      }
+
+      .countries-item-wrapper.single {
+        margin-top: 2rem;
+      }
+    }
   }
 
   .section-title {
     margin-bottom: 1.2em;
   }
 
-  .countries-listing-section {
-    a {
-      color: #0897b6;
-      font-size: 16px;
-      font-weight: 500;
-    }
+  .countries-listing-link {
+    color: #0897b6;
+    font-size: 16px;
+    font-weight: 500;
+  }
 
+  .countries-listing-section {
     @media only screen and (max-width: 600px) {
       columns: auto 2 !important;
     }
