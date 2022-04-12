@@ -28,6 +28,7 @@
 
   .item {
     padding: @menuItemPadding;
+    border: none;
     margin: 0;
     border-radius: 0;
     color: @menuItemColor;
@@ -36,11 +37,11 @@
 
   .active.item {
     position: relative;
-    background-color: @menuItemBackgroundActive;
-    color: @menuActiveItemColor;
+    background-color: @menuItemBackgroundActive !important;
+    color: @menuActiveItemColor !important;
   }
 
-  .default.tabs.inline {
+  .default.tabs {
     .ui.menu {
       border-bottom: 1px solid @menuBorderColor;
 
