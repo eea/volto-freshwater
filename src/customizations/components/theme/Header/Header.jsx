@@ -3,7 +3,7 @@
  * @module components/theme/Header/Header
  */
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Logo, Navigation, SearchWidget } from '@plone/volto/components';
@@ -30,19 +30,11 @@ const Header = (props) => {
   const isHomePage = content?.['@type'] === 'Plone Site';
   const cmsView = isCmsUi(actualPathName);
   const homePageView = isHomePage && !cmsView;
-  const [hasBanner, setHasBanner] = useState(false);
-  const stagingBanner =
-    __CLIENT__ && document.getElementsByClassName('stagingBanner').length > 0;
-
-  useEffect(() => {
-    if (stagingBanner) setHasBanner(true);
-  }, [setHasBanner, stagingBanner]);
 
   return (
     <div className="portal-top">
       {homePageView && <BodyClass className="homepage-view" />}
       {leadImageUrl && !cmsView && <BodyClass className="has-image" />}
-      {hasBanner && <BodyClass className="staging-banner" />}
       <Segment
         basic
         className={`header-wrapper ${
