@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Image } from 'semantic-ui-react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useSelector } from 'react-redux';
 
 import LogoImage from './freshwater_logo.svg';
@@ -21,7 +21,7 @@ const Logo = (props) => {
 
   return (
     <Link to={root || '/'} title="WISE Freshwater">
-      <Image
+      <LazyLoadImage
         src={LogoImage}
         alt="WISE Freshwater Logo"
         title="WISE Freshwater"

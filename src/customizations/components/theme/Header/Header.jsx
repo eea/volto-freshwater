@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { Logo, Navigation, SearchWidget } from '@plone/volto/components';
 import { BodyClass, isCmsUi } from '@plone/volto/helpers';
 import { Container, Segment } from 'semantic-ui-react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { HeroSection, StickyHeader } from '@eeacms/volto-freshwater/components';
@@ -52,7 +53,7 @@ const Header = (props) => {
               >
                 <div className="logo">
                   {homePageView ? (
-                    <img
+                    <LazyLoadImage
                       className="home-logo"
                       src={clearLogoSVG}
                       alt="Freshwater logo"
