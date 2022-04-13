@@ -54,7 +54,7 @@ const CountriesListingView = (props) => {
                     >
                       {section?.items
                         .sort((a, b) => (a.title > b.title ? 1 : -1))
-                        .filter((a) => a.id !== 'european-union')
+                        .filter((a) => a.id === 'european-union')
                         .map((item, i) => (
                           <div key={i} className="countries-item-wrapper">
                             {item.lead_image && (
@@ -79,9 +79,11 @@ const CountriesListingView = (props) => {
                         ))}
                     </div>
                   </Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
                   <Grid.Column width={4}>
                     {section?.items
-                      .filter((a) => a.id === 'european-union')
+                      .filter((a) => a.id !== 'european-union')
                       .map((item, i) => (
                         <div key={i} className="countries-item-wrapper single">
                           {item.lead_image && (
