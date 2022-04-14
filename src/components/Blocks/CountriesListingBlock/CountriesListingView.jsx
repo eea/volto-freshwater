@@ -82,7 +82,7 @@ const CountriesListingView = (props) => {
                     >
                       {section?.items
                         .sort((a, b) => (a.title > b.title ? 1 : -1))
-                        .filter((a) => a.id !== 'european-union')
+                        .filter((a) => a.id === 'european-union')
                         .map((item, i) => (
                           <div key={i} className="countries-item-wrapper">
                             {item.lead_image && (
