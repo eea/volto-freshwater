@@ -47,6 +47,34 @@ const CountriesListingView = (props) => {
               )}
               <Grid>
                 <Grid.Row>
+                  <Grid.Column width={4}>
+                    {section?.items
+                      .filter((a) => a.id === 'european-union')
+                      .map((item, i) => (
+                        <div key={i} className="countries-item-wrapper single">
+                          {item.lead_image && (
+                            <Item.Image
+                              className="countries-list-flag"
+                              alt={item.title}
+                              src={`${item['@id']
+                                .replace(config.settings.apiPath, '')
+                                .replace(
+                                  config.settings.internalApiPath,
+                                  '',
+                                )}/@@images/image/thumb`}
+                            />
+                          )}
+                          <Link
+                            to={flattenToAppURL(item['@id'])}
+                            className="countries-listing-link"
+                          >
+                            {item.title}
+                          </Link>
+                        </div>
+                      ))}
+                  </Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
                   <Grid.Column width={8}>
                     <div
                       className="countries-listing-section"
@@ -78,32 +106,6 @@ const CountriesListingView = (props) => {
                           </div>
                         ))}
                     </div>
-                  </Grid.Column>
-                  <Grid.Column width={4}>
-                    {section?.items
-                      .filter((a) => a.id === 'european-union')
-                      .map((item, i) => (
-                        <div key={i} className="countries-item-wrapper single">
-                          {item.lead_image && (
-                            <Item.Image
-                              className="countries-list-flag"
-                              alt={item.title}
-                              src={`${item['@id']
-                                .replace(config.settings.apiPath, '')
-                                .replace(
-                                  config.settings.internalApiPath,
-                                  '',
-                                )}/@@images/image/thumb`}
-                            />
-                          )}
-                          <Link
-                            to={flattenToAppURL(item['@id'])}
-                            className="countries-listing-link"
-                          >
-                            {item.title}
-                          </Link>
-                        </div>
-                      ))}
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
