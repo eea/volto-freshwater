@@ -40,7 +40,7 @@
 @mobileCollapsedToolbarHeight  : 20px;
 @sidebarWidth                  : 375px;
 
-@mobileMenuBreakpoint          : 1300px;
+@mobileMenuBreakpoint          : 1000px;
 
 
 /*-------------------

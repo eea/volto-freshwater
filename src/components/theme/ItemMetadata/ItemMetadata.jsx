@@ -2,7 +2,8 @@ import React from 'react';
 import { Icon } from '@plone/volto/components';
 import { Table, Button } from 'semantic-ui-react';
 import MapPreview from './MapPreview';
-import { getPath, useCopyToClipboard } from '@eeacms/volto-freshwater/utils';
+import { getPath } from '@eeacms/volto-freshwater/utils';
+import { useCopyToClipboard } from '@eeacms/volto-freshwater/helpers';
 import config from '@plone/volto/registry';
 import shareSVG from '@plone/volto/icons/share.svg';
 
