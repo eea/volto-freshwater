@@ -1,4 +1,3 @@
-import React from 'react';
 import config from '@plone/volto/registry';
 import { flattenToAppURL } from '@plone/volto/helpers';
 
