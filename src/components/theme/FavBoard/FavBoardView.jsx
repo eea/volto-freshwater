@@ -20,10 +20,8 @@ import {
   getAllBookmarks,
   deleteBookmark,
 } from '@eeacms/volto-freshwater/actions/boards';
-import {
-  useCopyToClipboard,
-  deStringifySearchquery,
-} from '@eeacms/volto-freshwater/utils';
+import { deStringifySearchquery } from '@eeacms/volto-freshwater/utils';
+import { useCopyToClipboard } from '@eeacms/volto-freshwater/helpers';
 import ToggleButton from './FavToggleStatusButton';
 
 import backSVG from '@plone/volto/icons/back.svg';

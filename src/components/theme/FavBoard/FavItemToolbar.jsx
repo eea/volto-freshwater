@@ -7,7 +7,7 @@ import {
   deleteBookmark,
   getAllBookmarks,
 } from '@eeacms/volto-freshwater/actions/boards';
-import { useCopyToClipboard } from '@eeacms/volto-freshwater/utils';
+import { useCopyToClipboard } from '@eeacms/volto-freshwater/helpers';
 
 import clearSVG from '@plone/volto/icons/delete.svg';
 import linkSVG from '@plone/volto/icons/link.svg';

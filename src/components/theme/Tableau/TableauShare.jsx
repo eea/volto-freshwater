@@ -1,7 +1,7 @@
 import React from 'react';
 import { Popup, Tab, Button, Menu, Input } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
-import { useCopyToClipboard } from '@eeacms/volto-freshwater/utils';
+import { useCopyToClipboard } from '@eeacms/volto-freshwater/helpers';
 
 import shareSVG from '@plone/volto/icons/share.svg';
 import codeSVG from '@plone/volto/icons/code.svg';

@@ -85,7 +85,7 @@ const BasketToolbarPopup = (props) => {
         <h2>Boards basket</h2>
       </header>
       <div className="fav-menu-content">
-        <div class="fav-boards-list">
+        <div className="fav-boards-list">
           <div className="toolbar-menu-title">Selected items: </div>
           {itemsInBasket ? (
             <ul className="fav-menu-listing">

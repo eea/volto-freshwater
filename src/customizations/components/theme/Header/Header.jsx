@@ -6,14 +6,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Logo, Navigation, SearchWidget } from '@plone/volto/components';
+import { Logo, Navigation, SearchWidget, Icon } from '@plone/volto/components';
 import { BodyClass, isCmsUi } from '@plone/volto/helpers';
 import { Container, Segment } from 'semantic-ui-react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { HeroSection, StickyHeader } from '@eeacms/volto-freshwater/components';
+import { useOutsideClick } from '@eeacms/volto-freshwater/helpers';
 import clearLogoSVG from '@eeacms/volto-freshwater/static/freshwater_logo_white.svg';
+import zoomSVG from '@plone/volto/icons/zoom.svg';
 
 const Header = (props) => {
   const {
@@ -31,6 +33,17 @@ const Header = (props) => {
   const isHomePage = content?.['@type'] === 'Plone Site';
   const cmsView = isCmsUi(actualPathName);
   const homePageView = isHomePage && !cmsView;
+
+  const searchRef = React.useRef(null);
+  const [showMobileSearch, setShowMobileSearch] = React.useState(false);
+
+  const toggleMobileSearch = () => {
+    setShowMobileSearch(!showMobileSearch);
+  };
+
+  useOutsideClick(searchRef, () => {
+    setShowMobileSearch(false);
+  });
 
   return (
     <div className="portal-top">
@@ -84,6 +97,16 @@ const Header = (props) => {
                     <div className="search">
                       <SearchWidget pathname={pathname} />
                     </div>
+
+                    <div className="mobile-search">
+                      <div className="search-icon">
+                        <Icon
+                          onClick={toggleMobileSearch}
+                          name={zoomSVG}
+                          size="39px"
+                        />
+                      </div>
+                    </div>
                   </div>
                   <Navigation
                     pathname={pathname}
@@ -92,6 +115,16 @@ const Header = (props) => {
                 </div>
               </div>
             </Container>
+
+            {showMobileSearch ? (
+              <div ref={searchRef} className="mobile-search-popup">
+                <div>
+                  <SearchWidget pathname={pathname} />
+                </div>
+              </div>
+            ) : (
+              ''
+            )}
           </div>
         </StickyHeader>
       </Segment>
