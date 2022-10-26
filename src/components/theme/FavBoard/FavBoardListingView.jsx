@@ -11,6 +11,7 @@ import { Tab, Menu, Button } from 'semantic-ui-react';
 import { getAllBookmarks } from '@eeacms/volto-freshwater/actions/boards';
 import backSVG from '@plone/volto/icons/back.svg';
 import starSVG from '@plone/volto/icons/half-star.svg';
+import zoomSVG from '@plone/volto/icons/zoom.svg';
 import './style.less';
 
 const ListingView = (props) => {
@@ -144,9 +145,22 @@ const FavBoardListingView = (props) => {
         <Portal node={document.getElementById('toolbar')}>
           <Toolbar
             inner={
-              <Button className="item" onClick={() => props.history.goBack()}>
-                <Icon name={backSVG} size="30px" className="contents circled" />
-              </Button>
+              <>
+                <Button className="item" onClick={() => props.history.goBack()}>
+                  <Icon
+                    name={backSVG}
+                    size="30px"
+                    className="contents circled"
+                  />
+                </Button>
+                <Link className="item" exact to="/data-maps-and-tools/metadata">
+                  <Icon
+                    name={zoomSVG}
+                    size="30px"
+                    className="contents circled"
+                  />
+                </Link>
+              </>
             }
           />
         </Portal>
