@@ -8,8 +8,18 @@
     position: relative;
     display: block;
   }
+  .fav-search-menu {
+    position: relative;
+    display: block;
+  }
 }
 
+#search {
+  .fav-search-menu {
+    position: relative;
+    display: block;
+  }
+}
 .ui.basic.button.add-fav-btn {
   box-shadow: none !important;
 }
@@ -22,7 +32,35 @@
   display: inline-block;
   margin-bottom: 20px;
 }
+.basket-search-btn {
+  background-color: transparent;
+  .basket-count {
+    position: relative;
+    z-index: 2;
+    top: 37px;
+    right: -22px;
+    display: block;
+    width: 18px;
+    height: 18px;
+    animation: count-pulse 2s;
+    animation-iteration-count: 10;
+    background: @wisePrimaryColor;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgb(52 172 224);
+    color: @white;
+    font-size: 10px;
+    line-height: 18px;
 
+    span {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+  }
+}
+.boards-search {
+  float: right;
+}
 .basket-toolbar-btn {
   position: relative;
   z-index: 1;
@@ -64,6 +102,66 @@
 
   100% {
     box-shadow: 0 0 0 0 rgba(52, 172, 224, 0);
+  }
+}
+
+.remove-search-pin-btn {
+  background-color: transparent !important;
+}
+
+.fav-menu-search {
+  position: absolute;
+  z-index: 1;
+  top: 60px;
+  right: 40px;
+  background-color: @white;
+  box-shadow: 5px 5px 5px 3px #c7d5d8;
+
+  .fav-menu-content {
+    padding: 0 20px 20px 20px;
+    font-size: 16px;
+  }
+
+  .fav-menu-listing {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+    margin-top: 0;
+    margin-top: 0;
+    list-style: none;
+  }
+
+  .fav-menu-list-item:first-child {
+    padding-bottom: 0 !important;
+  }
+
+  .fav-menu-list-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6em 0;
+
+    &:not(:last-child) {
+      border-top: 1px solid #e7e7e7;
+    }
+
+    button {
+      margin-top: 0 !important;
+
+      svg {
+        color: #007eb1;
+      }
+    }
+  }
+
+  .fav-item-title {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    font-size: 14px;
+    -webkit-line-clamp: 2;
   }
 }
 
