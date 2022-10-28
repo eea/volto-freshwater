@@ -4,11 +4,11 @@ import { compose } from 'redux';
 import { Button } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
 import { Portal } from 'react-portal';
-import BasketToolbarPopup from './BasketToolbarPopup';
+import BasketPopup from './BasketPopup';
 import basketSVG from '@eeacms/volto-freshwater/icons/basket.svg';
 import './style.less';
 
-const BasketToolbarButton = (props) => {
+const BasketButton = (props) => {
   const { basket } = props;
 
   const [showMenu, setShowMenu] = useState(false);
@@ -46,7 +46,7 @@ const BasketToolbarButton = (props) => {
           )}
         </Button>
 
-        {showMenu ? <BasketToolbarPopup /> : null}
+        {showMenu ? <BasketPopup /> : null}
       </div>
     </Portal>
   );
@@ -56,4 +56,4 @@ export default compose(
   connect((state) => ({
     basket: state.basket,
   })),
-)(BasketToolbarButton);
+)(BasketButton);

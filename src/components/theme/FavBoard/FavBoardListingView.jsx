@@ -153,13 +153,22 @@ const FavBoardListingView = (props) => {
                     className="contents circled"
                   />
                 </Button>
-                <Link className="item" exact to="/data-maps-and-tools/metadata">
+                <Button
+                  className="item"
+                  onClick={() => {
+                    props.history.push('/data-maps-and-tools/metadata');
+                  }}
+                  title="Back to resource catalogue"
+                >
                   <Icon
                     name={zoomSVG}
                     size="30px"
                     className="contents circled"
+                    aria-label="IDL"
+                    alt="IDK"
+                    as="a"
                   />
-                </Link>
+                </Button>
               </>
             }
           />
