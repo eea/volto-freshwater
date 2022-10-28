@@ -9,7 +9,7 @@ import basketSVG from '@eeacms/volto-freshwater/icons/basket.svg';
 import './style.less';
 
 const BasketToolbarButton = (props) => {
-  const { basket, location } = props;
+  const { basket } = props;
 
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef(null);
@@ -25,37 +25,30 @@ const BasketToolbarButton = (props) => {
       document.removeEventListener('mousedown', outsideClick);
     };
   }, [showMenu]);
-  const placement = () => {
-    if (location.pathname === '/data-maps-and-tools/metadata') return false;
-    return true;
-  };
 
   return (
-    <>
-      {placement() === true && (
-        <Portal node={__CLIENT__ && document.querySelector('.toolbar-bottom')}>
-          <div className="fav-toolbar-menu" ref={menuRef}>
-            <Button
-              className="basket-toolbar-btn"
-              onClick={() => {
-                setShowMenu(!showMenu);
-              }}
-              title="Boards basket"
-            >
-              {basket.items && basket.items.length > 0 && (
-                <div className="basket-count">
-                  <span>{basket.items.length}</span>
-                </div>
-              )}
+    <Portal
+      node={__CLIENT__ && document.querySelector('.right-section-wrapper')}
+    >
+      <div className="fav-basket-menu" ref={menuRef}>
+        <Button
+          className="basket-btn"
+          onClick={() => {
+            setShowMenu(!showMenu);
+          }}
+          title="Boards basket"
+        >
+          <Icon name={basketSVG} size="30px" />
+          {basket.items && basket.items.length > 0 && (
+            <div className="basket-count">
+              <span>{basket.items.length}</span>
+            </div>
+          )}
+        </Button>
 
-              <Icon name={basketSVG} size="36px" />
-            </Button>
-
-            {showMenu ? <BasketToolbarPopup /> : null}
-          </div>
-        </Portal>
-      )}
-    </>
+        {showMenu ? <BasketToolbarPopup /> : null}
+      </div>
+    </Portal>
   );
 };
 

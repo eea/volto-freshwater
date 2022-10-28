@@ -3,74 +3,50 @@
 
 @import (multiple, reference, optional) '../../theme.config';
 
-#toolbar {
-  .fav-toolbar-menu {
-    position: relative;
-    display: block;
-  }
-  .fav-search-menu {
-    position: relative;
-    display: block;
-  }
+.fav-basket-menu {
+  position: relative;
+  height: auto;
 }
 
-#search {
-  .fav-search-menu {
-    position: relative;
-    display: block;
-  }
-}
 .ui.basic.button.add-fav-btn {
   box-shadow: none !important;
 }
 
-#toolbar .toolbar.expanded .basket-toolbar-btn {
-  opacity: 1;
-}
-
-.fav-toolbar-btn {
+.fav-basket-btn {
   display: inline-block;
   margin-bottom: 20px;
 }
-.basket-search-btn {
-  background-color: transparent;
-  .basket-count {
-    position: relative;
-    z-index: 2;
-    top: 37px;
-    right: -22px;
-    display: block;
-    width: 18px;
-    height: 18px;
-    animation: count-pulse 2s;
-    animation-iteration-count: 10;
-    background: @wisePrimaryColor;
-    border-radius: 50%;
-    box-shadow: 0 0 0 0 rgb(52 172 224);
-    color: @white;
-    font-size: 10px;
-    line-height: 18px;
+.fav-basket-menu header {
+  display: flex;
+  height: 60px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 20px;
+  border-bottom: 4px solid #b8c6c8;
+}
 
-    span {
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%, 0);
-    }
-  }
+.fav-basket-menu header h2 {
+  overflow: hidden;
+  max-width: 100%;
+  flex: 1 0 auto;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-.boards-search {
-  float: right;
-}
-.basket-toolbar-btn {
+
+.basket-btn {
   position: relative;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
   z-index: 1;
-  opacity: 0;
-
+  background-color: transparent !important;
   .basket-count {
     position: relative;
     z-index: 2;
-    top: 37px;
-    right: -22px;
+    top: -14px;
+    right: -16px;
     display: block;
     width: 18px;
     height: 18px;
@@ -105,75 +81,23 @@
   }
 }
 
-.remove-search-pin-btn {
-  background-color: transparent !important;
-}
-
-.fav-menu-search {
-  position: absolute;
-  z-index: 1;
-  top: 60px;
-  right: 40px;
-  background-color: @white;
-  box-shadow: 5px 5px 5px 3px #c7d5d8;
-
-  .fav-menu-content {
-    padding: 0 20px 20px 20px;
-    font-size: 16px;
-  }
-
-  .fav-menu-listing {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0;
-    margin-top: 0;
-    margin-top: 0;
-    list-style: none;
-  }
-
-  .fav-menu-list-item:first-child {
-    padding-bottom: 0 !important;
-  }
-
-  .fav-menu-list-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.6em 0;
-
-    &:not(:last-child) {
-      border-top: 1px solid #e7e7e7;
-    }
-
-    button {
-      margin-top: 0 !important;
-
-      svg {
-        color: #007eb1;
-      }
-    }
-  }
-
-  .fav-item-title {
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    font-size: 14px;
-    -webkit-line-clamp: 2;
-  }
-}
-
 .fav-menu {
   position: absolute;
-  bottom: 0;
-  left: 57px;
+  display: block;
+  background-color: @white;
+  z-index: 9;
+  width: 320px;
+  height: auto;
+  top: 14px;
+  z-index: 1;
+  right: 57px;
   background-color: @white;
   box-shadow: 0 1px 2px 0 #c7d5d8;
 
   .fav-menu-content {
+    z-index: 9;
     padding: 0 20px 20px 20px;
+    background-color: @white;
     font-size: 16px;
   }
 
@@ -204,7 +128,7 @@
 
     button {
       margin-bottom: 0 !important;
-
+      background-color: transparent;
       svg {
         color: #007eb1;
       }
@@ -317,10 +241,6 @@ ul.boards-list {
   margin-bottom: 0 !important;
   background-color: @blue !important;
   color: @white !important;
-}
-
-.fav-toolbar-menu {
-  display: none;
 }
 
 .fav-menu-info,

@@ -2,7 +2,6 @@ import {
   FavoritesToolbarButton,
   BasketToolbarButton,
   AddToFavBoardButton,
-  BasketSearchButton,
 } from './FavoritesToolbarButton';
 import ScrollToTop from './ScrollToTop';
 
@@ -24,10 +23,6 @@ export default (config) => {
     {
       match: '',
       component: AddToFavBoardButton,
-    },
-    {
-      match: '',
-      component: BasketSearchButton,
     },
   ];
 
