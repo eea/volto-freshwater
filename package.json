@@ -25,7 +25,6 @@
     "@eeacms/volto-resize-helper",
     "@eeacms/volto-block-style",
     "@eeacms/volto-block-toc",
-    "@eeacms/volto-embed",
     "@eeacms/volto-arcgis-block",
     "volto-slate"
   ],
@@ -38,7 +37,6 @@
     "@eeacms/volto-block-style": "^3.3.0",
     "@eeacms/volto-columns-block": "*",
     "@eeacms/volto-datablocks": "*",
-    "@eeacms/volto-embed": "4.0.2",
     "@eeacms/volto-group-block": "*",
     "@kitconcept/volto-blocks-grid": "*",
     "react-slick": "^0.24.0",
