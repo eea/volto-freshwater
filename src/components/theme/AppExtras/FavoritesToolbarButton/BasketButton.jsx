@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Button } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
+import { useSelector } from 'react-redux';
 import { Portal } from 'react-portal';
 import BasketPopup from './BasketPopup';
 import basketSVG from '@eeacms/volto-freshwater/icons/basket.svg';
@@ -10,7 +11,10 @@ import './style.less';
 
 const BasketButton = (props) => {
   const { basket } = props;
-
+  const logedIn = useSelector(
+    (state) =>
+      state.userSession.token !== undefined && state.userSession.token !== null,
+  );
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef(null);
 
@@ -25,30 +29,37 @@ const BasketButton = (props) => {
       document.removeEventListener('mousedown', outsideClick);
     };
   }, [showMenu]);
-
   return (
-    <Portal
-      node={__CLIENT__ && document.querySelector('.right-section-wrapper')}
-    >
-      <div className="fav-basket-menu" ref={menuRef}>
-        <Button
-          className="basket-btn"
-          onClick={() => {
-            setShowMenu(!showMenu);
-          }}
-          title="Boards basket"
-        >
-          <Icon name={basketSVG} size="30px" />
-          {basket.items && basket.items.length > 0 && (
-            <div className="basket-count">
-              <span>{basket.items.length}</span>
-            </div>
-          )}
-        </Button>
+    <>
+      {logedIn && (
+        <Portal node={__CLIENT__ && document.querySelector('.basket')}>
+          <div
+            className="search fav-basket-menu"
+            ref={menuRef}
+            role={'listbox'}
+          >
+            <li>
+              <Button
+                className="basket-btn item"
+                onClick={() => {
+                  setShowMenu(!showMenu);
+                }}
+                title="Boards basket"
+              >
+                <Icon name={basketSVG} size="20px" />
 
-        {showMenu ? <BasketPopup /> : null}
-      </div>
-    </Portal>
+                {basket.items && basket.items.length > 0 && (
+                  <div className="basket-count">
+                    <span>{basket.items.length}</span>
+                  </div>
+                )}
+              </Button>
+            </li>
+            {showMenu ? <BasketPopup /> : null}
+          </div>
+        </Portal>
+      )}
+    </>
   );
 };
 

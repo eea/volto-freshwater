@@ -4,8 +4,15 @@
 @import (multiple, reference, optional) '../../theme.config';
 
 .fav-basket-menu {
-  position: relative;
   height: auto;
+}
+
+.fav-toolbar-menu {
+  display: none;
+}
+
+#toolbar .toolbar.expanded .fav-toolbar-menu {
+  display: block;
 }
 
 .ui.basic.button.add-fav-btn {
@@ -38,16 +45,15 @@
 
 .basket-btn {
   position: relative;
-  padding-top: 0 !important;
-  margin-top: 0 !important;
-  z-index: 1;
+  padding: 0 !important;
+  margin: 0 !important;
   background-color: transparent !important;
   .basket-count {
-    position: relative;
-    z-index: 2;
-    top: -14px;
-    right: -16px;
+    position: absolute;
     display: block;
+    margin-bottom: 0px;
+    top: 10px;
+    right: -6px;
     width: 18px;
     height: 18px;
     animation: count-pulse 2s;
@@ -57,7 +63,6 @@
     box-shadow: 0 0 0 0 rgb(52 172 224);
     color: @white;
     font-size: 10px;
-    line-height: 18px;
 
     span {
       position: absolute;
