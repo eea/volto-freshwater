@@ -24,16 +24,27 @@ export const HorizontalMenu = (props) => {
         )}
         <Menu>
           {map(tocEntries, (entries) => {
-            return map(entries, (myentry) => {
-              const [level, entry, id] = myentry;
+            if (Array.isArray(entries)) {
+              return map(entries, (myentry) => {
+                const [level, entry, id] = myentry;
+                return (
+                  entry && (
+                    <Menu.Item key={id} className={`headline-${level}`}>
+                      <AnchorLink href={`#${id}`}>{entry}</AnchorLink>
+                    </Menu.Item>
+                  )
+                );
+              });
+            } else {
+              const { level, title, id } = entries;
               return (
-                entry && (
+                title && (
                   <Menu.Item key={id} className={`headline-${level}`}>
-                    <AnchorLink href={`#${id}`}>{entry}</AnchorLink>
+                    <AnchorLink href={`#${id}`}>{title}</AnchorLink>
                   </Menu.Item>
                 )
               );
-            });
+            }
           })}
         </Menu>
       </div>
