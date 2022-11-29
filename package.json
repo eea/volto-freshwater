@@ -26,8 +26,7 @@
     "@eeacms/volto-block-style",
     "@eeacms/volto-block-toc",
     "@eeacms/volto-embed",
-    "@eeacms/volto-arcgis-block",
-    "volto-slate"
+    "@eeacms/volto-arcgis-block"
   ],
   "dependencies": {
     "@eeacms/volto-plotlycharts": "3.0.1",
@@ -43,7 +42,6 @@
     "@kitconcept/volto-blocks-grid": "*",
     "react-slick": "^0.24.0",
     "slick-carousel": "^1.8.1",
-    "volto-slate": "*",
     "stream-browserify": "^3.0.0"
   },
   "devDependencies": {

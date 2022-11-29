@@ -4,7 +4,7 @@ import config from '@plone/volto/registry';
 import { Icon } from '@plone/volto/components';
 import { UniversalLink } from '@plone/volto/components';
 import { BodyClass } from '@plone/volto/helpers';
-import { serializeNodes } from 'volto-slate/editor/render';
+import { serializeNodes } from '@plone/volto-slate/editor/render';
 import { CommonCardsSchemaExtender } from '../CommonAssets/schema';
 import cx from 'classnames';
 

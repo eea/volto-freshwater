@@ -4,7 +4,7 @@ import { LazyLoadComponent } from 'react-lazy-load-image-component';
 import { UniversalLink } from '@plone/volto/components';
 import { BodyClass } from '@plone/volto/helpers';
 import { getScaleUrl, getPath } from '@eeacms/volto-freshwater/utils';
-import { serializeNodes } from 'volto-slate/editor/render';
+import { serializeNodes } from '@plone/volto-slate/editor/render';
 import cx from 'classnames';
 
 import './css/plaincards.less';

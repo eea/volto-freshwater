@@ -3,7 +3,7 @@ import { Card } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
 import { UniversalLink } from '@plone/volto/components';
 import { BodyClass } from '@plone/volto/helpers';
-import { serializeNodes } from 'volto-slate/editor/render';
+import { serializeNodes } from '@plone/volto-slate/editor/render';
 import cx from 'classnames';
 
 import arrowSVG from '@plone/volto/icons/backspace.svg';

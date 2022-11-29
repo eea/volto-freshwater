@@ -1,6 +1,6 @@
 import React from 'react';
 import { BodyClass } from '@plone/volto/helpers';
-import { serializeNodes } from 'volto-slate/editor/render';
+import { serializeNodes } from '@plone/volto-slate/editor/render';
 import {
   CarouselCardsView,
   GroupCardsView,
