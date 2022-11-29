@@ -29,25 +29,25 @@
     "@eeacms/volto-arcgis-block"
   ],
   "dependencies": {
-    "@eeacms/volto-plotlycharts": "3.0.1",
-    "@eeacms/volto-arcgis-block": "0.1.16",
-    "@eeacms/volto-block-toc": "2.2.2",
-    "react-lazy-load-image-component": "^1.4.0",
-    "@eeacms/volto-resize-helper": "^0.2.0",
-    "@eeacms/volto-block-style": "^3.3.0",
+    "@eeacms/volto-arcgis-block": "*",
+    "@eeacms/volto-block-style": "*",
+    "@eeacms/volto-block-toc": "*",
     "@eeacms/volto-columns-block": "*",
     "@eeacms/volto-datablocks": "*",
-    "@eeacms/volto-embed": "4.0.2",
+    "@eeacms/volto-embed": "*",
     "@eeacms/volto-group-block": "*",
+    "@eeacms/volto-plotlycharts": "*",
+    "@eeacms/volto-resize-helper": "*",
     "@kitconcept/volto-blocks-grid": "*",
+    "react-lazy-load-image-component": "^1.4.0",
     "react-slick": "^0.24.0",
     "slick-carousel": "^1.8.1",
     "stream-browserify": "^3.0.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-nullish-coalescing-operator": "7.18.6",
     "@cypress/code-coverage": "^3.9.5",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "@babel/plugin-proposal-nullish-coalescing-operator": "7.18.6"
+    "babel-plugin-transform-class-properties": "^6.24.1"
   },
   "scripts": {
     "release": "release-it",
