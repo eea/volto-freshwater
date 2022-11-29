@@ -97,6 +97,7 @@ const Header = (props) => {
                     <div className="search">
                       <SearchWidget pathname={pathname} />
                     </div>
+                    <span id="divider"></span>
                     <div className="basket"></div>
 
                     <div className="mobile-search">

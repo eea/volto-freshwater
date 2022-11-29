@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Button } from 'semantic-ui-react';
@@ -15,6 +15,12 @@ const BasketButton = (props) => {
     (state) =>
       state.userSession.token !== undefined && state.userSession.token !== null,
   );
+  useLayoutEffect(() => {
+    if (!document.getElementById('divider')) return;
+    if (logedIn)
+      document.getElementById('divider').style.display = 'inline-block';
+    else document.getElementById('divider').style.display = 'none';
+  }, [logedIn]);
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef(null);
 
