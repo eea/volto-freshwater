@@ -19,6 +19,7 @@
   "addons": [
     "@kitconcept/volto-blocks-grid",
     "@eeacms/volto-plotlycharts",
+    "@eeacms/volto-slots",
     "@eeacms/volto-columns-block",
     "@eeacms/volto-datablocks",
     "@eeacms/volto-group-block",
@@ -33,6 +34,7 @@
     "@eeacms/volto-block-style": "*",
     "@eeacms/volto-block-toc": "*",
     "@eeacms/volto-columns-block": "*",
+    "@eeacms/volto-slots": "*",
     "@eeacms/volto-datablocks": "*",
     "@eeacms/volto-embed": "*",
     "@eeacms/volto-group-block": "*",
