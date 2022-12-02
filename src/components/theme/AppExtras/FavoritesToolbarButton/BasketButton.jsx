@@ -52,7 +52,7 @@ const BasketButton = (props) => {
                 }}
                 title="Boards basket"
               >
-                <Icon name={basketSVG} size="20px" />
+                <Icon name={basketSVG} size="25px" />
 
                 {basket.items && basket.items.length > 0 && (
                   <div className="basket-count">
