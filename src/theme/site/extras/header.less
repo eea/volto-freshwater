@@ -21,17 +21,7 @@
       }
     }
   }
-  #divider {
-    margin-left: 10px;
-    width: 0px;
-    height: 24px;
-    border-left: 1px solid @purpleBackground;
-  }
-  .basket {
-    display: inline-block;
-    padding: 0 1rem;
-    list-style-type: none;
-  }
+
   .ui.container {
     height: 100%;
   }
@@ -95,6 +85,7 @@
       flex-direction: row;
       flex-grow: 2;
       flex-wrap: nowrap;
+      align-items: center;
       justify-content: flex-end;
       margin: 0.7rem 0;
     }
@@ -116,6 +107,9 @@
   }
 
   .search button {
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
     color: @wiseSecondaryColor;
   }
 }

@@ -44,23 +44,22 @@ const BasketButton = (props) => {
             ref={menuRef}
             role={'listbox'}
           >
-            <li>
-              <Button
-                className="basket-btn item"
-                onClick={() => {
-                  setShowMenu(!showMenu);
-                }}
-                title="Boards basket"
-              >
-                <Icon name={basketSVG} size="25px" />
+            <Button
+              className="basket-btn item"
+              onClick={() => {
+                setShowMenu(!showMenu);
+              }}
+              title="Boards basket"
+            >
+              <Icon name={basketSVG} size="25px" />
 
-                {basket.items && basket.items.length > 0 && (
-                  <div className="basket-count">
-                    <span>{basket.items.length}</span>
-                  </div>
-                )}
-              </Button>
-            </li>
+              {basket.items && basket.items.length > 0 && (
+                <div className="basket-count">
+                  <span>{basket.items.length}</span>
+                </div>
+              )}
+            </Button>
+
             {showMenu ? <BasketPopup /> : null}
           </div>
         </Portal>
