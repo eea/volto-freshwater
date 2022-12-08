@@ -18,7 +18,7 @@ import checkSVG from '@plone/volto/icons/check.svg';
 import cx from 'classnames';
 import './style.less';
 
-const BasketToolbarPopup = (props) => {
+const BasketPopup = (props) => {
   const { basket, items, userId } = props;
   const itemsInBasket = basket && basket.items.length > 0;
   const dispatch = useDispatch();
@@ -86,7 +86,7 @@ const BasketToolbarPopup = (props) => {
       </header>
       <div className="fav-menu-content">
         <div className="fav-boards-list">
-          <div className="toolbar-menu-title">Selected items: </div>
+          <div className="basket-menu-title">Selected items: </div>
           {itemsInBasket ? (
             <ul className="fav-menu-listing">
               {basket.items.map((item, i) => (
@@ -121,7 +121,7 @@ const BasketToolbarPopup = (props) => {
 
         {groupedItems && Object.keys(groupedItems).length > 0 && (
           <div className="fav-boards-list">
-            <div className="toolbar-menu-title">Save to an existing board:</div>
+            <div className="basket-menu-title">Save to an existing board:</div>
 
             {Object.keys(groupedItems).map((user) => {
               return (
@@ -175,7 +175,7 @@ const BasketToolbarPopup = (props) => {
         )}
 
         <div className="fav-group-title">
-          <div className="toolbar-menu-title">Create a new board:</div>
+          <div className="basket-menu-title">Create a new board:</div>
 
           <Grid>
             <Grid.Row>
@@ -225,4 +225,4 @@ export default compose(
     }),
     { removeItemFromBasket },
   ),
-)(BasketToolbarPopup);
+)(BasketPopup);

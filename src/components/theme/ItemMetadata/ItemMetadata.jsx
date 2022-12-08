@@ -123,7 +123,18 @@ const ItemMetadata = (props) => {
                   </Table.Row>
                 )}
 
-                {publisher && (
+                {publisher?.length > 0 ? (
+                  <Table.Row>
+                    <Table.Cell>Organisation</Table.Cell>
+                    <Table.Cell>
+                      {publisher.map((item, i) => (
+                        <div key={i}>
+                          <p>{item.title}</p>
+                        </div>
+                      ))}
+                    </Table.Cell>
+                  </Table.Row>
+                ) : (
                   <Table.Row>
                     <Table.Cell>Organisation</Table.Cell>
                     <Table.Cell>

@@ -1,4 +1,4 @@
 export FavoritesToolbarButton from './FavoritesToolbarButton';
 export AddToFavBoardButton from './AddToFavBoardButton';
-export BasketToolbarButton from './BasketToolbarButton';
-export BasketToolbarPopup from './BasketToolbarPopup';
+export BasketButton from './BasketButton';
+export BasketPopup from './BasketPopup';
