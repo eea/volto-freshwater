@@ -3,39 +3,83 @@
 
 @import (multiple, reference, optional) '../../theme.config';
 
-#toolbar {
-  .fav-toolbar-menu {
-    position: relative;
-    display: block;
-  }
+#divider {
+  width: 0px;
+  height: 24px;
+  border-left: 1px solid @purpleBackground;
+  margin-left: 10px;
+}
+
+.basket {
+  padding: 0 1em;
+}
+
+.fav-basket-menu {
+  height: auto;
+}
+
+.fav-toolbar-menu {
+  display: none;
+}
+
+#toolbar .toolbar.expanded .fav-toolbar-menu {
+  display: block;
 }
 
 .ui.basic.button.add-fav-btn {
   box-shadow: none !important;
 }
 
-#toolbar .toolbar.expanded .basket-toolbar-btn {
-  opacity: 1;
-}
-
-.fav-toolbar-btn {
+.fav-basket-btn {
   display: inline-block;
   margin-bottom: 20px;
 }
 
-.basket-toolbar-btn {
+.fav-basket-menu {
   position: relative;
-  z-index: 1;
-  opacity: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+}
+
+.fav-basket-menu header {
+  display: flex;
+  height: 60px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 20px;
+  border-bottom: 4px solid #b8c6c8;
+}
+
+.fav-basket-menu header h2 {
+  overflow: hidden;
+  max-width: 100%;
+  flex: 1 0 auto;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fav-menu-listing button:hover {
+  background-color: transparent !important;
+}
+
+.basket-btn {
+  position: relative;
+  padding: 0 !important;
+  margin: 0 !important;
+  background-color: transparent !important;
 
   .basket-count {
-    position: relative;
-    z-index: 2;
-    top: 37px;
-    right: -22px;
+    position: absolute;
+    top: 10px;
+    right: -6px;
     display: block;
     width: 18px;
     height: 18px;
+    margin-bottom: 0px;
     animation: count-pulse 2s;
     animation-iteration-count: 10;
     background: @wisePrimaryColor;
@@ -43,7 +87,6 @@
     box-shadow: 0 0 0 0 rgb(52 172 224);
     color: @white;
     font-size: 10px;
-    line-height: 18px;
 
     span {
       position: absolute;
@@ -69,14 +112,20 @@
 
 .fav-menu {
   position: absolute;
-  bottom: 0;
-  left: 57px;
+  z-index: 3;
+  top: 14px;
+  right: 15px;
+  display: block;
+  width: 320px;
+  height: auto;
+  background-color: @white;
   background-color: @white;
   box-shadow: 0 1px 2px 0 #c7d5d8;
 
   .fav-menu-content {
+    z-index: 9;
     padding: 0 20px 20px 20px;
-    font-size: 16px;
+    background-color: @white;
   }
 
   .fav-menu-listing {
@@ -105,7 +154,9 @@
     }
 
     button {
+      padding: 0;
       margin-bottom: 0 !important;
+      background-color: transparent;
 
       svg {
         color: #007eb1;
@@ -132,7 +183,7 @@
   }
 }
 
-.toolbar-menu-title {
+.basket-menu-title {
   padding: 0.8em 0;
   font-family: @headerFont;
   font-size: 14px;
@@ -141,9 +192,7 @@
 }
 
 .fav-boards-list {
-  padding-bottom: 10px;
   border-bottom: 1px solid #b8c6c8;
-  margin-bottom: 2px;
 }
 
 ul.boards-list {
@@ -219,10 +268,6 @@ ul.boards-list {
   margin-bottom: 0 !important;
   background-color: @blue !important;
   color: @white !important;
-}
-
-.fav-toolbar-menu {
-  display: none;
 }
 
 .fav-menu-info,
