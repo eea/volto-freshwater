@@ -195,24 +195,24 @@ const applyConfig = (config) => {
     },
   ];
 
-  config.settings.externalRoutes = [
-    ...(config.settings.externalRoutes || []),
-    ...(config.settings.prefixPath
-      ? [
-          {
-            match: {
-              path: /\/$/,
-              exact: true,
-              strict: true,
-            },
+  // config.settings.externalRoutes = [
+  //   ...(config.settings.externalRoutes || []),
+  //   ...(config.settings.prefixPath
+  //     ? [
+  //         {
+  //           match: {
+  //             path: /\/$/,
+  //             exact: true,
+  //             strict: true,
+  //           },
 
-            url(payload) {
-              return payload.location.pathname;
-            },
-          },
-        ]
-      : []),
-  ];
+  //           url(payload) {
+  //             return payload.location.pathname;
+  //           },
+  //         },
+  //       ]
+  //     : []),
+  // ];
 
   // Custom block styles
   config.settings.pluggableStyles = [
