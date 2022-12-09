@@ -6,7 +6,7 @@ pipeline {
         NAMESPACE = "@eeacms"
         SONARQUBE_TAGS = "volto.eea.europa.eu,water.europa.eu-freshwater"
         DEPENDENCIES = ""
-        VOLTO = "plone/volto#slots_quanta_split_form_undo_prefix_path-v15.16.0"
+
     }
 
   stages {
