@@ -25,6 +25,7 @@ import { useCopyToClipboard } from '@eeacms/volto-freshwater/helpers';
 import ToggleButton from './FavToggleStatusButton';
 
 import backSVG from '@plone/volto/icons/back.svg';
+import zoomSVG from '@plone/volto/icons/zoom.svg';
 import linkSVG from '@plone/volto/icons/link.svg';
 import deleteSVG from '@plone/volto/icons/delete.svg';
 import moreSVG from '@plone/volto/icons/more.svg';
@@ -333,9 +334,31 @@ const FavBoardView = (props) => {
         <Portal node={document.getElementById('toolbar')}>
           <Toolbar
             inner={
-              <Link className="item" to="/boards">
-                <Icon name={backSVG} size="30px" className="contents circled" />
-              </Link>
+              <>
+                <Link className="item" to="/boards">
+                  <Icon
+                    name={backSVG}
+                    size="30px"
+                    className="contents circled"
+                  />
+                </Link>
+                <Button
+                  className="item"
+                  onClick={() => {
+                    props.history.push('/data-maps-and-tools/metadata');
+                  }}
+                  title="Back to resource catalogue"
+                >
+                  <Icon
+                    name={zoomSVG}
+                    size="30px"
+                    className="contents circled"
+                    aria-label="IDL"
+                    alt="IDK"
+                    as="a"
+                  />
+                </Button>
+              </>
             }
           />
         </Portal>
