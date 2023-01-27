@@ -123,7 +123,7 @@ const ItemMetadata = (props) => {
                   </Table.Row>
                 )}
 
-                {publisher?.length > 0 ? (
+                { Array.isArray(publisher) ? ( 
                   <Table.Row>
                     <Table.Cell>Organisation</Table.Cell>
                     <Table.Cell>
