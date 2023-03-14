@@ -1,0 +1,115 @@
+@type: 'extra';
+@element: 'custom';
+
+@import (multiple, reference, optional) '../../theme.config';
+
+.case-study-view {
+  // .breadcrumbs,
+  // .herosection {
+  //   display: none;
+  // }
+
+  // .item-snippet-type {
+  //   display: none;
+  // }
+
+  .field--label-inline {
+    .field__label {
+      display: inline-block;
+    }
+  }
+
+  .field--label-inline, .field--label-above {
+    .field__label {
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .field__item {
+      display: inline-block;
+    }
+  }
+
+  .table-responsive {
+    table {
+      border-collapse: collapse;
+
+      th, td {
+        border: 1px solid #333;
+      }
+    }
+  }
+
+  // Copy from DatabseItemView
+  .content-area {
+    padding-top: 0;
+  }
+
+  .ui.container.tags {
+    display: none;
+  }
+
+  .metadata-header {
+    margin-top: 2em;
+
+    h1 {
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e7e7e7;
+      margin-top: 0 !important;
+      margin-bottom: 10px;
+    }
+
+    .item-modal-metadata {
+      display: flex;
+      flex-direction: row;
+
+      @media only screen and (max-width: 600px) {
+        flex-direction: column;
+      }
+    }
+
+    .metadata-section {
+      margin-right: 15px;
+      font-size: 13px;
+    }
+  }
+
+  .item-table.item-metadata-table {
+    margin: 2.5em 0;
+
+    .ui.table {
+      td {
+        @media only screen and (max-width: @tabletBreakpoint) {
+          padding-right: 0 !important;
+          padding-left: 0 !important;
+        }
+      }
+    }
+  }
+
+  .item-type {
+    margin-bottom: 0.5em;
+    color: #7fc1d0;
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+
+  .item-table .ui.definition.table tr td:first-child:not(.ignored),
+  .item-table .ui.definition.table tr td.definition {
+    font-size: 17px;
+    font-weight: 500;
+  }
+
+  .resources-link {
+    display: inline-block;
+    color: #747474;
+    font-size: 15px;
+    font-weight: 400;
+
+    svg {
+      position: relative;
+      top: 5px;
+      margin-right: 8px;
+    }
+  }
+}

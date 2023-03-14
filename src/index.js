@@ -7,6 +7,7 @@ import {
   HorizontalTocView,
   FavBoardView,
   FavBoardListingView,
+  CaseStudyView,
 } from './components';
 
 import { basket, boards, localnavigation, breadcrumb } from './reducers';
@@ -77,6 +78,7 @@ const applyConfig = (config) => {
     indicator: DatabaseItemView,
     briefing: DatabaseItemView,
     map_interactive: DatabaseItemView,
+    case_study: CaseStudyView,
   };
 
   // Layout views
