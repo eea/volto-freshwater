@@ -1,12 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Icon } from 'semantic-ui-react';
 import { BodyClass } from '@plone/volto/helpers';
-import {
-  ItemMetadataSnippet,
-  ItemMetadata,
-} from '@eeacms/volto-freshwater/components';
-import { formatItemType } from '@eeacms/volto-freshwater/utils';
+import { ItemMetadataSnippet } from '@eeacms/volto-freshwater/components';
 
 import './style.less';
 

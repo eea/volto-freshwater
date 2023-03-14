@@ -20,7 +20,7 @@ export FavItemToolbar from './theme/FavBoard/FavItemToolbar';
 export FavBoardView from './theme/FavBoard/FavBoardView';
 export FavButton from './theme/FavBoard/FavButton';
 export HorizontalTocView from './theme/TocView/HorizontalTocView';
-export CaseStudyView from './theme/CaseStudyView/CaseStudyView'
+export CaseStudyView from './theme/CaseStudyView/CaseStudyView';
 
 export Card from './Blocks/CustomCardsBlock/templates/PresentationCards/Card';
 export CarouselCardsView from './Blocks/CustomCardsBlock/templates/PresentationCards/CarouselCardsView';
