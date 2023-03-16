@@ -8,6 +8,7 @@ import {
   FavBoardView,
   FavBoardListingView,
   CaseStudyView,
+  MeasureView,
 } from './components';
 
 import { basket, boards, localnavigation, breadcrumb } from './reducers';
@@ -79,6 +80,7 @@ const applyConfig = (config) => {
     briefing: DatabaseItemView,
     map_interactive: DatabaseItemView,
     case_study: CaseStudyView,
+    measure: MeasureView,
   };
 
   // Layout views
