@@ -44,8 +44,12 @@ const MeasureView = (props) => {
               <div class="field__item">
                 {content.items.map(
                   (item) =>
-                    item['@type'] == 'File' && (
-                      <a href={item['@id'] + '/@@images/file'} target="_blank">
+                    item['@type'] === 'File' && (
+                      <a
+                        href={item['@id'] + '/@@images/file'}
+                        rel="noreferrer"
+                        target="_blank"
+                      >
                         {item.title}
                       </a>
                     ),
@@ -71,7 +75,7 @@ const MeasureView = (props) => {
                 <div class="image-flexbox">
                   {content.items.map(
                     (item) =>
-                      item['@type'] == 'Image' && (
+                      item['@type'] === 'Image' && (
                         <div class="image-wrapper">
                           <div>
                             <a href={item['@id'] + '/@@images/image'}>
