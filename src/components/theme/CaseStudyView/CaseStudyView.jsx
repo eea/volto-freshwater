@@ -5,10 +5,10 @@ import { ItemMetadataSnippet } from '@eeacms/volto-freshwater/components';
 import './style.less';
 
 const Sections = [
-  {
-    id: 'general',
-    title: 'General',
-  },
+  // {
+  //   id: 'general',
+  //   title: 'General',
+  // },
   {
     id: 'site_information',
     title: 'Site information',
@@ -78,6 +78,60 @@ const CaseStudyView = (props) => {
             <h1>{content.title}</h1>
 
             <ItemMetadataSnippet {...props} item={content} />
+
+            <Section {...props} id="general" title="General" />
+
+            <div class="field--label-inline">
+              <div class="field__label">
+                The in-depth description of the case study
+              </div>
+              <div class="field__item">
+                {content.items.map(
+                  (item) =>
+                    item['@type'] === 'File' && (
+                      <a
+                        href={item['@id'] + '/@@images/file'}
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        {item.title}
+                      </a>
+                    ),
+                )}
+              </div>
+            </div>
+
+            {content.sources && (
+              <div class="field--label-above">
+                <div class="field__label">Sources</div>
+                <div class="field__item">
+                  <ul>
+                    {content.sources.map((item) => (
+                      <li key={item['@id']}>
+                        <a href={item['@id']}>{item.title}</a>
+                      </li>
+                    ))}{' '}
+                  </ul>
+                </div>
+              </div>
+            )}
+
+            {content.measures && (
+              <div class="field--label-above">
+                <div class="field__label">
+                  NWRM(s) implemented in the case study
+                </div>
+                <div class="field__item">
+                  <ul>
+                    {content.measures.map((item) => (
+                      <li key={item['@id']}>
+                        <a href={item['@id']}>{item.title}</a>
+                      </li>
+                    ))}{' '}
+                  </ul>
+                </div>
+              </div>
+            )}
 
             {Sections.map((item) => {
               return <Section {...props} id={item.id} title={item.title} />;

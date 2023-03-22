@@ -22,6 +22,7 @@ export FavButton from './theme/FavBoard/FavButton';
 export HorizontalTocView from './theme/TocView/HorizontalTocView';
 export CaseStudyView from './theme/CaseStudyView/CaseStudyView';
 export MeasureView from './theme/MeasureView/MeasureView';
+export SourceView from './theme/SourceView/SourceView';
 
 export Card from './Blocks/CustomCardsBlock/templates/PresentationCards/Card';
 export CarouselCardsView from './Blocks/CustomCardsBlock/templates/PresentationCards/CarouselCardsView';
