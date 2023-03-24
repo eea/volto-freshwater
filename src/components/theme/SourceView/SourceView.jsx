@@ -1,7 +1,6 @@
 import React from 'react';
 import { BodyClass } from '@plone/volto/helpers';
 import { ItemMetadataSnippet } from '@eeacms/volto-freshwater/components';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import './style.less';
 
 const SourceView = (props) => {
