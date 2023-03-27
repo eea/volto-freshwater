@@ -9,6 +9,7 @@ import {
   FavBoardListingView,
   CaseStudyView,
   MeasureView,
+  SourceView,
 } from './components';
 
 import { basket, boards, localnavigation, breadcrumb } from './reducers';
@@ -81,6 +82,7 @@ const applyConfig = (config) => {
     map_interactive: DatabaseItemView,
     case_study: CaseStudyView,
     measure: MeasureView,
+    source: SourceView,
   };
 
   // Layout views

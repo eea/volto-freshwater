@@ -3,15 +3,47 @@
 
 @import (multiple, reference, optional) '../../theme.config';
 
-.case-study-view {
-  // .breadcrumbs,
-  // .herosection {
-  //   display: none;
-  // }
+.source-view {
+  .fullwidth {
+    position: relative;
+    right: 50%;
+    left: 50%;
+    width: 100vw !important;
+    max-width: initial !important;
+    margin-right: -50vw !important;
+    margin-left: -50vw !important;
+    background-color: #eee;
+  }
 
-  // .item-snippet-type {
-  //   display: none;
-  // }
+  .images-container {
+    display: block;
+    width: 100% !important;
+    max-width: 1525px !important;
+    // padding-right: 40px !important;
+    // padding-left: 40px !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+
+    .image-flexbox {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-end;
+    }
+
+    .image-wrapper {
+      // background-color: grey;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 1em;
+    }
+
+    .image-title {
+      font-weight: bold;
+    }
+  }
 
   .field--label-inline {
     .field__label {
@@ -36,10 +68,6 @@
     .field__item {
       display: inline-block;
     }
-  }
-
-  ul {
-    margin: 0;
   }
 
   .table-responsive {
