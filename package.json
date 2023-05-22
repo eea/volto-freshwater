@@ -27,9 +27,11 @@
     "@eeacms/volto-block-toc",
     "@eeacms/volto-embed",
     "@eeacms/volto-arcgis-block",
+    "@eeacms/volto-openlayers-map",
     "volto-slate"
   ],
   "dependencies": {
+    "@eeacms/volto-openlayers-map": "*",
     "@eeacms/volto-plotlycharts": "3.0.1",
     "@eeacms/volto-arcgis-block": "0.1.16",
     "@eeacms/volto-block-toc": "2.2.2",

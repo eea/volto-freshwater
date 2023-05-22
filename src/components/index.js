@@ -27,3 +27,4 @@ export SourceView from './theme/SourceView/SourceView';
 export Card from './Blocks/CustomCardsBlock/templates/PresentationCards/Card';
 export CarouselCardsView from './Blocks/CustomCardsBlock/templates/PresentationCards/CarouselCardsView';
 export GroupCardsView from './Blocks/CustomCardsBlock/templates/PresentationCards/GroupCardsView';
+export CaseStudyExplorer from './Blocks/CaseStudyExplorer/CaseStudyExplorerView';
