@@ -25,7 +25,7 @@ export default function CaseStudyMap(props) {
 
   const [clusterSource] = React.useState(
     new ol.source.Cluster({
-      distance: 50,
+      distance: 0,
       source: pointsSource,
     }),
   );
@@ -101,15 +101,39 @@ function clusterStyle(feature) {
     styleCache[size] = style;
   }
 
+  if (size === 1) {
+    let color = ""
+
+    if(feature.values_.features[0].values_["nwrm_type"] === 'Light') {
+      color = '#94a7d6'
+    } else {
+      color = '#9dd18a'
+    }
+
+    return new ol.style.Style({
+      image: new ol.style.Circle({
+        radius: 7,
+        stroke: new ol.style.Stroke({
+          color: '#fff',
+        }),
+        fill: new ol.style.Fill({
+          color: color,
+        }),
+      }),
+    })
+  } else {
+    return style
+  }
+
   return size === 1
     ? new ol.style.Style({
         image: new ol.style.Circle({
-          radius: 5,
+          radius: 7,
           stroke: new ol.style.Stroke({
             color: '#fff',
           }),
           fill: new ol.style.Fill({
-            color: '#000000',
+            color: '#94a7d6',
           }),
         }),
       })

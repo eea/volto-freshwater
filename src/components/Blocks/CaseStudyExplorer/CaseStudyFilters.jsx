@@ -4,7 +4,7 @@ export default function CaseStudyFilters(props) {
     <>
       <h4>Light or In-depth</h4>
       {Object.entries(filters?.nwrm_type || {}).map(([value, label], index) => (
-        <p key={index}>
+        <div className="filter-input" key={index}>
           <span>{label}</span>
           <input
             value={value}
@@ -23,11 +23,11 @@ export default function CaseStudyFilters(props) {
               setActiveFilters(temp);
             }}
           />
-        </p>
+        </div>
       ))}
       <h4>NWRMs implemented</h4>
       {Object.entries(filters?.nwrms_implemented || {}).map(([value, label], index) => (
-        <p key={index}>
+        <div className="filter-input" key={index}>
           <span>{label}</span>
           <input
             value={value}
@@ -46,7 +46,7 @@ export default function CaseStudyFilters(props) {
               setActiveFilters(temp);
             }}
           />
-        </p>
+        </div>
       ))}
     </>
   );
