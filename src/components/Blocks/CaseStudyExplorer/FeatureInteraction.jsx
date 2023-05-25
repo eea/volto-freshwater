@@ -56,8 +56,10 @@ export default function FeatureInteraction({ onFeatureSelect }) {
           const selectedFeature = subfeatures[0].values_;
           onFeatureSelect(selectedFeature);
         } else {
+          // TODO find the sweet spot for the buffer value?
+          const extentBuffer = subfeatures.length < 5 ? 1000 : 50000 
           const extent = getExtentOfFeatures(subfeatures);
-          const paddedExtent = ol.extent.buffer(extent, 50000);
+          const paddedExtent = ol.extent.buffer(extent, extentBuffer);
           map.getView().fit(paddedExtent, { ...map.getSize(), duration: 1000 });
         }
       });

@@ -15,7 +15,7 @@ export default function FeatureDisplay({ feature }) {
         <ul>
           {feature.nwrms_implemented.map((item, index) => {
             return <li key={index}>
-              <a href={item["path"]}>{item["title"]}</a>
+              <a target="_blank" href={item["path"]}>{item["title"]}</a>
             </li>;
           })}
         </ul>

@@ -40,8 +40,9 @@ export default function InfoOverlay({
       const coordinate = evt.coordinate;
       const { pixel, target } = evt;
       const features = target.getFeaturesAtPixel(pixel);
-
-      if (features.length && !isCluster(features)) {
+      if (
+        features.length // && !isCluster(features)
+      ) {
         overlay.setPosition(coordinate);
         setShowTooltip(true);
       } else {

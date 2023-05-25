@@ -7,6 +7,8 @@ import InfoOverlay from './InfoOverlay';
 import FeatureInteraction from './FeatureInteraction';
 
 import { getFeatures } from './utils';
+import iconLight from './images/icon-light.png'
+import iconDepth from './images/icon-depth.png'
 
 const styleCache = {};
 
@@ -54,7 +56,7 @@ export default function CaseStudyMap(props) {
   return features.length > 0 ? (
     <Map
       view={{
-        center: ol.proj.fromLonLat([20, 50]),
+        center: ol.proj.fromLonLat([10, 50]),
         showFullExtent: true,
         zoom: 4,
       }}
@@ -88,7 +90,7 @@ function clusterStyle(feature) {
           color: '#fff',
         }),
         fill: new ol.style.Fill({
-          color: '#3399CC',
+          color: '#0099bb',
         }),
       }),
       text: new ol.style.Text({
@@ -103,13 +105,20 @@ function clusterStyle(feature) {
 
   if (size === 1) {
     let color = ""
+    let imgUrl = ""
 
     if(feature.values_.features[0].values_["nwrm_type"] === 'Light') {
       color = '#94a7d6'
+      imgUrl = iconLight
     } else {
       color = '#9dd18a'
+      imgUrl = iconDepth
     }
 
+    // return new ol.style.Style({
+    //   image: new ol.style.Icon({
+    //     src: imgUrl,
+    //   }),
     return new ol.style.Style({
       image: new ol.style.Circle({
         radius: 7,
@@ -124,18 +133,4 @@ function clusterStyle(feature) {
   } else {
     return style
   }
-
-  return size === 1
-    ? new ol.style.Style({
-        image: new ol.style.Circle({
-          radius: 7,
-          stroke: new ol.style.Stroke({
-            color: '#fff',
-          }),
-          fill: new ol.style.Fill({
-            color: '#94a7d6',
-          }),
-        }),
-      })
-    : style;
 }
