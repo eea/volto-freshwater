@@ -87,7 +87,7 @@ export function getFilters(cases) {
       if (!_filters.nwrms_implemented.hasOwnProperty(item['id'])) {
         _filters.nwrms_implemented[item['id']] = item['title'];
       }
-      return;
+      return [];
     });
 
     let sectors = _case.properties.sectors;
@@ -95,7 +95,7 @@ export function getFilters(cases) {
       if (!_filters.sectors.hasOwnProperty(item)) {
         _filters.sectors[item] = item;
       }
-      return;
+      return [];
     });
   }
 

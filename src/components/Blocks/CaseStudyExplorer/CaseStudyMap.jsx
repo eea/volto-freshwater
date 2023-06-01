@@ -7,8 +7,8 @@ import InfoOverlay from './InfoOverlay';
 import FeatureInteraction from './FeatureInteraction';
 
 import { getFeatures } from './utils';
-import iconLight from './images/icon-light.png';
-import iconDepth from './images/icon-depth.png';
+// import iconLight from './images/icon-light.png';
+// import iconDepth from './images/icon-depth.png';
 
 const styleCache = {};
 
