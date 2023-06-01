@@ -45,7 +45,7 @@ export default function CaseStudyExplorerView(props) {
   return (
     <div>
       <Grid columns="12">
-      <Grid.Row
+        <Grid.Row
           mobile={3}
           tablet={3}
           computer={2}

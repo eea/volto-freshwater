@@ -106,14 +106,14 @@ function clusterStyle(feature) {
 
   if (size === 1) {
     let color = '';
-    let imgUrl = '';
+    // let imgUrl = '';
 
     if (feature.values_.features[0].values_['nwrm_type'] === 'Light') {
       color = '#0083E0';
-      imgUrl = iconLight;
+      // imgUrl = iconLight;
     } else {
       color = '#50B0A4';
-      imgUrl = iconDepth;
+      // imgUrl = iconDepth;
     }
 
     // return new ol.style.Style({

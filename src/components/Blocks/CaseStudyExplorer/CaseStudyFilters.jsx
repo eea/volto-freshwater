@@ -19,7 +19,12 @@ export default function CaseStudyFilters(props) {
   return (
     <>
       <div className="filter-wrapper">
-        <h4 onClick={(e) => showInputs(e, 'type-filter')}>Light or In-depth</h4>
+        <button
+          onClick={(e) => showInputs(e, 'type-filter')}
+          handleKeyDown={() => {}}
+        >
+          Light or In-depth
+        </button>
         <div className="filter-inputs-wrapper" id="type-filter">
           {Object.entries(filters?.nwrm_type || {}).map(
             ([value, label], index) => (
@@ -47,9 +52,12 @@ export default function CaseStudyFilters(props) {
         </div>
       </div>
       <div className="filter-wrapper">
-        <h4 onClick={(e) => showInputs(e, 'nwrms-impl-filter')}>
+        <button
+          onClick={(e) => showInputs(e, 'nwrms-impl-filter')}
+          handleKeyDown={() => {}}
+        >
           NWRMs implemented
-        </h4>
+        </button>
         <div>
           <div className="filter-inputs-wrapper" id="nwrms-impl-filter">
             {Object.entries(filters?.nwrms_implemented || {}).map(
@@ -81,7 +89,12 @@ export default function CaseStudyFilters(props) {
         </div>
       </div>
       <div className="filter-wrapper">
-        <h4 onClick={(e) => showInputs(e, 'sectors-filter')}>Sectors</h4>
+        <button
+          onClick={(e) => showInputs(e, 'sectors-filter')}
+          handleKeyDown={() => {}}
+        >
+          Sectors
+        </button>
         <div>
           <div className="filter-inputs-wrapper" id="sectors-filter">
             {Object.entries(filters?.sectors || {}).map(
