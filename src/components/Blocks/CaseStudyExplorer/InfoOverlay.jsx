@@ -4,9 +4,9 @@ import { openlayers as ol } from '@eeacms/volto-openlayers-map';
 import FeatureDisplay from './FeatureDisplay';
 import { usePrevious } from '@plone/volto/helpers/Utils/usePrevious';
 
-const isCluster = (features) => {
-  return features.length > 1 ? true : features[0].values_?.features?.length > 1;
-};
+// const isCluster = (features) => {
+//   return features.length > 1 ? true : features[0].values_?.features?.length > 1;
+// };
 
 export default function InfoOverlay({
   selectedFeature,

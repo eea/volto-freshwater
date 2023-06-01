@@ -7,8 +7,8 @@ import InfoOverlay from './InfoOverlay';
 import FeatureInteraction from './FeatureInteraction';
 
 import { getFeatures } from './utils';
-import iconLight from './images/icon-light.png'
-import iconDepth from './images/icon-depth.png'
+import iconLight from './images/icon-light.png';
+import iconDepth from './images/icon-depth.png';
 
 const styleCache = {};
 
@@ -44,7 +44,8 @@ export default function CaseStudyMap(props) {
       new ol.source.TileWMS({
         url: 'https://gisco-services.ec.europa.eu/maps/service',
         params: {
-          LAYERS: 'OSMBlossomComposite',
+          // LAYERS: 'OSMBlossomComposite', # OSMCartoComposite
+          LAYERS: 'OSMPositronComposite',
           TILED: true,
         },
         serverType: 'geoserver',
@@ -104,15 +105,15 @@ function clusterStyle(feature) {
   }
 
   if (size === 1) {
-    let color = ""
-    let imgUrl = ""
+    let color = '';
+    let imgUrl = '';
 
-    if(feature.values_.features[0].values_["nwrm_type"] === 'Light') {
-      color = '#94a7d6'
-      imgUrl = iconLight
+    if (feature.values_.features[0].values_['nwrm_type'] === 'Light') {
+      color = '#0083E0';
+      imgUrl = iconLight;
     } else {
-      color = '#9dd18a'
-      imgUrl = iconDepth
+      color = '#50B0A4';
+      imgUrl = iconDepth;
     }
 
     // return new ol.style.Style({
@@ -129,8 +130,8 @@ function clusterStyle(feature) {
           color: color,
         }),
       }),
-    })
+    });
   } else {
-    return style
+    return style;
   }
 }

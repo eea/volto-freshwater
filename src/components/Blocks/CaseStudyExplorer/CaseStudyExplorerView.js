@@ -18,6 +18,7 @@ export default function CaseStudyExplorerView(props) {
   const [activeFilters, setActiveFilters] = React.useState({
     nwrm_type: [],
     nwrms_implemented: [],
+    sectors: [],
   });
 
   const [activeItems, setActiveItems] = React.useState(cases);
@@ -30,6 +31,7 @@ export default function CaseStudyExplorerView(props) {
     cases,
     activeFilters.nwrm_type,
     activeFilters.nwrms_implemented,
+    activeFilters.sectors,
     activeItems.length,
   ]);
 
@@ -43,16 +45,11 @@ export default function CaseStudyExplorerView(props) {
   return (
     <div>
       <Grid columns="12">
-        <Grid.Column mobile={9} tablet={9} computer={10} className="col-left">
-          {cases.length ? (
-            <CaseStudyMap items={cases} activeItems={activeItems} />
-          ) : null}
-        </Grid.Column>
-        <Grid.Column
+      <Grid.Row
           mobile={3}
           tablet={3}
           computer={2}
-          className="col-left"
+          stretched={true}
           id="cse-filter"
         >
           <CaseStudyFilters
@@ -60,7 +57,12 @@ export default function CaseStudyExplorerView(props) {
             activeFilters={activeFilters}
             setActiveFilters={setActiveFilters}
           />
-        </Grid.Column>
+        </Grid.Row>
+        <Grid.Row mobile={9} tablet={9} computer={10} stretched={true}>
+          {cases.length ? (
+            <CaseStudyMap items={cases} activeItems={activeItems} />
+          ) : null}
+        </Grid.Row>
       </Grid>
     </div>
   );
