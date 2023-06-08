@@ -7,24 +7,6 @@ import './style.less';
 const MeasureView = (props) => {
   const { content } = props;
 
-  // Add a class with the coresponding level from the table
-  const changeLevelsColor = () => {
-    const fieldItems = document.querySelectorAll('.field--name-field-level');
-    fieldItems.forEach((fieldItem) => {
-      const innerText = fieldItem.textContent;
-
-      if (innerText === 'High') {
-        fieldItem.classList.add('high');
-      }
-      if (innerText === 'Medium') {
-        fieldItem.classList.add('medium');
-      }
-      if (innerText === 'Low') {
-        fieldItem.classList.add('low');
-      }
-    });
-  };
-
   // Compare alphanumeric strings, used for sorting both lexicographically and numerically
   const compareAlphanumericStrings = (firstInput, secondInput) => {
     const regex = /(\d+)|(\D+)/g;
@@ -54,8 +36,23 @@ const MeasureView = (props) => {
     return firstInputArray.length - secondInputArray.length;
   };
 
-  // Rearrange rows from the table based on their level. (The rows with the level 'High' appear first, then 'Medium,' and then 'Low.')
-  const rearrangeRows = () => {
+  useEffect(() => {
+    // Add a class with the coresponding level from the table
+    const fieldItems = document.querySelectorAll('.field--name-field-level');
+    fieldItems.forEach((fieldItem) => {
+      const innerText = fieldItem.textContent;
+
+      if (innerText === 'High') {
+        fieldItem.classList.add('high');
+      }
+      if (innerText === 'Medium') {
+        fieldItem.classList.add('medium');
+      }
+      if (innerText === 'Low') {
+        fieldItem.classList.add('low');
+      }
+    });
+
     const table = document.querySelector(
       '#paragraph-nwrm_benefits_w_level tbody',
     );
@@ -63,6 +60,7 @@ const MeasureView = (props) => {
 
     let previousLevel = null;
 
+    // Rearrange rows from the table based on their level. (The rows with the level 'High' appear first, then 'Medium,' and then 'Low.')
     rows.sort((a, b) => {
       // Sort rows by levels
       const levelA = a.querySelector('.field--name-field-level').textContent;
@@ -98,11 +96,6 @@ const MeasureView = (props) => {
         previousLevel = level;
       }
     });
-  };
-
-  useEffect(() => {
-    changeLevelsColor();
-    rearrangeRows();
   }, []);
 
   return (
