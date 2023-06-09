@@ -81,11 +81,11 @@ const CaseStudyView = (props) => {
 
             <Section {...props} id="general" title="General" />
 
-            <div class="field--label-inline">
-              <div class="field__label">
+            <div className="field--label-inline">
+              <div className="field__label">
                 The in-depth description of the case study
               </div>
-              <div class="field__item">
+              <div className="field__item">
                 {content.items.map(
                   (item) =>
                     item['@type'] === 'File' && (
@@ -102,9 +102,9 @@ const CaseStudyView = (props) => {
             </div>
 
             {content.sources && (
-              <div class="field--label-above">
-                <div class="field__label">Sources</div>
-                <div class="field__item">
+              <div className="field--label-above">
+                <div className="field__label">Sources</div>
+                <div className="field__item">
                   <ul>
                     {content.sources.map((item) => (
                       <li key={item['@id']}>
@@ -117,11 +117,11 @@ const CaseStudyView = (props) => {
             )}
 
             {content.measures && (
-              <div class="field--label-above">
-                <div class="field__label">
+              <div className="field--label-above">
+                <div className="field__label">
                   NWRM(s) implemented in the case study
                 </div>
-                <div class="field__item">
+                <div className="field__item">
                   <ul>
                     {content.measures.map((item) => (
                       <li key={item['@id']}>

@@ -25,6 +25,7 @@ import installCustomCardsBlock from './components/Blocks/CustomCardsBlock';
 import installSearchBlock from './components/Blocks/SearchBlock';
 import installAppExtras from './components/theme/AppExtras';
 import installSlatePopup from './components/Blocks/SlatePopup';
+import installCaseStudyExplorer from './components/Blocks/CaseStudyExplorer';
 
 import customBlockTemplates from '@eeacms/volto-freshwater/components/Blocks/CustomBlockTemplates/customBlockTemplates';
 
@@ -277,6 +278,11 @@ const applyConfig = (config) => {
     breadcrumb,
   };
 
+  if (__SERVER__) {
+    const installExpressMiddleware = require('./express-middleware').default;
+    config = installExpressMiddleware(config);
+  }
+
   const final = [
     installEmbedContentBlock,
     installDashboardTabsBlock,
@@ -287,6 +293,7 @@ const applyConfig = (config) => {
     installArcgisBlock,
     installAppExtras,
     installSlatePopup,
+    installCaseStudyExplorer,
   ].reduce((acc, apply) => apply(acc), config);
 
   // console.log('final config', final);
