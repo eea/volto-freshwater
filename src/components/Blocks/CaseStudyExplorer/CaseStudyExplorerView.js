@@ -44,26 +44,36 @@ export default function CaseStudyExplorerView(props) {
 
   return (
     <div>
-      <Grid columns="12">
-        <Grid.Row
-          mobile={3}
-          tablet={3}
-          computer={2}
-          stretched={true}
-          id="cse-filter"
-        >
-          <CaseStudyFilters
-            filters={filters}
-            activeFilters={activeFilters}
-            setActiveFilters={setActiveFilters}
-          />
-        </Grid.Row>
-        <Grid.Row mobile={9} tablet={9} computer={10} stretched={true}>
-          {cases.length ? (
-            <CaseStudyMap items={cases} activeItems={activeItems} />
-          ) : null}
-        </Grid.Row>
-      </Grid>
+      <Grid.Row
+        // mobile={3}
+        // tablet={3}
+        // computer={2}
+        stretched={true}
+        id="cse-filter"
+      >
+        <CaseStudyFilters
+          filters={filters}
+          activeFilters={activeFilters}
+          setActiveFilters={setActiveFilters}
+        />
+      </Grid.Row>
+      <Grid.Row>
+        {cases.length ? (
+          <Grid columns="12">
+            <Grid.Column
+              mobile={8}
+              tablet={8}
+              computer={9}
+              // className="col-left"
+            >
+              <CaseStudyMap items={cases} activeItems={activeItems} />
+            </Grid.Column>
+            <Grid.Column mobile={4} tablet={4} computer={3}>
+              <div id="external-popup-overlay">popup HERE</div>
+            </Grid.Column>
+          </Grid>
+        ) : null}
+      </Grid.Row>
     </div>
   );
 }

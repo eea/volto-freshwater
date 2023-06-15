@@ -19,6 +19,13 @@ export default function InfoOverlay({
 
   const prevLayerId = usePrevious(layerId);
 
+  // React.useEffect(() => {
+  //   const externalPopup = document.getElementById('external-popup-overlay');
+  //   const popupOverlay = document.getElementById('popup-overlay');
+  //   debugger;
+  //   externalPopup.appendChild(popupOverlay);
+  // }, []);
+
   React.useEffect(() => {
     if (prevLayerId && layerId !== prevLayerId) {
       setShowTooltip(false);
@@ -37,13 +44,18 @@ export default function InfoOverlay({
     map.addOverlay(overlay);
 
     function handler(evt) {
-      const coordinate = evt.coordinate;
+      // const coordinate = evt.coordinate;
       const { pixel, target } = evt;
       const features = target.getFeaturesAtPixel(pixel);
       if (
         features.length // && !isCluster(features)
       ) {
-        overlay.setPosition(coordinate);
+        // overlay.setPosition(coordinate);
+        const externalPopup = document.getElementById('external-popup-overlay');
+        const popupOverlay = overlay.element; // document.getElementById('popup-overlay');
+        popupOverlay.style.display = 'block';
+        externalPopup.appendChild(popupOverlay);
+
         setShowTooltip(true);
       } else {
         // handle a click in an overlay popup

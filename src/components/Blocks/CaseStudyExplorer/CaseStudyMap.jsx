@@ -44,7 +44,7 @@ export default function CaseStudyMap(props) {
       new ol.source.TileWMS({
         url: 'https://gisco-services.ec.europa.eu/maps/service',
         params: {
-          // LAYERS: 'OSMBlossomComposite', # OSMCartoComposite
+          // LAYERS: 'OSMBlossomComposite', OSMCartoComposite, OSMPositronComposite
           LAYERS: 'OSMPositronComposite',
           TILED: true,
         },
@@ -54,6 +54,7 @@ export default function CaseStudyMap(props) {
     ]);
   }, []);
 
+  console.log('tileWMSSources', tileWMSSources);
   return features.length > 0 ? (
     <Map
       view={{
@@ -68,7 +69,7 @@ export default function CaseStudyMap(props) {
         <InfoOverlay
           selectedFeature={selectedCase}
           onFeatureSelect={onSelectedCase}
-          layerId={tileWMSSources?.[0]}
+          layerId={tileWMSSources[0]}
         />
         <FeatureInteraction onFeatureSelect={onSelectedCase} />
         <Layer.Tile source={tileWMSSources[0]} zIndex={0} />

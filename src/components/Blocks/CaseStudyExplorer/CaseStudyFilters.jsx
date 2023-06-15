@@ -1,44 +1,43 @@
-export default function CaseStudyFilters(props) {
-  const { filters, activeFilters, setActiveFilters } = props;
-  const showInputs = (event, elementId) => {
-    var inputsWrapper = document.getElementById(elementId);
+import React from 'react';
 
-    if (!inputsWrapper) return;
+const CaseStudyFilter = (props) => {
+  const {
+    filterTitle,
+    filters,
+    activeFilters,
+    setActiveFilters,
+    filterName,
+  } = props;
 
-    var width = event.target.clientWidth;
-    var display = inputsWrapper.style.display;
-
-    if (display === 'block') {
-      inputsWrapper.style.display = 'none';
-    } else {
-      inputsWrapper.style.display = 'block';
-      inputsWrapper.style.width = width + 'px';
-    }
+  const showInputs = (event) => {
+    event.currentTarget.parentElement.classList.add('active');
+    // debugger;
   };
 
   return (
-    <>
-      <div className="filter-wrapper">
-        <button
-          onClick={(e) => showInputs(e, 'type-filter')}
-          handleKeyDown={() => {}}
-        >
-          Light or In-depth
-        </button>
-        <div className="filter-inputs-wrapper" id="type-filter">
-          {Object.entries(filters?.nwrm_type || {}).map(
+    <div className="filter-wrapper">
+      <button
+        className="ui basic button facet-btn"
+        onClick={(e) => showInputs(e)}
+        handleKeyDown={() => {}}
+      >
+        <span>{filterTitle}</span>
+        <i aria-hidden="true" className="icon ri-arrow-down-s-line"></i>
+      </button>
+      <div className="filter-inputs-wrapper">
+        <div className="filter-inputs">
+          {Object.entries(filters?.[filterName] || {}).map(
             ([value, label], index) => (
               <div className="filter-input" key={index}>
-                <span>{label}</span>
                 <input
                   value={value}
                   type="checkbox"
                   onChange={(e) => {
                     const temp = JSON.parse(JSON.stringify(activeFilters));
                     if (e.target.checked) {
-                      temp.nwrm_type.push(e.target.value);
+                      temp[filterName].push(e.target.value);
                     } else {
-                      temp.nwrm_type = temp.nwrm_type.filter((value) => {
+                      temp[filterName] = temp[filterName].filter((value) => {
                         if (value !== e.target.value) return value;
                         return null;
                       });
@@ -46,83 +45,56 @@ export default function CaseStudyFilters(props) {
                     setActiveFilters(temp);
                   }}
                 />
+                <span>{label}</span>
               </div>
             ),
           )}
         </div>
       </div>
-      <div className="filter-wrapper">
-        <button
-          onClick={(e) => showInputs(e, 'nwrms-impl-filter')}
-          handleKeyDown={() => {}}
-        >
-          NWRMs implemented
-        </button>
-        <div>
-          <div className="filter-inputs-wrapper" id="nwrms-impl-filter">
-            {Object.entries(filters?.nwrms_implemented || {}).map(
-              ([value, label], index) => (
-                <div className="filter-input" key={index}>
-                  <span>{label}</span>
-                  <input
-                    value={value}
-                    type="checkbox"
-                    onChange={(e) => {
-                      const temp = JSON.parse(JSON.stringify(activeFilters));
-                      if (e.target.checked) {
-                        temp.nwrms_implemented.push(e.target.value);
-                      } else {
-                        temp.nwrms_implemented = temp.nwrms_implemented.filter(
-                          (value) => {
-                            if (value !== e.target.value) return value;
-                            return null;
-                          },
-                        );
-                      }
-                      setActiveFilters(temp);
-                    }}
-                  />
-                </div>
-              ),
-            )}
-          </div>
-        </div>
-      </div>
-      <div className="filter-wrapper">
-        <button
-          onClick={(e) => showInputs(e, 'sectors-filter')}
-          handleKeyDown={() => {}}
-        >
-          Sectors
-        </button>
-        <div>
-          <div className="filter-inputs-wrapper" id="sectors-filter">
-            {Object.entries(filters?.sectors || {}).map(
-              ([value, label], index) => (
-                <div className="filter-input" key={index}>
-                  <span>{label}</span>
-                  <input
-                    value={value}
-                    type="checkbox"
-                    onChange={(e) => {
-                      const temp = JSON.parse(JSON.stringify(activeFilters));
-                      if (e.target.checked) {
-                        temp.sectors.push(e.target.value);
-                      } else {
-                        temp.sectors = temp.sectors.filter((value) => {
-                          if (value !== e.target.value) return value;
-                          return null;
-                        });
-                      }
-                      setActiveFilters(temp);
-                    }}
-                  />
-                </div>
-              ),
-            )}
-          </div>
-        </div>
-      </div>
+    </div>
+  );
+};
+
+export default function CaseStudyFilters(props) {
+  const { filters, activeFilters, setActiveFilters } = props;
+
+  React.useEffect(() => {
+    window.addEventListener('click', (event) => {
+      const filters = document.getElementsByClassName('filter-wrapper');
+
+      for (let i = 0; i < filters.length; i++) {
+        if (!filters[i].contains(event.target)) {
+          filters[i].classList.remove('active');
+        }
+      }
+    });
+  }, []);
+
+  return (
+    <>
+      <CaseStudyFilter
+        filterTitle="Light or In-depth"
+        filterName="nwrm_type"
+        filters={filters}
+        activeFilters={activeFilters}
+        setActiveFilters={setActiveFilters}
+      />
+
+      <CaseStudyFilter
+        filterTitle="NWRMs implemented"
+        filterName="nwrms_implemented"
+        filters={filters}
+        activeFilters={activeFilters}
+        setActiveFilters={setActiveFilters}
+      />
+
+      <CaseStudyFilter
+        filterTitle="Sectors"
+        filterName="sectors"
+        filters={filters}
+        activeFilters={activeFilters}
+        setActiveFilters={setActiveFilters}
+      />
     </>
   );
 }
