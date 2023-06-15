@@ -4,9 +4,9 @@ import { openlayers as ol } from '@eeacms/volto-openlayers-map';
 import FeatureDisplay from './FeatureDisplay';
 import { usePrevious } from '@plone/volto/helpers/Utils/usePrevious';
 
-// const isCluster = (features) => {
-//   return features.length > 1 ? true : features[0].values_?.features?.length > 1;
-// };
+const isCluster = (features) => {
+  return features.length > 1 ? true : features[0].values_?.features?.length > 1;
+};
 
 export default function InfoOverlay({
   selectedFeature,
@@ -18,13 +18,6 @@ export default function InfoOverlay({
   const [showTooltip, setShowTooltip] = React.useState();
 
   const prevLayerId = usePrevious(layerId);
-
-  // React.useEffect(() => {
-  //   const externalPopup = document.getElementById('external-popup-overlay');
-  //   const popupOverlay = document.getElementById('popup-overlay');
-  //   debugger;
-  //   externalPopup.appendChild(popupOverlay);
-  // }, []);
 
   React.useEffect(() => {
     if (prevLayerId && layerId !== prevLayerId) {
@@ -47,13 +40,16 @@ export default function InfoOverlay({
       // const coordinate = evt.coordinate;
       const { pixel, target } = evt;
       const features = target.getFeaturesAtPixel(pixel);
+      const externalPopup = document.getElementById('external-popup-overlay');
+      const popupOverlay = overlay.element; // document.getElementById('popup-overlay');
+
       if (
         features.length // && !isCluster(features)
       ) {
         // overlay.setPosition(coordinate);
-        const externalPopup = document.getElementById('external-popup-overlay');
-        const popupOverlay = overlay.element; // document.getElementById('popup-overlay');
-        popupOverlay.style.display = 'block';
+        if (!isCluster(features)) {
+          popupOverlay.style.display = 'block';
+        }
         externalPopup.appendChild(popupOverlay);
 
         setShowTooltip(true);
@@ -61,6 +57,7 @@ export default function InfoOverlay({
         // handle a click in an overlay popup
         if (evt.originalEvent.target.tagName === 'A') return;
         setShowTooltip(false);
+        popupOverlay.style.display = 'none';
         onFeatureSelect(null);
       }
     }

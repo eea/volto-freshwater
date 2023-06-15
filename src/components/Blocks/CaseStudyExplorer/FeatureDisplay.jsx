@@ -3,15 +3,19 @@ import React from 'react';
 export default function FeatureDisplay({ feature }) {
   return feature ? (
     <div id="csepopup">
+      <h3>
+        <strong>
+          <a target="_blank" rel="noreferrer" href={feature.path}>
+            {feature.title}
+          </a>
+        </strong>
+      </h3>
       <div>
-        <strong>{feature.title}</strong>
-      </div>
-      <div>
-        <span>Light or In-depth: </span>
+        <h4>Light or In-depth</h4>
         <span>{feature.nwrm_type}</span>
       </div>
       <div>
-        <span>NWRMs implemented: </span>
+        <h4>NWRMs implemented</h4>
         <ul>
           {feature.nwrms_implemented.map((item, index) => {
             return (
@@ -25,8 +29,14 @@ export default function FeatureDisplay({ feature }) {
         </ul>
       </div>
       <div>
-        <span>Sectors: </span>
-        <span>{feature.sectors.join(', ')}</span>
+        <h4>Sectors </h4>
+        <ul>
+          {feature.sectors.map((item, index) => {
+            return <li key={index}>{item}</li>;
+          })}
+        </ul>
+
+        {/* <span>{feature.sectors.join(', ')}</span> */}
       </div>
       {/* <span
         dangerouslySetInnerHTML={{

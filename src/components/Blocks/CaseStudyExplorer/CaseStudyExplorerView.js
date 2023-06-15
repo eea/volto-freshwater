@@ -63,13 +63,13 @@ export default function CaseStudyExplorerView(props) {
             <Grid.Column
               mobile={8}
               tablet={8}
-              computer={9}
+              computer={8}
               // className="col-left"
             >
               <CaseStudyMap items={cases} activeItems={activeItems} />
             </Grid.Column>
-            <Grid.Column mobile={4} tablet={4} computer={3}>
-              <div id="external-popup-overlay">popup HERE</div>
+            <Grid.Column mobile={4} tablet={4} computer={4}>
+              <div id="external-popup-overlay"></div>
             </Grid.Column>
           </Grid>
         ) : null}

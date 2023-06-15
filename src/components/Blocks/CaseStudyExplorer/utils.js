@@ -19,6 +19,7 @@ export function getFeatures(cases) {
         nwrms_implemented: c.properties.measures,
         sectors: c.properties.sectors,
         index: index,
+        path: c.properties.path,
       },
       false,
     );

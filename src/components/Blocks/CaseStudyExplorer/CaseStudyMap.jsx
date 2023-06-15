@@ -18,7 +18,18 @@ export default function CaseStudyMap(props) {
 
   const features = getFeatures(items); //console.log('Features list', features);
 
-  const [tileWMSSources, setTileWMSSources] = React.useState([]);
+  const [tileWMSSources, setTileWMSSources] = React.useState([
+    new ol.source.TileWMS({
+      url: 'https://gisco-services.ec.europa.eu/maps/service',
+      params: {
+        // LAYERS: 'OSMBlossomComposite', OSMCartoComposite, OSMPositronComposite
+        LAYERS: 'OSMPositronComposite',
+        TILED: true,
+      },
+      serverType: 'geoserver',
+      transition: 0,
+    }),
+  ]);
   const [pointsSource] = React.useState(
     new ol.source.Vector({
       features,
@@ -27,7 +38,7 @@ export default function CaseStudyMap(props) {
 
   const [clusterSource] = React.useState(
     new ol.source.Cluster({
-      distance: 0,
+      distance: 15,
       source: pointsSource,
     }),
   );
@@ -39,22 +50,6 @@ export default function CaseStudyMap(props) {
     }
   }, [activeItems, pointsSource]);
 
-  React.useEffect(() => {
-    setTileWMSSources([
-      new ol.source.TileWMS({
-        url: 'https://gisco-services.ec.europa.eu/maps/service',
-        params: {
-          // LAYERS: 'OSMBlossomComposite', OSMCartoComposite, OSMPositronComposite
-          LAYERS: 'OSMPositronComposite',
-          TILED: true,
-        },
-        serverType: 'geoserver',
-        transition: 0,
-      }),
-    ]);
-  }, []);
-
-  console.log('tileWMSSources', tileWMSSources);
   return features.length > 0 ? (
     <Map
       view={{

@@ -21,17 +21,50 @@ const CaseStudyFilter = (props) => {
         onClick={(e) => showInputs(e)}
         handleKeyDown={() => {}}
       >
-        <span>{filterTitle}</span>
-        <i aria-hidden="true" className="icon ri-arrow-down-s-line"></i>
+        <span>
+          {filterTitle}
+          <i aria-hidden="true" className="icon angle down"></i>
+        </span>
       </button>
       <div className="filter-inputs-wrapper">
+        {Object.entries(filters?.[filterName] || {}).length > 7 ? (
+          <input
+            type="text"
+            className="filterInputText"
+            onKeyUp={(e) => {
+              const filterValue = e.currentTarget.value.toUpperCase();
+              const inputs = e.currentTarget.nextSibling.children;
+              // debugger;
+
+              for (let i = 0; i < inputs.length; i++) {
+                let inputValue = inputs[i].textContent || inputs[i].innerText;
+                if (inputValue.toUpperCase().indexOf(filterValue) > -1) {
+                  inputs[i].style.display = 'block';
+                } else {
+                  inputs[i].style.display = 'none';
+                }
+              }
+            }}
+            placeholder="Quick search"
+            title="Type in a name"
+          />
+        ) : (
+          ''
+        )}
+
         <div className="filter-inputs">
-          {Object.entries(filters?.[filterName] || {}).map(
-            ([value, label], index) => (
-              <div className="filter-input" key={index}>
+          {Object.entries(filters?.[filterName] || {})
+            .sort((item1, item2) => item1[1].localeCompare(item2[1]))
+            .map(([value, label], index) => (
+              <label
+                for={label + index}
+                className="filter-input"
+                key={index}
+              >
                 <input
                   value={value}
                   type="checkbox"
+                  id={label + index}
                   onChange={(e) => {
                     const temp = JSON.parse(JSON.stringify(activeFilters));
                     if (e.target.checked) {
@@ -46,9 +79,8 @@ const CaseStudyFilter = (props) => {
                   }}
                 />
                 <span>{label}</span>
-              </div>
-            ),
-          )}
+              </label>
+            ))}
         </div>
       </div>
     </div>
