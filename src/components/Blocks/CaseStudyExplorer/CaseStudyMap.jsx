@@ -38,7 +38,7 @@ export default function CaseStudyMap(props) {
 
   const [clusterSource] = React.useState(
     new ol.source.Cluster({
-      distance: 15,
+      distance: 19,
       source: pointsSource,
     }),
   );
@@ -76,18 +76,18 @@ export default function CaseStudyMap(props) {
 
 function clusterStyle(feature) {
   const size = feature.get('features').length;
-  //const size = feature.get('casePoints').length;
   let style = styleCache[size];
 
   if (!style) {
     style = new ol.style.Style({
       image: new ol.style.Circle({
-        radius: 10 + Math.min(Math.floor(size / 3), 10),
+        radius: 12 + Math.min(Math.floor(size / 3), 10),
         stroke: new ol.style.Stroke({
           color: '#fff',
         }),
         fill: new ol.style.Fill({
-          color: '#0099bb',
+          // 309ebc blue 3 + green 3 mix
+          color: '#309ebc', 
         }),
       }),
       text: new ol.style.Text({
@@ -101,16 +101,16 @@ function clusterStyle(feature) {
   }
 
   if (size === 1) {
-    let color = '';
+    let color = feature.values_.features[0].values_['color'];
     // let imgUrl = '';
 
-    if (feature.values_.features[0].values_['nwrm_type'] === 'Light') {
-      color = '#0083E0';
-      // imgUrl = iconLight;
-    } else {
-      color = '#50B0A4';
-      // imgUrl = iconDepth;
-    }
+    // if (feature.values_.features[0].values_['nwrm_type'] === 'Light') {
+    //   color = '#50B0A4'; // green-3 eea color palette
+    //   // imgUrl = iconLight;
+    // } else {
+    //   // imgUrl = iconDepth;
+    //   color = '#0083E0'; // blue-3 eea color palette
+    // }
 
     // return new ol.style.Style({
     //   image: new ol.style.Icon({
@@ -118,12 +118,13 @@ function clusterStyle(feature) {
     //   }),
     return new ol.style.Style({
       image: new ol.style.Circle({
-        radius: 7,
-        stroke: new ol.style.Stroke({
+        radius: 6,
+        fill: new ol.style.Fill({
           color: '#fff',
         }),
-        fill: new ol.style.Fill({
+        stroke: new ol.style.Stroke({
           color: color,
+          width: 6,
         }),
       }),
     });

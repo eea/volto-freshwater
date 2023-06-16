@@ -20,6 +20,7 @@ export function getFeatures(cases) {
         sectors: c.properties.sectors,
         index: index,
         path: c.properties.path,
+        color: c.properties.nwrm_type === 'Light' ? '#50B0A4' : '#0083E0',
       },
       false,
     );
