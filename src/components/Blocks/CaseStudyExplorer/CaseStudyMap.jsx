@@ -66,7 +66,7 @@ export default function CaseStudyMap(props) {
           onFeatureSelect={onSelectedCase}
           layerId={tileWMSSources[0]}
         />
-        <FeatureInteraction onFeatureSelect={onSelectedCase} />
+        <FeatureInteraction onFeatureSelect={onSelectedCase}/>
         <Layer.Tile source={tileWMSSources[0]} zIndex={0} />
         <Layer.Vector style={clusterStyle} source={clusterSource} zIndex={1} />
       </Layers>
