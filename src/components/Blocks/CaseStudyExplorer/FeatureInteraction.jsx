@@ -6,12 +6,15 @@ const useStyles = () => {
   const selected = React.useMemo(
     () =>
       new ol.style.Style({
-        fill: new ol.style.Fill({
-          color: '#cccccc',
-        }),
-        stroke: new ol.style.Stroke({
-          color: 'rgba(255, 0, 0, 0.7)',
-          width: 2,
+        image: new ol.style.Circle({
+          radius: 12,
+          fill: new ol.style.Fill({
+            color: '#ccc',
+          }),
+          stroke: new ol.style.Stroke({
+            color: '#fff',
+            width: 0,
+          }),
         }),
       }),
     [],
@@ -19,8 +22,10 @@ const useStyles = () => {
 
   const selectStyle = React.useCallback(
     (feature) => {
-      const color = feature.get('COLOR') || '#eeeeee';
-      selected.getFill().setColor(color);
+      // const color = feature.values_.features[0].values_['color'] || '#ccc';
+      const color = '#309ebc';
+      // console.log(color);
+      selected.image_.getFill().setColor(color);
       return selected;
     },
     [selected],
@@ -56,9 +61,10 @@ export default function FeatureInteraction({ onFeatureSelect }) {
           const selectedFeature = subfeatures[0].values_;
           onFeatureSelect(selectedFeature);
         } else {
-          // TODO find the sweet spot for the buffer value?
-          const extentBuffer = subfeatures.length < 5 ? 1000 : 50000;
           const extent = getExtentOfFeatures(subfeatures);
+          let extentBuffer =
+            (extent[3] - extent[1] + extent[2] - extent[0]) / 4;
+          extentBuffer = extentBuffer < 500 ? 500 : extentBuffer;
           const paddedExtent = ol.extent.buffer(extent, extentBuffer);
           map.getView().fit(paddedExtent, { ...map.getSize(), duration: 1000 });
         }
