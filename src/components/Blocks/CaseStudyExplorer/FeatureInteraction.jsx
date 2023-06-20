@@ -24,7 +24,7 @@ const useStyles = () => {
     (feature) => {
       // const color = feature.values_.features[0].values_['color'] || '#ccc';
       const color = '#309ebc';
-      console.log(color);
+      // console.log(color);
       selected.image_.getFill().setColor(color);
       return selected;
     },

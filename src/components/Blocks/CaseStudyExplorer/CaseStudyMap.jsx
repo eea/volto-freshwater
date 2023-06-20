@@ -18,7 +18,7 @@ export default function CaseStudyMap(props) {
 
   const features = getFeatures(items); //console.log('Features list', features);
 
-  const [tileWMSSources, setTileWMSSources] = React.useState([
+  const [tileWMSSources] = React.useState([
     new ol.source.TileWMS({
       url: 'https://gisco-services.ec.europa.eu/maps/service',
       params: {
@@ -66,7 +66,7 @@ export default function CaseStudyMap(props) {
           onFeatureSelect={onSelectedCase}
           layerId={tileWMSSources[0]}
         />
-        <FeatureInteraction onFeatureSelect={onSelectedCase}/>
+        <FeatureInteraction onFeatureSelect={onSelectedCase} />
         <Layer.Tile source={tileWMSSources[0]} zIndex={0} />
         <Layer.Vector style={clusterStyle} source={clusterSource} zIndex={1} />
       </Layers>
@@ -87,7 +87,7 @@ function clusterStyle(feature) {
         }),
         fill: new ol.style.Fill({
           // 309ebc blue 3 + green 3 mix
-          color: '#309ebc', 
+          color: '#309ebc',
         }),
       }),
       text: new ol.style.Text({
