@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Map, Layer, Layers } from '@eeacms/volto-openlayers-map/api';
+import { Map, Layer, Layers, Controls } from '@eeacms/volto-openlayers-map/api';
 import { openlayers as ol } from '@eeacms/volto-openlayers-map';
 
 import InfoOverlay from './InfoOverlay';
@@ -58,8 +58,9 @@ export default function CaseStudyMap(props) {
         zoom: 4,
       }}
       pixelRatio={1}
-      controls={ol.control.defaults({ attribution: false })}
+      // controls={ol.control.defaults({ attribution: false })}
     >
+      <Controls attribution={false} />
       <Layers>
         <InfoOverlay
           selectedFeature={selectedCase}
