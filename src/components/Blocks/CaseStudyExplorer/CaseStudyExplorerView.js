@@ -53,7 +53,7 @@ export default function CaseStudyExplorerView(props) {
     }
 
     setActiveItems(activeItems);
-  }, [activeFilters, cases]);
+  }, [caseStudiesIds, activeFilters, cases]);
 
   if (__SERVER__) return '';
 
