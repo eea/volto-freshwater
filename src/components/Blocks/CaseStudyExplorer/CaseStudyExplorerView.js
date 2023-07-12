@@ -13,7 +13,15 @@ import './styles.less';
 const cases_url = '@@case-studies-map.arcgis.json';
 
 export default function CaseStudyExplorerView(props) {
-  const cases = useCases(addAppURL(cases_url));
+  let cases = useCases(addAppURL(cases_url));
+  const { caseStudies } = props; // case studies from measure view
+  const caseStudiesIds =
+    caseStudies &&
+    caseStudies.map((item) => {
+      return item['@id'].split('/').pop();
+    });
+
+  const hideFilters = caseStudiesIds ? true : false;
 
   const [activeFilters, setActiveFilters] = React.useState({
     nwrm_type: [],
@@ -36,7 +44,14 @@ export default function CaseStudyExplorerView(props) {
   ]);
 
   React.useEffect(() => {
-    const activeItems = filterCases(cases, activeFilters);
+    let activeItems = filterCases(cases, activeFilters);
+
+    if (caseStudiesIds) {
+      activeItems = activeItems.filter((item) => {
+        return caseStudiesIds.includes(item.properties.url.split('/').pop());
+      });
+    }
+
     setActiveItems(activeItems);
   }, [activeFilters, cases]);
 
@@ -51,11 +66,13 @@ export default function CaseStudyExplorerView(props) {
         stretched={true}
         id="cse-filter"
       >
-        <CaseStudyFilters
-          filters={filters}
-          activeFilters={activeFilters}
-          setActiveFilters={setActiveFilters}
-        />
+        {hideFilters ? null : (
+          <CaseStudyFilters
+            filters={filters}
+            activeFilters={activeFilters}
+            setActiveFilters={setActiveFilters}
+          />
+        )}
       </Grid.Row>
       <Grid.Row>
         {cases.length ? (
