@@ -39,7 +39,6 @@ export default function CaseStudyExplorerView(props) {
   ]);
 
   React.useEffect(() => {
-    console.log('remder');
     let activeItems = filterCases(cases, activeFilters, caseStudiesIds);
 
     setActiveItems(activeItems);

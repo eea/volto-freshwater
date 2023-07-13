@@ -166,7 +166,9 @@ const MeasureView = (props) => {
 
                     <div className="field--label-inline">
                       <div className="field__label">Sector</div>
-                      <div className="field__item">{content.measure_sector}</div>
+                      <div className="field__item">
+                        {content.measure_sector}
+                      </div>
                     </div>
 
                     {content.other_sector && (
@@ -174,7 +176,9 @@ const MeasureView = (props) => {
                         <br />
                         <div className="field--label-inline">
                           <div className="field__label">Other sector(s)</div>
-                          <div className="field__item">{content.other_sector}</div>
+                          <div className="field__item">
+                            {content.other_sector}
+                          </div>
                         </div>
                       </>
                     )}
