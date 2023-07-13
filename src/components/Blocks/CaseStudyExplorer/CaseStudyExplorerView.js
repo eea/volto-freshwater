@@ -14,14 +14,9 @@ const cases_url = '@@case-studies-map.arcgis.json';
 
 export default function CaseStudyExplorerView(props) {
   let cases = useCases(addAppURL(cases_url));
-  const { caseStudies } = props; // case studies from measure view
-  const caseStudiesIds =
-    caseStudies &&
-    caseStudies.map((item) => {
-      return item['@id'].split('/').pop();
-    });
-
+  const { caseStudiesIds } = props; // case studies from measure view
   const hideFilters = caseStudiesIds ? true : false;
+  const mapColumnSize = hideFilters ? 12 : 8;
 
   const [activeFilters, setActiveFilters] = React.useState({
     nwrm_type: [],
@@ -44,13 +39,8 @@ export default function CaseStudyExplorerView(props) {
   ]);
 
   React.useEffect(() => {
-    let activeItems = filterCases(cases, activeFilters);
-
-    if (caseStudiesIds) {
-      activeItems = activeItems.filter((item) => {
-        return caseStudiesIds.includes(item.properties.url.split('/').pop());
-      });
-    }
+    console.log('remder');
+    let activeItems = filterCases(cases, activeFilters, caseStudiesIds);
 
     setActiveItems(activeItems);
   }, [caseStudiesIds, activeFilters, cases]);
@@ -76,18 +66,23 @@ export default function CaseStudyExplorerView(props) {
       </Grid.Row>
       <Grid.Row>
         {cases.length ? (
-          <Grid columns="12">
+          <Grid columns={12}>
             <Grid.Column
-              mobile={8}
-              tablet={8}
-              computer={8}
-              // className="col-left"
+              mobile={mapColumnSize}
+              tablet={mapColumnSize}
+              computer={mapColumnSize}
             >
-              <CaseStudyMap items={cases} activeItems={activeItems} />
+              <CaseStudyMap
+                items={cases}
+                activeItems={activeItems}
+                hideFilters={hideFilters}
+              />
             </Grid.Column>
-            <Grid.Column mobile={4} tablet={4} computer={4}>
-              <div id="external-popup-overlay"></div>
-            </Grid.Column>
+            {hideFilters ? null : (
+              <Grid.Column mobile={4} tablet={4} computer={4}>
+                <div id="external-popup-overlay"></div>
+              </Grid.Column>
+            )}
           </Grid>
         ) : null}
       </Grid.Row>

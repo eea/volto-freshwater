@@ -29,11 +29,14 @@ export function getFeatures(cases) {
   });
 }
 
-export function filterCases(cases, activeFilters) {
+export function filterCases(cases, activeFilters, caseStudiesIds) {
   const data = cases.filter((_case) => {
     let flag_type = false;
     let flag_implemented = false;
     let flag_sectors = false;
+    let flag_case = caseStudiesIds
+      ? caseStudiesIds.includes(_case.properties.url.split('/').pop())
+      : true;
 
     if (!activeFilters.nwrm_type.length) {
       flag_type = true;
@@ -67,7 +70,9 @@ export function filterCases(cases, activeFilters) {
       });
     }
 
-    return flag_type && flag_implemented && flag_sectors ? _case : false;
+    return flag_case && flag_type && flag_implemented && flag_sectors
+      ? _case
+      : false;
   });
 
   return data;
