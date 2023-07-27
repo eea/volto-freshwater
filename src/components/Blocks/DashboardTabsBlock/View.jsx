@@ -27,7 +27,7 @@ const DashboardTabsBlockView = (props) => {
   const {
     blocks: { blocksConfig },
   } = config;
-  const modalHash = selectedItem?.source[0].getId;
+  const modalHash = selectedItem?.source?.[0]?.getId;
 
   const TableauBlockView = blocksConfig.tableau_block.view;
   const MapBlockView = blocksConfig.maps.view;
@@ -136,7 +136,7 @@ const DashboardTabsBlockView = (props) => {
                       setOpen(true);
                       setSelectedItem(tab);
                       history.push({
-                        hash: tab?.source[0].getId,
+                        hash: tab?.source?.[0]?.getId,
                       });
                     }}
                   >

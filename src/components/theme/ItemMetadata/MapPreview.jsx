@@ -11,7 +11,7 @@ import {
 
 const MapPreview = (props) => {
   const { item, map_url, tableau_url, item_view } = props;
-  const itemID = item?.source?.[0].getId || item?.id;
+  const itemID = item?.source?.[0]?.getId || item?.id;
   const modalHash = itemID + '_preview';
   const [open, setOpen] = React.useState(false);
   const {
