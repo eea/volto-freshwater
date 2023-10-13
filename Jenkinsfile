@@ -115,21 +115,21 @@ pipeline {
     }
 
     // stage('Integration tests') {
-      when {
-        anyOf {
-          allOf {
-            not { environment name: 'CHANGE_ID', value: '' }
-            environment name: 'CHANGE_TARGET', value: 'develop'
-          }
-          allOf {
-            environment name: 'CHANGE_ID', value: ''
-            anyOf {
-              not { changelog '.*^Automated release [0-9\\.]+$' }
-              branch 'master'
-            }
-          }
-        }
-      }
+    //   when {
+    //     anyOf {
+    //       allOf {
+    //         not { environment name: 'CHANGE_ID', value: '' }
+    //         environment name: 'CHANGE_TARGET', value: 'develop'
+    //       }
+    //       allOf {
+    //         environment name: 'CHANGE_ID', value: ''
+    //         anyOf {
+    //           not { changelog '.*^Automated release [0-9\\.]+$' }
+    //           branch 'master'
+    //         }
+    //       }
+    //     }
+    //   }
     //   steps {
     //     parallel(
 
