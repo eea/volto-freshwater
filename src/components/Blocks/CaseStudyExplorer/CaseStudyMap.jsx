@@ -13,7 +13,7 @@ import { getFeatures } from './utils';
 const styleCache = {};
 
 export default function CaseStudyMap(props) {
-  const { items, activeItems } = props;
+  const { items, activeItems, hideFilters } = props;
   const [selectedCase, onSelectedCase] = React.useState();
 
   const features = getFeatures(items); //console.log('Features list', features);
@@ -66,8 +66,12 @@ export default function CaseStudyMap(props) {
           selectedFeature={selectedCase}
           onFeatureSelect={onSelectedCase}
           layerId={tileWMSSources[0]}
+          hideFilters={hideFilters}
         />
-        <FeatureInteraction onFeatureSelect={onSelectedCase} />
+        <FeatureInteraction
+          onFeatureSelect={onSelectedCase}
+          hideFilters={hideFilters}
+        />
         <Layer.Tile source={tileWMSSources[0]} zIndex={0} />
         <Layer.Vector style={clusterStyle} source={clusterSource} zIndex={1} />
       </Layers>

@@ -8,7 +8,7 @@ import config from '@plone/volto/registry';
 
 const TableauFullscreen = (props) => {
   const tableau_url = props.data.url;
-  const modalHash = props?.item.getId + '_preview';
+  const modalHash = props?.item?.getId + '_preview';
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
   const location = useLocation();
@@ -42,7 +42,7 @@ const TableauFullscreen = (props) => {
             setOpen(true);
             if (props.item) {
               history.push({
-                hash: props.item.getId + '_preview',
+                hash: props.item?.getId + '_preview',
               });
             }
           }}

@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
+import { Grid } from 'semantic-ui-react';
 import { BodyClass } from '@plone/volto/helpers';
-import { ItemMetadataSnippet } from '@eeacms/volto-freshwater/components';
+import {
+  ItemMetadataSnippet,
+  CaseStudyExplorer,
+} from '@eeacms/volto-freshwater/components';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import './style.less';
 
@@ -111,7 +115,7 @@ const MeasureView = (props) => {
 
             <div>
               <div
-                class="field__item"
+                className="field__item"
                 dangerouslySetInnerHTML={{
                   __html: content.measure_summary.data,
                 }}
@@ -119,14 +123,14 @@ const MeasureView = (props) => {
             </div>
 
             <br />
-            <div class="fullwidthZ">
-              <div class="images-container">
-                <div class="image-flexbox">
+            <div>
+              <div className="images-container">
+                <div className="image-flexbox">
                   <div>
                     {content.items.map(
                       (item) =>
                         item['@type'] === 'Image' && (
-                          <div class="image-wrapper">
+                          <div className="image-wrapper">
                             <div>
                               <a href={item['@id'] + '/@@images/image'}>
                                 <LazyLoadImage
@@ -137,7 +141,7 @@ const MeasureView = (props) => {
                               </a>
                             </div>
                             <div>
-                              <div class="image-title">{item.title}</div>
+                              <div className="image-title">{item.title}</div>
                               {item.description.includes('http') ? (
                                 <div>
                                   <a href={item.description.split(': ')[1]}>
@@ -145,7 +149,7 @@ const MeasureView = (props) => {
                                   </a>
                                 </div>
                               ) : (
-                                <div class="image-source">
+                                <div className="image-source">
                                   Source: {item.description.split(': ')[1]}
                                 </div>
                               )}
@@ -155,30 +159,34 @@ const MeasureView = (props) => {
                     )}
                   </div>
                   <div>
-                    <div class="field--label-inline">
-                      <div class="field__label">NWRM code</div>
-                      <div class="field__item">{content.measure_code}</div>
+                    <div className="field--label-inline">
+                      <div className="field__label">NWRM code</div>
+                      <div className="field__item">{content.measure_code}</div>
                     </div>
 
-                    <div class="field--label-inline">
-                      <div class="field__label">Sector</div>
-                      <div class="field__item">{content.measure_sector}</div>
+                    <div className="field--label-inline">
+                      <div className="field__label">Sector</div>
+                      <div className="field__item">
+                        {content.measure_sector}
+                      </div>
                     </div>
 
                     {content.other_sector && (
                       <>
                         <br />
-                        <div class="field--label-inline">
-                          <div class="field__label">Other sector(s)</div>
-                          <div class="field__item">{content.other_sector}</div>
+                        <div className="field--label-inline">
+                          <div className="field__label">Other sector(s)</div>
+                          <div className="field__item">
+                            {content.other_sector}
+                          </div>
                         </div>
                       </>
                     )}
 
                     <div>
-                      <div class="field--label-inline">
-                        <div class="field__label">Complete description</div>
-                        <div class="field__item">
+                      <div className="field--label-inline">
+                        <div className="field__label">Complete description</div>
+                        <div className="field__item">
                           {content.items.map(
                             (item) =>
                               item['@type'] === 'File' && (
@@ -205,7 +213,7 @@ const MeasureView = (props) => {
             <div>
               <h3>Benefits</h3>
               <div
-                class="field__item"
+                className="field__item"
                 dangerouslySetInnerHTML={{
                   __html: content.possible_benefits.data,
                 }}
@@ -213,20 +221,53 @@ const MeasureView = (props) => {
             </div>
 
             <br />
-            {content.case_studies && (
-              <div>
-                <h3>Case studies</h3>
-                <div class="field__item">
-                  <ul>
-                    {content.case_studies.map((item) => (
-                      <li key={item['@id']}>
-                        <a href={item['@id']}>{item.title}</a>
-                      </li>
-                    ))}{' '}
-                  </ul>
+            <h3>Related case studies</h3>
+            <div className="full-width case-study-wrapper">
+              <div className="ui container">
+                <div>
+                  <Grid.Row>
+                    <Grid columns="12">
+                      <Grid.Column
+                        mobile={8}
+                        tablet={8}
+                        computer={8}
+                        className="col-left"
+                      >
+                        <CaseStudyExplorer
+                          caseStudiesIds={
+                            content.case_studies
+                              ? content.case_studies.map((item) => {
+                                  return item['@id'].split('/').pop();
+                                })
+                              : null
+                          }
+                        />
+                      </Grid.Column>
+                      <Grid.Column
+                        mobile={4}
+                        tablet={4}
+                        computer={4}
+                        className="col-right"
+                      >
+                        {content.case_studies && (
+                          <div>
+                            <div className="case-studies-list">
+                              <ul>
+                                {content.case_studies.map((item) => (
+                                  <li key={item['@id']}>
+                                    <a href={item['@id']}>{item.title}</a>
+                                  </li>
+                                ))}{' '}
+                              </ul>
+                            </div>
+                          </div>
+                        )}
+                      </Grid.Column>
+                    </Grid>
+                  </Grid.Row>
                 </div>
               </div>
-            )}
+            </div>
           </div>
         </div>
       </div>

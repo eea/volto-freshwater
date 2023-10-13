@@ -40,7 +40,7 @@ function getExtentOfFeatures(features) {
   return point.getExtent();
 }
 
-export default function FeatureInteraction({ onFeatureSelect }) {
+export default function FeatureInteraction({ onFeatureSelect, hideFilters }) {
   const { map } = useMapContext();
   const { selectStyle } = useStyles();
 
@@ -49,7 +49,7 @@ export default function FeatureInteraction({ onFeatureSelect }) {
 
     const select = new ol.interaction.Select({
       condition: ol.condition.click,
-      style: selectStyle,
+      style: hideFilters ? null : selectStyle,
     });
 
     select.on('select', function (e) {
@@ -59,6 +59,11 @@ export default function FeatureInteraction({ onFeatureSelect }) {
         const subfeatures = feature.values_.features;
         if (subfeatures.length === 1) {
           const selectedFeature = subfeatures[0].values_;
+          if (hideFilters) {
+            const url = window.location.origin + selectedFeature.path;
+            // window.open(url);
+            window.location.href = url;
+          }
           onFeatureSelect(selectedFeature);
         } else {
           const extent = getExtentOfFeatures(subfeatures);
@@ -82,7 +87,7 @@ export default function FeatureInteraction({ onFeatureSelect }) {
     });
 
     return () => map.removeInteraction(select);
-  }, [map, selectStyle, onFeatureSelect]);
+  }, [map, selectStyle, onFeatureSelect, hideFilters]);
 
   return null;
 }

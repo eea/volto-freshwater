@@ -12,6 +12,7 @@ export default function InfoOverlay({
   selectedFeature,
   onFeatureSelect,
   layerId,
+  hideFilters,
 }) {
   const { map } = useMapContext();
   const [tooltip, setTooltipRef] = React.useState();
@@ -44,7 +45,8 @@ export default function InfoOverlay({
       const popupOverlay = overlay.element; // document.getElementById('popup-overlay');
 
       if (
-        features.length // && !isCluster(features)
+        features.length &&
+        !hideFilters // && !isCluster(features)
       ) {
         // overlay.setPosition(coordinate);
         if (!isCluster(features)) {
@@ -68,7 +70,7 @@ export default function InfoOverlay({
       map.un('click', handler);
       map.removeOverlay(overlay);
     };
-  }, [map, tooltip, onFeatureSelect]); //
+  }, [map, tooltip, onFeatureSelect, hideFilters]); //
 
   const [isClient, setIsClient] = React.useState(false);
   React.useEffect(() => setIsClient(true), []);
