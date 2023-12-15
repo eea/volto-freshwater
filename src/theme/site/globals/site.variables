@@ -52,7 +52,7 @@
     Brand Colors
 --------------------*/
 @wisePrimaryColor    : #0099BB;
-@wiseSecondaryColor  : #004050;
+@wiseSecondaryColor  : #0079CF;
 @lightSecondaryColor : @lightGrey;
 @lightBlueColor      : #00b4d5;
 @orangeColor         : #ff421b;
